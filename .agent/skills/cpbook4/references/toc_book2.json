@@ -1,0 +1,690 @@
+[
+  {
+    "title": "CP4: Book 2",
+    "page": 0
+  },
+  {
+    "title": "Contents",
+    "page": 2
+  },
+  {
+    "title": "5 Mathematics",
+    "page": 8
+  },
+  {
+    "title": "5.1 Overview and Motivation",
+    "page": 8
+  },
+  {
+    "title": "5.2 Ad Hoc Mathematical Problems",
+    "page": 9
+  },
+  {
+    "title": "5.3 Number Theory",
+    "page": 17
+  },
+  {
+    "title": "5.3.1 Prime Numbers",
+    "page": 17
+  },
+  {
+    "title": "5.3.2 Probabilistic Prime Testing (Java Only)",
+    "page": 19
+  },
+  {
+    "title": "5.3.3 Finding Prime Factors with Optimized Trial Divisions",
+    "page": 19
+  },
+  {
+    "title": "5.3.4 Functions Involving Prime Factors",
+    "page": 21
+  },
+  {
+    "title": "5.3.5 Modified Sieve",
+    "page": 23
+  },
+  {
+    "title": "5.3.6 Greatest Common Divisor & Least Common Multiple",
+    "page": 23
+  },
+  {
+    "title": "5.3.7 Factorial",
+    "page": 24
+  },
+  {
+    "title": "5.3.8 Working with Prime Factors",
+    "page": 24
+  },
+  {
+    "title": "5.3.9 Modular Arithmetic",
+    "page": 25
+  },
+  {
+    "title": "5.3.10 Extended Euclidean Algorithm",
+    "page": 27
+  },
+  {
+    "title": "5.3.11 Number Theory in Programming Contests",
+    "page": 28
+  },
+  {
+    "title": "5.4 Combinatorics",
+    "page": 33
+  },
+  {
+    "title": "5.4.1 Fibonacci Numbers",
+    "page": 33
+  },
+  {
+    "title": "5.4.2 Binomial Coefficients",
+    "page": 34
+  },
+  {
+    "title": "5.4.3 Catalan Numbers",
+    "page": 35
+  },
+  {
+    "title": "5.4.4 Combinatorics in Programming Contests",
+    "page": 36
+  },
+  {
+    "title": "5.5 Probability Theory",
+    "page": 40
+  },
+  {
+    "title": "5.6 Cycle-Finding",
+    "page": 43
+  },
+  {
+    "title": "5.6.1 Problem Description",
+    "page": 43
+  },
+  {
+    "title": "5.6.2 Solutions using Efficient Data Structures",
+    "page": 43
+  },
+  {
+    "title": "5.6.3 Floyd’s Cycle-Finding Algorithm",
+    "page": 44
+  },
+  {
+    "title": "5.7 Game Theory (Basic)",
+    "page": 47
+  },
+  {
+    "title": "5.8 Matrix Power",
+    "page": 50
+  },
+  {
+    "title": "5.8.1 Some Definitions and Sample Usages",
+    "page": 50
+  },
+  {
+    "title": "5.8.2 Efficient Modular Power (Exponentiation)",
+    "page": 51
+  },
+  {
+    "title": "5.8.3 Efficient Matrix Modular Power (Exponentiation)",
+    "page": 52
+  },
+  {
+    "title": "5.8.4 DP Speed-up with Matrix Power",
+    "page": 53
+  },
+  {
+    "title": "5.9 Solution to Non-Starred Exercises",
+    "page": 56
+  },
+  {
+    "title": "5.10 Chapter Notes",
+    "page": 59
+  },
+  {
+    "title": "6 String Processing",
+    "page": 60
+  },
+  {
+    "title": "6.1 Overview and Motivation",
+    "page": 60
+  },
+  {
+    "title": "6.2 Ad Hoc String (Harder)",
+    "page": 61
+  },
+  {
+    "title": "6.3 String Processing with DP",
+    "page": 64
+  },
+  {
+    "title": "6.3.1 String Alignment (Edit Distance)",
+    "page": 64
+  },
+  {
+    "title": "6.3.2 Longest Common Subsequence",
+    "page": 66
+  },
+  {
+    "title": "6.3.3 Non Classical String Processing with DP",
+    "page": 66
+  },
+  {
+    "title": "6.4 String Matching",
+    "page": 68
+  },
+  {
+    "title": "6.4.1 Library Solutions",
+    "page": 68
+  },
+  {
+    "title": "6.4.2 Knuth-Morris-Pratt (KMP) Algorithm",
+    "page": 68
+  },
+  {
+    "title": "6.4.3 String Matching in a 2D Grid",
+    "page": 71
+  },
+  {
+    "title": "6.5 Suffix Trie/Tree/Array",
+    "page": 73
+  },
+  {
+    "title": "6.5.1 Suffix Trie and Applications",
+    "page": 73
+  },
+  {
+    "title": "6.5.2 Suffix Tree",
+    "page": 75
+  },
+  {
+    "title": "6.5.3 Applications of Suffix Tree",
+    "page": 76
+  },
+  {
+    "title": "6.5.4 Suffix Array",
+    "page": 78
+  },
+  {
+    "title": "6.5.5 Applications of Suffix Array",
+    "page": 86
+  },
+  {
+    "title": "6.6 String Matching with Hashing",
+    "page": 90
+  },
+  {
+    "title": "6.6.1 Hashing a String",
+    "page": 90
+  },
+  {
+    "title": "6.6.2 Rolling Hash",
+    "page": 90
+  },
+  {
+    "title": "6.6.3 Rabin-Karp String Matching Algorithm",
+    "page": 92
+  },
+  {
+    "title": "6.6.4 Collisions Probability",
+    "page": 93
+  },
+  {
+    "title": "6.7 Anagram and Palindrome",
+    "page": 94
+  },
+  {
+    "title": "6.7.1 Anagram",
+    "page": 94
+  },
+  {
+    "title": "6.7.2 Palindrome",
+    "page": 94
+  },
+  {
+    "title": "6.8 Solution to Non-Starred Exercises",
+    "page": 98
+  },
+  {
+    "title": "6.9 Chapter Notes",
+    "page": 99
+  },
+  {
+    "title": "7 (Computational) Geometry",
+    "page": 100
+  },
+  {
+    "title": "7.1 Overview and Motivation",
+    "page": 100
+  },
+  {
+    "title": "7.2 Basic Geometry Objects with Libraries",
+    "page": 103
+  },
+  {
+    "title": "7.2.1 0D Objects: Points",
+    "page": 103
+  },
+  {
+    "title": "7.2.2 1D Objects: Lines",
+    "page": 106
+  },
+  {
+    "title": "7.2.3 2D Objects: Circles",
+    "page": 111
+  },
+  {
+    "title": "7.2.4 2D Objects: Triangles",
+    "page": 113
+  },
+  {
+    "title": "7.2.5 2D Objects: Quadrilaterals",
+    "page": 116
+  },
+  {
+    "title": "7.3 Algorithms on Polygon with Libraries",
+    "page": 119
+  },
+  {
+    "title": "7.3.1 Polygon Representation",
+    "page": 119
+  },
+  {
+    "title": "7.3.2 Perimeter of a Polygon",
+    "page": 119
+  },
+  {
+    "title": "7.3.3 Area of a Polygon",
+    "page": 120
+  },
+  {
+    "title": "7.3.4 Checking if a Polygon is Convex",
+    "page": 121
+  },
+  {
+    "title": "7.3.5 Checking if a Point is Inside a Polygon",
+    "page": 122
+  },
+  {
+    "title": "7.3.6 Cutting Polygon with a Straight Line",
+    "page": 123
+  },
+  {
+    "title": "7.3.7 Finding the Convex Hull of a Set of Points",
+    "page": 125
+  },
+  {
+    "title": "7.4 3D Geometry",
+    "page": 131
+  },
+  {
+    "title": "7.5 Solution to Non-Starred Exercises",
+    "page": 133
+  },
+  {
+    "title": "7.6 Chapter Notes",
+    "page": 135
+  },
+  {
+    "title": "8 More Advanced Topics",
+    "page": 136
+  },
+  {
+    "title": "8.1 Overview and Motivation",
+    "page": 136
+  },
+  {
+    "title": "8.2 More Advanced Search Techniques",
+    "page": 137
+  },
+  {
+    "title": "8.2.1 Backtracking with Bitmask",
+    "page": 137
+  },
+  {
+    "title": "8.2.2 State-Space Search with BFS or Dijkstra’s",
+    "page": 140
+  },
+  {
+    "title": "8.2.3 Meet in the Middle",
+    "page": 142
+  },
+  {
+    "title": "8.3 More Advanced DP Techniques",
+    "page": 146
+  },
+  {
+    "title": "8.3.1 DP with Bitmask",
+    "page": 146
+  },
+  {
+    "title": "8.3.2 Compilation of Common (DP) Parameters",
+    "page": 147
+  },
+  {
+    "title": "8.3.3 Handling Negative Parameter Values with O↵set",
+    "page": 147
+  },
+  {
+    "title": "8.3.4 MLE/TLE? Use Better State Representation",
+    "page": 149
+  },
+  {
+    "title": "8.3.5 MLE/TLE? Drop One Parameter, Recover It from Others",
+    "page": 150
+  },
+  {
+    "title": "8.3.6 Multiple Test Cases? No Memo Table Re-initializations",
+    "page": 151
+  },
+  {
+    "title": "8.3.7 MLE? Use bBST or Hash Table as Memo Table",
+    "page": 152
+  },
+  {
+    "title": "8.3.8 TLE? Use Binary Search Transition Speedup",
+    "page": 152
+  },
+  {
+    "title": "8.3.9 Other DP Techniques",
+    "page": 153
+  },
+  {
+    "title": "8.4 Network Flow",
+    "page": 155
+  },
+  {
+    "title": "8.4.1 Overview and Motivation",
+    "page": 155
+  },
+  {
+    "title": "8.4.2 Ford-Fulkerson Method",
+    "page": 155
+  },
+  {
+    "title": "8.4.3 Edmonds-Karp Algorithm",
+    "page": 157
+  },
+  {
+    "title": "8.4.4 Dinic’s Algorithm",
+    "page": 158
+  },
+  {
+    "title": "8.4.5 Flow Graph Modeling - Classic",
+    "page": 163
+  },
+  {
+    "title": "8.4.6 Flow Graph Modeling - Non Classic",
+    "page": 167
+  },
+  {
+    "title": "8.4.7 Network Flow in Programming Contests",
+    "page": 168
+  },
+  {
+    "title": "8.5 Graph Matching",
+    "page": 170
+  },
+  {
+    "title": "8.5.1 Overview and Motivation",
+    "page": 170
+  },
+  {
+    "title": "8.5.2 Graph Matching Variants",
+    "page": 170
+  },
+  {
+    "title": "8.5.3 Unweighted MCBM",
+    "page": 171
+  },
+  {
+    "title": "8.5.4 Weighted MCBM and Unweighted/Weighted MCM",
+    "page": 174
+  },
+  {
+    "title": "8.6 NP-hard/complete Problems",
+    "page": 176
+  },
+  {
+    "title": "8.6.1 Preliminaries",
+    "page": 176
+  },
+  {
+    "title": "8.6.2 Pseudo-Polynomial: Knapsack, Subset-Sum, Coin-Change",
+    "page": 177
+  },
+  {
+    "title": "8.6.3 Traveling-Salesman-Problem (TSP)",
+    "page": 178
+  },
+  {
+    "title": "8.6.4 Hamiltonian-Path/Tour",
+    "page": 180
+  },
+  {
+    "title": "8.6.5 Longest-Path",
+    "page": 181
+  },
+  {
+    "title": "8.6.6 Max-Independent-Set and Min-Vertex-Cover",
+    "page": 182
+  },
+  {
+    "title": "8.6.7 Min-Set-Cover",
+    "page": 188
+  },
+  {
+    "title": "8.6.8 Min-Path-Cover",
+    "page": 189
+  },
+  {
+    "title": "8.6.9 Satisfiability (SAT)",
+    "page": 190
+  },
+  {
+    "title": "8.6.10 Steiner-Tree",
+    "page": 192
+  },
+  {
+    "title": "8.6.11 Graph-Coloring",
+    "page": 194
+  },
+  {
+    "title": "8.6.12 Min-Clique-Cover",
+    "page": 195
+  },
+  {
+    "title": "8.6.13 Other NP-hard/complete Problems",
+    "page": 196
+  },
+  {
+    "title": "8.6.14 Summary",
+    "page": 197
+  },
+  {
+    "title": "8.7 Problem Decomposition",
+    "page": 200
+  },
+  {
+    "title": "8.7.1 Two Components: Binary Search the Answer and Other",
+    "page": 200
+  },
+  {
+    "title": "8.7.2 Two Components: Involving Efficient Data Structure",
+    "page": 202
+  },
+  {
+    "title": "8.7.3 Two Components: Involving Geometry",
+    "page": 203
+  },
+  {
+    "title": "8.7.4 Two Components: Involving Graph",
+    "page": 203
+  },
+  {
+    "title": "8.7.5 Two Components: Involving Mathematics",
+    "page": 203
+  },
+  {
+    "title": "8.7.6 Two Components: Graph Preprocessing and DP",
+    "page": 204
+  },
+  {
+    "title": "8.7.7 Two Components: Involving 1D Static RSQ/RMQ",
+    "page": 205
+  },
+  {
+    "title": "8.7.8 Three (or More) Components",
+    "page": 205
+  },
+  {
+    "title": "8.8 Solution to Non-Starred Exercises",
+    "page": 213
+  },
+  {
+    "title": "8.9 Chapter Notes",
+    "page": 215
+  },
+  {
+    "title": "9 Rare Topics",
+    "page": 216
+  },
+  {
+    "title": "9.1 Overview and Motivation",
+    "page": 216
+  },
+  {
+    "title": "9.2 Sliding Window",
+    "page": 218
+  },
+  {
+    "title": "9.3 Sparse Table Data Structure",
+    "page": 220
+  },
+  {
+    "title": "9.4 Square Root Decomposition",
+    "page": 223
+  },
+  {
+    "title": "9.5 Heavy-Light Decomposition",
+    "page": 228
+  },
+  {
+    "title": "9.6 Tower of Hanoi",
+    "page": 231
+  },
+  {
+    "title": "9.7 Matrix Chain Multiplication",
+    "page": 232
+  },
+  {
+    "title": "9.8 Lowest Common Ancestor",
+    "page": 234
+  },
+  {
+    "title": "9.9 Tree Isomorphism",
+    "page": 236
+  },
+  {
+    "title": "9.10 De Bruijn Sequence",
+    "page": 240
+  },
+  {
+    "title": "9.11 Fast Fourier Transform",
+    "page": 243
+  },
+  {
+    "title": "9.12 Pollard’s rho Algorithm",
+    "page": 263
+  },
+  {
+    "title": "9.13 Chinese Remainder Theorem",
+    "page": 265
+  },
+  {
+    "title": "9.14 Lucas’ Theorem",
+    "page": 269
+  },
+  {
+    "title": "9.15 Rare Formulas or Theorems",
+    "page": 271
+  },
+  {
+    "title": "9.16 Combinatorial Game Theory",
+    "page": 273
+  },
+  {
+    "title": "9.17 Gaussian Elimination Algorithm",
+    "page": 278
+  },
+  {
+    "title": "9.18 Art Gallery Problem",
+    "page": 281
+  },
+  {
+    "title": "9.19 Closest Pair Problem",
+    "page": 282
+  },
+  {
+    "title": "9.20 A* and IDA*: Informed Search",
+    "page": 283
+  },
+  {
+    "title": "9.21 Pancake Sorting",
+    "page": 286
+  },
+  {
+    "title": "9.22 Egg Dropping Puzzle",
+    "page": 289
+  },
+  {
+    "title": "9.23 Dynamic Programming Optimization",
+    "page": 293
+  },
+  {
+    "title": "9.24 Push-Relabel Algorithm",
+    "page": 301
+  },
+  {
+    "title": "9.25 Min Cost (Max) Flow",
+    "page": 306
+  },
+  {
+    "title": "9.26 Hopcroft-Karp Algorithm",
+    "page": 308
+  },
+  {
+    "title": "9.27 Kuhn-Munkres Algorithm",
+    "page": 309
+  },
+  {
+    "title": "9.28 Edmonds’ Matching Algorithm",
+    "page": 312
+  },
+  {
+    "title": "9.29 Chinese Postman Problem",
+    "page": 315
+  },
+  {
+    "title": "9.30 Constructive Problem",
+    "page": 317
+  },
+  {
+    "title": "9.31 Interactive Problem",
+    "page": 320
+  },
+  {
+    "title": "9.32 Linear Programming",
+    "page": 321
+  },
+  {
+    "title": "9.33 Gradient Descent",
+    "page": 324
+  },
+  {
+    "title": "9.34 Chapter Notes",
+    "page": 325
+  },
+  {
+    "title": "Index",
+    "page": 329
+  }
+]
