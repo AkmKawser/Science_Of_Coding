@@ -40,28 +40,28 @@ This document records all instructions, architectural decisions, and agent conve
 ### Actions Taken & Implementation Summary
 1. **Added Master Decision Tree Flowchart**:
    - Integrated a comprehensive **Mermaid decision tree flowchart** directly into [`query/001_graph_and_tree_learning_roadmap.md`](query/001_graph_and_tree_learning_roadmap.md).
-   - Structured around real interview conditions:
-     - **Level 1 (Is it a Tree? Connected & `E = V - 1`)**:
-       - *Diameter / Longest Path* $\to$ 2-Pass DFS/BFS (`O(V)`).
-       - *Shortest Path / Reachability* $\to$ Simple DFS (`O(V)` with zero Dijkstra overhead).
-       - *Lowest Common Ancestor* $\to$ Binary Lifting LCA (`O(V log V)` prep, `O(log V)` query).
-       - *Path Updates / Range Queries on Tree* $\to$ Heavy-Light Decomposition (`O(log² V)`).
-     - **Level 2 (General Graph: Core Goal Routing)**:
-       - *Grid / Maze* $\to$ 2D Flood Fill (`O(R x C)`).
-       - *Dependencies / Build Order* $\to$ Kahn's Topological Sort (`O(V + E)`).
-       - *Two Conflicting Sets / 2-Coloring* $\to$ Bipartite BFS (`O(V + E)`).
-       - *Critical Link / Single Point of Failure* $\to$ Tarjan's Lowlink Bridges & Articulation Points (`O(V + E)`).
-       - *Mutual Directed Reachability* $\to$ Tarjan's Strongly Connected Components (`O(V + E)`).
-       - *Connect all nodes with Minimum Wire* $\to$ Kruskal (UFDS) or Prim (Min-Heap) (`O(E log V)`).
-       - *Shortest Path on Unweighted Graph* $\to$ Standard Queue BFS (`O(V + E)`).
-       - *Shortest Path on Non-negative Weighted Graph* $\to$ Dijkstra with Min-Heap (`O((V + E) log V)`).
-       - *Negative Weights / Arbitrage Cycle* $\to$ Bellman-Ford / SPFA (`O(V * E)`).
-       - *All-Pairs Shortest Path (`V <= 400`)* $\to$ Floyd-Warshall 3 Nested Loops (`O(V³)`).
-       - *Visit Every Edge Exactly Once* $\to$ Hierholzer's Eulerian Tour (`O(V + E)`).
-       - *Match Items 1-to-1 Between Two Sets* $\to$ Kuhn's Augmenting Path MCBM (`O(V * E)`).
-       - *Max Network Capacity / Min Cut* $\to$ Dinic's Max Flow Algorithm (`O(V² * E)`).
+   - Structured around real interview conditions (Tree vs General Graph $\to$ Query Type $\to$ Algorithm).
 2. **Added Quick-Lookup Interview Trigger Table**:
    - Tabular quick-reference mapping exact problem statement trigger phrases to their matching algorithms and time bounds.
+
+---
+
+## Session 12: Complete Rendering Fixes & Typography Normalization
+
+### User Request
+> "please fix the rendering problem"
+
+### Actions Taken & Implementation Summary
+1. **Sanitized Mermaid Syntax**:
+   - Replaced illegal `<br/>` HTML tags and raw Unicode characters (`²`, `³`, `>`, `<`, `==>`, `->`, `&`) within the flowchart node strings that were triggering syntax errors and breaking diagram rendering.
+   - Simplified all labels to strict, portable Mermaid syntax supported by GitHub, VS Code, and browser markdown engines.
+2. **Normalized Typography & Zero Non-ASCII Font Glitches**:
+   - Replaced curved quotation marks (`“`, `”`, `‘`, `’`), en/em dashes (`–`, `—`), and non-standard superscript numbers (`²`, `³`) with clean, universal standard ASCII characters (`^2`, `^3`, `"`, `'`, `-`, `--`).
+   - Converted emoji markers to clean, universal square bracket labels (e.g. `[Guide]`, `[Decision Tree]`, `[Memory Trick]`, `[Python]`, `[Java]`), eliminating CP1252/UTF-8 character corruption on Windows systems.
+3. **Automated Verification**:
+   - Confirmed 0 non-ASCII font-breaking characters remaining in the document.
+   - Tested that all 14 Python executable code blocks and all 13 Java classes compile and run with 100% success.
+
 
 
 

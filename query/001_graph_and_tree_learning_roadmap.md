@@ -2,7 +2,7 @@
 
 > **Document Serial**: `001`  
 > **Topic**: Complete Exhaustive Graph & Tree Knowledge Base, Algorithms, Decision Paradigms & Quick Revision Guide  
-> **Source Ground Truth**: *Competitive Programming 4 (CP4)* Book 1 (Chapters 2.4.1, 4.1–4.6) & Book 2 (Chapters 8.4–8.5, 9.5, 9.8, 9.9, 9.24–9.29)  
+> **Source Ground Truth**: *Competitive Programming 4 (CP4)* Book 1 (Chapters 2.4.1, 4.1-4.6) & Book 2 (Chapters 8.4-8.5, 9.5, 9.8, 9.9, 9.24-9.29)  
 > **Authors**: Steven Halim, Felix Halim, Suhendry Effendy  
 > **Language Support**: 100% Complete & Standalone Executable **Python 3** and **Java 21** for **Every Single Algorithm**  
 > **UI Control**: Interactive native toggle tabs (`<details><summary>`) for every code implementation  
@@ -12,66 +12,51 @@
 
 ---
 
-## 🎯 Master Decision Tree: What Algorithm to Choose at What Condition?
+## [Decision Tree] Master Decision Tree: What Algorithm to Choose at What Condition?
 
 When facing any graph or tree problem in an interview or programming competition, follow this **instant identification flow**:
 
 ```mermaid
 flowchart TD
-    Start(["Problem Involves Network / Entities / Grid"]) --> TreeCheck{"Is it a Tree?<br/>(Connected & E = V - 1, No Cycles)"}
+    Start["Problem Involves Network or Entities or Grid"] --> TreeCheck{"Is it a Tree? E = V - 1 and No Cycles"}
     
-    %% TREE BRANCH
-    TreeCheck -->|YES: Tree| TreeQ{"What is the query on the Tree?"}
-    TreeQ -->|Diameter / Longest Path| TreeDiam["2-Pass DFS/BFS<br/>Time: O(V)<br/>(Any root -> furthest X -> furthest Y)"]
-    TreeQ -->|Shortest Path / Reachability| TreeSSSP["Simple DFS / BFS<br/>Time: O(V)<br/>(Zero Dijkstra needed! Only check parent (u, p))"]
-    TreeQ -->|Closest Common Ancestor| TreeLCA["Binary Lifting LCA<br/>Prep: O(V log V), Query: O(log V)<br/>(Dist = depth[u] + depth[v] - 2*depth[lca])"]
-    TreeQ -->|Subtree / Path Queries with Updates| TreeHLD["Heavy-Light Decomposition (HLD)<br/>+ Segment Tree<br/>Time: O(log² V) per update/query"]
+    TreeCheck -->|YES: Tree| TreeQ{"Query Type on Tree"}
+    TreeQ -->|Diameter or Longest Path| TreeDiam["2-Pass DFS or BFS - Time: O(V)"]
+    TreeQ -->|Shortest Path or Reachability| TreeSSSP["Simple DFS or BFS - Time: O(V)"]
+    TreeQ -->|Lowest Common Ancestor| TreeLCA["Binary Lifting LCA - Query: O(log V)"]
+    TreeQ -->|Path Queries with Updates| TreeHLD["Heavy-Light Decomposition - Time: O(log^2 V)"]
     
-    %% GENERAL GRAPH BRANCH
     TreeCheck -->|NO: General Graph| GoalQ{"What is the Core Goal?"}
     
-    %% 1. Traversals & Structure
-    GoalQ -->|Connectivity / Reachability| ConnQ{"Graph Type & Trait?"}
-    ConnQ -->|2D Matrix / Grid| FF["Flood Fill (DFS/BFS)<br/>Time: O(R x C)<br/>(Use dr/dc coordinate deltas)"]
-    ConnQ -->|Dependency / Order / DAG| TopoQ["Topological Sort (Kahn's Queue)<br/>Time: O(V + E)<br/>(Count in-degree == 0. Remaining > 0 ==> Cycle!)"]
-    ConnQ -->|Conflict / 2-Partitions| Bipartite["Bipartite 2-Coloring (BFS)<br/>Time: O(V + E)<br/>(No odd cycles allowed!)"]
-    ConnQ -->|Critical Links / Single Failure| TarjanAP["Tarjan Lowlink (Bridges & AP)<br/>Time: O(V + E)<br/>(dfs_low[v] > dfs_num[u] ==> Bridge)"]
-    ConnQ -->|Directed Mutual Reachability| SCC["Tarjan / Kosaraju SCC<br/>Time: O(V + E)<br/>(Condense whirlpools into a clean DAG)"]
+    GoalQ -->|Connectivity or Structure| ConnQ{"Graph Trait"}
+    ConnQ -->|2D Matrix or Grid| FF["Flood Fill - Time: O(R * C)"]
+    ConnQ -->|Task Order or Dependencies| TopoQ["Topological Sort Kahn - Time: O(V + E)"]
+    ConnQ -->|Two Conflicting Groups| Bipartite["Bipartite 2-Coloring - Time: O(V + E)"]
+    ConnQ -->|Critical Bridge or Single Failure| TarjanAP["Tarjan Bridges and AP - Time: O(V + E)"]
+    ConnQ -->|Directed Mutual Cycles| SCC["Tarjan SCC - Time: O(V + E)"]
     
-    %% 2. Spanning Tree
-    GoalQ -->|Connect all nodes with Min Cost| MSTQ{"Edge representation?"}
-    MSTQ -->|Sparse / Edge List| Kruskal["Kruskal's Algorithm + UFDS<br/>Time: O(E log V)<br/>(Sort edges, greedily unite disjoint sets)"]
-    MSTQ -->|Dense / Matrix| Prim["Prim's Algorithm + Min-Heap<br/>Time: O((V + E) log V)<br/>(Grow tree outward from start node)"]
+    GoalQ -->|Connect all nodes with Min Cost| MSTQ{"Edge Format"}
+    MSTQ -->|Sparse or Edge List| Kruskal["Kruskal with UFDS - Time: O(E log V)"]
+    MSTQ -->|Dense or Adjacency Matrix| Prim["Prim with Min-Heap - Time: O((V + E) log V)"]
     
-    %% 3. Shortest Paths
-    GoalQ -->|Shortest Path / Min Distance| SPQ{"Single Source (SSSP) or All Pairs (APSP)?"}
-    SPQ -->|APSP: All Pairs| FWQ{"V size constraint?"}
-    FWQ -->|V <= 400| FW["Floyd-Warshall (3 Nested Loops)<br/>Time: O(V³)<br/>(k on OUTSIDE, i & j inside)"]
-    FWQ -->|V > 400 & Sparse| RepDijk["V x Dijkstra<br/>Time: O(V * (V + E) log V)"]
+    GoalQ -->|Shortest Path Query| SPQ{"SSSP or APSP"}
+    SPQ -->|APSP: All-to-All| FWQ{"Vertex Count"}
+    FWQ -->|V <= 400| FW["Floyd-Warshall - Time: O(V^3)"]
+    FWQ -->|V > 400 and Sparse| RepDijk["V x Dijkstra - Time: O(V * E log V)"]
     
-    SPQ -->|SSSP: Single Source| WeightQ{"Edge Weight Characteristics?"}
-    WeightQ -->|All edges equal weight (1)| BFS_SP["Standard BFS<br/>Time: O(V + E)<br/>(Layer-by-layer queue guarantees shortest path)"]
-    WeightQ -->|Non-negative weights| Dijk["Dijkstra's Algorithm (Min-Heap)<br/>Time: O((V + E) log V)<br/>(Greedy relaxation + lazy deletion)"]
-    WeightQ -->|Negative weights / Detect Cycles| BF["Bellman-Ford / SPFA<br/>Time: O(V * E)<br/>(Relax V-1 times. Decreases on pass V ==> Negative Cycle)"]
-    WeightQ -->|DAG (no cycles)| DAG_SP["Toposort + DP Relaxation<br/>Time: O(V + E)<br/>(Linear time shortest/longest path!)"]
+    SPQ -->|SSSP: Single Source| WeightQ{"Edge Weights"}
+    WeightQ -->|All edges equal weight 1| BFS_SP["Standard BFS - Time: O(V + E)"]
+    WeightQ -->|Non-negative weights| Dijk["Dijkstra Algorithm - Time: O((V + E) log V)"]
+    WeightQ -->|Negative weights or Negative Cycles| BF["Bellman-Ford SPFA - Time: O(V * E)"]
+    WeightQ -->|DAG no cycles| DAG_SP["Toposort with DP - Time: O(V + E)"]
     
-    %% 4. Advanced: Flows & Matching
-    GoalQ -->|Max Output / Pair Matching / Routes| AdvQ{"Specific Scenario?"}
-    AdvQ -->|Visit every edge exactly once| Euler["Eulerian Tour (Hierholzer)<br/>Time: O(V + E)<br/>(Tour: all degrees even. Path: exactly 2 odd degrees)"]
-    AdvQ -->|Pair items between 2 disjoint sets| Kuhn["Kuhn's Augmenting Path (MCBM)<br/>Time: O(V * E)<br/>(Lightweight DFS swap without heavy flow graphs)"]
-    AdvQ -->|Bottleneck Capacity / Min Cut| Dinic["Dinic's Max Flow Algorithm<br/>Time: O(V² * E)<br/>(Level Graph BFS + Blocking Flow DFS)"]
-
-    %% Visual Styling
-    classDef highlight fill:#0284c7,stroke:#38bdf8,stroke-width:2px,color:#ffffff;
-    classDef decision fill:#1e293b,stroke:#e2e8f0,stroke-width:2px,color:#f8fafc;
-    classDef leaf fill:#15803d,stroke:#4ade80,stroke-width:2px,color:#ffffff;
-    
-    class TreeDiam,TreeSSSP,TreeLCA,TreeHLD,FF,TopoQ,Bipartite,TarjanAP,SCC,Kruskal,Prim,FW,RepDijk,BFS_SP,Dijk,BF,DAG_SP,Euler,Kuhn,Dinic leaf;
-    class TreeCheck,TreeQ,GoalQ,ConnQ,MSTQ,SPQ,FWQ,WeightQ,AdvQ decision;
-    class Start highlight;
+    GoalQ -->|Throughput or Matching| AdvQ{"Problem Goal"}
+    AdvQ -->|Visit every edge once| Euler["Eulerian Tour Hierholzer - Time: O(V + E)"]
+    AdvQ -->|Match items between two sets| Kuhn["Kuhn MCBM - Time: O(V * E)"]
+    AdvQ -->|Bottleneck Capacity or Min Cut| Dinic["Dinic Max Flow - Time: O(V^2 * E)"]
 ```
 
-### ⚡ Quick-Lookup Interview Trigger Table
+### [Summary] Quick-Lookup Interview Trigger Table
 
 | If the problem mentions... | Red Flag / Invariant | Pick This Algorithm | Time Complexity |
 | :--- | :--- | :--- | :--- |
@@ -81,18 +66,18 @@ flowchart TD
 | **"Divide into two non-conflicting groups"** | No odd cycles | **Bipartite 2-Coloring (BFS)** | `O(V + E)` |
 | **"Shortest path with positive weights"** | Non-negative edge weights | **Dijkstra's Algorithm (Min-Heap)** | `O((V + E) log V)` |
 | **"Negative costs / Currency arbitrage cycle"** | Negative weights | **Bellman-Ford / SPFA** | `O(V * E)` |
-| **"All-pairs distances with V <= 400"** | Dense all-to-all query | **Floyd-Warshall** | `O(V³)` |
+| **"All-pairs distances with V <= 400"** | Dense all-to-all query | **Floyd-Warshall** | `O(V^3)` |
 | **"Connect all computers/cities with min wire"** | Spanning Tree | **Kruskal (UFDS) or Prim (Min-Heap)** | `O(E log V)` |
 | **"Single point of network failure / Critical edge"** | Bridges & Cut Vertices | **Tarjan's Lowlink (`dfs_low`)** | `O(V + E)` |
 | **"Condense directed cycles into DAG"** | Mutual reachability | **Tarjan's SCC** | `O(V + E)` |
 | **"Lowest common ancestor / Distance in tree"** | Tree hierarchy query | **Binary Lifting LCA** | `O(V log V) prep, O(log V) query` |
 | **"Draw shape without lifting pen / use all tickets"** | Visit all edges once | **Hierholzer's Eulerian Tour** | `O(V + E)` |
 | **"Assign jobs to workers / Pair items 1-to-1"** | Max Bipartite Matching | **Kuhn's Augmenting Path** | `O(V * E)` |
-| **"Max throughput / Pipes / Min Cut"** | Capacity bottleneck | **Dinic's Algorithm** | `O(V² * E)` |
+| **"Max throughput / Pipes / Min Cut"** | Capacity bottleneck | **Dinic's Algorithm** | `O(V^2 * E)` |
 
 ---
 
-## 🧭 Complete Master Curriculum & Topic Index
+## [Guide] Complete Master Curriculum & Topic Index
 
 This manual covers **every graph and tree topic** presented in CP4 Books 1 and 2:
 
@@ -147,7 +132,7 @@ flowchart TD
 
 ## 1. Graph Representations (AM, AL, EL, Implicit Grid)
 
-### 🧠 Interview Memory Trick: "Who is my neighbor?"
+### [Memory Trick] Interview Memory Trick: "Who is my neighbor?"
 > **The 3-Second Mental Hook**:
 > - **Matrix (`AM`)**: Think of an *Excel Spreadsheet*. Instant check cell `(u, v)`, but wastes memory like an empty ocean when sparse. Use only when `V <= 1,000` or doing all-pairs matrices.
 > - **List (`AL`)**: Think of a *Phone Contact Book*. Each person `u` stores only their actual friends. Best default for 99% of interviews (`V, E <= 200,000`).
@@ -164,7 +149,7 @@ Before executing any graph algorithm, select the correct representation based on
 | **Implicit Grid Graph** | `O(1)` extra | `O(1)` via `(d r, d c)` | `O(1)` | 2D matrices, Flood Fill |
 
 <details open>
-<summary><b>🐍 Python 3 Implementation: Complete Graph Representations</b></summary>
+<summary><b>[Python] Python 3 Implementation: Complete Graph Representations</b></summary>
 
 ```python
 from typing import List, Tuple
@@ -202,7 +187,7 @@ if __name__ == "__main__":
 </details>
 
 <details>
-<summary><b>☕ Java 21 Implementation: Complete Graph Representations</b></summary>
+<summary><b>[Java] Java 21 Implementation: Complete Graph Representations</b></summary>
 
 ```java
 import java.util.*;
@@ -264,7 +249,7 @@ public class GraphRepresentations {
 
 ## 2. Core Traversals & Connected Components (DFS, BFS, Flood Fill)
 
-### 🧠 Interview Memory Trick: "Maze vs Ripple"
+### [Memory Trick] Interview Memory Trick: "Maze vs Ripple"
 > **The 3-Second Mental Hook**:
 > - **DFS = The Blind Maze Explorer**: You keep walking forward until you hit a wall, then you backtrack. In interviews, use DFS whenever the question asks: *"Does a path exist?"*, *"Find all possible combinations/paths"*, or *"Count disconnected islands"*.
 > - **BFS = Stone in a Pond (Water Ripple)**: The ripple expands outward layer by layer (Distance 1, Distance 2, Distance 3). In interviews, use BFS whenever the interviewer says: *"Find the SHORTEST / MINIMUM steps or moves in an unweighted grid/graph"*. Never use DFS for shortest path on unweighted graphs!
@@ -275,7 +260,7 @@ public class GraphRepresentations {
 - **Flood Fill (`O(R x C)`)**: Implicit graph traversal on a 2D grid matrix using directional coordinate deltas.
 
 <details open>
-<summary><b>🐍 Python 3 Implementation: DFS, BFS & Flood Fill</b></summary>
+<summary><b>[Python] Python 3 Implementation: DFS, BFS & Flood Fill</b></summary>
 
 ```python
 from collections import deque
@@ -345,7 +330,7 @@ if __name__ == "__main__":
 </details>
 
 <details>
-<summary><b>☕ Java 21 Implementation: DFS, BFS & Flood Fill</b></summary>
+<summary><b>[Java] Java 21 Implementation: DFS, BFS & Flood Fill</b></summary>
 
 ```java
 import java.util.*;
@@ -423,7 +408,7 @@ public class CoreTraversals {
 
 ## 3. Topological Sort & Directed Cycle Detection
 
-### 🧠 Interview Memory Trick: "University Course Prerequisites"
+### [Memory Trick] Interview Memory Trick: "University Course Prerequisites"
 > **The 3-Second Mental Hook**:
 > - **When to trigger**: Any problem with constraints like *"Task A must be completed before Task B"*, *"Course prerequisites"*, or *"Build order dependency"*.
 > - **Kahn's Trick (In-Degree Zero)**:
@@ -432,7 +417,7 @@ public class CoreTraversals {
 >   3. Pop a course, take it, and decrement its successors' prerequisites by 1.
 >   4. If you took all `V` courses, it is a valid order. If fewer than `V` courses were taken, there is a **Deadlock / Circular Dependency (Cycle)**!
 > - **DFS 3-Colors Trick**: 
->   `0 = Unvisited`, `1 = Currently on Stack (in progress)`, `2 = Fully Processed`.
+`0 = Unvisited`, `1 = Currently on Stack (in progress)`, `2 = Fully Processed`.
 >   If you ever see a neighbor with color `1`, you ran into your own tail (Back-Edge = Cycle!).
 
 - **Topological Sort**: Linear ordering of vertices in a Directed Acyclic Graph (DAG) such that edge `u \to v ==> u` appears before `v`.
@@ -440,7 +425,7 @@ public class CoreTraversals {
 - **Cycle Detection**: 3-state DFS tracking `UNVISITED (0)`, `EXPLORING (1)`, `VISITED (2)`. An edge to an `EXPLORING` node is a **back-edge**, proving a directed cycle.
 
 <details open>
-<summary><b>🐍 Python 3 Implementation: Kahn's Toposort & Cycle Detection</b></summary>
+<summary><b>[Python] Python 3 Implementation: Kahn's Toposort & Cycle Detection</b></summary>
 
 ```python
 from collections import deque
@@ -502,7 +487,7 @@ if __name__ == "__main__":
 </details>
 
 <details>
-<summary><b>☕ Java 21 Implementation: Kahn's Toposort & Cycle Detection</b></summary>
+<summary><b>[Java] Java 21 Implementation: Kahn's Toposort & Cycle Detection</b></summary>
 
 ```java
 import java.util.*;
@@ -571,7 +556,7 @@ public class TopoCycleDemo {
 
 ## 4. Bipartite Graph Check (2-Coloring via BFS)
 
-### 🧠 Interview Memory Trick: "Two Rival Sports Teams"
+### [Memory Trick] Interview Memory Trick: "Two Rival Sports Teams"
 > **The 3-Second Mental Hook**:
 > - **When to trigger**: *"Can we divide people into 2 conflicting groups?"*, *"Can you color graph with 2 alternating colors?"*, or *"Is there any odd-length cycle?"*
 > - **The Invariant**: A graph is Bipartite **if and only if it has NO odd-length cycles** (a triangle cannot be 2-colored).
@@ -580,7 +565,7 @@ public class TopoCycleDemo {
 A graph is **Bipartite** if and only if it contains **no odd-length cycles**. We can verify bipartiteness in `O(V + E)` by attempting to color vertices with 2 alternating colors (`0` and `1`).
 
 <details open>
-<summary><b>🐍 Python 3 Implementation: Bipartite Graph 2-Coloring</b></summary>
+<summary><b>[Python] Python 3 Implementation: Bipartite Graph 2-Coloring</b></summary>
 
 ```python
 from collections import deque
@@ -625,7 +610,7 @@ if __name__ == "__main__":
 </details>
 
 <details>
-<summary><b>☕ Java 21 Implementation: Bipartite Graph 2-Coloring</b></summary>
+<summary><b>[Java] Java 21 Implementation: Bipartite Graph 2-Coloring</b></summary>
 
 ```java
 import java.util.*;
@@ -687,7 +672,7 @@ public class BipartiteChecker {
 
 ## 5. Tarjan's Articulation Points & Bridges (Lowlink)
 
-### 🧠 Interview Memory Trick: "The Single Point of Failure"
+### [Memory Trick] Interview Memory Trick: "The Single Point of Failure"
 > **The 3-Second Mental Hook**:
 > - **When to trigger**: *"Find critical connections in a network"*, *"Which server failure will partition the network?"* (e.g., LeetCode 1192).
 > - **The Mental Picture**:
@@ -704,7 +689,7 @@ In an undirected graph:
   - `dfs_low[v] >= dfs_num[u]` `==> u` is an **Articulation Point** (for root node, check if root children `>= 2`).
 
 <details open>
-<summary><b>🐍 Python 3 Implementation: Tarjan's Bridges & Articulation Points</b></summary>
+<summary><b>[Python] Python 3 Implementation: Tarjan's Bridges & Articulation Points</b></summary>
 
 ```python
 from typing import List, Tuple
@@ -771,7 +756,7 @@ if __name__ == "__main__":
 </details>
 
 <details>
-<summary><b>☕ Java 21 Implementation: Tarjan's Bridges & Articulation Points</b></summary>
+<summary><b>[Java] Java 21 Implementation: Tarjan's Bridges & Articulation Points</b></summary>
 
 ```java
 import java.util.*;
@@ -850,16 +835,16 @@ public class TarjanBridgesAP {
 
 ## 6. Strongly Connected Components (Tarjan's SCC)
 
-### 🧠 Interview Memory Trick: "Round-Trip Whirlpools"
+### [Memory Trick] Interview Memory Trick: "Round-Trip Whirlpools"
 > **The 3-Second Mental Hook**:
 > - **When to trigger**: In a **Directed** Graph where you need to condense mutual reachability (can I travel from A to B and return from B to A?).
 > - **The Mental Picture**: Each SCC is a self-contained whirlpool. If you contract each SCC into a single super-node, the remaining graph is a **pure DAG**!
-> - **Tarjan's Stack Trick**: Push nodes onto a stack during DFS. The root of an SCC is the exact moment `dfs_low[u] == dfs_num[u]`. Pop everything off the stack until you reach `u`—that popped group is your complete round-trip component.
+> - **Tarjan's Stack Trick**: Push nodes onto a stack during DFS. The root of an SCC is the exact moment `dfs_low[u] == dfs_num[u]`. Pop everything off the stack until you reach `u`--that popped group is your complete round-trip component.
 
 In a directed graph, a **Strongly Connected Component (SCC)** is a maximal subgraph where every vertex is reachable from every other vertex. Tarjan's SCC algorithm discovers all components in a single `O(V + E)` DFS pass using an auxiliary LIFO stack.
 
 <details open>
-<summary><b>🐍 Python 3 Implementation: Tarjan's Strongly Connected Components</b></summary>
+<summary><b>[Python] Python 3 Implementation: Tarjan's Strongly Connected Components</b></summary>
 
 ```python
 from typing import List
@@ -924,7 +909,7 @@ if __name__ == "__main__":
 </details>
 
 <details>
-<summary><b>☕ Java 21 Implementation: Tarjan's Strongly Connected Components</b></summary>
+<summary><b>[Java] Java 21 Implementation: Tarjan's Strongly Connected Components</b></summary>
 
 ```java
 import java.util.*;
@@ -999,7 +984,7 @@ public class TarjanSCC {
 
 ## 7. Minimum Spanning Tree: Prim's Algorithm
 
-### 🧠 Interview Memory Trick: "Electric Grid Cable Expansion"
+### [Memory Trick] Interview Memory Trick: "Electric Grid Cable Expansion"
 > **The 3-Second Mental Hook**:
 > - **When to trigger**: Connect all cities with minimum total cable length without any cycles.
 > - **Kruskal vs. Prim Interview Choice**:
@@ -1009,7 +994,7 @@ public class TarjanSCC {
 While Kruskal's algorithm operates on an Edge List via UFDS in `O(E \log V)`, **Prim's Algorithm** grows the tree vertex-by-vertex from a start node using a Priority Queue in `O((V + E) \log V)`, which is especially efficient on dense graphs.
 
 <details open>
-<summary><b>🐍 Python 3 Implementation: Prim's MST Algorithm</b></summary>
+<summary><b>[Python] Python 3 Implementation: Prim's MST Algorithm</b></summary>
 
 ```python
 import heapq
@@ -1059,7 +1044,7 @@ if __name__ == "__main__":
 </details>
 
 <details>
-<summary><b>☕ Java 21 Implementation: Prim's MST Algorithm</b></summary>
+<summary><b>[Java] Java 21 Implementation: Prim's MST Algorithm</b></summary>
 
 ```java
 import java.util.*;
@@ -1127,7 +1112,7 @@ public class PrimMST {
 
 ## 8. SSSP with Negative Weights & Cycles (Bellman-Ford & SPFA)
 
-### 🧠 Interview Memory Trick: "The Time Travel Paradox"
+### [Memory Trick] Interview Memory Trick: "The Time Travel Paradox"
 > **The 3-Second Mental Hook**:
 > - **Why Dijkstra fails**: Dijkstra greedily locks in a node once popped from the Min-Heap. If a negative edge appears later, it breaks the greedy invariant.
 > - **Bellman-Ford Mental Model**:
@@ -1140,7 +1125,7 @@ When edges can have negative weights, Dijkstra produces invalid results.
 - **SPFA (Shortest Path Faster Algorithm)**: Queue-optimized Bellman-Ford running in `O(E)` average on random graphs.
 
 <details open>
-<summary><b>🐍 Python 3 Implementation: Bellman-Ford & Negative Cycle Detection</b></summary>
+<summary><b>[Python] Python 3 Implementation: Bellman-Ford & Negative Cycle Detection</b></summary>
 
 ```python
 from typing import List, Tuple, Optional
@@ -1191,7 +1176,7 @@ if __name__ == "__main__":
 </details>
 
 <details>
-<summary><b>☕ Java 21 Implementation: Bellman-Ford & Negative Cycle Detection</b></summary>
+<summary><b>[Java] Java 21 Implementation: Bellman-Ford & Negative Cycle Detection</b></summary>
 
 ```java
 import java.util.*;
@@ -1263,16 +1248,16 @@ public class BellmanFordDemo {
 
 ## 9. All-Pairs Shortest Paths (Floyd-Warshall)
 
-### 🧠 Interview Memory Trick: "The 3 Nested For-Loops"
+### [Memory Trick] Interview Memory Trick: "The 3 Nested For-Loops"
 > **The 3-Second Mental Hook**:
 > - **When to trigger**: When `V <= 400` and you need distances between **every pair of nodes** `(i, j)`, or transitive reachability.
 > - **The Golden Rule of Loop Order: `k` on the OUTSIDE!**:
->   ```python
->   for k in range(V):        # k is the INTERMEDIATE relay station
->       for i in range(V):    # i is the START
->           for j in range(V):# j is the DESTINATION
->               dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
->   ```
+```python
+for k in range(V):        # k is the INTERMEDIATE relay station
+    for i in range(V):    # i is the START
+        for j in range(V):# j is the DESTINATION
+            dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
+```
 >   *Mnemonic*: **"Can I fly from City `i` to City `j` faster by having a layover at Airport `k`?"**
 
 The **Floyd-Warshall Algorithm** computes the shortest path between every pair of vertices in `O(V^3)` using simple dynamic programming:
@@ -1280,7 +1265,7 @@ $`D[i][j] = \min(D[i][j], D[i][k] + D[k][j])`$
 Ideal when `V <= 400` or for transitive closure reachability checks.
 
 <details open>
-<summary><b>🐍 Python 3 Implementation: Floyd-Warshall APSP</b></summary>
+<summary><b>[Python] Python 3 Implementation: Floyd-Warshall APSP</b></summary>
 
 ```python
 from typing import List
@@ -1321,7 +1306,7 @@ if __name__ == "__main__":
 </details>
 
 <details>
-<summary><b>☕ Java 21 Implementation: Floyd-Warshall APSP</b></summary>
+<summary><b>[Java] Java 21 Implementation: Floyd-Warshall APSP</b></summary>
 
 ```java
 import java.util.*;
@@ -1376,7 +1361,7 @@ public class FloydWarshallDemo {
 
 ## 10. Eulerian Path & Tour (Hierholzer's Algorithm)
 
-### 🧠 Interview Memory Trick: "The Seven Bridges of Königsberg"
+### [Memory Trick] Interview Memory Trick: "The Seven Bridges of Konigsberg"
 > **The 3-Second Mental Hook**:
 > - **When to trigger**: *"Draw this shape without lifting your pen and without retracing any edge"* or *"Reconstruct itinerary visiting every flight ticket exactly once"* (e.g., LeetCode 332).
 > - **Degree Check in 5 seconds**:
@@ -1390,7 +1375,7 @@ An **Eulerian Tour** visits every edge of a graph exactly once and returns to th
 - **Hierholzer's Algorithm (`O(V + E)`)**: Follows unvisited edges greedily, splicing sub-tours when encountering vertices with remaining edges.
 
 <details open>
-<summary><b>🐍 Python 3 Implementation: Hierholzer's Eulerian Tour</b></summary>
+<summary><b>[Python] Python 3 Implementation: Hierholzer's Eulerian Tour</b></summary>
 
 ```python
 from typing import List, Optional
@@ -1434,7 +1419,7 @@ if __name__ == "__main__":
 </details>
 
 <details>
-<summary><b>☕ Java 21 Implementation: Hierholzer's Eulerian Tour</b></summary>
+<summary><b>[Java] Java 21 Implementation: Hierholzer's Eulerian Tour</b></summary>
 
 ```java
 import java.util.*;
@@ -1491,7 +1476,7 @@ public class EulerianTourDemo {
 
 ## 11. Lowest Common Ancestor (Binary Lifting)
 
-### 🧠 Interview Memory Trick: "Binary Stepping Up the Family Tree"
+### [Memory Trick] Interview Memory Trick: "Binary Stepping Up the Family Tree"
 > **The 3-Second Mental Hook**:
 > - **When to trigger**: Find closest common manager of two employees in an organization, or distance between any two nodes in a tree: `dist(u, v) = depth[u] + depth[v] - 2 * depth[LCA(u, v)]`.
 > - **The Binary Lifting Trick**:
@@ -1504,7 +1489,7 @@ In a tree, the **Lowest Common Ancestor (LCA)** of nodes `u` and `v` is the deep
 - Query: `O(\log V)` by lifting nodes to equal depth and binary stepping upwards.
 
 <details open>
-<summary><b>🐍 Python 3 Implementation: LCA via Binary Lifting</b></summary>
+<summary><b>[Python] Python 3 Implementation: LCA via Binary Lifting</b></summary>
 
 ```python
 import math
@@ -1569,7 +1554,7 @@ if __name__ == "__main__":
 </details>
 
 <details>
-<summary><b>☕ Java 21 Implementation: LCA via Binary Lifting</b></summary>
+<summary><b>[Java] Java 21 Implementation: LCA via Binary Lifting</b></summary>
 
 ```java
 import java.util.*;
@@ -1639,19 +1624,19 @@ public class TreeLCADemo {
 
 ## 12. Maximum Network Flow (Dinic's Algorithm)
 
-### 🧠 Interview Memory Trick: "Water Pipes & Residual Valving"
+### [Memory Trick] Interview Memory Trick: "Water Pipes & Residual Valving"
 > **The 3-Second Mental Hook**:
 > - **When to trigger**: Bipartite matching, bottleneck routing, maximum throughput from source to sink, or finding the Minimum Cut (Max Flow == Min Cut).
 > - **The Golden Residual Edge Rule**:
 >   - Whenever you push flow f along forward edge `u -> v`, you **MUST add a reverse edge `v -> u` with capacity +f**.
->   - *Why?* The reverse edge represents **cancellation**—it allows future flows to redirect earlier suboptimal choices!
+>   - *Why?* The reverse edge represents **cancellation**--it allows future flows to redirect earlier suboptimal choices!
 > - **Dinic vs Edmonds-Karp**: Edmonds-Karp uses BFS (O(V * E^2)). Dinic uses BFS to build levels, then DFS to push blocking flows (O(V^2 * E)), which runs blisteringly fast on competitive programming tests.
 
 Dinic's Algorithm computes Maximum Flow in `O(V^2 E)` by constructing a **Level Graph via BFS** and pushing **Blocking Flows via DFS** with edge pointer caching (`ptr[u]`).
 On unit networks, Dinic runs in `O(\min(V^{2/3}, E^{1/2}) E)`, solving bipartite matching faster than generic methods.
 
 <details open>
-<summary><b>🐍 Python 3 Implementation: Dinic's Algorithm for Maximum Flow</b></summary>
+<summary><b>[Python] Python 3 Implementation: Dinic's Algorithm for Maximum Flow</b></summary>
 
 ```python
 from collections import deque
@@ -1733,7 +1718,7 @@ if __name__ == "__main__":
 </details>
 
 <details>
-<summary><b>☕ Java 21 Implementation: Dinic's Algorithm for Maximum Flow</b></summary>
+<summary><b>[Java] Java 21 Implementation: Dinic's Algorithm for Maximum Flow</b></summary>
 
 ```java
 import java.util.*;
@@ -1831,7 +1816,7 @@ public class DinicMaxFlow {
 
 ## 13. Maximum Cardinality Bipartite Matching (Augmenting Paths)
 
-### 🧠 Interview Memory Trick: "The Dating Game & Roommate Swap"
+### [Memory Trick] Interview Memory Trick: "The Dating Game & Roommate Swap"
 > **The 3-Second Mental Hook**:
 > - **When to trigger**: Job assignment, pairing students to dorm rooms, or maximizing non-conflicting pairs.
 > - **Kuhn's Augmenting Path in 3 sentences**:
@@ -1843,7 +1828,7 @@ public class DinicMaxFlow {
 Finding the maximum number of disjoint edges in a Bipartite Graph `G(V_1, V_2, E)` can be solved in `O(V * E)` using **Augmenting Paths (Kuhn's Algorithm)** without the overhead of full flow networks.
 
 <details open>
-<summary><b>🐍 Python 3 Implementation: Kuhn's Augmenting Path MCBM</b></summary>
+<summary><b>[Python] Python 3 Implementation: Kuhn's Augmenting Path MCBM</b></summary>
 
 ```python
 from typing import List
@@ -1892,7 +1877,7 @@ if __name__ == "__main__":
 </details>
 
 <details>
-<summary><b>☕ Java 21 Implementation: Kuhn's Augmenting Path MCBM</b></summary>
+<summary><b>[Java] Java 21 Implementation: Kuhn's Augmenting Path MCBM</b></summary>
 
 ```java
 import java.util.*;
@@ -1951,7 +1936,7 @@ public class BipartiteMatchingDemo {
 
 ---
 
-## ⚡ Master Quick Revision Flashcards
+## [Summary] Master Quick Revision Flashcards
 
 > [!TIP]
 > **Tree Check**: If connected and `E = V - 1`, discard Dijkstra, Bellman-Ford, and Floyd-Warshall! A single `O(V)` DFS solves SSSP, and 2 DFS calls compute the diameter.
