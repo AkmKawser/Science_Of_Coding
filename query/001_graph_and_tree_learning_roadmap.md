@@ -5,7 +5,7 @@
 > **Source Ground Truth**: *Competitive Programming 4 (CP4)* Book 1 (Chapters 2.4.1, 4.1-4.6) & Book 2 (Chapters 8.4-8.5, 9.5, 9.8, 9.9, 9.24-9.29)  
 > **Authors**: Steven Halim, Felix Halim, Suhendry Effendy  
 > **Language Support**: 100% Complete & Standalone Executable **Python 3** and **Java 21** for **Every Single Algorithm**  
-> **UI Control**: Interactive native toggle tabs (`<details><summary>`) for every code implementation  
+> **UI Control**: Interactive native toggle tabs (HTML details and summary tags) for every code implementation
 > **Generated Timestamp**: `2026-11-05T02:50:00+06:00`
 
 ---
@@ -75,21 +75,6 @@ flowchart TD
 | **"Assign jobs to workers / Pair items 1-to-1"** | Max Bipartite Matching | **Kuhn's Augmenting Path** | `O(V * E)` | **Maximum Number of Accepted Job Applications**: Pair applicants to available jobs without conflicts. | Try matching Worker A to their favorite job. If that job is already occupied by Worker B, politely ask Worker B to switch to their second-choice job. If B can switch, A takes the job! |
 | **"Max throughput / Pipes / Min Cut"** | Capacity bottleneck | **Dinic's Algorithm** | `O(V^2 * E)` | **Network Flow / Maximum Water Pipeline Delivery**: Maximum gallons of water that can flow through a pipe network. | Use BFS to measure distances from water source to drain. Then push water along shortest downhill pipes via DFS. If a pipe gets full, keep reverse valves so future water flows can redirect mistakes. |
 
---- | :--- | :--- | :--- |
-| **"E = V - 1, connected, no cycles"** | Tree Property | **Single DFS / 2-Pass DFS** | `O(V)` |
-| **"Shortest path in maze / unweighted grid"** | Uniform edge cost = 1 | **Breadth-First Search (BFS)** | `O(V + E)` |
-| **"Prerequisites / Build order / Dependencies"** | Directed Acyclic Graph (DAG) | **Kahn's Topological Sort** | `O(V + E)` |
-| **"Divide into two non-conflicting groups"** | No odd cycles | **Bipartite 2-Coloring (BFS)** | `O(V + E)` |
-| **"Shortest path with positive weights"** | Non-negative edge weights | **Dijkstra's Algorithm (Min-Heap)** | `O((V + E) log V)` |
-| **"Negative costs / Currency arbitrage cycle"** | Negative weights | **Bellman-Ford / SPFA** | `O(V * E)` |
-| **"All-pairs distances with V <= 400"** | Dense all-to-all query | **Floyd-Warshall** | `O(V^3)` |
-| **"Connect all computers/cities with min wire"** | Spanning Tree | **Kruskal (UFDS) or Prim (Min-Heap)** | `O(E log V)` |
-| **"Single point of network failure / Critical edge"** | Bridges & Cut Vertices | **Tarjan's Lowlink (`dfs_low`)** | `O(V + E)` |
-| **"Condense directed cycles into DAG"** | Mutual reachability | **Tarjan's SCC** | `O(V + E)` |
-| **"Lowest common ancestor / Distance in tree"** | Tree hierarchy query | **Binary Lifting LCA** | `O(V log V) prep, O(log V) query` |
-| **"Draw shape without lifting pen / use all tickets"** | Visit all edges once | **Hierholzer's Eulerian Tour** | `O(V + E)` |
-| **"Assign jobs to workers / Pair items 1-to-1"** | Max Bipartite Matching | **Kuhn's Augmenting Path** | `O(V * E)` |
-| **"Max throughput / Pipes / Min Cut"** | Capacity bottleneck | **Dinic's Algorithm** | `O(V^2 * E)` |
 
 ---
 
