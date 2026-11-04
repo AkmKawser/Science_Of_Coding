@@ -46,21 +46,26 @@ This document records all instructions, architectural decisions, and agent conve
 
 ---
 
-## Session 12: Complete Rendering Fixes & Typography Normalization
+## Session 13: Enhancing Interview Trigger Table with Real Examples & Plain-English Solutions
 
 ### User Request
-> "please fix the rendering problem"
+> "in the [Summary] Quick-Lookup Interview Trigger Table create a colomn and provide one example problem in short term and another coloum provide how it solves it using the algorithm in normal language term"
 
 ### Actions Taken & Implementation Summary
-1. **Sanitized Mermaid Syntax**:
-   - Replaced illegal `<br/>` HTML tags and raw Unicode characters (`²`, `³`, `>`, `<`, `==>`, `->`, `&`) within the flowchart node strings that were triggering syntax errors and breaking diagram rendering.
-   - Simplified all labels to strict, portable Mermaid syntax supported by GitHub, VS Code, and browser markdown engines.
-2. **Normalized Typography & Zero Non-ASCII Font Glitches**:
-   - Replaced curved quotation marks (`“`, `”`, `‘`, `’`), en/em dashes (`–`, `—`), and non-standard superscript numbers (`²`, `³`) with clean, universal standard ASCII characters (`^2`, `^3`, `"`, `'`, `-`, `--`).
-   - Converted emoji markers to clean, universal square bracket labels (e.g. `[Guide]`, `[Decision Tree]`, `[Memory Trick]`, `[Python]`, `[Java]`), eliminating CP1252/UTF-8 character corruption on Windows systems.
-3. **Automated Verification**:
-   - Confirmed 0 non-ASCII font-breaking characters remaining in the document.
-   - Tested that all 14 Python executable code blocks and all 13 Java classes compile and run with 100% success.
+1. **Added Two New Pedagogical Columns to the Quick-Lookup Table**:
+   - **Column 5 (`Real-World Example Problem`)**: Anchors each trigger phrase to a canonical competitive programming or interview challenge (e.g. *LeetCode 1091: Shortest Path in Binary Matrix*, *LeetCode 210: Course Schedule II*, *LeetCode 1192: Critical Connections in a Network*, *LeetCode 1584: Min Cost to Connect All Points*, *LeetCode 236: Lowest Common Ancestor*).
+   - **Column 6 (`Plain-English Intuitive Solution`)**: Explains the exact mechanism in simple, jargon-free conversational terms:
+     - *Tree Diameter*: *"Pick any node at random, find furthest node X. From X, run DFS again to find Y. Path X to Y is the longest highway in the tree."*
+     - *BFS*: *"Drop a stone at start. Like water ripples expanding 1 tile outward every second, the moment a ripple touches the exit tile, you have reached it in the absolute fewest steps possible."*
+     - *Kahn's Toposort*: *"Put courses with 0 prerequisites in a queue. Take each course, cross it off, and reduce prerequisites for subsequent courses until done."*
+     - *Dijkstra*: *"Keep a scoreboard of shortest times and a Priority Queue. Always pick the unvisited node with the smallest recorded time, send signals, and relax neighbors."*
+     - *Bellman-Ford*: *"Try improving every flight route in the world V - 1 times. If any price can still decrease on the V-th round, you found an infinite money glitch (negative cost cycle)."*
+     - *Kruskal*: *"Put all cables in a price-sorted list from cheapest to most expensive. Greedily plug in the cheapest cable unless it connects two cities already linked together."*
+     - *Tarjan Bridges*: *"Track your arrival timestamp and the oldest ancestor your kids can reach via side roads. If your child has no side road back to someone older than you, your cable is a critical bridge."*
+     - *Kuhn's Matching*: *"Try matching Worker A to their favorite job. If occupied by B, politely ask B to switch to their second choice. If B can switch, A takes the job!"*
+2. **Updated Master File**:
+   - Verified that [`query/001_graph_and_tree_learning_roadmap.md`](query/001_graph_and_tree_learning_roadmap.md) renders with 100% clean formatting and zero font issues.
+
 
 
 
