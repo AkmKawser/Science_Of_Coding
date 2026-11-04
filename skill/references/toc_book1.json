@@ -1,0 +1,430 @@
+[
+  {
+    "title": "CP4: Book 1",
+    "page": 0
+  },
+  {
+    "title": "Contents",
+    "page": 2
+  },
+  {
+    "title": "1 Introduction",
+    "page": 30
+  },
+  {
+    "title": "1.1 Competitive Programming",
+    "page": 30
+  },
+  {
+    "title": "1.2 The Competitions",
+    "page": 32
+  },
+  {
+    "title": "1.2.1 International Olympiad in Informatics (IOI)",
+    "page": 32
+  },
+  {
+    "title": "1.2.2 International Collegiate Programming Contests (ICPC)",
+    "page": 33
+  },
+  {
+    "title": "1.2.3 Other Programming Contests",
+    "page": 35
+  },
+  {
+    "title": "1.3 Tips to be Competitive",
+    "page": 35
+  },
+  {
+    "title": "1.3.1 Tip 1: Type Code Faster!",
+    "page": 35
+  },
+  {
+    "title": "1.3.2 Tip 2: Quickly Identify Problem Types",
+    "page": 37
+  },
+  {
+    "title": "1.3.3 Tip 3: Do Algorithm Analysis",
+    "page": 39
+  },
+  {
+    "title": "1.3.4 Tip 4: Master Programming Languages",
+    "page": 44
+  },
+  {
+    "title": "1.3.5 Tip 5: Master the Art of Testing Code",
+    "page": 47
+  },
+  {
+    "title": "1.3.6 Tip 6: Practice and More Practice",
+    "page": 50
+  },
+  {
+    "title": "1.3.7 Tip 7: Team Work (for ICPC)",
+    "page": 51
+  },
+  {
+    "title": "1.4 Getting Started: The Easy Problems",
+    "page": 52
+  },
+  {
+    "title": "1.4.1 Anatomy of a Programming Contest Problem",
+    "page": 52
+  },
+  {
+    "title": "1.4.2 Typical Input/Output Routines",
+    "page": 52
+  },
+  {
+    "title": "1.4.3 Time to Start the Journey",
+    "page": 55
+  },
+  {
+    "title": "1.4.4 Getting Our First Accepted (AC) Verdict",
+    "page": 56
+  },
+  {
+    "title": "1.5 Basic String Processing Skills",
+    "page": 60
+  },
+  {
+    "title": "1.6 The Ad Hoc Problems",
+    "page": 62
+  },
+  {
+    "title": "1.7 Solutions to Non-Starred Exercises",
+    "page": 70
+  },
+  {
+    "title": "1.8 Chapter Notes",
+    "page": 80
+  },
+  {
+    "title": "2 Data Structures and Libraries",
+    "page": 82
+  },
+  {
+    "title": "2.1 Overview and Motivation",
+    "page": 82
+  },
+  {
+    "title": "2.2 Linear DS with Built-in Libraries",
+    "page": 84
+  },
+  {
+    "title": "2.2.1 Array",
+    "page": 84
+  },
+  {
+    "title": "2.2.2 Special Sorting Problems",
+    "page": 88
+  },
+  {
+    "title": "2.2.3 Bitmask",
+    "page": 91
+  },
+  {
+    "title": "2.2.4 Big Integer (Python & Java)",
+    "page": 95
+  },
+  {
+    "title": "2.2.5 Linked Data Structures",
+    "page": 98
+  },
+  {
+    "title": "2.2.6 Special Stack-based Problems",
+    "page": 100
+  },
+  {
+    "title": "2.3 Non-Linear DS with Built-in Libraries",
+    "page": 107
+  },
+  {
+    "title": "2.3.1 Binary Heap (Priority Queue)",
+    "page": 107
+  },
+  {
+    "title": "2.3.2 Hash Table",
+    "page": 110
+  },
+  {
+    "title": "2.3.3 Balanced Binary Search Tree (bBST)",
+    "page": 113
+  },
+  {
+    "title": "2.3.4 Order Statistics Tree",
+    "page": 116
+  },
+  {
+    "title": "2.4 DS with Our Own Libraries",
+    "page": 123
+  },
+  {
+    "title": "2.4.1 Graph",
+    "page": 123
+  },
+  {
+    "title": "2.4.2 Union-Find Disjoint Sets",
+    "page": 128
+  },
+  {
+    "title": "2.4.3 Fenwick (Binary Indexed) Tree",
+    "page": 133
+  },
+  {
+    "title": "2.4.4 Segment Tree",
+    "page": 143
+  },
+  {
+    "title": "2.5 Solution to Non-Starred Exercises",
+    "page": 153
+  },
+  {
+    "title": "2.6 Chapter Notes",
+    "page": 156
+  },
+  {
+    "title": "3 Problem Solving Paradigms",
+    "page": 158
+  },
+  {
+    "title": "3.1 Overview and Motivation",
+    "page": 158
+  },
+  {
+    "title": "3.2 Complete Search",
+    "page": 159
+  },
+  {
+    "title": "3.2.1 Iterative Complete Search",
+    "page": 160
+  },
+  {
+    "title": "3.2.2 Recursive Complete Search",
+    "page": 164
+  },
+  {
+    "title": "3.2.3 Complete Search Tips",
+    "page": 168
+  },
+  {
+    "title": "3.2.4 Complete Search in Programming Contests",
+    "page": 172
+  },
+  {
+    "title": "3.3 Divide and Conquer",
+    "page": 177
+  },
+  {
+    "title": "3.3.1 Interesting Usages of Binary Search",
+    "page": 177
+  },
+  {
+    "title": "3.3.2 Ternary Search",
+    "page": 181
+  },
+  {
+    "title": "3.3.3 Divide and Conquer in Programming Contests",
+    "page": 182
+  },
+  {
+    "title": "3.4 Greedy",
+    "page": 184
+  },
+  {
+    "title": "3.4.1 Examples",
+    "page": 184
+  },
+  {
+    "title": "3.4.2 Greedy Algorithm in Programming Contests",
+    "page": 190
+  },
+  {
+    "title": "3.5 Dynamic Programming",
+    "page": 193
+  },
+  {
+    "title": "3.5.1 DP Illustration",
+    "page": 193
+  },
+  {
+    "title": "3.5.2 Classical Examples",
+    "page": 202
+  },
+  {
+    "title": "3.5.3 Non-Classical Examples",
+    "page": 213
+  },
+  {
+    "title": "3.5.4 Dynamic Programming in Programming Contests",
+    "page": 216
+  },
+  {
+    "title": "3.6 Solution to Non-Starred Exercises",
+    "page": 219
+  },
+  {
+    "title": "3.7 Chapter Notes",
+    "page": 220
+  },
+  {
+    "title": "4 Graph",
+    "page": 222
+  },
+  {
+    "title": "4.1 Overview and Motivation",
+    "page": 222
+  },
+  {
+    "title": "4.2 Graph Traversal",
+    "page": 224
+  },
+  {
+    "title": "4.2.1 Overview and Motivation",
+    "page": 224
+  },
+  {
+    "title": "4.2.2 Depth First Search (DFS)",
+    "page": 224
+  },
+  {
+    "title": "4.2.3 Breadth First Search (BFS)",
+    "page": 226
+  },
+  {
+    "title": "4.2.4 Finding Connected Components (Undirected Graph)",
+    "page": 227
+  },
+  {
+    "title": "4.2.5 Flood Fill (Implicit 2D Grid Graph)",
+    "page": 228
+  },
+  {
+    "title": "4.2.6 Topological Sort (Directed Acyclic Graph)",
+    "page": 229
+  },
+  {
+    "title": "4.2.7 Bipartite Graph Check (Undirected Graph)",
+    "page": 231
+  },
+  {
+    "title": "4.2.8 Cycle Check (Directed Graph)",
+    "page": 232
+  },
+  {
+    "title": "4.2.9 Finding Articulation Points and Bridges (Undirected Graph)",
+    "page": 234
+  },
+  {
+    "title": "4.2.10 Finding Strongly Connected Components (Directed Graph)",
+    "page": 237
+  },
+  {
+    "title": "4.2.11 Graph Traversal in Programming Contests",
+    "page": 240
+  },
+  {
+    "title": "4.3 Minimum Spanning Tree (MST)",
+    "page": 244
+  },
+  {
+    "title": "4.3.1 Overview and Motivation",
+    "page": 244
+  },
+  {
+    "title": "4.3.2 Kruskal’s Algorithm",
+    "page": 244
+  },
+  {
+    "title": "4.3.3 Prim’s Algorithm",
+    "page": 246
+  },
+  {
+    "title": "4.3.4 Other Applications",
+    "page": 247
+  },
+  {
+    "title": "4.3.5 MST in Programming Contests",
+    "page": 250
+  },
+  {
+    "title": "4.4 Single-Source Shortest Paths (SSSP)",
+    "page": 252
+  },
+  {
+    "title": "4.4.1 Overview and Motivation",
+    "page": 252
+  },
+  {
+    "title": "4.4.2 On Unweighted Graph: BFS",
+    "page": 252
+  },
+  {
+    "title": "4.4.3 On Weighted Graph: Dijkstra’s",
+    "page": 256
+  },
+  {
+    "title": "4.4.4 On Small Graph (with Negative Cycle): Bellman-Ford",
+    "page": 263
+  },
+  {
+    "title": "4.4.5 SSSP in Programming Contests",
+    "page": 266
+  },
+  {
+    "title": "4.5 All-Pairs Shortest Paths (APSP)",
+    "page": 270
+  },
+  {
+    "title": "4.5.1 Overview and Motivation",
+    "page": 270
+  },
+  {
+    "title": "4.5.2 Floyd-Warshall Algorithm",
+    "page": 271
+  },
+  {
+    "title": "4.5.3 Other Applications",
+    "page": 273
+  },
+  {
+    "title": "4.5.4 APSP in Programming Contests",
+    "page": 275
+  },
+  {
+    "title": "4.6 Special Graphs",
+    "page": 278
+  },
+  {
+    "title": "4.6.1 Directed Acyclic Graph",
+    "page": 278
+  },
+  {
+    "title": "4.6.2 Tree",
+    "page": 284
+  },
+  {
+    "title": "4.6.3 Bipartite Graph",
+    "page": 286
+  },
+  {
+    "title": "4.6.4 Eulerian Graph",
+    "page": 289
+  },
+  {
+    "title": "4.6.5 Special Graphs in Programming Contests",
+    "page": 292
+  },
+  {
+    "title": "4.7 Solution to Non-Starred Exercises",
+    "page": 296
+  },
+  {
+    "title": "4.8 Chapter Notes",
+    "page": 299
+  },
+  {
+    "title": "Index",
+    "page": 306
+  }
+]

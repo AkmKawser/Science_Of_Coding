@@ -10,8 +10,30 @@ if sys.stdout.encoding != 'utf-8':
     except AttributeError:
         pass
 
+def find_pdf_file(book_num):
+    filename_candidates = [
+        f"Part-{book_num}.pdf",
+        f"Part-{book_num}.pdf" if book_num == 1 else "Parttt-2.pdf",
+    ]
+    
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    possible_roots = [
+        os.path.abspath(os.path.join(script_dir, "..")),                       # skill root
+        os.path.abspath(os.path.join(script_dir, "..", "books")),               # skill/books
+        os.path.abspath(os.path.join(script_dir, "..", "..", "..")),           # repo root
+        os.path.abspath(os.path.join(script_dir, "..", "..", "..", "Books")),   # repo Books/
+        os.path.abspath(os.path.join(script_dir, "..", "..", "..", "skill", "books")),
+    ]
+    
+    for r in possible_roots:
+        for fname in filename_candidates:
+            p = os.path.join(r, fname)
+            if os.path.exists(p):
+                return p
+    return None
+
 def extract_pages(pdf_path, start_page, end_page, output_file=None):
-    if not os.path.exists(pdf_path):
+    if not pdf_path or not os.path.exists(pdf_path):
         print(f"Error: File not found at {pdf_path}", file=sys.stderr)
         sys.exit(1)
 
@@ -38,7 +60,7 @@ def extract_pages(pdf_path, start_page, end_page, output_file=None):
         print(result)
 
 def search_text(pdf_path, query, max_matches=10):
-    if not os.path.exists(pdf_path):
+    if not pdf_path or not os.path.exists(pdf_path):
         print(f"Error: File not found at {pdf_path}", file=sys.stderr)
         sys.exit(1)
 
@@ -81,18 +103,15 @@ def main():
 
     args = parser.parse_args()
 
-    workspace_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", ".."))
-    book_file = "Part-1.pdf" if args.book == 1 else "Parttt-2.pdf"
-    book_path = os.path.join(workspace_root, book_file)
-    if not os.path.exists(book_path):
-        alt_path = os.path.join(workspace_root, "Books", f"Part-{args.book}.pdf")
-        if os.path.exists(alt_path):
-            book_path = alt_path
+    pdf_path = find_pdf_file(args.book)
+    if not pdf_path:
+        print(f"Error: Could not locate PDF for Book {args.book}.", file=sys.stderr)
+        sys.exit(1)
 
     if args.command == "extract":
-        extract_pages(book_path, args.start, args.end, args.output)
+        extract_pages(pdf_path, args.start, args.end, args.output)
     elif args.command == "search":
-        search_text(book_path, args.query, args.limit)
+        search_text(pdf_path, args.query, args.limit)
 
 if __name__ == "__main__":
     main()
