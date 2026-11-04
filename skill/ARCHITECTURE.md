@@ -93,5 +93,28 @@ This skill has zero proprietary dependencies:
 - Written in standard Markdown, JSON, and standard Python (`pypdf`).
 - Works on Windows, Linux, and macOS.
 - Can be zipped and shared with any other project or AI platform.
-- Cross-compatible symlinks/mirrors exist at `.agent/skills/cpbook4/` and `.claude/skills/cpbook4/`.
+
+### How to use across specific Agentic AIs:
+
+#### 1. Google Antigravity
+- Place or point to the skill in `.agent/skills/cpbook4/SKILL.md` (pre-configured in this repository).
+- Antigravity automatically indexes the skill upon workspace startup.
+- Mention `@skill:cpbook4` or ask algorithm questions directly in chat; the agent will consult `references/table_of_contents.md` and invoke `scripts/query_cpbook.py` as needed.
+
+#### 2. Claude Code
+- Claude Code natively searches for skills under `.claude/skills/<skill-name>/SKILL.md`.
+- You can enable it by copying `skill/SKILL.md` to `.claude/skills/cpbook4/SKILL.md`, or by adding a reference line to your root `CLAUDE.md`:
+  ```markdown
+  Refer to `skill/SKILL.md` for algorithm design and CP4 queries.
+  ```
+- Invoke by asking Claude Code: *"Consult the cpbook4 skill to find the optimal DP approach for Longest Common Subsequence."*
+
+#### 3. OpenAI Codex / Cursor / Custom Agent Frameworks
+- For Codex, Cursor, Copilot Workspace, or custom LangChain/AutoGPT agents:
+- Include a directive in `.cursorrules`, `AGENTS.md`, or the agent system prompt:
+  ```markdown
+  For algorithmic problems, consult the CP4 skill in `skill/SKILL.md`. Use `python skill/scripts/query_cpbook.py search|extract` to retrieve exact pages and code patterns from `skill/books/`.
+  ```
+- The agent will use its bash/terminal tool to query the books deterministically.
+
 

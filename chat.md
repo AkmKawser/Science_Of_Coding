@@ -32,18 +32,25 @@ This document records all instructions, architectural decisions, and agent conve
 
 ---
 
-## Session 5: Documentation Update (README.md)
+## Session 7: Graph & Tree Roadmap, Revision Guide, and Query Knowledgebase
 
 ### User Request
-> "update readme file"
+> "step by step approach to learn about graph and tree also make a revision guide. also create a folder named query where these query and output of these query will me stored in a colourful and professional .md file for each quesry the query topic name will be the .md file name and also there will be a serial number for each .md file according the tmie of creation."
 
 ### Actions Taken & Implementation Summary
-- Updated `README.md` with:
-  - Project mission statement for the *Science of Coding* manual.
-  - Full explanation of the `cpbook4` agent skill architecture (3-tier retrieval pipeline).
-  - Clean visual ASCII diagram of the repository layout.
-  - Practical CLI command examples for searching and extracting pages from both books.
-  - Author and official CP4 reference links.
+1. **Created `query/` Knowledgebase Directory**:
+   - Initialized `query/` to store formatted topic reports and research query outputs chronologically.
+2. **Generated Comprehensive Graph & Tree Roadmap & Revision Guide**:
+   - Generated [`query/001_graph_and_tree_learning_roadmap.md`](query/001_graph_and_tree_learning_roadmap.md) featuring:
+     - 6-Phase Pedagogical Progression (Foundations $\to$ Core Traversals $\to$ Tree Invariants $\to$ SSSP/APSP Decision Tree $\to$ Advanced Connectivity $\to$ Advanced Tree Decompositions & Flows).
+     - Mermaid visual flowchart of the learning phases.
+     - Graph representations comparison table (AM, AL, EL, Implicit Grids) with C++17 implementations.
+     - In-depth DFS and BFS mechanics and code templates.
+     - Tree special theorems directly from CP4 Book 1 Section 4.6.2 ($E=V-1$, bridge/articulation point invariants, 2-DFS diameter calculation).
+     - SSSP vs APSP decision matrix (BFS vs Dijkstra vs Bellman-Ford vs Floyd-Warshall).
+     - High-yield revision flashcards with GitHub alerts.
+
+
 
 
 

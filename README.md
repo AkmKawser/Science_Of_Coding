@@ -81,6 +81,52 @@ Science_Of_Coding/
 
 ---
 
+## 🤖 How to Use in Agentic AI Systems
+
+The `cpbook4` skill is engineered to be portable and interoperable across all modern coding agent environments.
+
+### 1. Google Antigravity
+Antigravity automatically discovers skills inside the `.agent/skills/` directory:
+- **Discovery**: The repository already includes [`.agent/skills/cpbook4/SKILL.md`](.agent/skills/cpbook4/SKILL.md), which Antigravity loads on session launch.
+- **Triggering**: You can invoke it naturally or explicitly in chat:
+  - *"Using the cpbook4 skill, look up the best data structure for dynamic range sum queries."*
+  - *"Explain Dinic's algorithm using cpbook4."*
+- **Autonomous Execution**: Antigravity reads the decision matrices in `SKILL.md` and uses `query_cpbook.py` automatically whenever competitive programming algorithms or book references are needed.
+
+### 2. Claude Code
+Claude Code discovers skills placed in `.claude/skills/` or via prompt inclusion:
+- **Repository-level Integration**:
+  To have Claude Code pick up the skill directly inside a workspace, create a directory pointer or symlink:
+  ```bash
+  # Windows PowerShell
+  New-Item -ItemType Directory -Force -Path ".claude\skills\cpbook4"
+  Copy-Item -Path "skill\SKILL.md" -Destination ".claude\skills\cpbook4\SKILL.md"
+  ```
+- **Slash Command / Mentions**:
+  Claude Code allows referencing skills directly or placing guidelines in `CLAUDE.md`:
+  ```markdown
+  # In CLAUDE.md:
+  For competitive programming and algorithm tasks, refer to the cpbook4 skill located at `skill/SKILL.md` and query books using `python skill/scripts/query_cpbook.py`.
+  ```
+- **Prompt Invocation**:
+  > *"Read `skill/SKILL.md` and extract section 6.5 of Book 2 on Suffix Arrays to solve this problem."*
+
+### 3. OpenAI Codex / Custom Agent Harnesses (Cursor, Copilot, AutoGPT)
+For OpenAI Codex, Cursor, GitHub Copilot Workspace, or custom agents:
+- **System / Agent Instructions (`.cursorrules` / `AGENTS.md` / System Prompt)**:
+  Add the following directive to your agent configuration or system prompt:
+  ```markdown
+  When dealing with algorithms, data structures, or math puzzles, consult the CP4 skill:
+  1. Entry rules & decision tree: skill/SKILL.md
+  2. Topic and page index: skill/references/table_of_contents.md
+  3. Query execution: python skill/scripts/query_cpbook.py search/extract
+  ```
+- **Interactive Prompting**:
+  You can instruct the agent to run the query script via its terminal tool:
+  > *"Run `python skill/scripts/query_cpbook.py search --book 1 --query 'Monotonic Stack'` and draft the manual section based on the book's examples."*
+
+---
+
 ## 🛠️ CLI Usage: Querying the Books
 
 You or any AI agent can query and extract text from the books on demand using Python (requires `pypdf`):
