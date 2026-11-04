@@ -65,14 +65,21 @@ flowchart TD
 
 ## 1. Graph Representations (AM, AL, EL, Implicit Grid)
 
-Before executing any graph algorithm, select the correct representation based on vertices $V$ and edges $E$:
+### 🧠 Interview Memory Trick: "Who is my neighbor?"
+> **The 3-Second Mental Hook**:
+> - **Matrix (`AM`)**: Think of an *Excel Spreadsheet*. Instant check cell `(u, v)`, but wastes memory like an empty ocean when sparse. Use only when `V <= 1,000` or doing all-pairs matrices.
+> - **List (`AL`)**: Think of a *Phone Contact Book*. Each person `u` stores only their actual friends. Best default for 99% of interviews (`V, E <= 200,000`).
+> - **Edge List (`EL`)**: Think of a *Flight Route List*. A flat array of trips `(origin, dest, price)`. Best when sorting all edges in bulk (e.g., Kruskal's MST).
+> - **Grid**: No graph structure needed! Just use directional arrays: `dr = [-1, 1, 0, 0]` and `dc = [0, 0, -1, 1]`.
 
-| Representation | Space Complexity | Enumerate Neighbors | Check Edge $(u, v)$ | Ideal Use Case |
+Before executing any graph algorithm, select the correct representation based on vertices `V` and edges `E`:
+
+| Representation | Space Complexity | Enumerate Neighbors | Check Edge `(u, v)` | Ideal Use Case |
 | :--- | :--- | :--- | :--- | :--- |
-| **Adjacency Matrix (`AM`)** | $O(V^2)$ | $O(V)$ | $O(1)$ | Dense graphs ($E \approx V^2$), $V \le 1000$, Floyd-Warshall |
-| **Adjacency List (`AL`)** | $O(V + E)$ | $O(\text{deg}(u))$ | $O(\text{deg}(u))$ | **Default choice** for $95\%$ of problems ($V, E \le 2 \cdot 10^5$) |
-| **Edge List (`EL`)** | $O(E)$ | $O(E)$ | $O(E)$ | Kruskal's MST, Bellman-Ford |
-| **Implicit Grid Graph** | $O(1)$ extra | $O(1)$ via $(\Delta r, \Delta c)$ | $O(1)$ | 2D matrices, Flood Fill |
+| **Adjacency Matrix (`AM`)** | `O(V^2)` | `O(V)` | `O(1)` | Dense graphs (`E ~ V^2`), `V <= 1000`, Floyd-Warshall |
+| **Adjacency List (`AL`)** | `O(V + E)` | `O(deg(u))` | `O(deg(u))` | **Default choice** for `95\%` of problems (`V, E <= 2 * 10^5`) |
+| **Edge List (`EL`)** | `O(E)` | `O(E)` | `O(E)` | Kruskal's MST, Bellman-Ford |
+| **Implicit Grid Graph** | `O(1)` extra | `O(1)` via `(d r, d c)` | `O(1)` | 2D matrices, Flood Fill |
 
 <details open>
 <summary><b>🐍 Python 3 Implementation: Complete Graph Representations</b></summary>
@@ -175,9 +182,15 @@ public class GraphRepresentations {
 
 ## 2. Core Traversals & Connected Components (DFS, BFS, Flood Fill)
 
-- **DFS ($O(V + E)$)**: Depth-oriented recursive exploration. Ideal for components and reachability.
-- **BFS ($O(V + E)$)**: Breadth-oriented queue exploration. Guarantees **shortest path in unweighted graphs**.
-- **Flood Fill ($O(R \times C)$)**: Implicit graph traversal on a 2D grid matrix using directional coordinate deltas.
+### 🧠 Interview Memory Trick: "Maze vs Ripple"
+> **The 3-Second Mental Hook**:
+> - **DFS = The Blind Maze Explorer**: You keep walking forward until you hit a wall, then you backtrack. In interviews, use DFS whenever the question asks: *"Does a path exist?"*, *"Find all possible combinations/paths"*, or *"Count disconnected islands"*.
+> - **BFS = Stone in a Pond (Water Ripple)**: The ripple expands outward layer by layer (Distance 1, Distance 2, Distance 3). In interviews, use BFS whenever the interviewer says: *"Find the SHORTEST / MINIMUM steps or moves in an unweighted grid/graph"*. Never use DFS for shortest path on unweighted graphs!
+> - **Flood Fill**: Remember the 4-way boundary guard idiom: `if r < 0 or r >= R or c < 0 or c >= C or grid[r][c] != target: return`.
+
+- **DFS (`O(V + E)`)**: Depth-oriented recursive exploration. Ideal for components and reachability.
+- **BFS (`O(V + E)`)**: Breadth-oriented queue exploration. Guarantees **shortest path in unweighted graphs**.
+- **Flood Fill (`O(R x C)`)**: Implicit graph traversal on a 2D grid matrix using directional coordinate deltas.
 
 <details open>
 <summary><b>🐍 Python 3 Implementation: DFS, BFS & Flood Fill</b></summary>
@@ -328,8 +341,20 @@ public class CoreTraversals {
 
 ## 3. Topological Sort & Directed Cycle Detection
 
-- **Topological Sort**: Linear ordering of vertices in a Directed Acyclic Graph (DAG) such that edge $u \to v \implies u$ appears before $v$.
-  - **Kahn's Algorithm**: $O(V + E)$ queue tracking in-degrees ($\text{in\_degree}[v] == 0$).
+### 🧠 Interview Memory Trick: "University Course Prerequisites"
+> **The 3-Second Mental Hook**:
+> - **When to trigger**: Any problem with constraints like *"Task A must be completed before Task B"*, *"Course prerequisites"*, or *"Build order dependency"*.
+> - **Kahn's Trick (In-Degree Zero)**:
+>   1. Count how many prerequisites each course has (`in_degree`).
+>   2. Put courses with `in_degree == 0` (zero prerequisites) in a Queue.
+>   3. Pop a course, take it, and decrement its successors' prerequisites by 1.
+>   4. If you took all `V` courses, it is a valid order. If fewer than `V` courses were taken, there is a **Deadlock / Circular Dependency (Cycle)**!
+> - **DFS 3-Colors Trick**: 
+>   `0 = Unvisited`, `1 = Currently on Stack (in progress)`, `2 = Fully Processed`.
+>   If you ever see a neighbor with color `1`, you ran into your own tail (Back-Edge = Cycle!).
+
+- **Topological Sort**: Linear ordering of vertices in a Directed Acyclic Graph (DAG) such that edge `u \to v ==> u` appears before `v`.
+  - **Kahn's Algorithm**: `O(V + E)` queue tracking in-degrees (`\text{in\_degree}[v] == 0`).
 - **Cycle Detection**: 3-state DFS tracking `UNVISITED (0)`, `EXPLORING (1)`, `VISITED (2)`. An edge to an `EXPLORING` node is a **back-edge**, proving a directed cycle.
 
 <details open>
@@ -464,7 +489,13 @@ public class TopoCycleDemo {
 
 ## 4. Bipartite Graph Check (2-Coloring via BFS)
 
-A graph is **Bipartite** if and only if it contains **no odd-length cycles**. We can verify bipartiteness in $O(V + E)$ by attempting to color vertices with 2 alternating colors (`0` and `1`).
+### 🧠 Interview Memory Trick: "Two Rival Sports Teams"
+> **The 3-Second Mental Hook**:
+> - **When to trigger**: *"Can we divide people into 2 conflicting groups?"*, *"Can you color graph with 2 alternating colors?"*, or *"Is there any odd-length cycle?"*
+> - **The Invariant**: A graph is Bipartite **if and only if it has NO odd-length cycles** (a triangle cannot be 2-colored).
+> - **How to implement in 60 seconds**: Standard BFS. Color starting node `0`. Every neighbor must get color `1 - current_color`. If you ever bump into a neighbor that already has your exact same color, immediately return `False`.
+
+A graph is **Bipartite** if and only if it contains **no odd-length cycles**. We can verify bipartiteness in `O(V + E)` by attempting to color vertices with 2 alternating colors (`0` and `1`).
 
 <details open>
 <summary><b>🐍 Python 3 Implementation: Bipartite Graph 2-Coloring</b></summary>
@@ -574,12 +605,21 @@ public class BipartiteChecker {
 
 ## 5. Tarjan's Articulation Points & Bridges (Lowlink)
 
+### 🧠 Interview Memory Trick: "The Single Point of Failure"
+> **The 3-Second Mental Hook**:
+> - **When to trigger**: *"Find critical connections in a network"*, *"Which server failure will partition the network?"* (e.g., LeetCode 1192).
+> - **The Mental Picture**:
+>   - `dfs_num[u]`: Discovery timestamp when I arrived at node `u`.
+>   - `dfs_low[u]`: The highest ancestor (smallest timestamp) anyone in my entire subtree can reach via back-edges.
+> - **The Bridge Rule**: If `dfs_low[v] > dfs_num[u]`, child `v` has **NO escape route** to anyone older than `u`. Therefore, edge `(u, v)` is a **Bridge**! Cut it, and the bridge collapses.
+> - **The Cut-Vertex Rule**: If `dfs_low[v] >= dfs_num[u]`, node `u` is an **Articulation Point** (for root, check if it has >= 2 children).
+
 In an undirected graph:
 - A **Bridge** is an edge whose removal increases the number of connected components.
 - An **Articulation Point (Cut Vertex)** is a vertex whose removal disconnects the graph.
 - **Tarjan's Lowlink Theorem**:
-  - `dfs_low[v] > dfs_num[u]` $\implies (u, v)$ is a **Bridge**.
-  - `dfs_low[v] >= dfs_num[u]` $\implies u$ is an **Articulation Point** (for root node, check if root children $\ge 2$).
+  - `dfs_low[v] > dfs_num[u]` `==> (u, v)` is a **Bridge**.
+  - `dfs_low[v] >= dfs_num[u]` `==> u` is an **Articulation Point** (for root node, check if root children `>= 2`).
 
 <details open>
 <summary><b>🐍 Python 3 Implementation: Tarjan's Bridges & Articulation Points</b></summary>
@@ -728,7 +768,13 @@ public class TarjanBridgesAP {
 
 ## 6. Strongly Connected Components (Tarjan's SCC)
 
-In a directed graph, a **Strongly Connected Component (SCC)** is a maximal subgraph where every vertex is reachable from every other vertex. Tarjan's SCC algorithm discovers all components in a single $O(V + E)$ DFS pass using an auxiliary LIFO stack.
+### 🧠 Interview Memory Trick: "Round-Trip Whirlpools"
+> **The 3-Second Mental Hook**:
+> - **When to trigger**: In a **Directed** Graph where you need to condense mutual reachability (can I travel from A to B and return from B to A?).
+> - **The Mental Picture**: Each SCC is a self-contained whirlpool. If you contract each SCC into a single super-node, the remaining graph is a **pure DAG**!
+> - **Tarjan's Stack Trick**: Push nodes onto a stack during DFS. The root of an SCC is the exact moment `dfs_low[u] == dfs_num[u]`. Pop everything off the stack until you reach `u`—that popped group is your complete round-trip component.
+
+In a directed graph, a **Strongly Connected Component (SCC)** is a maximal subgraph where every vertex is reachable from every other vertex. Tarjan's SCC algorithm discovers all components in a single `O(V + E)` DFS pass using an auxiliary LIFO stack.
 
 <details open>
 <summary><b>🐍 Python 3 Implementation: Tarjan's Strongly Connected Components</b></summary>
@@ -871,7 +917,14 @@ public class TarjanSCC {
 
 ## 7. Minimum Spanning Tree: Prim's Algorithm
 
-While Kruskal's algorithm operates on an Edge List via UFDS in $O(E \log V)$, **Prim's Algorithm** grows the tree vertex-by-vertex from a start node using a Priority Queue in $O((V + E) \log V)$, which is especially efficient on dense graphs.
+### 🧠 Interview Memory Trick: "Electric Grid Cable Expansion"
+> **The 3-Second Mental Hook**:
+> - **When to trigger**: Connect all cities with minimum total cable length without any cycles.
+> - **Kruskal vs. Prim Interview Choice**:
+>   - **Kruskal (UFDS)**: Best when edges are already given as an Edge List or graph is sparse (`E log V`). Sort all cables by cost, plug in cheapest cable if it connects 2 different islands.
+>   - **Prim (Priority Queue)**: Best when starting from an established city and expanding outward into dense territory. Mark current node as `taken`, push all outward roads into Min-Heap, repeatedly pop the cheapest road connecting to an untaken city.
+
+While Kruskal's algorithm operates on an Edge List via UFDS in `O(E \log V)`, **Prim's Algorithm** grows the tree vertex-by-vertex from a start node using a Priority Queue in `O((V + E) \log V)`, which is especially efficient on dense graphs.
 
 <details open>
 <summary><b>🐍 Python 3 Implementation: Prim's MST Algorithm</b></summary>
@@ -992,9 +1045,17 @@ public class PrimMST {
 
 ## 8. SSSP with Negative Weights & Cycles (Bellman-Ford & SPFA)
 
+### 🧠 Interview Memory Trick: "The Time Travel Paradox"
+> **The 3-Second Mental Hook**:
+> - **Why Dijkstra fails**: Dijkstra greedily locks in a node once popped from the Min-Heap. If a negative edge appears later, it breaks the greedy invariant.
+> - **Bellman-Ford Mental Model**:
+>   - In a graph of `V` vertices, any simple path has at most `V - 1` edges.
+>   - Relax every single edge in the graph `V - 1` times.
+>   - **The Catch**: Run an extra `V`-th pass. If *any* distance still decreases, someone found an infinite money glitch / time loop (**Negative Weight Cycle**) and distances drop to `-infinity`!
+
 When edges can have negative weights, Dijkstra produces invalid results.
-- **Bellman-Ford ($O(V \cdot E)$)**: Relaxes all $E$ edges $V - 1$ times. On the $V$-th pass, any distance decrease proves the existence of a **negative weight cycle**.
-- **SPFA (Shortest Path Faster Algorithm)**: Queue-optimized Bellman-Ford running in $O(E)$ average on random graphs.
+- **Bellman-Ford (`O(V * E)`)**: Relaxes all `E` edges `V - 1` times. On the `V`-th pass, any distance decrease proves the existence of a **negative weight cycle**.
+- **SPFA (Shortest Path Faster Algorithm)**: Queue-optimized Bellman-Ford running in `O(E)` average on random graphs.
 
 <details open>
 <summary><b>🐍 Python 3 Implementation: Bellman-Ford & Negative Cycle Detection</b></summary>
@@ -1120,9 +1181,21 @@ public class BellmanFordDemo {
 
 ## 9. All-Pairs Shortest Paths (Floyd-Warshall)
 
-The **Floyd-Warshall Algorithm** computes the shortest path between every pair of vertices in $O(V^3)$ using simple dynamic programming:
-$$D[i][j] = \min(D[i][j], D[i][k] + D[k][j])$$
-Ideal when $V \le 400$ or for transitive closure reachability checks.
+### 🧠 Interview Memory Trick: "The 3 Nested For-Loops"
+> **The 3-Second Mental Hook**:
+> - **When to trigger**: When `V <= 400` and you need distances between **every pair of nodes** `(i, j)`, or transitive reachability.
+> - **The Golden Rule of Loop Order: `k` on the OUTSIDE!**:
+>   ```python
+>   for k in range(V):        # k is the INTERMEDIATE relay station
+>       for i in range(V):    # i is the START
+>           for j in range(V):# j is the DESTINATION
+>               dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
+>   ```
+>   *Mnemonic*: **"Can I fly from City `i` to City `j` faster by having a layover at Airport `k`?"**
+
+The **Floyd-Warshall Algorithm** computes the shortest path between every pair of vertices in `O(V^3)` using simple dynamic programming:
+$`D[i][j] = \min(D[i][j], D[i][k] + D[k][j])`$
+Ideal when `V <= 400` or for transitive closure reachability checks.
 
 <details open>
 <summary><b>🐍 Python 3 Implementation: Floyd-Warshall APSP</b></summary>
@@ -1221,10 +1294,18 @@ public class FloydWarshallDemo {
 
 ## 10. Eulerian Path & Tour (Hierholzer's Algorithm)
 
+### 🧠 Interview Memory Trick: "The Seven Bridges of Königsberg"
+> **The 3-Second Mental Hook**:
+> - **When to trigger**: *"Draw this shape without lifting your pen and without retracing any edge"* or *"Reconstruct itinerary visiting every flight ticket exactly once"* (e.g., LeetCode 332).
+> - **Degree Check in 5 seconds**:
+>   - **Eulerian Tour (Start == End)**: Connected + **Every node has an EVEN degree**.
+>   - **Eulerian Path (Start != End)**: Connected + **Exactly 2 nodes have ODD degree** (one is Start, one is End).
+> - **Hierholzer's Algorithm**: Greedily walk edges; when stuck at a dead-end, prepend it to your itinerary (post-order reversal).
+
 An **Eulerian Tour** visits every edge of a graph exactly once and returns to the starting vertex.
 - **Undirected Graph**: Exists if connected and **every vertex has even degree**.
 - **Eulerian Path**: Exists if connected and **exactly 0 or 2 vertices have odd degree**.
-- **Hierholzer's Algorithm ($O(V + E)$)**: Follows unvisited edges greedily, splicing sub-tours when encountering vertices with remaining edges.
+- **Hierholzer's Algorithm (`O(V + E)`)**: Follows unvisited edges greedily, splicing sub-tours when encountering vertices with remaining edges.
 
 <details open>
 <summary><b>🐍 Python 3 Implementation: Hierholzer's Eulerian Tour</b></summary>
@@ -1328,9 +1409,17 @@ public class EulerianTourDemo {
 
 ## 11. Lowest Common Ancestor (Binary Lifting)
 
-In a tree, the **Lowest Common Ancestor (LCA)** of nodes $u$ and $v$ is the deepest node that is an ancestor to both.
-- Preprocessing: $O(V \log V)$ using doubling dynamic programming table $\text{up}[u][k] = 2^k\text{-th ancestor of } u$.
-- Query: $O(\log V)$ by lifting nodes to equal depth and binary stepping upwards.
+### 🧠 Interview Memory Trick: "Binary Stepping Up the Family Tree"
+> **The 3-Second Mental Hook**:
+> - **When to trigger**: Find closest common manager of two employees in an organization, or distance between any two nodes in a tree: `dist(u, v) = depth[u] + depth[v] - 2 * depth[LCA(u, v)]`.
+> - **The Binary Lifting Trick**:
+>   - Instead of climbing 1 step at a time (O(N)), precompute jumps of powers of two: `up[u][k]` = your 2^k-th ancestor (1st, 2nd, 4th, 8th, 16th...).
+>   - Step 1: Bring the deeper node up to the same depth using bitwise jumps.
+>   - Step 2: Jump both nodes upward together by the largest possible power of two that doesn't overshoot their common parent.
+
+In a tree, the **Lowest Common Ancestor (LCA)** of nodes `u` and `v` is the deepest node that is an ancestor to both.
+- Preprocessing: `O(V \log V)` using doubling dynamic programming table `\text{up}[u][k] = 2^k\text{-th ancestor of } u`.
+- Query: `O(\log V)` by lifting nodes to equal depth and binary stepping upwards.
 
 <details open>
 <summary><b>🐍 Python 3 Implementation: LCA via Binary Lifting</b></summary>
@@ -1468,8 +1557,16 @@ public class TreeLCADemo {
 
 ## 12. Maximum Network Flow (Dinic's Algorithm)
 
-Dinic's Algorithm computes Maximum Flow in $O(V^2 E)$ by constructing a **Level Graph via BFS** and pushing **Blocking Flows via DFS** with edge pointer caching (`ptr[u]`).
-On unit networks, Dinic runs in $O(\min(V^{2/3}, E^{1/2}) E)$, solving bipartite matching faster than generic methods.
+### 🧠 Interview Memory Trick: "Water Pipes & Residual Valving"
+> **The 3-Second Mental Hook**:
+> - **When to trigger**: Bipartite matching, bottleneck routing, maximum throughput from source to sink, or finding the Minimum Cut (Max Flow == Min Cut).
+> - **The Golden Residual Edge Rule**:
+>   - Whenever you push flow f along forward edge `u -> v`, you **MUST add a reverse edge `v -> u` with capacity +f**.
+>   - *Why?* The reverse edge represents **cancellation**—it allows future flows to redirect earlier suboptimal choices!
+> - **Dinic vs Edmonds-Karp**: Edmonds-Karp uses BFS (O(V * E^2)). Dinic uses BFS to build levels, then DFS to push blocking flows (O(V^2 * E)), which runs blisteringly fast on competitive programming tests.
+
+Dinic's Algorithm computes Maximum Flow in `O(V^2 E)` by constructing a **Level Graph via BFS** and pushing **Blocking Flows via DFS** with edge pointer caching (`ptr[u]`).
+On unit networks, Dinic runs in `O(\min(V^{2/3}, E^{1/2}) E)`, solving bipartite matching faster than generic methods.
 
 <details open>
 <summary><b>🐍 Python 3 Implementation: Dinic's Algorithm for Maximum Flow</b></summary>
@@ -1652,7 +1749,16 @@ public class DinicMaxFlow {
 
 ## 13. Maximum Cardinality Bipartite Matching (Augmenting Paths)
 
-Finding the maximum number of disjoint edges in a Bipartite Graph $G(V_1, V_2, E)$ can be solved in $O(V \cdot E)$ using **Augmenting Paths (Kuhn's Algorithm)** without the overhead of full flow networks.
+### 🧠 Interview Memory Trick: "The Dating Game & Roommate Swap"
+> **The 3-Second Mental Hook**:
+> - **When to trigger**: Job assignment, pairing students to dorm rooms, or maximizing non-conflicting pairs.
+> - **Kuhn's Augmenting Path in 3 sentences**:
+>   - Try to match Left person `u` with their preferred Right person `v`.
+>   - If `v` is free, match them!
+>   - If `v` is already taken by someone else `w`, politely ask `w`: *"Can you find another partner?"*
+>   - If `w` can recursively find a new match, `v` becomes free for `u`! If nobody can move, `u` cannot be matched.
+
+Finding the maximum number of disjoint edges in a Bipartite Graph `G(V_1, V_2, E)` can be solved in `O(V * E)` using **Augmenting Paths (Kuhn's Algorithm)** without the overhead of full flow networks.
 
 <details open>
 <summary><b>🐍 Python 3 Implementation: Kuhn's Augmenting Path MCBM</b></summary>
@@ -1766,10 +1872,10 @@ public class BipartiteMatchingDemo {
 ## ⚡ Master Quick Revision Flashcards
 
 > [!TIP]
-> **Tree Check**: If connected and $E = V - 1$, discard Dijkstra, Bellman-Ford, and Floyd-Warshall! A single $O(V)$ DFS solves SSSP, and 2 DFS calls compute the diameter.
+> **Tree Check**: If connected and `E = V - 1`, discard Dijkstra, Bellman-Ford, and Floyd-Warshall! A single `O(V)` DFS solves SSSP, and 2 DFS calls compute the diameter.
 
 > [!IMPORTANT]
-> **Negative Weights Check**: Dijkstra produces undefined behavior with negative edge weights. Always use Bellman-Ford ($O(V \cdot E)$) or SPFA if edge weights can be negative.
+> **Negative Weights Check**: Dijkstra produces undefined behavior with negative edge weights. Always use Bellman-Ford (`O(V * E)`) or SPFA if edge weights can be negative.
 
 > [!CAUTION]
-> **Bipartite Matching Trap**: Do not use full Ford-Fulkerson when Kuhn's Augmenting Path runs in clean $O(V \cdot E)$ with minimal code overhead.
+> **Bipartite Matching Trap**: Do not use full Ford-Fulkerson when Kuhn's Augmenting Path runs in clean `O(V * E)` with minimal code overhead.
