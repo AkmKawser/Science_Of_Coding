@@ -32,23 +32,25 @@ This document records all instructions, architectural decisions, and agent conve
 
 ---
 
-## Session 7: Graph & Tree Roadmap, Revision Guide, and Query Knowledgebase
+## Session 8: Full Runnable Python & Java Implementations Side-by-Side
 
 ### User Request
-> "step by step approach to learn about graph and tree also make a revision guide. also create a folder named query where these query and output of these query will me stored in a colourful and professional .md file for each quesry the query topic name will be the .md file name and also there will be a serial number for each .md file according the tmie of creation."
+> "all the codes should be complete and runnable also the lanauge should be in python and java side by side"
 
 ### Actions Taken & Implementation Summary
-1. **Created `query/` Knowledgebase Directory**:
-   - Initialized `query/` to store formatted topic reports and research query outputs chronologically.
-2. **Generated Comprehensive Graph & Tree Roadmap & Revision Guide**:
-   - Generated [`query/001_graph_and_tree_learning_roadmap.md`](query/001_graph_and_tree_learning_roadmap.md) featuring:
-     - 6-Phase Pedagogical Progression (Foundations $\to$ Core Traversals $\to$ Tree Invariants $\to$ SSSP/APSP Decision Tree $\to$ Advanced Connectivity $\to$ Advanced Tree Decompositions & Flows).
-     - Mermaid visual flowchart of the learning phases.
-     - Graph representations comparison table (AM, AL, EL, Implicit Grids) with C++17 implementations.
-     - In-depth DFS and BFS mechanics and code templates.
-     - Tree special theorems directly from CP4 Book 1 Section 4.6.2 ($E=V-1$, bridge/articulation point invariants, 2-DFS diameter calculation).
-     - SSSP vs APSP decision matrix (BFS vs Dijkstra vs Bellman-Ford vs Floyd-Warshall).
-     - High-yield revision flashcards with GitHub alerts.
+1. **Document Refactoring (`query/001_graph_and_tree_learning_roadmap.md`)**:
+   - Replaced pseudo-code snippets with **100% complete, fully self-contained, and runnable** implementations.
+   - Arranged all algorithms in synchronized **Python 3** and **Java 21** side-by-side comparative carousel blocks:
+     1. **Graph Representations (`AM`, `AL`, `EL`)**: Object-oriented models with weighted and unweighted edges.
+     2. **Core Traversals (DFS & BFS)**: Full recursive DFS and queue-based BFS with distance tracking.
+     3. **Tree Invariants & Tree Diameter**: 2-pass DFS without `visited[]` array using `(u, p)` parent tracking.
+     4. **Shortest Paths (Dijkstra's Algorithm)**: Min-heap / priority queue with lazy deletion and path reconstruction.
+     5. **Minimum Spanning Tree (Kruskal's with UFDS)**: Disjoint sets with path compression and union by rank.
+2. **Automated Verification**:
+   - Executed and validated all 5 Python blocks via Python 3.14.
+   - Compiled and executed all 5 Java classes (`GraphDemo`, `TraversalsDemo`, `TreeAlgorithmsDemo`, `DijkstraDemo`, `KruskalDemo`) via `javac` & `java` (OpenJDK 21).
+   - Zero compilation or runtime errors. Cleaned up temporary test artifacts.
+
 
 
 
