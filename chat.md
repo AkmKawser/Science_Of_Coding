@@ -32,22 +32,20 @@ This document records all instructions, architectural decisions, and agent conve
 
 ---
 
-## Session 3: Self-Contained Skill Directory & Architecture Documentation
+## Session 5: Documentation Update (README.md)
 
 ### User Request
-> "add the architecture how this skill will work in a md file inside a folder named skill. also put all the skill related folder these including the book."
+> "update readme file"
 
 ### Actions Taken & Implementation Summary
-1. **Consolidated `skill/` Directory Structure**:
-   - Created the self-contained root folder `skill/` housing the entire ecosystem:
-     - `skill/books/`: Stores `Part-1.pdf` (Book 1, 329 pages) and `Part-2.pdf` (Book 2, 352 pages).
-     - `skill/references/`: Stores `table_of_contents.md`, `toc_book1.json`, and `toc_book2.json`.
-     - `skill/scripts/`: Stores `query_cpbook.py` with multi-path resolution (skill-local books, project root books, and fallback directories).
-     - `skill/SKILL.md`: Universal agent entrypoint and instruction rules.
-     - `skill/ARCHITECTURE.md`: Complete architecture diagram, technical breakdown, and 3-tier retrieval rationale.
-2. **Updated Tooling**:
-   - Verified that `python skill/scripts/query_cpbook.py` automatically resolves paths inside `skill/books/`.
-   - Updated `.agent/skills/cpbook4/scripts/query_cpbook.py` to match.
+- Updated `README.md` with:
+  - Project mission statement for the *Science of Coding* manual.
+  - Full explanation of the `cpbook4` agent skill architecture (3-tier retrieval pipeline).
+  - Clean visual ASCII diagram of the repository layout.
+  - Practical CLI command examples for searching and extracting pages from both books.
+  - Author and official CP4 reference links.
+
+
 
 
 
