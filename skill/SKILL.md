@@ -14,12 +14,12 @@ It is structured to be completely **agent-agnostic**—fully functional with any
 ## 1. Skill Capabilities & Book References
 
 The skill directly references the two canonical volumes stored in this repository:
-1. **Book 1 (`Part-1.pdf` / `Books/Part-1.pdf`)**: 329 pages.
+1. **Book 1 (`skill/books/Overall/Part-1.pdf`)**: 329 pages.
    - Fundamentals, problem types, time/space complexity analysis.
    - Built-in & custom linear and non-linear data structures (UFDS, Fenwick Tree, Segment Tree).
    - Core paradigms: Complete Search, Divide and Conquer, Greedy, Dynamic Programming.
    - Graph algorithms: Traversals (DFS/BFS), MST, SSSP (Dijkstra, Bellman-Ford), APSP (Floyd-Warshall), Special Graphs (DAG, Tree, Bipartite, Eulerian).
-2. **Book 2 (`Parttt-2.pdf` / `Books/Part-2.pdf`)**: 352 pages.
+2. **Book 2 (`skill/books/Overall/Part-2.pdf`)**: 352 pages.
    - Mathematics: Number theory (Primes, Sieve, GCD/LCM, Modular arithmetic, Extended Euclidean), Combinatorics, Probability, Game theory, Matrix power.
    - String Processing: Edit distance, LCS, KMP, Suffix Trie/Tree/Array, Rabin-Karp hashing, Manacher.
    - Computational Geometry: Points, lines, circles, polygons, Convex Hull (Graham scan, Monotone chain), 3D geometry.

@@ -18,8 +18,11 @@ skill/
 ├── ARCHITECTURE.md                 <-- Detailed operational manual (this file)
 ├── SKILL.md                        <-- Universal agent entrypoint & decision rules
 ├── books/
-│   ├── Part-1.pdf                  <-- CP4 Book 1 complete original PDF (329 pages)
-│   └── Part-2.pdf                  <-- CP4 Book 2 complete original PDF (352 pages)
+│   ├── Flowchart/                  <-- Flowcharts & programming techniques
+│   ├── Overall/                    <-- Comprehensive CP4 reference books
+│   │   ├── Part-1.pdf              <-- CP4 Book 1 complete original PDF (329 pages)
+│   │   └── Part-2.pdf              <-- CP4 Book 2 complete original PDF (352 pages)
+│   └── Programming Logic/          <-- Logic, loops & pattern books
 ├── references/
 │   ├── table_of_contents.md        <-- Fast human & agent markdown topic index with page numbers
 │   ├── toc_book1.json              <-- Machine-readable outline tree for Book 1

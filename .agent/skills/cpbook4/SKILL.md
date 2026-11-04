@@ -11,8 +11,8 @@ This skill points directly to the canonical standalone package in the [`skill/`]
 - **Architecture & Operational Guide**: [`skill/ARCHITECTURE.md`](../../../skill/ARCHITECTURE.md)
 - **Primary Specification & Decision Matrix**: [`skill/SKILL.md`](../../../skill/SKILL.md)
 - **Books**:
-  - Book 1: [`skill/books/Part-1.pdf`](../../../skill/books/Part-1.pdf)
-  - Book 2: [`skill/books/Part-2.pdf`](../../../skill/books/Part-2.pdf)
+  - Book 1: [`skill/books/Overall/Part-1.pdf`](../../../skill/books/Overall/Part-1.pdf)
+  - Book 2: [`skill/books/Overall/Part-2.pdf`](../../../skill/books/Overall/Part-2.pdf)
 - **Topic & Page Navigation**: [`skill/references/table_of_contents.md`](../../../skill/references/table_of_contents.md)
 - **Query & Page Extractor Utility**:
   ```bash

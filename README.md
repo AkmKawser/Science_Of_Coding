@@ -18,9 +18,9 @@ This repository features:
 ## 🧠 The `cpbook4` Agent Skill
 
 The `cpbook4` skill encapsulates both volumes of *Competitive Programming 4*:
-- **Book 1 (`skill/books/Part-1.pdf`)**: 329 pages  
+- **Book 1 (`skill/books/Overall/Part-1.pdf`)**: 329 pages  
   *Introduction, Built-in and Custom Linear/Non-linear Data Structures (UFDS, Fenwick Tree, Segment Tree), Core Paradigms (Complete Search, Divide & Conquer, Greedy, Dynamic Programming), and Graph Algorithms (DFS/BFS, MST, SSSP, APSP, Special Graphs).*
-- **Book 2 (`skill/books/Part-2.pdf`)**: 352 pages  
+- **Book 2 (`skill/books/Overall/Part-2.pdf`)**: 352 pages  
   *Mathematics (Number Theory, Combinatorics, Probability, Game Theory, Matrix Power), String Processing (KMP, Suffix Trie/Tree/Array, Hashing, Manacher), Computational Geometry, Advanced Search & DP, Network Flow, Matching, NP-hard Problems, Problem Decomposition, and Rare Topics (Sparse Table, HLD, LCA, FFT/NTT, Simplex).*
 - **Total Volume**: 681 pages, ~328,000 words (~436,000 tokens).
 
@@ -65,9 +65,12 @@ Science_Of_Coding/
 ├── skill/                          # Standalone, portable Agent Skill package
 │   ├── ARCHITECTURE.md             # Detailed architectural specification & mechanics
 │   ├── SKILL.md                    # Universal agent skill instructions & decision matrix
-│   ├── books/                      # Original CP4 PDF documents
-│   │   ├── Part-1.pdf              # Book 1 (329 pages)
-│   │   └── Part-2.pdf              # Book 2 (352 pages)
+│   ├── books/                      # Curated coding & CP books library
+│   │   ├── Flowchart/              # Flowchart & programming techniques
+│   │   ├── Overall/                # Comprehensive CP4 references
+│   │   │   ├── Part-1.pdf          # CP4 Book 1 (329 pages)
+│   │   │   └── Part-2.pdf          # CP4 Book 2 (352 pages)
+│   │   └── Programming Logic/      # Programming logic & loop patterns
 │   ├── references/                 # Table of contents and machine-readable outline trees
 │   │   ├── table_of_contents.md    # Fast topic-to-page navigation map
 │   │   ├── toc_book1.json          # Book 1 JSON outline tree
@@ -147,11 +150,3 @@ python skill/scripts/query_cpbook.py extract --book 1 --start 143 --end 148
 # Save Dinic's Algorithm pages from Book 2 to a file
 python skill/scripts/query_cpbook.py extract --book 2 --start 156 --end 160 --output dinic.txt
 ```
-
----
-
-## 📜 Authors & References
-
-- **Authors**: Steven Halim, Felix Halim, Suhendry Effendy
-- **Official CP4 Portal & Errata**: [https://cpbook.net](https://cpbook.net)
-- **Official Companion Code Repository**: [https://github.com/stevenhalim/cpbook-code](https://github.com/stevenhalim/cpbook-code)

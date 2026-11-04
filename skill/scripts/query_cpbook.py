@@ -18,13 +18,23 @@ def find_pdf_file(book_num):
     
     script_dir = os.path.dirname(os.path.abspath(__file__))
     possible_roots = [
-        os.path.abspath(os.path.join(script_dir, "..")),                       # skill root
-        os.path.abspath(os.path.join(script_dir, "..", "books")),               # skill/books
+        os.path.abspath(os.path.join(script_dir, "..", "books", "Overall")),   # New location: skill/books/Overall/
+        os.path.abspath(os.path.join(script_dir, "..", "books")),              # skill/books/
+        os.path.abspath(os.path.join(script_dir, "..")),                       # skill/
         os.path.abspath(os.path.join(script_dir, "..", "..", "..")),           # repo root
-        os.path.abspath(os.path.join(script_dir, "..", "..", "..", "Books")),   # repo Books/
+        os.path.abspath(os.path.join(script_dir, "..", "..", "..", "Books")),   # Books/
+        os.path.abspath(os.path.join(script_dir, "..", "..", "..", "skill", "books", "Overall")),
         os.path.abspath(os.path.join(script_dir, "..", "..", "..", "skill", "books")),
     ]
     
+    # Also recursively search within skill/books if needed
+    books_dir = os.path.abspath(os.path.join(script_dir, "..", "books"))
+    if os.path.exists(books_dir):
+        for root, _, files in os.walk(books_dir):
+            for fname in filename_candidates:
+                if fname in files:
+                    return os.path.join(root, fname)
+
     for r in possible_roots:
         for fname in filename_candidates:
             p = os.path.join(r, fname)

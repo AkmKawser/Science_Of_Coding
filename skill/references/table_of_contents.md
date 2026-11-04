@@ -4,7 +4,7 @@
 ---
 
 ## BOOK 1: Fundamental Data Structures & Core Problem-Solving Paradigms
-- **File Reference**: `Part-1.pdf` or `Books/Part-1.pdf` (Total Pages: 329)
+- **File Reference**: `skill/books/Overall/Part-1.pdf` (Total Pages: 329)
 
 ### Chapter 1: Introduction (PDF Page 30)
 - **1.1 Competitive Programming**: Overview, goals, skills required (page 30).
@@ -118,7 +118,7 @@
 ---
 
 ## BOOK 2: Advanced Topics, Mathematics, Strings, Geometry & Hard Problems
-- **File Reference**: `Parttt-2.pdf` or `Books/Part-2.pdf` (Total Pages: 352)
+- **File Reference**: `skill/books/Overall/Part-2.pdf` (Total Pages: 352)
 
 ### Chapter 5: Mathematics (PDF Page 8)
 - **5.2 Ad Hoc Mathematics**: Base numbers conversion, roman numerals, sequence generation (page 9)
