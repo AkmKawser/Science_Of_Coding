@@ -10,6 +10,88 @@
 
 ---
 
+---
+
+## 🎯 Master Decision Tree: What Algorithm to Choose at What Condition?
+
+When facing any graph or tree problem in an interview or programming competition, follow this **instant identification flow**:
+
+```mermaid
+flowchart TD
+    Start(["Problem Involves Network / Entities / Grid"]) --> TreeCheck{"Is it a Tree?<br/>(Connected & E = V - 1, No Cycles)"}
+    
+    %% TREE BRANCH
+    TreeCheck -->|YES: Tree| TreeQ{"What is the query on the Tree?"}
+    TreeQ -->|Diameter / Longest Path| TreeDiam["2-Pass DFS/BFS<br/>Time: O(V)<br/>(Any root -> furthest X -> furthest Y)"]
+    TreeQ -->|Shortest Path / Reachability| TreeSSSP["Simple DFS / BFS<br/>Time: O(V)<br/>(Zero Dijkstra needed! Only check parent (u, p))"]
+    TreeQ -->|Closest Common Ancestor| TreeLCA["Binary Lifting LCA<br/>Prep: O(V log V), Query: O(log V)<br/>(Dist = depth[u] + depth[v] - 2*depth[lca])"]
+    TreeQ -->|Subtree / Path Queries with Updates| TreeHLD["Heavy-Light Decomposition (HLD)<br/>+ Segment Tree<br/>Time: O(log² V) per update/query"]
+    
+    %% GENERAL GRAPH BRANCH
+    TreeCheck -->|NO: General Graph| GoalQ{"What is the Core Goal?"}
+    
+    %% 1. Traversals & Structure
+    GoalQ -->|Connectivity / Reachability| ConnQ{"Graph Type & Trait?"}
+    ConnQ -->|2D Matrix / Grid| FF["Flood Fill (DFS/BFS)<br/>Time: O(R x C)<br/>(Use dr/dc coordinate deltas)"]
+    ConnQ -->|Dependency / Order / DAG| TopoQ["Topological Sort (Kahn's Queue)<br/>Time: O(V + E)<br/>(Count in-degree == 0. Remaining > 0 ==> Cycle!)"]
+    ConnQ -->|Conflict / 2-Partitions| Bipartite["Bipartite 2-Coloring (BFS)<br/>Time: O(V + E)<br/>(No odd cycles allowed!)"]
+    ConnQ -->|Critical Links / Single Failure| TarjanAP["Tarjan Lowlink (Bridges & AP)<br/>Time: O(V + E)<br/>(dfs_low[v] > dfs_num[u] ==> Bridge)"]
+    ConnQ -->|Directed Mutual Reachability| SCC["Tarjan / Kosaraju SCC<br/>Time: O(V + E)<br/>(Condense whirlpools into a clean DAG)"]
+    
+    %% 2. Spanning Tree
+    GoalQ -->|Connect all nodes with Min Cost| MSTQ{"Edge representation?"}
+    MSTQ -->|Sparse / Edge List| Kruskal["Kruskal's Algorithm + UFDS<br/>Time: O(E log V)<br/>(Sort edges, greedily unite disjoint sets)"]
+    MSTQ -->|Dense / Matrix| Prim["Prim's Algorithm + Min-Heap<br/>Time: O((V + E) log V)<br/>(Grow tree outward from start node)"]
+    
+    %% 3. Shortest Paths
+    GoalQ -->|Shortest Path / Min Distance| SPQ{"Single Source (SSSP) or All Pairs (APSP)?"}
+    SPQ -->|APSP: All Pairs| FWQ{"V size constraint?"}
+    FWQ -->|V <= 400| FW["Floyd-Warshall (3 Nested Loops)<br/>Time: O(V³)<br/>(k on OUTSIDE, i & j inside)"]
+    FWQ -->|V > 400 & Sparse| RepDijk["V x Dijkstra<br/>Time: O(V * (V + E) log V)"]
+    
+    SPQ -->|SSSP: Single Source| WeightQ{"Edge Weight Characteristics?"}
+    WeightQ -->|All edges equal weight (1)| BFS_SP["Standard BFS<br/>Time: O(V + E)<br/>(Layer-by-layer queue guarantees shortest path)"]
+    WeightQ -->|Non-negative weights| Dijk["Dijkstra's Algorithm (Min-Heap)<br/>Time: O((V + E) log V)<br/>(Greedy relaxation + lazy deletion)"]
+    WeightQ -->|Negative weights / Detect Cycles| BF["Bellman-Ford / SPFA<br/>Time: O(V * E)<br/>(Relax V-1 times. Decreases on pass V ==> Negative Cycle)"]
+    WeightQ -->|DAG (no cycles)| DAG_SP["Toposort + DP Relaxation<br/>Time: O(V + E)<br/>(Linear time shortest/longest path!)"]
+    
+    %% 4. Advanced: Flows & Matching
+    GoalQ -->|Max Output / Pair Matching / Routes| AdvQ{"Specific Scenario?"}
+    AdvQ -->|Visit every edge exactly once| Euler["Eulerian Tour (Hierholzer)<br/>Time: O(V + E)<br/>(Tour: all degrees even. Path: exactly 2 odd degrees)"]
+    AdvQ -->|Pair items between 2 disjoint sets| Kuhn["Kuhn's Augmenting Path (MCBM)<br/>Time: O(V * E)<br/>(Lightweight DFS swap without heavy flow graphs)"]
+    AdvQ -->|Bottleneck Capacity / Min Cut| Dinic["Dinic's Max Flow Algorithm<br/>Time: O(V² * E)<br/>(Level Graph BFS + Blocking Flow DFS)"]
+
+    %% Visual Styling
+    classDef highlight fill:#0284c7,stroke:#38bdf8,stroke-width:2px,color:#ffffff;
+    classDef decision fill:#1e293b,stroke:#e2e8f0,stroke-width:2px,color:#f8fafc;
+    classDef leaf fill:#15803d,stroke:#4ade80,stroke-width:2px,color:#ffffff;
+    
+    class TreeDiam,TreeSSSP,TreeLCA,TreeHLD,FF,TopoQ,Bipartite,TarjanAP,SCC,Kruskal,Prim,FW,RepDijk,BFS_SP,Dijk,BF,DAG_SP,Euler,Kuhn,Dinic leaf;
+    class TreeCheck,TreeQ,GoalQ,ConnQ,MSTQ,SPQ,FWQ,WeightQ,AdvQ decision;
+    class Start highlight;
+```
+
+### ⚡ Quick-Lookup Interview Trigger Table
+
+| If the problem mentions... | Red Flag / Invariant | Pick This Algorithm | Time Complexity |
+| :--- | :--- | :--- | :--- |
+| **"E = V - 1, connected, no cycles"** | Tree Property | **Single DFS / 2-Pass DFS** | `O(V)` |
+| **"Shortest path in maze / unweighted grid"** | Uniform edge cost = 1 | **Breadth-First Search (BFS)** | `O(V + E)` |
+| **"Prerequisites / Build order / Dependencies"** | Directed Acyclic Graph (DAG) | **Kahn's Topological Sort** | `O(V + E)` |
+| **"Divide into two non-conflicting groups"** | No odd cycles | **Bipartite 2-Coloring (BFS)** | `O(V + E)` |
+| **"Shortest path with positive weights"** | Non-negative edge weights | **Dijkstra's Algorithm (Min-Heap)** | `O((V + E) log V)` |
+| **"Negative costs / Currency arbitrage cycle"** | Negative weights | **Bellman-Ford / SPFA** | `O(V * E)` |
+| **"All-pairs distances with V <= 400"** | Dense all-to-all query | **Floyd-Warshall** | `O(V³)` |
+| **"Connect all computers/cities with min wire"** | Spanning Tree | **Kruskal (UFDS) or Prim (Min-Heap)** | `O(E log V)` |
+| **"Single point of network failure / Critical edge"** | Bridges & Cut Vertices | **Tarjan's Lowlink (`dfs_low`)** | `O(V + E)` |
+| **"Condense directed cycles into DAG"** | Mutual reachability | **Tarjan's SCC** | `O(V + E)` |
+| **"Lowest common ancestor / Distance in tree"** | Tree hierarchy query | **Binary Lifting LCA** | `O(V log V) prep, O(log V) query` |
+| **"Draw shape without lifting pen / use all tickets"** | Visit all edges once | **Hierholzer's Eulerian Tour** | `O(V + E)` |
+| **"Assign jobs to workers / Pair items 1-to-1"** | Max Bipartite Matching | **Kuhn's Augmenting Path** | `O(V * E)` |
+| **"Max throughput / Pipes / Min Cut"** | Capacity bottleneck | **Dinic's Algorithm** | `O(V² * E)` |
+
+---
+
 ## 🧭 Complete Master Curriculum & Topic Index
 
 This manual covers **every graph and tree topic** presented in CP4 Books 1 and 2:

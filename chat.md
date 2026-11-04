@@ -32,31 +32,37 @@ This document records all instructions, architectural decisions, and agent conve
 
 ---
 
-## Session 10: Interview Memory Tricks & Font Rendering Fixes
+## Session 11: Master Graph & Tree Decision Tree Diagram
 
 ### User Request
-> "also add remembering trick for all topics how to remember in the interview. also some of the fonts are not rendering proeprly fix it."
+> "can you also add a decision tree diagram of the whole graph and tree segement so that it beomes easy what to chose at what codition"
 
 ### Actions Taken & Implementation Summary
-1. **Added "3-Second Mental Hook" Interview Memory Tricks to All 13 Topics**:
-   - **Graph Representations**: *"Excel Spreadsheet (AM) vs Phone Contact Book (AL) vs Flight Routes (EL)"*.
-   - **Core Traversals**: *"Blind Maze Explorer (DFS) vs Stone in a Pond / Water Ripple (BFS for Shortest Unweighted Paths)"*.
-   - **Topological Sort**: *"University Course Prerequisites & Kahn's In-Degree Zero Queue vs 3-Color DFS Back-Edges"*.
-   - **Bipartite Graphs**: *"Two Rival Sports Teams & The No-Odd-Cycles Theorem"*.
-   - **Tarjan's Lowlink (Bridges & AP)**: *"Single Point of Failure: `dfs_low[v] > dfs_num[u]` means no escape route, cut it and the bridge collapses"*.
-   - **Strongly Connected Components**: *"Round-Trip Whirlpools: pop stack when `dfs_low[u] == dfs_num[u]` to condense into a clean DAG"*.
-   - **Minimum Spanning Trees**: *"Electric Grid Cable Expansion: Kruskal (sort flat cables with UFDS) vs Prim (expand from city with Min-Heap)"*.
-   - **Bellman-Ford**: *"The Time Travel Paradox: relax `V - 1` times; if distance decreases on pass `V`, an infinite money/time glitch exists"*.
-   - **Floyd-Warshall**: *"The 3 Nested Loops with `k` on the OUTSIDE: Can I fly from City `i` to City `j` faster with a layover at Airport `k`?"*.
-   - **Eulerian Tours**: *"The Seven Bridges of Königsberg: Tour requires all EVEN degrees; Path requires exactly TWO ODD degrees"*.
-   - **Lowest Common Ancestor**: *"Binary Stepping Up the Family Tree: jump by powers of two (`2^k`) instead of single steps"*.
-   - **Maximum Network Flow**: *"Water Pipes & The Golden Residual Edge Rule: pushing flow $+f$ forward MUST add $+f$ capacity backward to permit future cancellation"*.
-   - **Bipartite Matching (MCBM)**: *"The Dating Game & Roommate Swap: if preference is taken, politely ask their partner to recursively find a new match"*.
+1. **Added Master Decision Tree Flowchart**:
+   - Integrated a comprehensive **Mermaid decision tree flowchart** directly into [`query/001_graph_and_tree_learning_roadmap.md`](query/001_graph_and_tree_learning_roadmap.md).
+   - Structured around real interview conditions:
+     - **Level 1 (Is it a Tree? Connected & `E = V - 1`)**:
+       - *Diameter / Longest Path* $\to$ 2-Pass DFS/BFS (`O(V)`).
+       - *Shortest Path / Reachability* $\to$ Simple DFS (`O(V)` with zero Dijkstra overhead).
+       - *Lowest Common Ancestor* $\to$ Binary Lifting LCA (`O(V log V)` prep, `O(log V)` query).
+       - *Path Updates / Range Queries on Tree* $\to$ Heavy-Light Decomposition (`O(log² V)`).
+     - **Level 2 (General Graph: Core Goal Routing)**:
+       - *Grid / Maze* $\to$ 2D Flood Fill (`O(R x C)`).
+       - *Dependencies / Build Order* $\to$ Kahn's Topological Sort (`O(V + E)`).
+       - *Two Conflicting Sets / 2-Coloring* $\to$ Bipartite BFS (`O(V + E)`).
+       - *Critical Link / Single Point of Failure* $\to$ Tarjan's Lowlink Bridges & Articulation Points (`O(V + E)`).
+       - *Mutual Directed Reachability* $\to$ Tarjan's Strongly Connected Components (`O(V + E)`).
+       - *Connect all nodes with Minimum Wire* $\to$ Kruskal (UFDS) or Prim (Min-Heap) (`O(E log V)`).
+       - *Shortest Path on Unweighted Graph* $\to$ Standard Queue BFS (`O(V + E)`).
+       - *Shortest Path on Non-negative Weighted Graph* $\to$ Dijkstra with Min-Heap (`O((V + E) log V)`).
+       - *Negative Weights / Arbitrage Cycle* $\to$ Bellman-Ford / SPFA (`O(V * E)`).
+       - *All-Pairs Shortest Path (`V <= 400`)* $\to$ Floyd-Warshall 3 Nested Loops (`O(V³)`).
+       - *Visit Every Edge Exactly Once* $\to$ Hierholzer's Eulerian Tour (`O(V + E)`).
+       - *Match Items 1-to-1 Between Two Sets* $\to$ Kuhn's Augmenting Path MCBM (`O(V * E)`).
+       - *Max Network Capacity / Min Cut* $\to$ Dinic's Max Flow Algorithm (`O(V² * E)`).
+2. **Added Quick-Lookup Interview Trigger Table**:
+   - Tabular quick-reference mapping exact problem statement trigger phrases to their matching algorithms and time bounds.
 
-2. **Font Rendering & Character Glitch Resolution**:
-   - Fixed unescaped LaTeX math delimiters (`$...$`) which were causing font rendering glitches and illegible symbols in markdown viewings.
-   - Cleaned up formatting into standard, universal monospaced code spans (e.g. `O(V + E)`, `O(V²)`, `V <= 1000`) that render with 100% clarity across VS Code, GitHub, and any web browser.
-   - Verified that all 13 Python and 13 Java runnable code blocks remain intact.
 
 
 
