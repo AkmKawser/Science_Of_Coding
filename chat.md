@@ -191,3 +191,32 @@ This document records all instructions, architectural decisions, and agent conve
    - Pushed successfully to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
    - Verified that the working tree is completely clean and up to date.
 
+---
+
+## Session 24: Refinement of Part 1 in Templates/Repetitive Structure.md
+
+### User Request
+> "Part 1: Define the state
+> State. List every variable you need in order to resume from this exact point.
+> Classify each variable:
+> Free: you choose it by iterating a range (becomes a loop)
+> Derived: computed from others (an assignment, no loop)
+> Carried: accumulated across iterations (an update inside the loop)
+> Fixed: given and unchanging (n, k)
+> Variable roles. For each variable in step 2, write its role first, then read its class from this table. Only steppers and walkers add loops. 
+> 
+> 'State. List every variable you need in order to resume from this exact point. ' dont you think ists wrong to put state : here. dont you think it should be Find List of variables?"
+> "update it"
+
+### Changes Made to Templates/Repetitive Structure.md
+1. **Separated Candidate Listing from State Extraction**:
+   - Replaced ambiguous `1. State. List every variable...` with a structured 3-step sequence:
+     - **Step 1: List Candidate Variables** (write down every variable touched by the problem).
+     - **Step 2: Assign Roles and Classify** (write roles first from the table, then determine class: Free, Derived, Carried, Fixed).
+     - **Step 3: Form the True State** (filter down to the minimal state tuple `State = (Free Variables, Carried Variables)`, dropping fixed inputs, derived formulas, and temporaries).
+2. **Re-sequenced Downstream Step References**:
+   - Re-indexed Part 2, Part 3, and Part 4 steps from 4 through 14.
+   - Synchronized all `### Step X in detail:` subheadings and cross-references.
+3. **Committed and Pushed**:
+   - Pushed commit `1b2cf37` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
