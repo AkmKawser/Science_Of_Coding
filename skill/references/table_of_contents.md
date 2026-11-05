@@ -1,5 +1,4 @@
-# Detailed Table of Contents & Topic Index: CP4 (Competitive Programming 4)
-**Authors**: Steven Halim, Felix Halim, Suhendry Effendy
+# Detailed Table of Contents & Topic Index: Algorithmic Engineering Volumes
 
 ---
 

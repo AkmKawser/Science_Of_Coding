@@ -2,8 +2,7 @@
 
 > **Document Serial**: `001`  
 > **Topic**: Complete Exhaustive Graph & Tree Knowledge Base, Algorithms, Decision Paradigms & Quick Revision Guide  
-> **Source Ground Truth**: *Competitive Programming 4 (CP4)* Book 1 (Chapters 2.4.1, 4.1-4.6) & Book 2 (Chapters 8.4-8.5, 9.5, 9.8, 9.9, 9.24-9.29)  
-> **Authors**: Steven Halim, Felix Halim, Suhendry Effendy  
+> **Source Ground Truth**: Comprehensive Algorithmic & Graph Engineering Library
 > **Language Support**: 100% Complete & Standalone Executable **Python 3** and **Java 21** for **Every Single Algorithm**  
 > **UI Control**: Interactive native toggle tabs (HTML details and summary tags) for every code implementation
 > **Generated Timestamp**: `2026-11-05T02:50:00+06:00`
@@ -80,7 +79,7 @@ flowchart TD
 
 ## [Guide] Complete Master Curriculum & Topic Index
 
-This manual covers **every graph and tree topic** presented in CP4 Books 1 and 2:
+This manual covers **every core and advanced graph and tree topic** required for algorithmic problem-solving:
 
 ```mermaid
 flowchart TD

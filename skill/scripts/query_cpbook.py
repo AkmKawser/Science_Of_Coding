@@ -97,17 +97,17 @@ def search_text(pdf_path, query, max_matches=10):
         print("No matches found.")
 
 def main():
-    parser = argparse.ArgumentParser(description="Query or extract content from CP4 Book 1 and Book 2 PDFs.")
+    parser = argparse.ArgumentParser(description="Query or extract content from reference PDFs.")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     extract_p = subparsers.add_parser("extract", help="Extract text from a range of pages")
-    extract_p.add_argument("--book", type=int, choices=[1, 2], required=True, help="Book number (1 or 2)")
+    extract_p.add_argument("--book", type=int, choices=[1, 2], required=True, help="Volume number (1 or 2)")
     extract_p.add_argument("--start", type=int, required=True, help="Start page index (0-based)")
     extract_p.add_argument("--end", type=int, required=True, help="End page index (0-based, inclusive)")
     extract_p.add_argument("--output", type=str, default=None, help="Output file path (optional)")
 
     search_p = subparsers.add_parser("search", help="Search keyword across a book")
-    search_p.add_argument("--book", type=int, choices=[1, 2], required=True, help="Book number (1 or 2)")
+    search_p.add_argument("--book", type=int, choices=[1, 2], required=True, help="Volume number (1 or 2)")
     search_p.add_argument("--query", type=str, required=True, help="Search phrase or keyword")
     search_p.add_argument("--limit", type=int, default=5, help="Maximum number of matches to return")
 

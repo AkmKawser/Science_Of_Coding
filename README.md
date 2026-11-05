@@ -1,30 +1,44 @@
 # Science of Coding
 
-An exhaustive, high-performance algorithmic engineering manual and agentic AI skill system based on *Competitive Programming 4 (CP4)* by Steven Halim, Felix Halim, and Suhendry Effendy.
+An exhaustive, high-performance algorithmic engineering manual and agentic AI skill system designed for rigorous software problem-solving and deterministic code generation.
 
 ---
 
-## 📖 Project Overview
+## 🎯 Core Philosophy & Project Objective
 
-The mission of **Science of Coding** is to create a complete, rigorous, and practical manual for mastering the art and science of competitive programming, algorithm design, and software problem-solving.
+> *"The objective of this project is to establish deterministic control and architectural transparency over agentic coding models, rather than passively accepting unverified AI-generated code. Whenever multiple valid designs or algorithmic trade-offs exist, the agent must proactively engage the developer—presenting architectural options, evaluating time/space trade-offs, and seeking explicit consensus before implementing code."*
 
-This repository features:
-1. **The Science of Coding Manual**: Structured guides, mathematical proofs, pattern decompositions, and battle-tested code templates for standard and advanced algorithmic problems.
-2. **`cpbook4` Agentic Skill**: A portable, self-contained AI agent skill that enables any Agentic AI (Antigravity, Claude Code, Cursor, Copilot, ChatGPT, or custom LLM harnesses) to retrieve exact formulas, theorems, and implementations from both CP4 books without context exhaustion or hallucinations.
-3. **`chat.md`**: A chronological record of conversations, architectural decisions, and design sessions.
+### Moving from Black-Box AI to Collaborative Engineering
+
+Modern LLM-powered coding assistants frequently suffer from two fatal failure modes:
+1. **Unchecked Assumption Making**: Agents unilaterally choose an arbitrary design, implementation pattern, or complexity profile without consulting the developer about constraints, trade-offs, or production idioms.
+2. **Context Hallucination & Suboptimal Patterns**: Agents generate superficial or subtly flawed code because their advice is not tethered to authoritative data structures, mathematical proofs, and invariant analysis.
+
+**Science of Coding** solves this by establishing a **Human-in-the-Loop, Invariant-Grounded Engineering Framework**:
+- **Proactive Design Consultations**: When more than one algorithmic paradigm or data structure is applicable (e.g., iterative vs. recursive DP, Fenwick Tree vs. Segment Tree, Dijkstra vs. SPFA, Kruskal vs. Prim), the agent is **mandated** to present the candidate options alongside their trade-offs (time complexity, space overhead, implementation complexity, cache locality) and request the user's architectural preference before writing code.
+- **Authoritative Reference Grounding**: All algorithmic reasoning is anchored to mathematically verified invariants and optimal Big-O bounds.
+
+---
+
+## 📖 Key Deliverables
+
+1. **The Science of Coding Manual**: Structured guides, mathematical proofs, pattern decompositions, and battle-tested code templates with side-by-side runnable implementations in **Python 3** and **Java 21**.
+2. **`cpbook4` Agentic Skill**: A portable, self-contained AI agent skill that enables any Agentic AI (Antigravity, Claude Code, Cursor, Copilot, ChatGPT, or custom LLM harnesses) to retrieve exact formulas, theorems, and implementations on demand without context exhaustion or hallucinations.
+3. **`query/` Knowledgebase**: A dedicated library of deep-dive query documents featuring visual decision trees, interview memory mnemonics, and real-world problem mappings.
+4. **`chat.md`**: A chronological record of all conversations, architectural decisions, and design sessions.
 
 ---
 
 ## 🧠 The `cpbook4` Agent Skill
 
-The `cpbook4` skill encapsulates both volumes of *Competitive Programming 4*:
-- **Book 1 (`skill/books/Overall/Part-1.pdf`)**: 329 pages  
+The `cpbook4` skill encapsulates comprehensive reference libraries:
+- **Foundations & Core Algorithms**: 329 pages  
   *Introduction, Built-in and Custom Linear/Non-linear Data Structures (UFDS, Fenwick Tree, Segment Tree), Core Paradigms (Complete Search, Divide & Conquer, Greedy, Dynamic Programming), and Graph Algorithms (DFS/BFS, MST, SSSP, APSP, Special Graphs).*
-- **Book 2 (`skill/books/Overall/Part-2.pdf`)**: 352 pages  
+- **Advanced Systems & Mathematics**: 352 pages  
   *Mathematics (Number Theory, Combinatorics, Probability, Game Theory, Matrix Power), String Processing (KMP, Suffix Trie/Tree/Array, Hashing, Manacher), Computational Geometry, Advanced Search & DP, Network Flow, Matching, NP-hard Problems, Problem Decomposition, and Rare Topics (Sparse Table, HLD, LCA, FFT/NTT, Simplex).*
 - **Total Volume**: 681 pages, ~328,000 words (~436,000 tokens).
 
-### Architecture & Mechanics
+### 3-Tier Precision Retrieval Architecture
 
 Loading ~436,000 tokens into an AI context window causes severe degradation and token bloat. The `cpbook4` skill uses a **3-Tier Precision Pipeline** described in detail in [`skill/ARCHITECTURE.md`](skill/ARCHITECTURE.md):
 
@@ -45,7 +59,7 @@ Loading ~436,000 tokens into an AI context window causes severe degradation and 
                query_cpbook.py extract
                            │
                            ▼
-                 skill/books/ (PDFs)
+             skill/books/Overall/ (PDFs)
                            │
                            ▼
                100% Grounded Context
@@ -62,14 +76,16 @@ Science_Of_Coding/
 │   └── skills/
 │       └── cpbook4/
 │           └── SKILL.md            # Entrypoint for Antigravity native skill discovery
+├── query/                          # Deep-dive algorithmic manuals & query outputs
+│   └── 001_graph_and_tree_learning_roadmap.md
 ├── skill/                          # Standalone, portable Agent Skill package
 │   ├── ARCHITECTURE.md             # Detailed architectural specification & mechanics
 │   ├── SKILL.md                    # Universal agent skill instructions & decision matrix
-│   ├── books/                      # Curated coding & CP books library
+│   ├── books/                      # Curated coding & reference books library
 │   │   ├── Flowchart/              # Flowchart & programming techniques
-│   │   ├── Overall/                # Comprehensive CP4 references
-│   │   │   ├── Part-1.pdf          # CP4 Book 1 (329 pages)
-│   │   │   └── Part-2.pdf          # CP4 Book 2 (352 pages)
+│   │   ├── Overall/                # Comprehensive algorithm references
+│   │   │   ├── Part-1.pdf          # Volume 1 (329 pages)
+│   │   │   └── Part-2.pdf          # Volume 2 (352 pages)
 │   │   └── Programming Logic/      # Programming logic & loop patterns
 │   ├── references/                 # Table of contents and machine-readable outline trees
 │   │   ├── table_of_contents.md    # Fast topic-to-page navigation map
@@ -84,53 +100,51 @@ Science_Of_Coding/
 
 ---
 
-## 🤖 How to Use in Agentic AI Systems
+## 🤖 How to Use the `cpbook4` Skill with Agentic AIs
 
-The `cpbook4` skill is engineered to be portable and interoperable across all modern coding agent environments.
+The `cpbook4` skill enforces the **collaborative design protocol**: when multiple approaches exist, the agent must consult you before implementing.
 
 ### 1. Google Antigravity
-Antigravity automatically discovers skills inside the `.agent/skills/` directory:
-- **Discovery**: The repository already includes [`.agent/skills/cpbook4/SKILL.md`](.agent/skills/cpbook4/SKILL.md), which Antigravity loads on session launch.
-- **Triggering**: You can invoke it naturally or explicitly in chat:
-  - *"Using the cpbook4 skill, look up the best data structure for dynamic range sum queries."*
-  - *"Explain Dinic's algorithm using cpbook4."*
-- **Autonomous Execution**: Antigravity reads the decision matrices in `SKILL.md` and uses `query_cpbook.py` automatically whenever competitive programming algorithms or book references are needed.
+Antigravity automatically discovers skills inside `.agent/skills/`:
+- **Auto-Discovery**: Pre-configured at [`.agent/skills/cpbook4/SKILL.md`](.agent/skills/cpbook4/SKILL.md).
+- **Interactive Prompts**:
+  - *"Using @skill:cpbook4, I need to design a system for dynamic range minimum queries with updates. Present the available options and ask me which one fits best before writing code."*
+  - *"Using cpbook4, check how to handle SSSP with negative weights and present the trade-offs."*
+- **Agent Behavior**: Antigravity reads the decision trees in `SKILL.md`, executes `query_cpbook.py` behind the scenes, presents the available algorithmic options, and waits for your confirmation.
 
 ### 2. Claude Code
-Claude Code discovers skills placed in `.claude/skills/` or via prompt inclusion:
-- **Repository-level Integration**:
-  To have Claude Code pick up the skill directly inside a workspace, create a directory pointer or symlink:
+Claude Code discovers skills via `.claude/skills/` or prompt inclusion:
+- **Workspace Setup**:
   ```bash
   # Windows PowerShell
   New-Item -ItemType Directory -Force -Path ".claude\skills\cpbook4"
   Copy-Item -Path "skill\SKILL.md" -Destination ".claude\skills\cpbook4\SKILL.md"
   ```
-- **Slash Command / Mentions**:
-  Claude Code allows referencing skills directly or placing guidelines in `CLAUDE.md`:
+- **Project Rule in `CLAUDE.md`**:
   ```markdown
-  # In CLAUDE.md:
-  For competitive programming and algorithm tasks, refer to the cpbook4 skill located at `skill/SKILL.md` and query books using `python skill/scripts/query_cpbook.py`.
+  When handling algorithmic or data structure tasks:
+  1. Always consult the cpbook4 skill in `skill/SKILL.md`.
+  2. If more than one viable design or data structure exists, present the trade-offs and ask the user for their preferred design before coding.
+  3. Query books using: python skill/scripts/query_cpbook.py search|extract
   ```
 - **Prompt Invocation**:
-  > *"Read `skill/SKILL.md` and extract section 6.5 of Book 2 on Suffix Arrays to solve this problem."*
+  > *"Consult `skill/SKILL.md` and outline the possible approaches for Maximum Bipartite Matching. Ask me how I want to structure the code before implementation."*
 
-### 3. OpenAI Codex / Custom Agent Harnesses (Cursor, Copilot, AutoGPT)
-For OpenAI Codex, Cursor, GitHub Copilot Workspace, or custom agents:
-- **System / Agent Instructions (`.cursorrules` / `AGENTS.md` / System Prompt)**:
-  Add the following directive to your agent configuration or system prompt:
+### 3. OpenAI Codex / Cursor / Custom Agent Frameworks
+For Cursor, Copilot Workspace, OpenAI Codex, or LangChain agents:
+- **System Instructions (`.cursorrules` / `AGENTS.md`)**:
   ```markdown
-  When dealing with algorithms, data structures, or math puzzles, consult the CP4 skill:
-  1. Entry rules & decision tree: skill/SKILL.md
-  2. Topic and page index: skill/references/table_of_contents.md
-  3. Query execution: python skill/scripts/query_cpbook.py search/extract
+  ### Algorithmic Design Protocol:
+  1. Consult `skill/SKILL.md` and `skill/references/table_of_contents.md`.
+  2. Query exact reference pages using: python skill/scripts/query_cpbook.py search|extract
+  3. MANDATORY: If more than one algorithmic solution exists (e.g., Kruskal vs. Prim, Top-Down vs. Bottom-Up DP, Fenwick vs. Segment Tree), present the options with time/space trade-offs and ASK the user which design they prefer before generating code.
   ```
 - **Interactive Prompting**:
-  You can instruct the agent to run the query script via its terminal tool:
-  > *"Run `python skill/scripts/query_cpbook.py search --book 1 --query 'Monotonic Stack'` and draft the manual section based on the book's examples."*
+  > *"Search the reference books for Eulerian path algorithms. Show me the candidate approaches and ask me for my design choice."*
 
 ---
 
-## 🛠️ CLI Usage: Querying the Books
+## 🛠️ CLI Usage: Querying the Books Directly
 
 You or any AI agent can query and extract text from the books on demand using Python (requires `pypdf`):
 

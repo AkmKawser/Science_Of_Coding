@@ -2,9 +2,9 @@
 
 ## 1. System Overview & Purpose
 
-The `cpbook4` skill is a **portable, self-contained, agent-agnostic knowledge and retrieval module** encapsulating both volumes of *Competitive Programming 4 (CP4)* by Steven Halim, Felix Halim, and Suhendry Effendy:
-* **Book 1 (`Part-1.pdf`)**: 329 pages (Data Structures, Paradigms, Graphs)
-* **Book 2 (`Part-2.pdf`)**: 352 pages (Math, Strings, Geometry, Advanced Topics, Rare Topics)
+The `cpbook4` skill is a **portable, self-contained, agent-agnostic knowledge and retrieval module** encapsulating comprehensive reference volumes:
+* **Volume 1 (`Part-1.pdf`)**: 329 pages (Data Structures, Paradigms, Graphs)
+* **Volume 2 (`Part-2.pdf`)**: 352 pages (Math, Strings, Geometry, Advanced Topics, Rare Topics)
 * **Total Volume**: 681 pages, ~328,000 words, ~436,000 tokens.
 
 This package can be moved into any AI agent environment (Antigravity, Claude Code, Cursor, AutoGPT, custom LangChain/LlamaIndex pipelines) without modifying agent source code.
@@ -19,9 +19,9 @@ skill/
 ├── SKILL.md                        <-- Universal agent entrypoint & decision rules
 ├── books/
 │   ├── Flowchart/                  <-- Flowcharts & programming techniques
-│   ├── Overall/                    <-- Comprehensive CP4 reference books
-│   │   ├── Part-1.pdf              <-- CP4 Book 1 complete original PDF (329 pages)
-│   │   └── Part-2.pdf              <-- CP4 Book 2 complete original PDF (352 pages)
+│   ├── Overall/                    <-- Comprehensive reference books
+│   │   ├── Part-1.pdf              <-- Volume 1 complete PDF (329 pages)
+│   │   └── Part-2.pdf              <-- Volume 2 complete PDF (352 pages)
 │   └── Programming Logic/          <-- Logic, loops & pattern books
 ├── references/
 │   ├── table_of_contents.md        <-- Fast human & agent markdown topic index with page numbers
@@ -86,7 +86,7 @@ Instead of dumping raw tokens into memory, the skill implements a **3-tier preci
      ```bash
      python skill/scripts/query_cpbook.py extract --book 1 --start 143 --end 148 --output st_lazy.txt
      ```
-   - This feeds the LLM with 100% verified, author-written code and mathematical definitions.
+   - This feeds the LLM with verified formulas and mathematical definitions.
 
 ---
 
@@ -108,7 +108,7 @@ This skill has zero proprietary dependencies:
 - Claude Code natively searches for skills under `.claude/skills/<skill-name>/SKILL.md`.
 - You can enable it by copying `skill/SKILL.md` to `.claude/skills/cpbook4/SKILL.md`, or by adding a reference line to your root `CLAUDE.md`:
   ```markdown
-  Refer to `skill/SKILL.md` for algorithm design and CP4 queries.
+  Refer to `skill/SKILL.md` for algorithm design and reference queries.
   ```
 - Invoke by asking Claude Code: *"Consult the cpbook4 skill to find the optimal DP approach for Longest Common Subsequence."*
 
@@ -116,8 +116,6 @@ This skill has zero proprietary dependencies:
 - For Codex, Cursor, Copilot Workspace, or custom LangChain/AutoGPT agents:
 - Include a directive in `.cursorrules`, `AGENTS.md`, or the agent system prompt:
   ```markdown
-  For algorithmic problems, consult the CP4 skill in `skill/SKILL.md`. Use `python skill/scripts/query_cpbook.py search|extract` to retrieve exact pages and code patterns from `skill/books/`.
+  For algorithmic problems, consult the skill in `skill/SKILL.md`. Use `python skill/scripts/query_cpbook.py search|extract` to retrieve exact pages and code patterns from `skill/books/`.
   ```
 - The agent will use its bash/terminal tool to query the books deterministically.
-
-
