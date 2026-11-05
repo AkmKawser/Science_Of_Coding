@@ -54,7 +54,7 @@ flowchart TD
     
     %% 7. LIFO / FIFO / Monotonicity
     QueryTypeQ -->|Nearest Greater or Smaller Element| MonoStack["Monotonic Stack or Monotonic Deque - Amortized: O(1)"]
-    QueryTypeQ -->|Small State Subsets N <= 64| BMask["Bitmask Bitwise Manipulation - Space: O(1), Time: O(1)"]
+    QueryTypeQ -->|Small State Subsets N up to 64| BMask["Bitmask Bitwise Manipulation - Space: O(1), Time: O(1)"]
 ```
 
 ---
@@ -65,7 +65,7 @@ flowchart TD
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **"Static range minimum query (RMQ) with zero updates"** | Immutable array, `O(1)` query needed | **Sparse Table** | Prep: `O(N log N)`, Query: `O(1)` | **Range Minimum Query in Immutable Telemetry**: Query lowest ping in historical sensor logs. | Precompute power-of-two jump tables `2^k`. Because finding min is idempotent (`min(A, A) = A`), overlap two intervals of length `2^k` that completely cover `[L, R]` in one single comparison. |
 | **"Dynamic point update + prefix/range sum"** | Mutable array, prefix cumulative frequency | **Fenwick (Binary Indexed) Tree** | Space: `O(N)`, Update: `O(log N)`, Query: `O(log N)` | **Running Leaderboard Score Changes**: Update individual user scores and query total points in top rank range. | Use the lowest significant bit `LSB(i) = i & (-i)` to let each tree index manage a range of size `LSB(i)`. Fast to write and uses zero pointer overhead compared to trees. |
-| **"Range update (add x to [L, R]) + Range min/sum query"** | Both updates and queries span arbitrary intervals | **Segment Tree with Lazy Propagation** | Space: `O(4N)`, Update: `O(log N)`, Query: `O(log N)` | **Hotel Room Booking Intervals (LeetCode 732)**: Add guest bookings to date ranges and check peak occupancy. | Build a binary tree where nodes represent intervals. Postpone updates to children by storing a "lazy" pending tag until a future query actually needs to visit that subtree. |
+| **"Range update (add x to [L, R]) + Range min/sum query"** | Both updates and queries span arbitrary intervals | **Segment Tree with Lazy Propagation** | Space: `O(4N)`, Update: `O(log N)`, Query: `O(log N)` | **Hotel Room Booking Intervals (LeetCode 732)**: Add +5guest bookings to date ranges and check peak occupancy. | Build a binary tree where nodes represent intervals. Postpone updates to children by storing a "lazy" pending tag until a future query actually needs to visit that subtree. |
 | **"Dynamic connectivity / Cycle detection in edges"** | Merging disjoint groups and checking connected status | **Union-Find Disjoint Sets (UFDS)** | Space: `O(N)`, Operations: `O(alpha(N)) ~ O(1)` | **Redundant Connection (LeetCode 684)**: Detect the exact edge that creates a loop in a network. | Each item points to its parent representative. Use path compression (flattening tree on find) and union by rank. If `find(u) == find(v)` before adding edge, a cycle is detected! |
 | **"Next greater element / Stock span / Histogram area"** | Finding the nearest larger/smaller boundary | **Monotonic Stack** | Space: `O(N)`, Push/Pop Amortized: `O(1)` | **Largest Rectangle in Histogram (LeetCode 84)**: Find max rectangular area under bar chart heights. | Keep elements in strictly ascending order in a stack. When a smaller bar arrives, pop all taller bars--they have found their right boundary, allowing immediate rectangle width calculations. |
 | **"Sliding window maximum / Min in rolling buffer"** | Rolling contiguous window of fixed size K | **Monotonic Deque** | Space: `O(K)`, Push/Pop Amortized: `O(1)` | **Sliding Window Maximum (LeetCode 239)**: Return max element in sliding window of size K. | Keep window element indices in a double-ended queue. Maintain values in descending order by evicting smaller elements from the back; evict out-of-window indices from the front. |
@@ -85,25 +85,25 @@ This manual covers **every core and advanced data structure** from fundamental l
 ```mermaid
 flowchart TD
     subgraph LinearDS["1. Linear Data Structures"]
-        D1["Array & Dynamic Vector (Amortized Doubling)"]
-        D2["Bitmask Manipulations & Bitwise Math"]
-        D3["Stack, Queue & Monotonic Deque"]
+        D1["Array and Dynamic Vector (Amortized Doubling)"]
+        D2["Bitmask Manipulations and Bitwise Math"]
+        D3["Stack Queue and Monotonic Deque"]
     end
     subgraph NonLinearDS["2. Non-Linear Built-in Structures"]
-        D4["Binary Heap & Priority Queue"]
+        D4["Binary Heap and Priority Queue"]
         D5["Hash Table (Chaining vs Open Addressing)"]
         D6["Balanced Binary Search Tree (AVL / Red-Black)"]
         D7["Order Statistics Tree (Augmented BST with Subtree Size)"]
     end
     subgraph CustomRangeDS["3. Custom Advanced Range Query Structures"]
-        D8["Union-Find Disjoint Sets (UFDS with Path Compression & Rank)"]
+        D8["Union-Find Disjoint Sets (UFDS with Path Compression and Rank)"]
         D9["Fenwick Tree (Binary Indexed Tree - Point Update, Range Query)"]
         D10["Segment Tree with Lazy Propagation (Range Update, Range Query)"]
         D11["Sparse Table (Static RMQ in O(1))"]
     end
-    subgraph StringDS["4. Specialized String & Text Structures"]
+    subgraph StringDS["4. Specialized String and Text Structures"]
         D12["Trie (Prefix Tree)"]
-        D13["Suffix Array & Kasai's LCP Array"]
+        D13["Suffix Array and Kasai LCP Array"]
     end
 
     LinearDS --> NonLinearDS
@@ -116,7 +116,7 @@ flowchart TD
 ## 1. Dynamic Array & Coordinate Compression
 
 An **Array** is a contiguous block of memory with `O(1)` random access. A **Dynamic Array** (Python `list`, Java `ArrayList`) doubles its capacity upon reaching saturation, achieving `O(1)` amortized append.
-**Coordinate Compression** maps arbitrary large coordinates (e.g., `-10^9 <= x <= 10^9`) to a compact contiguous rank space `[0..M-1]` in `O(N log N)`, making it possible to use arrays, Segment Trees, or Fenwick Trees without massive sparse tables.
+**Coordinate Compression** maps arbitrary large coordinates (e.g., `-10^9 to 10^9`) to a compact contiguous rank space `[0..M-1]` in `O(N log N)`, making it possible to use arrays, Segment Trees, or Fenwick Trees without massive sparse tables.
 
 ### [Memory Trick] Interview Memory Trick: "Seat Assignment on an Airplane"
 > **The 3-Second Mental Hook**:
@@ -388,7 +388,7 @@ class MonotonicStructures:
 
             q.append(i)
 
-            # 3. Add to result once first window is formed
+            # 3. Add +5to result once first window is formed
             if i >= k - 1:
                 res.append(nums[q[0]])
 
@@ -1021,12 +1021,14 @@ public class AVLTreeDemo {
 
 ## 7. Order Statistics Tree (Augmented BST)
 
-Standard search trees cannot find the $K$-th smallest element or query the rank of a key without an `O(N)` linear traversal.
+Standard search trees cannot find the `K`-th smallest element or query the rank of a key without an `O(N)` linear traversal.
 An **Order Statistics Tree (OST)** augments every tree node with an additional field:
-$$	ext{size} = 1 + 	ext{size}(	ext{left}) + 	ext{size}(	ext{right})$$
+
+	ext{size} = 1 + 	ext{size}(	ext{left}) + 	ext{size}(	ext{right})
+
 This allows:
-1. `find_by_order(k)`: Returns the $K$-th smallest element in `O(log N)`.
-2. `order_of_key(x)`: Returns the number of elements strictly smaller than $x$ in `O(log N)`.
+1. `find_by_order(k)`: Returns the `K`-th smallest element in `O(log N)`.
+2. `order_of_key(x)`: Returns the number of elements strictly smaller than `x` in `O(log N)`.
 
 ### [Memory Trick] Interview Memory Trick: "Headcount at the Turnstile"
 > **The 3-Second Mental Hook**:
@@ -1294,14 +1296,16 @@ public class UFDSMasterDemo {
 
 A **Fenwick Tree (Binary Indexed Tree)** provides `O(log N)` prefix sum queries and point updates on an array while requiring only `O(N)` storage and zero tree pointer overhead.
 It utilizes the **Lowest Significant Bit (LSB)** identity:
-$$	ext{LSB}(i) = i \ \& \ (-i)$$
+
+	ext{LSB}(i) = i \ \& \ (-i)
+
 - **Prefix Sum `rsq(b)`**: Sum up `tree[b]` and repeatedly subtract `LSB(b)` until `b == 0`.
-- **Point Update `update(k, v)`**: Add `v` to `tree[k]` and repeatedly add `LSB(k)` until reaching table capacity.
+- **Point Update `update(k, v)`**: Add +5`v` to `tree[k]` and repeatedly add `LSB(k)` until reaching table capacity.
 - **Range Sum Query**: `rsq(a, b) = rsq(b) - rsq(a - 1)`.
 
 ### [Memory Trick] Interview Memory Trick: "Powers of Two Step Ladders"
 > **The 3-Second Mental Hook**:
-> - Every positive integer is a sum of powers of two (e.g., $13 = 8 + 4 + 1$).
+> - Every positive integer is a sum of powers of two (e.g., `13 = 8 + 4 + 1`).
 > - **Query**: To get sum up to index 13, read index 13 (covers 1 element), jump back by LSB to index 12 (covers 4 elements), jump back by LSB to index 8 (covers 8 elements). Done in 3 jumps!
 > - **Update**: Adding value to index 5 ripples upward: add to 5, jump forward by LSB to 6, then to 8, then to 16.
 
@@ -1350,7 +1354,7 @@ if __name__ == "__main__":
 
     print("Prefix Sum [1..3] (4+2+5):", ft.rsq(3)) # Expected 11
     print("Range Sum [2..5] (2+5+8+1):", ft.range_query(2, 5)) # Expected 16
-    ft.update(3, 10) # Add 10 to index 3
+    ft.update(3, 10) # Add +510 to index 3
     print("Range Sum [2..5] after adding 10 to index 3:", ft.range_query(2, 5)) # Expected 26
 ```
 </details>
@@ -1418,7 +1422,7 @@ With **Lazy Propagation**, updates to entire ranges `[L..R]` are deferred: the u
 > **The 3-Second Mental Hook**:
 > - Imagine an office manager told to update all employee records from department 5 to 50.
 > - A hardworking manager visits every desk individually (`O(N)`).
-> - **A Lazy Manager (Lazy Propagation)**: Writes a sticky note on the department door saying *"Add $5 to everyone inside"* and goes to sleep (`O(1)`).
+> - **A Lazy Manager (Lazy Propagation)**: Writes a sticky note on the department door saying *"Add +5+5o everyone inside"* and goes to sleep (`O(1)`).
 > - Only when someone actually knocks on that door to ask about an individual employee does the manager push the sticky note down to the sub-departments!
 
 <details open>
@@ -1490,7 +1494,7 @@ if __name__ == "__main__":
     st = SegmentTreeLazy(initial_arr)
     print("Initial Range Sum [1..3] (3+5+7):", st.query_range(1, 3)) # Expected 15
 
-    # Add 10 to every element in range [1..4]
+    # Add +510 to every element in range [1..4]
     st.update_range(1, 4, 10)
     print("Range Sum [1..3] after adding 10 to [1..4]:", st.query_range(1, 3)) # Expected 45
     print("Total Array Sum [0..5]:", st.query_range(0, 5))
@@ -1580,15 +1584,18 @@ public class SegmentTreeLazyDemo {
 ## 11. Sparse Table (Static RMQ in O(1))
 
 When an array is **immutable** (zero updates), a **Sparse Table** provides instantaneous `O(1)` Range Minimum Queries (RMQ) following `O(N log N)` dynamic programming preprocessing:
-$$	ext{st}[i][j] = \min(	ext{st}[i][j - 1], \ 	ext{st}[i + 2^{j - 1}][j - 1])$$
+
+	ext{st}[i][j] = \min(	ext{st}[i][j - 1], \ 	ext{st}[i + 2^{j - 1}][j - 1])
+
 Because minimum is an **idempotent operation** (`min(x, x) = x`), an arbitrary query range `[L, R]` with length `len = R - L + 1` can be covered by two overlapping intervals of length `k = floor(log2(len))`:
-$$	ext{RMQ}(L, R) = \min(	ext{st}[L][k], \ 	ext{st}[R - 2^k + 1][k])$$
+
+	ext{RMQ}(L, R) = \min(	ext{st}[L][k], \ 	ext{st}[R - 2^k + 1][k])
 
 ### [Memory Trick] Interview Memory Trick: "Overlapping Umbrella Protection"
 > **The 3-Second Mental Hook**:
 > - If it's raining on a sidewalk from meter 3 to meter 10 (length 8):
 > - Precompute umbrella shelters of size 1, 2, 4, 8, 16.
-> - Take the largest umbrella of size $2^k \le 	ext{length}$. Open one umbrella starting at $L$, and another umbrella ending at $R$. They overlap in the middle, but because `min(A, A) == A`, the overlap causes zero distortion and covers the entire sidewalk in **1 single check**!
+> - Take the largest umbrella of size 2^k <= length. Open one umbrella starting at `L`, and another umbrella ending at `R`. They overlap in the middle, but because `min(A, A) == A`, the overlap causes zero distortion and covers the entire sidewalk in **1 single check**!
 
 <details open>
 <summary><b>[Python] Python 3 Implementation: Complete Sparse Table</b></summary>
@@ -1686,7 +1693,7 @@ public class SparseTableDemo {
 ## 12. Trie (Prefix Tree)
 
 A **Trie** is an ordered tree data structure used to store an associative collection of strings where keys share common prefixes.
-- **Search & Insert**: Executes in `O(L)` proportional to string length $L$, completely independent of the total number of words $N$ stored in the dictionary.
+- **Search & Insert**: Executes in `O(L)` proportional to string length `L`, completely independent of the total number of words `N` stored in the dictionary.
 - **Applications**: Autocomplete, spell check, dictionary validation, IP routing tables, and Bitwise Max-XOR queries.
 
 ### [Memory Trick] Interview Memory Trick: "Spell-Check Tree Branches"
@@ -1808,9 +1815,9 @@ public class TrieDemo {
 
 ## 13. Suffix Array & Kasai's LCP Algorithm
 
-A **Suffix Array** is a sorted integer array containing the starting indices of all suffixes of a string $S$ in lexicographical order.
+A **Suffix Array** is a sorted integer array containing the starting indices of all suffixes of a string `S` in lexicographical order.
 Coupled with **Kasai's Algorithm**, which computes the **Longest Common Prefix (LCP)** array between adjacent sorted suffixes in linear time `O(N)`, it allows solving complex string questions:
-1. Finding any pattern $P$ in text $S$ in `O(|P| log |S|)`.
+1. Finding any pattern `P` in text `S` in `O(|P| log |S|)`.
 2. Finding the Longest Repeated Substring in `O(N)`.
 3. Finding the number of distinct substrings in `O(N)`.
 
@@ -1959,4 +1966,4 @@ public class SuffixArrayKasaiDemo {
 > **Fenwick vs. Segment Tree Choice**: If the problem only requires point updates and range sum queries, use a **Fenwick Tree**--it takes 1/4 the memory of a Segment Tree, has zero pointer overhead, and can be coded in under 20 lines. Use a **Segment Tree** only when you need range updates (`Lazy Propagation`) or arbitrary aggregations (Min, Max, GCD).
 
 > [!CAUTION]
-> **Bitmask Integer Boundary**: In Python, integers have arbitrary precision, but in Java and C++, a standard 32-bit `int` overflows at $N > 31$. Always use 64-bit `long` (e.g., `1L << i`) whenever tracking subsets up to $N = 62$.
+> **Bitmask Integer Boundary**: In Python, integers have arbitrary precision, but in Java and C++, a standard 32-bit `int` overflows at `N > 31`. Always use 64-bit `long` (e.g., `1L << i`) whenever tracking subsets up to `N = 62`.
