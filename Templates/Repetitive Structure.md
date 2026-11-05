@@ -29,7 +29,7 @@ The last column shows that the number of variables in the state and the number o
 
 ### Not every variable you list stays in the state
 
-In step 1 you list every variable the problem touches. In step 2 you classify them. Fixed values (given and unchanging) and derived variables (a formula of the others) do not describe where you are, and temporaries live inside one iteration only, so they are dropped. What remains, the free and carried variables, is the state in the strict sense.
+In step 1 you list every candidate variable the problem touches. In step 2 you classify them and identify their roles. In step 3 you form the true state. Fixed values (given and unchanging) and derived variables (a formula of the others) do not describe where you are, and temporaries live inside one iteration only, so they are dropped. What remains, the free and carried variables, is the state in the strict sense.
 
 ### State space
 
@@ -159,14 +159,19 @@ How the work grows with the input. The number of **leaves** is the number of tim
 
 ## Part 1: Define the state
 
-1. **State.** List every variable you need in order to resume from this exact point.
-2. **Classify each variable:**
-   - **Free:** you choose it by iterating a range (becomes a loop)
-   - **Derived:** computed from others (an assignment, no loop)
-   - **Carried:** accumulated across iterations (an update inside the loop)
-   - **Fixed:** given and unchanging (`n`, `k`)
+1. **List Candidate Variables.** Write down every variable the problem touches (inputs, counters, totals, results, helpers).
+2. **Assign Roles and Classify:**
+   - Write each variable's role first using the table below.
+   - Then classify it:
+     - **Free:** you choose it by iterating a range (becomes a loop)
+     - **Derived:** computed on the fly from others (an assignment, no loop)
+     - **Carried:** accumulated across iterations (an update inside the loop)
+     - **Fixed:** given and unchanging (`n`, `k`)
+3. **Form the True State.** Filter down to the minimal note needed to pause and resume:
+   $$\text{State} = (\text{Free Variables}, \text{Carried Variables})$$
+   *(Fixed values, derived formulas, and temporaries are dropped from the state tuple).*
 
-**Variable roles.** For each variable in step 2, write its role first, then read its class from this table. Only steppers and walkers add loops.
+**Variable roles.** For each candidate variable, determine its role first, then read its class from this table. Only steppers and walkers add loops.
 
 | Role | Typical example | Class |
 | --- | --- | --- |
@@ -378,18 +383,18 @@ In every row, the number of **Free** variables is the number of loops. That is w
 
 ## Part 2: Find the relationships and draw the tree
 
-3. **Parent variable.** Among the free variables, find whose range depends on whose. The one that sets the range is the **parent**, and the other is the **child**.
+4. **Parent variable.** Among the free variables, find whose range depends on whose. The one that sets the range is the **parent**, and the other is the **child**.
    - Dependent ranges: nested loops, parent outermost
    - Independent ranges: nested loops, no parent
    - Variables move together under a condition: a single loop (two pointers)
    - One free variable only: a single loop
-4. **Draw the tree (mandatory).** Do not move to Part 3 until the tree exists.
+5. **Draw the tree (mandatory).** Do not move to Part 3 until the tree exists.
    - Root at the top, then **one level per free variable**, with the parent level first
    - **One node per value** of that variable
    - **Edges** from each parent value to the child values it allows
    - **Leaves** are the complete states, where the loop body runs
    - Use a small input (`n = 4` or `5`) so the whole tree fits
-5. **Read the loop facts off the tree.** These are the facts you will code.
+6. **Read the loop facts off the tree.** These are the facts you will code.
    - **Start and end of each loop:** the first and last child under a node
    - **Child count per parent:** the same for every parent means independent ranges, and different counts mean dependent ranges. The pattern of counts (1, 2, 3... or 5, 4, 3...) gives the bound formula.
    - **Leaf value:** what is printed or computed at each leaf, which is where the derived variables go
@@ -397,11 +402,11 @@ In every row, the number of **Free** variables is the number of loops. That is w
 
 ## Part 3: Build the loop from the tree
 
-6. **Initialization.** Starting values, including the smallest case.
-7. **Bounds.** Copy them from step 5, and leave room for the descendants (`a < k-5`).
-8. **Transition.** How the derived and carried variables update.
-9. **Termination.** Each iteration makes progress toward the bound.
-10. **Result.** What is returned or printed, and when.
+7. **Initialization.** Starting values, including the smallest case.
+8. **Bounds.** Copy them from step 6, and leave room for the descendants (`a < k-5`).
+9. **Transition.** How the derived and carried variables update.
+10. **Termination.** Each iteration makes progress toward the bound.
+11. **Result.** What is returned or printed, and when.
 
 Part 3 turns the tree from Part 2 into code. Do not guess the loops from the printed output. Copy each fact from the tree, using the mapping below, and the loops follow.
 
@@ -564,9 +569,9 @@ Look at the shape of your tree and pick the loop shape from this table.
 
 ## Part 4: Verify against the tree
 
-11. **Validity.** Every root-to-leaf path satisfies the relationship (`a < b < c`, or the formula on each leaf).
-12. **Missing cases.** Compare the code's output with the leaves one by one, and test the edge cases: `n = 0`, `n = 1`, duplicates, extremes, pruned branches.
-13. **Complexity.** Count the leaves and check the time is acceptable.
+12. **Validity.** Every root-to-leaf path satisfies the relationship (`a < b < c`, or the formula on each leaf).
+13. **Missing cases.** Compare the code's output with the leaves one by one, and test the edge cases: `n = 0`, `n = 1`, duplicates, extremes, pruned branches.
+14. **Complexity.** Count the leaves and check the time is acceptable.
 
 Part 4 checks the code against the tree. The tree is the specification: it lists every state that should exist. The code is the implementation. Verifying means comparing the two, not just running the code on the sample from the problem statement, because a sample can pass while a boundary case fails.
 
