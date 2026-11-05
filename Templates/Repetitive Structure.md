@@ -423,7 +423,7 @@ Part 3 turns the tree from Part 2 into code. Do not guess the loops from the pri
 | What happens at a leaf | The leaf value | The loop body |
 | What happens when a level finishes | Moving on to the next sibling at the parent level | Code placed after the inner loop, such as a newline |
 
-### Step 6 in detail: Initialization
+### Step 7 in detail: Initialization
 
 Initialization sets the starting state. Do it variable by variable.
 
@@ -452,7 +452,7 @@ for (int i = 1; i <= n; ++i) {
 }
 ```
 
-### Step 7 in detail: Bounds
+### Step 8 in detail: Bounds
 
 A bound is a formula for the last child of a loop. Find it by reading the tree for two or three different parents and fitting a formula.
 
@@ -472,7 +472,7 @@ The last `j` drops by 1 each time `i` grows by 1, starting at 5 when `i = 1`. Th
 
 **Check the bound at both ends.** After you write a bound, plug in the smallest and the largest parent value and compare the number of children with the tree. This catches nearly all off-by-one mistakes, such as writing `<` where `<=` is needed.
 
-### Step 8 in detail: Transition
+### Step 9 in detail: Transition
 
 A transition moves the state from one iteration to the next. There are three kinds:
 
@@ -493,7 +493,7 @@ for (int i = 1; i < n; ++i) {
 
 If the two lines were swapped, `last` would equal `arr[i]` every time and every element would look like a duplicate.
 
-### Step 9 in detail: Termination
+### Step 10 in detail: Termination
 
 Termination means every loop ends. Check each loop with three questions:
 
@@ -509,7 +509,7 @@ Termination means every loop ends. Check each loop with three questions:
 
 For a `while` loop, name the statement inside the loop that changes the condition. If you cannot point to one, the loop may never end. If you leave early with `break` or a flag, check that the early exit happens only when the answer is already known.
 
-### Step 10 in detail: Result
+### Step 11 in detail: Result
 
 The result is what the program returns or prints. In the tree, it can happen at three places:
 
@@ -562,7 +562,7 @@ Look at the shape of your tree and pick the loop shape from this table.
 - **Writing the loops from the output instead of the tree.** The output hides the child counts, which are what give the bounds.
 - **Off-by-one bounds.** Always test the smallest and the largest parent value against the tree.
 - **Forgetting to reset a per-parent carried variable.** A row total initialised outside the outer loop keeps growing across rows.
-- **Updating a carried variable before using its old value.** See the `last` example in step 8.
+- **Updating a carried variable before using its old value.** See the `last` example in step 9.
 - **No room for descendants.** The bound lets a variable reach a value that leaves nothing for the variables after it, and the loop produces incomplete states.
 - **Missing update in the loop.** The loop never ends.
 - **Adding a loop for a derived variable.** If a variable is a formula of the others, compute it inside the loop body instead.
@@ -584,7 +584,7 @@ Compare the code with the tree in two directions:
 
 The practical method is a trace. Write the leaves of the tree from left to right as the expected output, trace the code by hand (or run it on a small input), and compare line by line. Also compare the order: a depth-first walk of the tree visits leaves from left to right, so the output should come out in that order.
 
-### Step 11 in detail: Validity
+### Step 12 in detail: Validity
 
 Validity means every state the code visits is allowed by the relationship you assumed. Run these checks.
 
@@ -614,7 +614,7 @@ Validity means every state the code visits is allowed by the relationship you as
 | Crash or garbage values | A bound allows an index outside the array |
 | One row too long or too short | A bound uses `<` where `<=` is needed, or the reverse |
 
-### Step 12 in detail: Missing cases
+### Step 13 in detail: Missing cases
 
 A case is missing when a valid state never appears. A case is extra when an invalid state appears. Check both.
 
@@ -643,7 +643,7 @@ A case is missing when a valid state never appears. A case is extra when an inva
 
 **4. Run the smallest inputs first.** Test `n = 0`, `n = 1`, `n = 2`, and only then a typical size. Most bound errors show up at the smallest sizes.
 
-### Step 13 in detail: Complexity
+### Step 14 in detail: Complexity
 
 Complexity tells you how the work grows with the input. The loop body runs once per leaf, so the number of leaves is the number of times the body runs. Counting leaves is usually enough, because the nodes above them are fewer.
 
