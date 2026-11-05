@@ -129,3 +129,25 @@ This document records all instructions, architectural decisions, and agent conve
    - Exactly **26 balanced `<details>` / `</details>` tags** per document.
    - Zero mentions of restricted author or book titles.
 
+---
+
+## Session 21: Integration of Memory Layer and Canonical Benchmark Problem Suite
+
+### User Request
+> "the tilte should only be memoery layer. nothing else. also add another layer. add the most popular problem on that topic in online judges. give reference of that problem statement from which online j duge it was taken . explain the problem in plane english but no line restriction. take as much line as you want to explain in plane english to a absolute beginner. then give a soluytion to it in plane english. and finally write the sotion code with proper commenting. so it for both 001 and 002 query files."
+
+### Requirements & Design Directives Applied
+1. **Memory Layer Renaming**:
+   - The memory section title across all 26 topics in both manuals is now strictly:
+     `### Memory Layer`
+2. **Canonical Benchmark Problem Layer**:
+   - For every single topic across both `query/001_graph_and_tree_learning_roadmap.md` and `query/002_data_structures_master_manual.md` (26 total topics), added:
+     - **Online Judge Platform & Reference ID**: (LeetCode, CSES, SPOJ, HackerRank).
+     - **Problem Statement (Plain English Breakdown)**: Unlimited line, beginner-level explanation with zero jargon, step-by-step logic, input-output scenarios, and real-world analogies.
+     - **Beginner Intuition & Step-by-Step Solution Strategy**: Why naive approaches fail, how the optimal structure/algorithm works, and step-by-step mechanics.
+     - **Fully Commented Benchmark Solution**: Complete, self-contained, tested implementations in **Python 3** and **Java 21** inside collapsible interactive toggle tabs (`<details open>` and `<details>`).
+3. **Strict Verification & Quality Assurance**:
+   - **`query/001_graph_and_tree_learning_roadmap.md`**: 26 Python code blocks (26/26 passed), 26 Java classes (26/26 compiled and passed with OpenJDK 21), 52 `<details>` opening/closing pairs, 0 non-ASCII characters, 0 raw LaTeX dollar signs.
+   - **`query/002_data_structures_master_manual.md`**: 26 Python code blocks (26/26 passed), 26 Java classes (26/26 compiled and passed with OpenJDK 21), 52 `<details>` opening/closing pairs, 0 non-ASCII characters, 0 raw LaTeX dollar signs.
+   - **Zero External Citation**: 100% clean of author names or book references.
+

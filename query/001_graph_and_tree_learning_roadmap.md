@@ -132,7 +132,7 @@ flowchart TD
 
 ## 1. Graph Representations (AM, AL, EL, Implicit Grid)
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"Phonebook vs Excel Spreadsheet."* A phonebook lists only people you actually talk to; a giant grid wastes pages of empty boxes.
 >
@@ -145,6 +145,101 @@ Before executing any graph algorithm, select the correct representation based on
 | **Adjacency List (`AL`)** | `O(V + E)` | `O(deg(u))` | `O(deg(u))` | **Default choice** for `95\%` of problems (`V, E <= 2 * 10^5`) |
 | **Edge List (`EL`)** | `O(E)` | `O(E)` | `O(E)` | Kruskal's MST, Bellman-Ford |
 | **Implicit Grid Graph** | `O(1)` extra | `O(1)` via `(d r, d c)` | `O(1)` | 2D matrices, Flood Fill |
+
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 997 - Find the Town Judge
+- **Difficulty**: Easy / Classic Graph Representation Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+In a small town of `n` people (labeled from `1` to `n`), there is a rumor that one of them is the secret town judge.
+If the town judge exists, then:
+1. The town judge trusts nobody.
+2. Everybody else in the town (all `n - 1` other people) completely trusts the town judge.
+3. There is at most one person that satisfies both property 1 and property 2.
+
+You are given an array of trust pairs `trust[i] = [a, b]`, meaning person `a` trusts person `b`.
+Your job is to identify the town judge and return their label number, or return `-1` if no such judge exists.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+Think of this as a directed graph where people are vertices and trust relationships are directed arrows pointing from the truster to the trustee: `a -> b`.
+- If person `a` trusts person `b`, person `a` has an **outgoing trust arrow** (`out-degree`).
+- Person `b` receives an **incoming trust arrow** (`in-degree`).
+
+What does it mean to be the town judge?
+- The judge trusts nobody -> `out-degree == 0`.
+- Everyone else trusts the judge -> `in-degree == n - 1`.
+
+Instead of allocating an expensive N x N matrix, we just keep a simple score counter for each person: `trust_score = in_degree - out_degree`.
+- When `a` trusts `b`: `a` gives up trust (`score[a] -= 1`), and `b` gains trust (`score[b] += 1`).
+- The town judge will be the single person whose final net trust score equals exactly `n - 1`!
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Find the Town Judge</b></summary>
+
+```python
+from typing import List
+
+def findJudge(n: int, trust: List[List[int]]) -> int:
+    # Net trust score: incoming_trust - outgoing_trust
+    trust_scores = [0] * (n + 1)
+    
+    for a, b in trust:
+        trust_scores[a] -= 1  # Person 'a' trusts someone -> cannot be judge
+        trust_scores[b] += 1  # Person 'b' receives trust
+        
+    for person in range(1, n + 1):
+        # The judge must be trusted by everyone else (n - 1) and trust no one (0)
+        if trust_scores[person] == n - 1:
+            return person
+            
+    return -1
+
+if __name__ == "__main__":
+    n = 3
+    trust_pairs = [[1, 3], [2, 3]]
+    result = findJudge(n, trust_pairs)
+    print(f"Town judge among {n} people with trust {trust_pairs}:", result) # Expected 3
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Find the Town Judge</b></summary>
+
+```java
+public class TownJudgeBenchmark {
+    public static int findJudge(int n, int[][] trust) {
+        int[] trustScores = new int[n + 1];
+        
+        for (int[] edge : trust) {
+            int a = edge[0];
+            int b = edge[1];
+            trustScores[a]--; // Outgoing trust
+            trustScores[b]++; // Incoming trust
+        }
+        
+        for (int person = 1; person <= n; person++) {
+            if (trustScores[person] == n - 1) {
+                return person;
+            }
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        int n = 3;
+        int[][] trust = {{1, 3}, {2, 3}};
+        System.out.println("Judge: " + findJudge(n, trust)); // 3
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
 
 <details open>
 <summary><b>[Python] Python 3 Implementation: Complete Graph Representations</b></summary>
@@ -247,7 +342,7 @@ public class GraphRepresentations {
 
 ## 2. Core Traversals & Connected Components (DFS, BFS, Flood Fill)
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"Blind maze explorer vs stone dropped in a pond."* The maze runner dives down one path until hitting a dead end; the water ripple expands outward equally in all directions.
 >
@@ -255,6 +350,136 @@ public class GraphRepresentations {
 - **DFS (`O(V + E)`)**: Depth-oriented recursive exploration. Ideal for components and reachability.
 - **BFS (`O(V + E)`)**: Breadth-oriented queue exploration. Guarantees **shortest path in unweighted graphs**.
 - **Flood Fill (`O(R x C)`)**: Implicit graph traversal on a 2D grid matrix using directional coordinate deltas.
+
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 200 - Number of Islands
+- **Difficulty**: Medium / Archetypal 2D Grid Flood Fill Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+You are given an `m x n` 2D grid map of `'1'`s (land) and `'0'`s (water).
+An **island** is surrounded by water and is formed by connecting adjacent lands horizontally or vertically (diagonal connections do not count).
+You may assume all four edges of the entire grid are completely surrounded by water.
+
+Your task is to count and return the total number of distinct islands on the map.
+
+For example, given:
+```text
+1 1 0 0 0
+1 1 0 0 0
+0 0 1 0 0
+0 0 0 1 1
+```
+- The top-left four `'1'`s form 1 big island.
+- The single `'1'` in the middle forms a 2nd island.
+- The bottom-right two `'1'`s form a 3rd island.
+The total number of islands is `3`.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+Imagine flying a helicopter over the ocean and looking down at the grid:
+1. You scan cell by cell, row by row, from top-left to bottom-right.
+2. The moment your eyes spot a `'1'` (fresh unvisited land), congratulations--you just discovered a brand new island! Increment your `island_count` by 1.
+3. But wait! You don't want to accidentally count the neighbor pieces of this same island as new islands later.
+4. So you immediately trigger a **Flood Fill (DFS)** starting right at that cell:
+   - Walk in all 4 directions (Up, Down, Left, Right).
+   - Whenever you step on connected land `'1'`, sink it by turning it into water `'0'` (or mark it as visited).
+   - Keep expanding recursively until the entire island has been sunken.
+5. Continue scanning the rest of the map. Any land you encounter from now on must belong to a completely different, undiscovered island!
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Number of Islands</b></summary>
+
+```python
+from typing import List
+
+def numIslands(grid: List[List[str]]) -> int:
+    if not grid or not grid[0]:
+        return 0
+        
+    rows, cols = len(grid), len(grid[0])
+    island_count = 0
+    
+    # 4-directional moves: Up, Down, Left, Right
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    
+    def sink_island(r: int, c: int):
+        # Boundary guard and water check
+        if r < 0 or r >= rows or c < 0 or c >= cols or grid[r][c] != '1':
+            return
+        # Sink this piece of land so it won't be visited again
+        grid[r][c] = '0'
+        for dr, dc in directions:
+            sink_island(r + dr, c + dc)
+            
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] == '1':
+                island_count += 1
+                sink_island(r, c) # Flood fill to sink all connected land
+                
+    return island_count
+
+if __name__ == "__main__":
+    test_grid = [
+        ['1', '1', '0', '0', '0'],
+        ['1', '1', '0', '0', '0'],
+        ['0', '0', '1', '0', '0'],
+        ['0', '0', '0', '1', '1']
+    ]
+    result = numIslands(test_grid)
+    print("Total islands discovered:", result) # Expected 3
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Number of Islands</b></summary>
+
+```java
+public class NumIslandsBenchmark {
+    public static int numIslands(char[][] grid) {
+        if (grid == null || grid.length == 0) return 0;
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int count = 0;
+        
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                if (grid[r][c] == '1') {
+                    count++;
+                    sink(grid, r, c, rows, cols);
+                }
+            }
+        }
+        return count;
+    }
+
+    private static void sink(char[][] grid, int r, int c, int rows, int cols) {
+        if (r < 0 || r >= rows || c < 0 || c >= cols || grid[r][c] != '1') return;
+        grid[r][c] = '0'; // Sink land to water
+        sink(grid, r - 1, c, rows, cols);
+        sink(grid, r + 1, c, rows, cols);
+        sink(grid, r, c - 1, rows, cols);
+        sink(grid, r, c + 1, rows, cols);
+    }
+
+    public static void main(String[] args) {
+        char[][] grid = {
+            {'1', '1', '0', '0', '0'},
+            {'1', '1', '0', '0', '0'},
+            {'0', '0', '1', '0', '0'},
+            {'0', '0', '0', '1', '1'}
+        };
+        System.out.println("Total islands: " + numIslands(grid)); // 3
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
 
 <details open>
 <summary><b>[Python] Python 3 Implementation: DFS, BFS & Flood Fill</b></summary>
@@ -405,11 +630,136 @@ public class CoreTraversals {
 
 ## 3. Topological Sort & Directed Cycle Detection
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"College courses with zero prerequisites."* You take all entry-level classes first, and once passed, you unlock next-level courses.
 >
 > **How It Solves the Problem (Plain English)**: To order tasks that depend on each other, you count how many blockers each task has. Any task with zero blockers can be done immediately. As you finish a task, you remove it as a blocker from its dependent tasks; whichever task hits zero blockers next is ready to go. If you finish before clearing all tasks, a circular dependency exists.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 207 - Course Schedule
+- **Difficulty**: Medium / Essential Topological Sort & Cycle Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+You are a university student planning to take a total of `numCourses` courses, labeled from `0` to `numCourses - 1`.
+Some courses require you to complete prerequisites first.
+You are given an array `prerequisites` where `prerequisites[i] = [a, b]` indicates that you **must take course `b` before you can take course `a`**.
+
+Your task is to determine: **Is it actually possible for you to finish all courses?** Return `True` if possible, and `False` if impossible.
+
+For example:
+- `numCourses = 2, prerequisites = [[1, 0]]`: You take course `0` first, then course `1`. Possible! Output: `True`.
+- `numCourses = 2, prerequisites = [[1, 0], [0, 1]]`: To take course `1`, you must first take course `0`. But to take course `0`, you must first take course `1`! This is a circular deadlock (cycle). Impossible! Output: `False`.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+A circular dependency means you can never start! How can we methodically simulate taking classes to see if we get stuck?
+We use **Kahn's In-Degree BFS Algorithm**:
+1. For every course, count how many unfinished prerequisites it is waiting on (`in_degree`).
+2. Which courses can you enroll in on Day 1 without asking for permission? Any course that has **`in_degree == 0`**!
+3. Put all zero-prerequisite courses into an active queue.
+4. Take a course out of the queue (you finished it!). Increment your `finished_courses` tally by 1.
+5. For all advanced courses that were waiting on this class: decrease their remaining prerequisite count by 1.
+6. If any advanced course now has its prerequisite count drop down to `0`, it is completely unlocked! Add it to the queue.
+7. Repeat until the queue is empty.
+If the number of finished courses equals `numCourses`, you graduated successfully! If not, an unbreakable deadlock loop locked you out.
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Course Schedule</b></summary>
+
+```python
+from collections import deque
+from typing import List
+
+def canFinish(numCourses: int, prerequisites: List[List[int]]) -> bool:
+    # Build Adjacency List and compute in-degree for every course
+    adj = [[] for _ in range(numCourses)]
+    in_degree = [0] * numCourses
+    
+    for course, prereq in prerequisites:
+        adj[prereq].append(course) # prereq -> course
+        in_degree[course] += 1
+        
+    # Queue all courses that currently have zero prerequisites
+    queue = deque([c for c in range(numCourses) if in_degree[c] == 0])
+    courses_completed = 0
+    
+    while queue:
+        curr = queue.popleft()
+        courses_completed += 1
+        
+        # Free this prerequisite for dependent courses
+        for neighbor in adj[curr]:
+            in_degree[neighbor] -= 1
+            if in_degree[neighbor] == 0:
+                queue.append(neighbor)
+                
+    # If we completed all courses, no cycle existed!
+    return courses_completed == numCourses
+
+if __name__ == "__main__":
+    n = 2
+    prereqs = [[1, 0]]
+    print("Can finish [1, 0]:", canFinish(n, prereqs)) # True
+    deadlock = [[1, 0], [0, 1]]
+    print("Can finish deadlock:", canFinish(n, deadlock)) # False
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Course Schedule</b></summary>
+
+```java
+import java.util.*;
+
+public class CourseScheduleBenchmark {
+    public static boolean canFinish(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i < numCourses; i++) adj.add(new ArrayList<>());
+        int[] inDegree = new int[numCourses];
+
+        for (int[] p : prerequisites) {
+            int course = p[0];
+            int prereq = p[1];
+            adj.get(prereq).add(course);
+            inDegree[course]++;
+        }
+
+        Queue<Integer> queue = new ArrayDeque<>();
+        for (int i = 0; i < numCourses; i++) {
+            if (inDegree[i] == 0) queue.offer(i);
+        }
+
+        int completed = 0;
+        while (!queue.isEmpty()) {
+            int curr = queue.poll();
+            completed++;
+            for (int neighbor : adj.get(curr)) {
+                inDegree[neighbor]--;
+                if (inDegree[neighbor] == 0) {
+                    queue.offer(neighbor);
+                }
+            }
+        }
+        return completed == numCourses;
+    }
+
+    public static void main(String[] args) {
+        int n = 2;
+        int[][] prereqs = {{1, 0}};
+        System.out.println("Can finish valid: " + canFinish(n, prereqs)); // true
+        int[][] deadlock = {{1, 0}, {0, 1}};
+        System.out.println("Can finish deadlock: " + canFinish(n, deadlock)); // false
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Kahn's Toposort & Cycle Detection</b></summary>
 
@@ -542,11 +892,139 @@ public class TopoCycleDemo {
 
 ## 4. Bipartite Graph Check (2-Coloring via BFS)
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"Two rival sports jerseys (Red vs Blue)."* Every player must wear the opposite color of all their direct opponents.
 >
 > **How It Solves the Problem (Plain English)**: To see if a network can be split into two non-conflicting groups, you assign the first person color Red and paint all their neighbors Blue. You continue alternating colors down the line. If you ever find two neighbors forced to wear the same color, a clean two-way split is impossible.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 785 - Is Graph Bipartite?
+- **Difficulty**: Medium / Classic 2-Coloring Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+You are given an undirected graph with `n` nodes.
+A graph is **bipartite** if we can divide its set of nodes into two independent subsets, say **Set A** and **Set B**, such that every edge in the graph connects a node in Set A to a node in Set B.
+No two nodes in the same set can ever have a direct edge connecting them!
+
+Return `True` if the graph is bipartite, or `False` if it is impossible to separate the nodes cleanly.
+
+For example:
+- A triangle of 3 nodes: Person 1 is friends with 2, 2 with 3, and 3 with 1.
+  - Put Person 1 in Team Red.
+  - Person 2 must go to Team Blue.
+  - Person 3 must go to Team Red (because of Person 2).
+  - But wait! Person 3 and Person 1 are friends, and they are both in Team Red! Conflict! Output: `False`.
+- Any graph with an **odd-length cycle** (like a triangle or pentagon) can never be bipartite.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+We can solve this using a simple **2-Coloring BFS traversal**:
+1. Keep a `color` array where every node starts uncolored (`-1`).
+2. Pick any uncolored node, start a BFS, and paint it **Color 0** (Team Red).
+3. For every neighbor of this node:
+   - If the neighbor is already painted, check its color: if it has the **exact same color** as our current node, we immediately caught a conflict! The graph is not bipartite, return `False`.
+   - If the neighbor is not yet colored, paint it the **opposite color** (`1 - current_color`), and push it into the queue.
+4. Be sure to loop through all nodes in case the graph has separate disconnected components.
+5. If you finish checking all nodes with zero conflicts, the graph is bipartite! Return `True`.
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Is Graph Bipartite?</b></summary>
+
+```python
+from collections import deque
+from typing import List
+
+def isBipartite(graph: List[List[int]]) -> bool:
+    n = len(graph)
+    # color[i] = -1 (uncolored), 0 (Red), 1 (Blue)
+    color = [-1] * n
+    
+    for start in range(n):
+        # If this component is already colored, skip it
+        if color[start] != -1:
+            continue
+            
+        color[start] = 0
+        queue = deque([start])
+        
+        while queue:
+            curr = queue.popleft()
+            curr_color = color[curr]
+            
+            for neighbor in graph[curr]:
+                if color[neighbor] == -1:
+                    # Paint neighbor with opposite color
+                    color[neighbor] = 1 - curr_color
+                    queue.append(neighbor)
+                elif color[neighbor] == curr_color:
+                    # Neighbor has the exact same color -> Odd cycle detected!
+                    return False
+                    
+    return True
+
+if __name__ == "__main__":
+    # Graph 1: Square with 4 nodes (Even cycle -> Bipartite)
+    square_graph = [[1, 3], [0, 2], [1, 3], [0, 2]]
+    print("Square graph bipartite:", isBipartite(square_graph)) # True
+
+    # Graph 2: Triangle (Odd cycle -> Not Bipartite)
+    triangle_graph = [[1, 2], [0, 2], [0, 1]]
+    print("Triangle graph bipartite:", isBipartite(triangle_graph)) # False
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Is Graph Bipartite?</b></summary>
+
+```java
+import java.util.*;
+
+public class IsBipartiteBenchmark {
+    public static boolean isBipartite(int[][] graph) {
+        int n = graph.length;
+        int[] color = new int[n];
+        Arrays.fill(color, -1);
+
+        for (int i = 0; i < n; i++) {
+            if (color[i] != -1) continue;
+
+            Queue<Integer> queue = new ArrayDeque<>();
+            color[i] = 0;
+            queue.offer(i);
+
+            while (!queue.isEmpty()) {
+                int curr = queue.poll();
+                int currColor = color[curr];
+
+                for (int neighbor : graph[curr]) {
+                    if (color[neighbor] == -1) {
+                        color[neighbor] = 1 - currColor;
+                        queue.offer(neighbor);
+                    } else if (color[neighbor] == currColor) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        int[][] square = {{1, 3}, {0, 2}, {1, 3}, {0, 2}};
+        System.out.println("Square bipartite: " + isBipartite(square)); // true
+        int[][] triangle = {{1, 2}, {0, 2}, {0, 1}};
+        System.out.println("Triangle bipartite: " + isBipartite(triangle)); // false
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Bipartite Graph 2-Coloring</b></summary>
 
@@ -655,11 +1133,152 @@ public class BipartiteChecker {
 
 ## 5. Tarjan's Articulation Points & Bridges (Lowlink)
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"The only bridge out of an island town."* If that bridge blows up, residents are trapped and cannot escape back to the mainland.
 >
 > **How It Solves the Problem (Plain English)**: You explore a network while stamping a timestamp on every node you visit. Each node also tracks the oldest ancestor reachable through back-alleys. If a child branch cannot loop back to any node visited before its parent, the connection between them is a critical bridge whose failure will split the network.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 1192 - Critical Connections in a Network
+- **Difficulty**: Hard / Legendary Tarjan Bridge Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+Imagine you are the chief engineer of a network with `n` computer servers, connected by a list of two-way network cables called `connections`.
+The entire network is currently fully connected: any server can send a message to any other server.
+
+A **critical connection** (also called a **Bridge**) is a cable that, if unplugged or broken, will cut the network into disconnected pieces so that some servers can no longer talk to each other.
+Your job is to identify all critical connections in the network.
+
+For example, given 4 servers `0, 1, 2, 3` and cables `[[0, 1], [1, 2], [2, 0], [1, 3]]`:
+- Servers `0, 1, 2` form a triangle of cables. If cable `[0, 1]` breaks, `0` can still talk to `1` by going through `2`. So none of the triangle cables are critical.
+- But server `3` only has one single cable connecting it to server `1`. If cable `[1, 3]` is cut, server `3` is completely isolated!
+Therefore, the only critical connection is `[[1, 3]]`.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+A naive approach would be to test each cable: temporarily delete it, run a BFS to see if the network gets disconnected, and put the cable back.
+Doing that for E edges takes O(E * (V + E)) time, which fails on 100,000 servers.
+
+**Tarjan's Bridge-Finding Algorithm** finds every single critical cable in **one single DFS pass** (O(V + E) time):
+1. Walk through the graph with DFS. As you step onto each node `u`, stamp it with a monotonically increasing clock timestamp `disc[u]`.
+2. Each node also keeps track of `low[u]`: the earliest timestamp reachable from `u` using back-alleys (alternative paths that don't backtrack through your immediate parent).
+3. Now, consider a neighbor `v` of node `u`:
+   - If `v` is our immediate parent who sent us here, ignore it.
+   - If `v` was already visited earlier, this edge is a back-alley shortcut! Update `low[u] = min(low[u], disc[v])`.
+   - If `v` is a brand-new child, recurse into `v`. After exploring `v`, update `low[u] = min(low[u], low[v])`.
+4. **The Gold Standard Bridge Rule**:
+   If `low[v] > disc[u]`, it means the child `v` had **zero alternative back-alleys** to reach node `u` or any ancestor visited before `u`.
+   The edge `(u, v)` was the one and only lifeline connecting `v` to the rest of the world! It is a **Critical Bridge**!
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Critical Connections in a Network</b></summary>
+
+```python
+from typing import List
+
+def criticalConnections(n: int, connections: List[List[int]]) -> List[List[int]]:
+    adj = [[] for _ in range(n)]
+    for u, v in connections:
+        adj[u].append(v)
+        adj[v].append(u)
+        
+    disc = [-1] * n  # Discovery timestamp
+    low = [-1] * n   # Lowest discovery time reachable
+    bridges = []
+    timer = 0
+    
+    def dfs(u: int, parent: int):
+        nonlocal timer
+        disc[u] = low[u] = timer
+        timer += 1
+        
+        for v in adj[u]:
+            if v == parent:
+                continue # Don't backtrack to immediate parent
+            if disc[v] != -1:
+                # Back-edge to an ancestor visited earlier
+                low[u] = min(low[u], disc[v])
+            else:
+                # Forward tree-edge to unvisited child
+                dfs(v, u)
+                low[u] = min(low[u], low[v])
+                # If child cannot reach u or earlier, (u, v) is a critical bridge!
+                if low[v] > disc[u]:
+                    bridges.append([u, v])
+                    
+    dfs(0, -1)
+    return bridges
+
+if __name__ == "__main__":
+    n = 4
+    edges = [[0, 1], [1, 2], [2, 0], [1, 3]]
+    result = criticalConnections(n, edges)
+    print("Critical connections (bridges):", result) # Expected [[1, 3]]
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Critical Connections in a Network</b></summary>
+
+```java
+import java.util.*;
+
+public class CriticalConnectionsBenchmark {
+    private static int timer = 0;
+
+    public static List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
+        List<List<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i < n; i++) adj.add(new ArrayList<>());
+        for (List<Integer> edge : connections) {
+            adj.get(edge.get(0)).add(edge.get(1));
+            adj.get(edge.get(1)).add(edge.get(0));
+        }
+
+        int[] disc = new int[n];
+        int[] low = new int[n];
+        Arrays.fill(disc, -1);
+        List<List<Integer>> bridges = new ArrayList<>();
+        timer = 0;
+
+        dfs(0, -1, adj, disc, low, bridges);
+        return bridges;
+    }
+
+    private static void dfs(int u, int parent, List<List<Integer>> adj, int[] disc, int[] low, List<List<Integer>> bridges) {
+        disc[u] = low[u] = timer++;
+        for (int v : adj.get(u)) {
+            if (v == parent) continue;
+            if (disc[v] != -1) {
+                low[u] = Math.min(low[u], disc[v]);
+            } else {
+                dfs(v, u, adj, disc, low, bridges);
+                low[u] = Math.min(low[u], low[v]);
+                if (low[v] > disc[u]) {
+                    bridges.add(Arrays.asList(u, v));
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int n = 4;
+        List<List<Integer>> edges = new ArrayList<>();
+        edges.add(Arrays.asList(0, 1));
+        edges.add(Arrays.asList(1, 2));
+        edges.add(Arrays.asList(2, 0));
+        edges.add(Arrays.asList(1, 3));
+        System.out.println("Bridges: " + criticalConnections(n, edges)); // [[1, 3]]
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Tarjan's Bridges & Articulation Points</b></summary>
 
@@ -807,11 +1426,162 @@ public class TarjanBridgesAP {
 
 ## 6. Strongly Connected Components (Tarjan's SCC)
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"A one-way traffic roundabout."* Once you enter, you can drive around to every street inside and still return to where you started.
 >
 > **How It Solves the Problem (Plain English)**: In a directed maze, you want to identify clusters of locations where everyone can reach everyone else. You push locations onto a stack during exploration; when you finish inspecting a cluster and discover its leader has no back-path out, you pop the entire cluster off the stack together as one self-contained community.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: CSES
+- **Problem Reference**: CSES 1686 - Coin Collector / Fundamental SCC Benchmark
+- **Difficulty**: Hard / Classic Strongly Connected Components Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+In a game, there are `n` rooms connected by `m` one-way tunnels.
+Each room contains a certain number of gold coins. You can start in any room you choose and follow the one-way tunnels.
+When you enter a room, you collect all its coins. You can visit rooms multiple times, but you can only collect coins from each room once.
+
+Your goal is to find the maximum total number of coins you can collect on a single valid journey.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+Why is this hard in a general graph? Because there can be **directed cycles** (loops)!
+If a group of rooms forms a mutual cycle (Room A -> Room B -> Room C -> Room A), once you reach any one of them, you can easily walk in a circle and collect the coins from **every single room in that cycle**!
+
+This group of mutually reachable rooms is called a **Strongly Connected Component (SCC)**.
+1. Use **Tarjan's SCC Algorithm** to find all SCCs in O(V + E) time.
+2. Collapse (condense) each whole cycle of rooms into a single **Super-Node** whose value is the total sum of all coins inside that component.
+3. Because all mutual cycles are now merged, the resulting graph of Super-Nodes is a **pure Directed Acyclic Graph (DAG)** with zero loops!
+4. Finally, finding the maximum coin path on a DAG is solved with a straightforward Dynamic Programming pass along the topological order.
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Strongly Connected Components (Tarjan's)</b></summary>
+
+```python
+from typing import List
+
+def findSCCs(n: int, edges: List[List[int]]) -> List[List[int]]:
+    adj = [[] for _ in range(n)]
+    for u, v in edges:
+        adj[u].append(v)
+        
+    disc = [-1] * n
+    low = [-1] * n
+    on_stack = [False] * n
+    stack = []
+    timer = 0
+    scc_list = []
+    
+    def dfs(u: int):
+        nonlocal timer
+        disc[u] = low[u] = timer
+        timer += 1
+        stack.append(u)
+        on_stack[u] = True
+        
+        for v in adj[u]:
+            if disc[v] == -1:
+                dfs(v)
+                low[u] = min(low[u], low[v])
+            elif on_stack[v]:
+                low[u] = min(low[u], disc[v])
+                
+        # If u is the root of an SCC, pop all component nodes
+        if low[u] == disc[u]:
+            current_scc = []
+            while True:
+                node = stack.pop()
+                on_stack[node] = False
+                current_scc.append(node)
+                if node == u:
+                    break
+            scc_list.append(current_scc)
+            
+    for i in range(n):
+        if disc[i] == -1:
+            dfs(i)
+            
+    return scc_list
+
+if __name__ == "__main__":
+    # Graph with 5 nodes: 0->1->2->0 (cycle 1), 2->3, 3->4 (line)
+    n = 5
+    edge_list = [[0, 1], [1, 2], [2, 0], [2, 3], [3, 4]]
+    sccs = findSCCs(n, edge_list)
+    print("Strongly Connected Components discovered:")
+    for scc in sccs:
+        print(" ", scc)
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Strongly Connected Components (Tarjan's)</b></summary>
+
+```java
+import java.util.*;
+
+public class TarjanSCCBenchmark {
+    private static int timer = 0;
+
+    public static List<List<Integer>> findSCCs(int n, int[][] edges) {
+        List<List<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i < n; i++) adj.add(new ArrayList<>());
+        for (int[] edge : edges) adj.get(edge[0]).add(edge[1]);
+
+        int[] disc = new int[n];
+        int[] low = new int[n];
+        Arrays.fill(disc, -1);
+        boolean[] onStack = new boolean[n];
+        Deque<Integer> stack = new ArrayDeque<>();
+        List<List<Integer>> sccs = new ArrayList<>();
+        timer = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (disc[i] == -1) dfs(i, adj, disc, low, onStack, stack, sccs);
+        }
+        return sccs;
+    }
+
+    private static void dfs(int u, List<List<Integer>> adj, int[] disc, int[] low, boolean[] onStack, Deque<Integer> stack, List<List<Integer>> sccs) {
+        disc[u] = low[u] = timer++;
+        stack.push(u);
+        onStack[u] = true;
+
+        for (int v : adj.get(u)) {
+            if (disc[v] == -1) {
+                dfs(v, adj, disc, low, onStack, stack, sccs);
+                low[u] = Math.min(low[u], low[v]);
+            } else if (onStack[v]) {
+                low[u] = Math.min(low[u], disc[v]);
+            }
+        }
+
+        if (low[u] == disc[u]) {
+            List<Integer> comp = new ArrayList<>();
+            while (true) {
+                int node = stack.pop();
+                onStack[node] = false;
+                comp.add(node);
+                if (node == u) break;
+            }
+            sccs.add(comp);
+        }
+    }
+
+    public static void main(String[] args) {
+        int n = 5;
+        int[][] edges = {{0, 1}, {1, 2}, {2, 0}, {2, 3}, {3, 4}};
+        System.out.println("SCCs: " + findSCCs(n, edges));
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Tarjan's Strongly Connected Components</b></summary>
 
@@ -953,11 +1723,136 @@ public class TarjanSCC {
 
 ## 7. Minimum Spanning Tree: Prim's Algorithm
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"Connecting power cables from cheapest to most expensive."* Buy the cheapest wire available, but skip any wire that plugs into houses already on the same circuit.
 >
 > **How It Solves the Problem (Plain English)**: To connect every building on a map using the least wire, you sort all potential cables by price. You install cables starting from the lowest price tag, using a group tracker to ignore cables connecting buildings that already have a path between them. You stop the moment all buildings are united.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 1584 - Min Cost to Connect All Points
+- **Difficulty**: Medium / Benchmark Minimum Spanning Tree Problem
+
+#### Problem Statement (Plain English Breakdown)
+You are given an array `points` representing integer coordinates of some points on a 2D plane, where `points[i] = [xi, yi]`.
+The cost of connecting two points `[xi, yi]` and `[xj, yj]` is the Manhattan distance between them: `|xi - xj| + |yi - yj|`.
+
+Your task is to find the minimum total cost to connect all points such that there is a path between any pair of points.
+There should be no unnecessary cycles.
+
+For example, given points `[[0, 0], [2, 2], [3, 10], [5, 2], [7, 0]]`:
+Connecting them all in a spanning tree of minimum distance gives a total cost of `20`.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+Every single point can potentially connect to every other point. That forms a complete, dense graph with `N * (N - 1) / 2` possible edges.
+We need to select a subset of edges that connects all `N` points with the **minimum total cost**--this is the definition of a **Minimum Spanning Tree (MST)**.
+
+For dense graphs, **Prim's Algorithm** is ideal:
+1. Start at any arbitrary point (say Point 0). It is now part of our growing "connected continent".
+2. Keep a list of the cheapest distance needed to connect each outside point to our continent: `min_cost = [infinity] * N`.
+3. In each round, look at all points outside the continent and pick the one with the smallest connection cost.
+4. Add that point to the continent, add its cost to our total, and update the connection costs for all remaining outside neighbors.
+5. Repeat until all `N` points are connected. Total time: O(N^2).
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Min Cost to Connect All Points</b></summary>
+
+```python
+from typing import List
+
+def minCostConnectPoints(points: List[List[int]]) -> int:
+    n = len(points)
+    in_mst = [False] * n
+    min_dist = [float('inf')] * n
+    min_dist[0] = 0  # Start at point 0 with 0 cost
+    total_cost = 0
+    
+    for _ in range(n):
+        # Step 1: Pick the unvisited node with the smallest distance to the tree
+        curr_u = -1
+        curr_min = float('inf')
+        for i in range(n):
+            if not in_mst[i] and min_dist[i] < curr_min:
+                curr_min = min_dist[i]
+                curr_u = i
+                
+        # Add to MST
+        in_mst[curr_u] = True
+        total_cost += curr_min
+        
+        # Step 2: Update connection costs for all remaining outside points
+        x1, y1 = points[curr_u]
+        for v in range(n):
+            if not in_mst[v]:
+                x2, y2 = points[v]
+                manhattan = abs(x1 - x2) + abs(y1 - y2)
+                if manhattan < min_dist[v]:
+                    min_dist[v] = manhattan
+                    
+    return total_cost
+
+if __name__ == "__main__":
+    pts = [[0, 0], [2, 2], [3, 10], [5, 2], [7, 0]]
+    result = minCostConnectPoints(pts)
+    print("Points:", pts)
+    print("Minimum Spanning Tree cost:", result) # Expected 20
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Min Cost to Connect All Points</b></summary>
+
+```java
+import java.util.*;
+
+public class MinCostPointsBenchmark {
+    public static int minCostConnectPoints(int[][] points) {
+        int n = points.length;
+        boolean[] inMST = new boolean[n];
+        int[] minDist = new int[n];
+        Arrays.fill(minDist, Integer.MAX_VALUE);
+        minDist[0] = 0;
+        int totalCost = 0;
+
+        for (int step = 0; step < n; step++) {
+            int u = -1;
+            int currentMin = Integer.MAX_VALUE;
+            for (int i = 0; i < n; i++) {
+                if (!inMST[i] && minDist[i] < currentMin) {
+                    currentMin = minDist[i];
+                    u = i;
+                }
+            }
+
+            inMST[u] = true;
+            totalCost += currentMin;
+
+            for (int v = 0; v < n; v++) {
+                if (!inMST[v]) {
+                    int dist = Math.abs(points[u][0] - points[v][0]) + Math.abs(points[u][1] - points[v][1]);
+                    if (dist < minDist[v]) {
+                        minDist[v] = dist;
+                    }
+                }
+            }
+        }
+        return totalCost;
+    }
+
+    public static void main(String[] args) {
+        int[][] pts = {{0, 0}, {2, 2}, {3, 10}, {5, 2}, {7, 0}};
+        System.out.println("MST Cost: " + minCostConnectPoints(pts)); // 20
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Prim's MST Algorithm</b></summary>
 
@@ -1077,11 +1972,112 @@ public class PrimMST {
 
 ## 8. SSSP with Negative Weights & Cycles (Bellman-Ford & SPFA)
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"A discount coupon that pays you money."* If cycling through discounts earns infinite cash, the price drops forever without bottoming out.
 >
 > **How It Solves the Problem (Plain English)**: When some routes have toll discounts (negative weights), standard greedy pathfinding gets tricked. Instead, you relax every road in the system up to V - 1 times, guaranteeing the shortest route stabilizes. If distances can still be lowered on a V-th pass, a loop exists that drops costs infinitely.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 787 - Cheapest Flights Within K Stops
+- **Difficulty**: Medium / Benchmark Bellman-Ford (Edge Relaxation) Problem
+
+#### Problem Statement (Plain English Breakdown)
+There are `n` cities connected by some number of flights.
+You are given an array `flights` where `flights[i] = [from, to, price]` indicates that there is a flight from city `from` to city `to` with cost `price`.
+
+You are also given three integers: `src` (starting city), `dst` (destination city), and `k`.
+Your job is to find the **cheapest price** to travel from `src` to `dst` with **at most `k` stops** along the way.
+If there is no possible route within `k` stops, return `-1`.
+
+For example, if you can reach the destination in 1 stop for 200, or in 5 stops for 50, but `k = 1`, you must pick the 200 flight because 5 stops exceeds your limit of `k = 1`.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+Why does standard Dijkstra fail here? Because Dijkstra greedily commits to the cheapest immediate distance without caring about how many stops were consumed. It might burn all your allowed stops on tiny cheap hops and get stranded!
+
+This problem maps onto **Bellman-Ford**:
+In Bellman-Ford, relaxing all edges once guarantees the shortest distances using **at most 1 flight**.
+Relaxing all edges a second time guarantees the shortest distances using **at most 2 flights**.
+Relaxing all edges `k + 1` times guarantees the shortest distances using **at most `k + 1` flights** (which means at most `k` stops in between)!
+
+1. Start with `prices = [infinity] * n`, and `prices[src] = 0`.
+2. Run a loop `k + 1` times.
+3. In each round, make a temporary copy of `prices`. Loop through every flight `(u, v, cost)`:
+   - If city `u` was reachable in the previous round, check if `prices[u] + cost < temp_prices[v]`.
+   - If so, update `temp_prices[v]`.
+4. Overwrite `prices` with `temp_prices`.
+5. After `k + 1` iterations, `prices[dst]` is your exact answer!
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Cheapest Flights Within K Stops</b></summary>
+
+```python
+from typing import List
+
+def findCheapestPrice(n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
+    prices = [float('inf')] * n
+    prices[src] = 0
+    
+    # Relax edges exactly k + 1 times (each round adds 1 flight hop)
+    for _ in range(k + 1):
+        temp_prices = prices[:]
+        for u, v, cost in flights:
+            if prices[u] != float('inf') and prices[u] + cost < temp_prices[v]:
+                temp_prices[v] = prices[u] + cost
+        prices = temp_prices
+        
+    return prices[dst] if prices[dst] != float('inf') else -1
+
+if __name__ == "__main__":
+    n = 4
+    flight_list = [[0, 1, 100], [1, 2, 100], [2, 0, 100], [1, 3, 600], [2, 3, 200]]
+    src, dst, k = 0, 3, 1
+    result = findCheapestPrice(n, flight_list, src, dst, k)
+    print("Cheapest price within 1 stop:", result) # Expected 700 (0 -> 1 -> 3)
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Cheapest Flights Within K Stops</b></summary>
+
+```java
+import java.util.*;
+
+public class CheapestFlightsBenchmark {
+    public static int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+        int[] prices = new int[n];
+        Arrays.fill(prices, Integer.MAX_VALUE);
+        prices[src] = 0;
+
+        for (int i = 0; i <= k; i++) {
+            int[] temp = prices.clone();
+            for (int[] flight : flights) {
+                int u = flight[0], v = flight[1], cost = flight[2];
+                if (prices[u] != Integer.MAX_VALUE && prices[u] + cost < temp[v]) {
+                    temp[v] = prices[u] + cost;
+                }
+            }
+            prices = temp;
+        }
+
+        return prices[dst] == Integer.MAX_VALUE ? -1 : prices[dst];
+    }
+
+    public static void main(String[] args) {
+        int n = 4;
+        int[][] flights = {{0, 1, 100}, {1, 2, 100}, {2, 0, 100}, {1, 3, 600}, {2, 3, 200}};
+        System.out.println("Cheapest: " + findCheapestPrice(n, flights, 0, 3, 1)); // 700
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Bellman-Ford & Negative Cycle Detection</b></summary>
 
@@ -1206,11 +2202,140 @@ public class BellmanFordDemo {
 
 ## 9. All-Pairs Shortest Paths (Floyd-Warshall)
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"Connecting flights through airport layover hubs."* Checking if flying City A to City B is cheaper by stopping at Hub K first.
 >
 > **How It Solves the Problem (Plain English)**: To find the shortest path between every pair of cities at once, you test every city as a possible layover stop. If going from city i to layover k and then k to j is cheaper than the direct route from i to j, you update your flight table with the cheaper layover route.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 1334 - Find the City With the Smallest Number of Neighbors at a Threshold Distance
+- **Difficulty**: Medium / Benchmark Floyd-Warshall All-Pairs Problem
+
+#### Problem Statement (Plain English Breakdown)
+There are `n` cities numbered from `0` to `n - 1`.
+You are given an array `edges` where `edges[i] = [from, to, weight]` represents a bidirectional weighted road between cities, and an integer `distanceThreshold`.
+
+A city is considered a "neighbor" of city `A` if the absolute shortest driving distance between city `A` and city `B` is **less than or equal to `distanceThreshold`**.
+Your job is to find the city that can reach the **smallest number of other cities** within that distance threshold.
+If there are multiple such cities, return the city with the **greatest number** (e.g. pick city 3 over city 1).
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+We need the shortest driving distances between **every pair of cities** `(i, j)`.
+Because the number of cities is small (`n <= 100`), **Floyd-Warshall** is the simplest and most robust algorithm to use!
+
+It works on a beautiful idea:
+1. Start with a 2D matrix of distances initialized to direct road lengths (or infinity if no direct road exists).
+2. Consider every city `k` as a possible intermediate stop (layover).
+3. For every pair of cities `(i, j)`: check if flying from `i` to `k` and then `k` to `j` is faster than our current known route from `i` to `j`:
+   `dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])`.
+4. Remember the golden rule: the loop for intermediate stop `k` **must be on the outside**!
+5. Once the 3 nested loops finish, `dist[i][j]` holds the exact shortest distance between all cities. We simply count how many cities each city can reach within `distanceThreshold` and pick the winner.
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: City With Smallest Neighbors</b></summary>
+
+```python
+from typing import List
+
+def findTheCity(n: int, edges: List[List[int]], distanceThreshold: int) -> int:
+    # Initialize distance matrix
+    dist = [[float('inf')] * n for _ in range(n)]
+    for i in range(n):
+        dist[i][i] = 0
+    for u, v, w in edges:
+        dist[u][v] = dist[v][u] = w
+        
+    # Floyd-Warshall: intermediate stop k MUST be outermost loop!
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                if dist[i][k] + dist[k][j] < dist[i][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+                    
+    min_reachable = float('inf')
+    best_city = -1
+    
+    for i in range(n):
+        # Count how many cities i can reach within distanceThreshold
+        reachable = sum(1 for j in range(n) if i != j and dist[i][j] <= distanceThreshold)
+        # We want the smallest reachable count, breaking ties with greatest city index
+        if reachable <= min_reachable:
+            min_reachable = reachable
+            best_city = i
+            
+    return best_city
+
+if __name__ == "__main__":
+    n = 4
+    edge_list = [[0, 1, 3], [1, 2, 1], [1, 3, 4], [2, 3, 1]]
+    threshold = 4
+    result = findTheCity(n, edge_list, threshold)
+    print("Best city with smallest neighbors:", result) # Expected 3
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: City With Smallest Neighbors</b></summary>
+
+```java
+import java.util.*;
+
+public class FindTheCityBenchmark {
+    public static int findTheCity(int n, int[][] edges, int distanceThreshold) {
+        int[][] dist = new int[n][n];
+        int INF = 100000000;
+        for (int i = 0; i < n; i++) {
+            Arrays.fill(dist[i], INF);
+            dist[i][i] = 0;
+        }
+        for (int[] e : edges) {
+            dist[e[0]][e[1]] = dist[e[1]][e[0]] = e[2];
+        }
+
+        for (int k = 0; k < n; k++) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (dist[i][k] + dist[k][j] < dist[i][j]) {
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                    }
+                }
+            }
+        }
+
+        int minReachable = Integer.MAX_VALUE;
+        int bestCity = -1;
+
+        for (int i = 0; i < n; i++) {
+            int reachable = 0;
+            for (int j = 0; j < n; j++) {
+                if (i != j && dist[i][j] <= distanceThreshold) {
+                    reachable++;
+                }
+            }
+            if (reachable <= minReachable) {
+                minReachable = reachable;
+                bestCity = i;
+            }
+        }
+        return bestCity;
+    }
+
+    public static void main(String[] args) {
+        int n = 4;
+        int[][] edges = {{0, 1, 3}, {1, 2, 1}, {1, 3, 4}, {2, 3, 1}};
+        System.out.println("Best city: " + findTheCity(n, edges, 4)); // 3
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Floyd-Warshall APSP</b></summary>
 
@@ -1308,11 +2433,118 @@ public class FloydWarshallDemo {
 
 ## 10. Eulerian Path & Tour (Hierholzer's Algorithm)
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"Tracing a continuous drawing without lifting your pen."* Every intersection you enter must have an unused exit road so you never get trapped.
 >
 > **How It Solves the Problem (Plain English)**: To travel every single road exactly once without repeating, every junction must have an even number of roads (one to enter, one to leave). You start driving and burn bridges behind you; if you hit a dead end early, you splice side-loops into your main route until every road has been crossed.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 332 - Reconstruct Itinerary
+- **Difficulty**: Hard / Classic Hierholzer Eulerian Path Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+You are given a list of airline tickets where `tickets[i] = [from, to]` represents the departure and arrival airports of one flight.
+You must reconstruct the complete travel itinerary using **every single ticket exactly once**.
+
+Rules:
+1. All flights start from `"JFK"`.
+2. If there are multiple valid itineraries, you must return the itinerary that has the smallest lexical (alphabetical) order when read as a single string.
+   For example, the itinerary `["JFK", "LGA"]` has a smaller lexical order than `["JFK", "SFO"]`.
+3. You may assume all tickets form at least one valid itinerary.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+Notice what this problem is really asking:
+We have a directed graph where airports are nodes and tickets are directed edges.
+We must visit **every single edge (ticket) exactly once** starting from `"JFK"`.
+This is the textbook definition of an **Eulerian Path**!
+
+Why does standard backtracking get stuck? Because you might make a wrong turn early and hit a dead end before using all tickets!
+**Hierholzer's Algorithm** solves this smoothly without any backtracking:
+1. Sort each airport's outgoing flights in reverse alphabetical order so that when we `pop()` from the back of the list, we automatically choose the smallest alphabetical flight first.
+2. Walk greedily along available tickets, pushing airports onto an exploration path.
+3. When you reach an airport that has **no remaining outgoing flights** (you hit a dead end), that airport is guaranteed to be the *final destination* of this part of your trip!
+4. Add that dead-end airport to your final itinerary list.
+5. Backtrack to previous airports; if they still have unused flights, explore those side-loops and splice them in.
+6. When done, reverse the resulting list to get your perfect itinerary from start to finish!
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Reconstruct Itinerary</b></summary>
+
+```python
+from collections import defaultdict
+from typing import List
+
+def findItinerary(tickets: List[List[int]]) -> List[str]:
+    # Sort tickets reverse alphabetically so pop() yields smallest alphabetical airport first
+    adj = defaultdict(list)
+    for u, v in sorted(tickets, reverse=True):
+        adj[u].append(v)
+        
+    itinerary = []
+    
+    # Hierholzer's DFS
+    def visit(airport: str):
+        while adj[airport]:
+            next_airport = adj[airport].pop()
+            visit(next_airport)
+        itinerary.append(airport)
+        
+    visit("JFK")
+    return itinerary[::-1] # Reverse to get correct forward order
+
+if __name__ == "__main__":
+    ticket_list = [["MUC", "LHR"], ["JFK", "MUC"], ["SFO", "SJC"], ["LHR", "SFO"]]
+    result = findItinerary(ticket_list)
+    print("Reconstructed itinerary:", result)
+    # Expected: ['JFK', 'MUC', 'LHR', 'SFO', 'SJC']
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Reconstruct Itinerary</b></summary>
+
+```java
+import java.util.*;
+
+public class ReconstructItineraryBenchmark {
+    public static List<String> findItinerary(List<List<String>> tickets) {
+        Map<String, PriorityQueue<String>> adj = new HashMap<>();
+        for (List<String> t : tickets) {
+            adj.computeIfAbsent(t.get(0), k -> new PriorityQueue<>()).offer(t.get(1));
+        }
+
+        LinkedList<String> itinerary = new LinkedList<>();
+        dfs("JFK", adj, itinerary);
+        return itinerary;
+    }
+
+    private static void dfs(String airport, Map<String, PriorityQueue<String>> adj, LinkedList<String> itinerary) {
+        PriorityQueue<String> pq = adj.get(airport);
+        while (pq != null && !pq.isEmpty()) {
+            dfs(pq.poll(), adj, itinerary);
+        }
+        itinerary.addFirst(airport); // Add to head instead of reversing at the end
+    }
+
+    public static void main(String[] args) {
+        List<List<String>> tickets = new ArrayList<>();
+        tickets.add(Arrays.asList("MUC", "LHR"));
+        tickets.add(Arrays.asList("JFK", "MUC"));
+        tickets.add(Arrays.asList("SFO", "SJC"));
+        tickets.add(Arrays.asList("LHR", "SFO"));
+        System.out.println("Itinerary: " + findItinerary(tickets));
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Hierholzer's Eulerian Tour</b></summary>
 
@@ -1415,11 +2647,140 @@ public class EulerianTourDemo {
 
 ## 11. Lowest Common Ancestor (Binary Lifting)
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"An elevator with buttons for floors 1, 2, 4, 8, 16."* Skip climbing stairs one by one by taking power-of-two elevator jumps up the family tree.
 >
 > **How It Solves the Problem (Plain English)**: To find the closest common ancestor of two people, walking up the tree one step at a time is too slow. Instead, you precompute jumps of powers of two (parents, grandparents 4 levels up, 8 levels up...). You bring both nodes to the same depth and make large binary jumps together until their paths merge.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 1483 - Kth Ancestor of a Tree Node
+- **Difficulty**: Hard / Classic Binary Lifting Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+You are given a tree with `n` nodes numbered from `0` to `n - 1` in the form of a `parent` array where `parent[i]` is the parent of node `i`. The root of the tree is node `0`.
+You need to implement a class `TreeAncestor` that answers queries:
+`getKthAncestor(node, k)`: Returns the `k`-th ancestor of the given `node`. If no such ancestor exists, return `-1`.
+
+The `k`-th ancestor of a node is the node reached by climbing up the tree `k` steps along parent pointers.
+For example, the 1st ancestor is the parent, the 2nd ancestor is the grandparent, and so on.
+
+Constraints: Up to 50,000 nodes and 50,000 queries. Climbing 1 step at a time takes O(N * Q) = 2.5 billion steps (Time Limit Exceeded).
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+Instead of climbing 1 step at a time, what if you could make giant power-of-two jumps: jump 1 step, 2 steps, 4 steps, 8 steps, 16 steps...?
+Any number `k` can be written as a sum of powers of two (for example, 13 = 8 + 4 + 1).
+If you want to climb 13 steps up:
+1. Jump up 8 steps in 1 move!
+2. From there, jump up 4 steps in 1 move!
+3. From there, jump up 1 step in 1 move!
+You reached the 13th ancestor in just **3 moves**!
+
+This is **Binary Lifting**:
+- In preprocessing, compute table `up[node][j]`: the `2^j`-th ancestor of `node`.
+- Notice the recurrence: your 4th ancestor (`2^2`) is simply the 2nd ancestor of your 2nd ancestor:
+  `up[node][j] = up[up[node][j - 1]][j - 1]`.
+- Preprocessing takes `O(N log N)`.
+- Every query is answered in blazing fast `O(log k)` time!
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Kth Ancestor (Binary Lifting)</b></summary>
+
+```python
+from typing import List
+import math
+
+class TreeAncestor:
+    def __init__(self, n: int, parent: List[int]):
+        self.max_log = int(math.log2(n)) + 1
+        # up[node][j] stores the 2^j-th ancestor of node
+        self.up = [[-1] * self.max_log for _ in range(n)]
+        
+        # Base case: 2^0 = 1st ancestor is immediate parent
+        for i in range(n):
+            self.up[i][0] = parent[i]
+            
+        # Binary lifting DP table
+        for j in range(1, self.max_log):
+            for i in range(n):
+                if self.up[i][j - 1] != -1:
+                    self.up[i][j] = self.up[self.up[i][j - 1]][j - 1]
+
+    def getKthAncestor(self, node: int, k: int) -> int:
+        for j in range(self.max_log):
+            if (k >> j) & 1:  # If the j-th bit in k is set, jump 2^j steps!
+                node = self.up[node][j]
+                if node == -1:
+                    break
+        return node
+
+if __name__ == "__main__":
+    n = 7
+    # Tree: 0 is root, 1 & 2 are children of 0, 3 & 4 are children of 1, 5 & 6 are children of 2
+    parents = [-1, 0, 0, 1, 1, 2, 2]
+    tree = TreeAncestor(n, parents)
+    print("3rd node's 1st ancestor (parent):", tree.getKthAncestor(3, 1)) # 1
+    print("5th node's 2nd ancestor (grandparent):", tree.getKthAncestor(5, 2)) # 0
+    print("6th node's 3rd ancestor (does not exist):", tree.getKthAncestor(6, 3)) # -1
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Kth Ancestor (Binary Lifting)</b></summary>
+
+```java
+import java.util.*;
+
+public class TreeAncestorBenchmark {
+    private final int[][] up;
+    private final int maxLog;
+
+    public TreeAncestorBenchmark(int n, int[] parent) {
+        maxLog = 32 - Integer.numberOfLeadingZeros(n);
+        up = new int[n][maxLog];
+
+        for (int i = 0; i < n; i++) {
+            Arrays.fill(up[i], -1);
+            up[i][0] = parent[i];
+        }
+
+        for (int j = 1; j < maxLog; j++) {
+            for (int i = 0; i < n; i++) {
+                if (up[i][j - 1] != -1) {
+                    up[i][j] = up[up[i][j - 1]][j - 1];
+                }
+            }
+        }
+    }
+
+    public int getKthAncestor(int node, int k) {
+        for (int j = 0; j < maxLog; j++) {
+            if (((k >> j) & 1) == 1) {
+                node = up[node][j];
+                if (node == -1) break;
+            }
+        }
+        return node;
+    }
+
+    public static void main(String[] args) {
+        int n = 7;
+        int[] parents = {-1, 0, 0, 1, 1, 2, 2};
+        TreeAncestorBenchmark tree = new TreeAncestorBenchmark(n, parents);
+        System.out.println("Node 3 ancestor 1: " + tree.getKthAncestor(3, 1)); // 1
+        System.out.println("Node 5 ancestor 2: " + tree.getKthAncestor(5, 2)); // 0
+        System.out.println("Node 6 ancestor 3: " + tree.getKthAncestor(6, 3)); // -1
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: LCA via Binary Lifting</b></summary>
 
@@ -1556,11 +2917,212 @@ public class TreeLCADemo {
 
 ## 12. Maximum Network Flow (Dinic's Algorithm)
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"Plumbing valves with a return pipe."* If you send water down the wrong pipe, you can push water backward through a return valve to undo your mistake.
 >
 > **How It Solves the Problem (Plain English)**: To pump the maximum water from a reservoir to a city, you find paths with leftover pipe capacity and push water through. To fix bad routing choices made early, you create an imaginary return pipe that lets future routes cancel out and redirect earlier flow without starting over.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: CSES
+- **Problem Reference**: CSES 1694 - Download Speed / Benchmark Maximum Flow Problem
+- **Difficulty**: Hard / Classic Dinic's Algorithm Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+You are given a computer network of `n` computers and `m` directional network connections.
+Connection `i` sends data from computer `a` to computer `b` with a maximum bandwidth capacity of `c` megabits per second.
+
+Computer `1` is the server and computer `n` is your client computer.
+Your task is to calculate the **maximum total download speed** that can be sustained from server `1` to client `n`.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+Think of this as a network of physical water pipes with varying diameters:
+- You turn on the faucet at source `s`. Water flows through the network and pours out into the sink at `t`.
+- A pipe cannot carry more water than its capacity.
+- The total flow entering any intermediate computer must equal the total flow exiting it.
+
+How does **Dinic's Algorithm** find the maximum throughput efficiently?
+1. **Level Graph (BFS)**: Use BFS to calculate the "distance" from the source to every other node. Water should only flow downhill from level `L` to level `L + 1`. This stops water from going in circles!
+2. **Blocking Flow (DFS)**: Push as much water as possible along downhill paths using DFS.
+3. **The Golden Residual Edge Rule**: Whenever you push `f` units of water forward along edge `u -> v`, you **MUST add an imaginary reverse pipe `v -> u` with capacity `+f`**. This allows future paths to "push back" and redirect water if an earlier path made a suboptimal choice!
+4. Repeat BFS + DFS rounds until no path from source to sink can receive any more flow. Total throughput is optimal!
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Dinic's Max Flow</b></summary>
+
+```python
+from collections import deque
+from typing import List
+
+class Edge:
+    def __init__(self, to: int, rev: int, cap: int):
+        self.to = to
+        self.rev = rev
+        self.cap = cap
+
+class DinicMaxFlow:
+    def __init__(self, n: int):
+        self.n = n
+        self.adj = [[] for _ in range(n)]
+        self.level = [-1] * n
+        self.ptr = [0] * n
+
+    def add_edge(self, u: int, v: int, cap: int):
+        # Forward edge has capacity cap; reverse residual edge starts at capacity 0
+        a = Edge(v, len(self.adj[v]), cap)
+        b = Edge(u, len(self.adj[u]), 0)
+        self.adj[u].append(a)
+        self.adj[v].append(b)
+
+    def _bfs(self, s: int, t: int) -> bool:
+        self.level = [-1] * self.n
+        self.level[s] = 0
+        queue = deque([s])
+        while queue:
+            u = queue.popleft()
+            for edge in self.adj[u]:
+                if edge.cap > 0 and self.level[edge.to] == -1:
+                    self.level[edge.to] = self.level[u] + 1
+                    queue.append(edge.to)
+        return self.level[t] != -1
+
+    def _dfs(self, u: int, t: int, pushed: int) -> int:
+        if pushed == 0 or u == t:
+            return pushed
+        for cid in range(self.ptr[u], len(self.adj[u])):
+            self.ptr[u] = cid
+            edge = self.adj[u][cid]
+            tr = edge.to
+            if self.level[u] + 1 != self.level[tr] or edge.cap == 0:
+                continue
+            tr_pushed = self._dfs(tr, t, min(pushed, edge.cap))
+            if tr_pushed == 0:
+                continue
+            edge.cap -= tr_pushed
+            self.adj[tr][edge.rev].cap += tr_pushed
+            return tr_pushed
+        return 0
+
+    def max_flow(self, s: int, t: int) -> int:
+        flow = 0
+        while self._bfs(s, t):
+            self.ptr = [0] * self.n
+            while True:
+                pushed = self._dfs(s, t, float('inf'))
+                if pushed == 0:
+                    break
+                flow += pushed
+        return flow
+
+if __name__ == "__main__":
+    # 4 nodes: 0 (Source) to 3 (Sink)
+    dinic = DinicMaxFlow(4)
+    dinic.add_edge(0, 1, 10)
+    dinic.add_edge(0, 2, 10)
+    dinic.add_edge(1, 2, 2)
+    dinic.add_edge(1, 3, 4)
+    dinic.add_edge(2, 3, 9)
+    print("Maximum flow from 0 to 3:", dinic.max_flow(0, 3)) # Expected 13
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Dinic's Max Flow</b></summary>
+
+```java
+import java.util.*;
+
+public class DinicMaxFlowBenchmark {
+    static class Edge {
+        int to, rev, cap;
+        Edge(int to, int rev, int cap) {
+            this.to = to;
+            this.rev = rev;
+            this.cap = cap;
+        }
+    }
+
+    private final int n;
+    private final List<List<Edge>> adj;
+    private final int[] level, ptr;
+
+    public DinicMaxFlowBenchmark(int n) {
+        this.n = n;
+        adj = new ArrayList<>();
+        for (int i = 0; i < n; i++) adj.add(new ArrayList<>());
+        level = new int[n];
+        ptr = new int[n];
+    }
+
+    public void addEdge(int from, int to, int cap) {
+        Edge a = new Edge(to, adj.get(to).size(), cap);
+        Edge b = new Edge(from, adj.get(from).size(), 0);
+        adj.get(from).add(a);
+        adj.get(to).add(b);
+    }
+
+    private boolean bfs(int s, int t) {
+        Arrays.fill(level, -1);
+        level[s] = 0;
+        Queue<Integer> q = new ArrayDeque<>();
+        q.offer(s);
+        while (!q.isEmpty()) {
+            int u = q.poll();
+            for (Edge e : adj.get(u)) {
+                if (e.cap > 0 && level[e.to] == -1) {
+                    level[e.to] = level[u] + 1;
+                    q.offer(e.to);
+                }
+            }
+        }
+        return level[t] != -1;
+    }
+
+    private int dfs(int u, int t, int pushed) {
+        if (pushed == 0 || u == t) return pushed;
+        for (int cid = ptr[u]; cid < adj.get(u).size(); cid++, ptr[u]++) {
+            Edge e = adj.get(u).get(cid);
+            if (level[u] + 1 != level[e.to] || e.cap == 0) continue;
+            int trPushed = dfs(e.to, t, Math.min(pushed, e.cap));
+            if (trPushed == 0) continue;
+            e.cap -= trPushed;
+            adj.get(e.to).get(e.rev).cap += trPushed;
+            return trPushed;
+        }
+        return 0;
+    }
+
+    public int maxFlow(int s, int t) {
+        int flow = 0;
+        while (bfs(s, t)) {
+            Arrays.fill(ptr, 0);
+            while (true) {
+                int pushed = dfs(s, t, Integer.MAX_VALUE);
+                if (pushed == 0) break;
+                flow += pushed;
+            }
+        }
+        return flow;
+    }
+
+    public static void main(String[] args) {
+        DinicMaxFlowBenchmark dinic = new DinicMaxFlowBenchmark(4);
+        dinic.addEdge(0, 1, 10);
+        dinic.addEdge(0, 2, 10);
+        dinic.addEdge(1, 2, 2);
+        dinic.addEdge(1, 3, 4);
+        dinic.addEdge(2, 3, 9);
+        System.out.println("Max flow: " + dinic.maxFlow(0, 3)); // 13
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Dinic's Algorithm for Maximum Flow</b></summary>
 
@@ -1742,11 +3304,135 @@ public class DinicMaxFlow {
 
 ## 13. Maximum Cardinality Bipartite Matching (Augmenting Paths)
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"Politely asking someone to switch dance partners."* If your desired partner is taken, you ask them to see if their current partner has another option.
 >
 > **How It Solves the Problem (Plain English)**: To match as many applicants to jobs as possible, you try to assign each applicant to their preferred job. If that job is already occupied, you check if the current occupant can switch to an alternate choice. If a chain reaction of swaps frees up a spot, total matches increase.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 1349 / HackerRank - Maximum Bipartite Matching
+- **Difficulty**: Hard / Classic Kuhn's Augmenting Path Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+Imagine there are `M` applicants looking for jobs, and `N` available job positions.
+Each applicant is interested in a specific subset of the jobs (for example, Alice is only qualified for Job 1 and Job 3).
+Each applicant can be hired for at most one job, and each job can be given to at most one applicant.
+
+Your task is to find the **maximum number of applicants who can be hired for a job**.
+
+For example, given:
+- Applicant 0 wants Job 0 or Job 1.
+- Applicant 1 wants Job 0.
+- Applicant 2 wants Job 1.
+If Applicant 0 takes Job 0, then Applicant 1 gets nothing. But if Applicant 0 takes Job 1, then Applicant 1 gets Job 0! In that case, 2 applicants get jobs. Can all 3 get jobs? No, because there are only 2 total jobs! The answer is `2`.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+This is the classic **Maximum Cardinality Bipartite Matching (MCBM)** problem:
+The two sets of nodes are Applicants (Left) and Jobs (Right). Edges only exist between Left and Right.
+
+**Kuhn's Algorithm** solves this using polite partner swaps (**Augmenting Paths**):
+1. For each applicant `u`:
+2. Look at each job `v` that applicant `u` is interested in:
+   - If job `v` is currently completely empty: Great! Hire applicant `u` for job `v` immediately.
+   - If job `v` is already occupied by another applicant `p`: Politely ask applicant `p`: *"Hey, can you switch to another job you like?"*
+   - Recursively run DFS on applicant `p` to see if they can find an alternate vacant job.
+   - If applicant `p` successfully moves to an alternate job, job `v` is freed up! Applicant `u` takes job `v`.
+3. If a swap chain succeeds, the total count of matched pairs increases by 1.
+4. Total time complexity is `O(V * E)`, running in just milliseconds for typical interview input sizes.
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Maximum Bipartite Matching</b></summary>
+
+```python
+from typing import List
+
+def maxBipartiteMatching(num_applicants: int, num_jobs: int, preferences: List[List[int]]) -> int:
+    # adj[u] lists the jobs applicant u is qualified for
+    adj = preferences
+    
+    # match_job[v] stores which applicant currently holds job v (-1 if empty)
+    match_job = [-1] * num_jobs
+    
+    def try_kuhn(applicant: int, visited_jobs: List[bool]) -> bool:
+        for job in adj[applicant]:
+            if not visited_jobs[job]:
+                visited_jobs[job] = True
+                
+                # If job is free, OR its current owner can switch to another job
+                if match_job[job] == -1 or try_kuhn(match_job[job], visited_jobs):
+                    match_job[job] = applicant
+                    return True
+        return False
+
+    total_matches = 0
+    for u in range(num_applicants):
+        visited = [False] * num_jobs
+        if try_kuhn(u, visited):
+            total_matches += 1
+            
+    return total_matches
+
+if __name__ == "__main__":
+    # 3 applicants, 2 jobs
+    # Applicant 0 wants [0, 1], Applicant 1 wants [0], Applicant 2 wants [1]
+    prefs = [[0, 1], [0], [1]]
+    result = maxBipartiteMatching(3, 2, prefs)
+    print("Maximum applicants matched to jobs:", result) # Expected 2
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Maximum Bipartite Matching</b></summary>
+
+```java
+import java.util.*;
+
+public class BipartiteMatchingBenchmark {
+    public static int maxBipartiteMatching(int numApplicants, int numJobs, List<List<Integer>> adj) {
+        int[] matchJob = new int[numJobs];
+        Arrays.fill(matchJob, -1);
+        int totalMatches = 0;
+
+        for (int u = 0; u < numApplicants; u++) {
+            boolean[] visitedJobs = new boolean[numJobs];
+            if (tryKuhn(u, adj, visitedJobs, matchJob)) {
+                totalMatches++;
+            }
+        }
+        return totalMatches;
+    }
+
+    private static boolean tryKuhn(int applicant, List<List<Integer>> adj, boolean[] visitedJobs, int[] matchJob) {
+        for (int job : adj.get(applicant)) {
+            if (!visitedJobs[job]) {
+                visitedJobs[job] = true;
+                if (matchJob[job] == -1 || tryKuhn(matchJob[job], adj, visitedJobs, matchJob)) {
+                    matchJob[job] = applicant;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        List<List<Integer>> prefs = new ArrayList<>();
+        prefs.add(Arrays.asList(0, 1));
+        prefs.add(Arrays.asList(0));
+        prefs.add(Arrays.asList(1));
+        System.out.println("Max matches: " + maxBipartiteMatching(3, 2, prefs)); // 2
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Kuhn's Augmenting Path MCBM</b></summary>
 

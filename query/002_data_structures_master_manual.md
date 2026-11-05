@@ -118,11 +118,114 @@ flowchart TD
 An **Array** is a contiguous block of memory with `O(1)` random access. A **Dynamic Array** (Python `list`, Java `ArrayList`) doubles its capacity upon reaching saturation, achieving `O(1)` amortized append.
 **Coordinate Compression** maps arbitrary large coordinates (e.g., `-10^9 to 10^9`) to a compact contiguous rank space `[0..M-1]` in `O(N log N)`, making it possible to use arrays, Segment Trees, or Fenwick Trees without massive sparse tables.
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"Renaming scattered phone numbers to speed-dial buttons 1, 2, 3."* You don't need a keypad with 10-digit numbers; you just sort your contacts alphabetically and assign them buttons 0, 1, 2... based on their rank.
 >
 > **How It Solves the Problem (Plain English)**: If your numbers are huge (like -1,000,000,000 and +1,000,000,000), you can't use them as array slots without crashing your computer's memory. But if there are only 1,000 numbers in total, their exact values don't matter--only their relative order does. You sort them and replace them with their ranks: 0, 1, 2, ..., 999.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 1365 - How Many Numbers Are Smaller Than the Current Number
+- **Difficulty**: Easy / Classic Coordinate Compression Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+You are given a list of integer numbers. For every single number in this list, your job is to find out how many *other* numbers in the entire list are strictly smaller than it.
+
+For example, imagine you are looking at the list `[8, 1, 2, 2, 3]`:
+- For `8`: The numbers smaller than it are `1, 2, 2, 3`. That is 4 numbers.
+- For `1`: There are no numbers smaller than 1. That is 0 numbers.
+- For the first `2`: Only `1` is smaller. That is 1 number.
+- For the second `2`: Only `1` is smaller. That is 1 number.
+- For `3`: The numbers smaller than it are `1, 2, 2`. That is 3 numbers.
+The final answer we must return is `[4, 0, 1, 1, 3]`.
+
+The values could be scattered, negative, or up to a billion in generalized versions (such as interval intersection problems), but the total number of items is modest.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+A beginner might first think: "Why not just take each number one by one, loop through all other numbers, count how many are smaller, and write down the answer?"
+While that works for a tiny list, it does double-work. If there are 100,000 numbers, checking every pair takes 10,000,000,000 comparisons, which completely freezes the computer.
+
+Here is the clean coordinate compression strategy:
+1. Make a copy of the numbers and sort them from smallest to largest.
+2. In a sorted list, what does an element's index tell you? It tells you *exactly* how many numbers come before it! For example, if sorted numbers are `[1, 2, 2, 3, 8]`:
+   - `1` is at index 0 (0 numbers are smaller than 1).
+   - The first `2` is at index 1 (1 number is smaller than 2). We ignore subsequent duplicate 2s because they have the same rank.
+   - `3` is at index 3 (3 numbers are smaller than 3).
+   - `8` is at index 4 (4 numbers are smaller than 8).
+3. We store this mapping from value to its first sorted index in a fast lookup table (hash map).
+4. Finally, we walk through our original list in its initial order, look up each number in our map, and immediately get our answer in one step!
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Smaller Numbers Count</b></summary>
+
+```python
+from typing import List, Dict
+
+def smallerNumbersThanCurrent(nums: List[int]) -> List[int]:
+    # Step 1: Sort a copy of the numbers to reveal their relative ranks
+    sorted_nums = sorted(nums)
+    
+    # Step 2: Record the first index where each distinct number appears.
+    # Because the list is sorted, that first index equals the count of strictly smaller numbers.
+    rank_map: Dict[int, int] = {}
+    for index, val in enumerate(sorted_nums):
+        if val not in rank_map:
+            rank_map[val] = index
+            
+    # Step 3: Map each original number directly to its precomputed rank
+    return [rank_map[num] for num in nums]
+
+if __name__ == "__main__":
+    test_input = [8, 1, 2, 2, 3]
+    result = smallerNumbersThanCurrent(test_input)
+    print("Input numbers: ", test_input)
+    print("Counts smaller:", result) # Expected: [4, 0, 1, 1, 3]
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Smaller Numbers Count</b></summary>
+
+```java
+import java.util.*;
+
+public class SmallerNumbersBenchmark {
+    public static int[] smallerNumbersThanCurrent(int[] nums) {
+        // Step 1: Clone and sort the array to establish relative ranking
+        int[] sorted = nums.clone();
+        Arrays.sort(sorted);
+        
+        // Step 2: Map each unique value to its very first index in the sorted order
+        Map<Integer, Integer> rankMap = new HashMap<>();
+        for (int i = 0; i < sorted.length; i++) {
+            // Only record the first time we see the number (handles duplicates)
+            rankMap.putIfAbsent(sorted[i], i);
+        }
+        
+        // Step 3: Construct the result using the original order
+        int[] result = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            result[i] = rankMap.get(nums[i]);
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] testInput = {8, 1, 2, 2, 3};
+        int[] result = smallerNumbersThanCurrent(testInput);
+        System.out.println("Input:  " + Arrays.toString(testInput));
+        System.out.println("Result: " + Arrays.toString(result)); // [4, 0, 1, 1, 3]
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Dynamic Array & Coordinate Compression</b></summary>
 
@@ -219,11 +322,120 @@ public class CoordinateCompressorDemo {
 
 A **Bitmask** uses the individual bits of an integer (32-bit `int` or 64-bit `long`) to represent a subset of up to 64 items. Every set operation (union, intersection, element toggle, lowest set bit isolation) executes in `O(1)` CPU cycles with zero memory overhead.
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"A bank of light switches on a control board."* Each switch is either ON (1) or OFF (0); checking or flipping any light is instant.
 >
 > **How It Solves the Problem (Plain English)**: Instead of using heavy lists or sets to remember whether you picked item 1, item 2, or item 3, you use a single integer. Each binary digit of the integer represents one item (1 = picked, 0 = not picked). You can add, remove, or check items instantly using simple math.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 78 - Subsets (Power Set)
+- **Difficulty**: Medium / Fundamental Bitmask Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+You are given a list of unique numbers, for example `[1, 2, 3]`. You are asked to return *all possible subsets* that can be created from these numbers (also known as the Power Set).
+
+What is a subset? A subset is any combination of elements you can form by deciding, for each element, whether to keep it or leave it behind.
+For `[1, 2, 3]`, all possible subsets are:
+- The empty set: `[]` (we picked nothing)
+- Sets with 1 item: `[1]`, `[2]`, `[3]`
+- Sets with 2 items: `[1, 2]`, `[1, 3]`, `[2, 3]`
+- The complete set: `[1, 2, 3]`
+In total, for 3 numbers, there are exactly 2^3 = 8 subsets.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+Notice that for every single number in the list, there are only two choices:
+- Choice 0: Leave it out.
+- Choice 1: Include it.
+
+If there are N numbers, there are 2^N total choices. This matches binary numbers perfectly!
+Let us write out the binary numbers from 0 up to 7 (which is 2^3 - 1):
+- `000` in binary means: don't take element 0, don't take element 1, don't take element 2 -> `[]`
+- `001` in binary means: take element 0 -> `[1]`
+- `010` in binary means: take element 1 -> `[2]`
+- `011` in binary means: take element 0 and element 1 -> `[1, 2]`
+- `100` in binary means: take element 2 -> `[3]`
+- `101` in binary means: take element 0 and element 2 -> `[1, 3]`
+- `110` in binary means: take element 1 and element 2 -> `[2, 3]`
+- `111` in binary means: take element 0, 1, and 2 -> `[1, 2, 3]`
+
+Instead of writing complex recursive backtracking with helper functions and state rollbacks, we can just run a simple counting loop from `0` to `(2^N) - 1`. For each number in our loop, we inspect its binary digits: if the i-th bit is 1, we add `nums[i]` to our subset!
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Bitmask Subsets</b></summary>
+
+```python
+from typing import List
+
+def subsets(nums: List[int]) -> List[List[int]]:
+    n = len(nums)
+    total_subsets = 1 << n  # 1 << n computes 2^n in O(1) time
+    all_subsets = []
+    
+    # Loop through every integer mask from 0 up to 2^n - 1
+    for mask in range(total_subsets):
+        current_subset = []
+        for i in range(n):
+            # Check if the i-th bit in mask is turned ON (equals 1)
+            if (mask >> i) & 1:
+                current_subset.append(nums[i])
+        all_subsets.append(current_subset)
+        
+    return all_subsets
+
+if __name__ == "__main__":
+    nums = [1, 2, 3]
+    result = subsets(nums)
+    print(f"Generated {len(result)} subsets for {nums}:")
+    for s in result:
+        print(" ", s)
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Bitmask Subsets</b></summary>
+
+```java
+import java.util.*;
+
+public class BitmaskSubsetsBenchmark {
+    public static List<List<Integer>> subsets(int[] nums) {
+        int n = nums.length;
+        int totalSubsets = 1 << n; // 2^n total subsets
+        List<List<Integer>> result = new ArrayList<>();
+        
+        // Loop from 0 to 2^n - 1
+        for (int mask = 0; mask < totalSubsets; mask++) {
+            List<Integer> currentSubset = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                // Check if the i-th switch is ON
+                if (((mask >> i) & 1) == 1) {
+                    currentSubset.add(nums[i]);
+                }
+            }
+            result.add(currentSubset);
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 3};
+        List<List<Integer>> allSubsets = subsets(nums);
+        System.out.println("Total subsets: " + allSubsets.size());
+        for (List<Integer> subset : allSubsets) {
+            System.out.println("  " + subset);
+        }
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Bitmask Manipulation</b></summary>
 
@@ -338,11 +550,123 @@ public class BitmaskDemo {
 A **Monotonic Stack** maintains its elements in strictly monotonic (increasing or decreasing) order. Each element is pushed and popped at most once, providing an `O(N)` solution for finding the **Nearest Greater or Smaller Element** for every item in an array.
 A **Monotonic Deque** extends this to a sliding window of size `K`, maintaining elements in monotonic order by popping outdated indices from the front and smaller values from the back in amortized `O(1)` per window step.
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"Standing in line at a movie theater."* If someone taller stands in front of you, you can't see the screen anymore (you get kicked out of view).
 >
 > **How It Solves the Problem (Plain English)**: As you scan a list of numbers, you only care about numbers that still have a chance of being the "next bigger" thing. Whenever a new number arrives that is bigger than what you've seen, it kicks out all the smaller numbers behind it because they are blocked and will never be needed again. For sliding windows, old numbers also leave from the front as time expires.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 84 - Largest Rectangle in Histogram
+- **Difficulty**: Hard / Legendary Monotonic Stack Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+Imagine you are looking at a bar chart (histogram) where each bar has a width of 1 unit, but the bars have different heights.
+For example, given heights: `[2, 1, 5, 6, 2, 3]`.
+
+You want to find the largest rectangular box that can fit completely inside these bars without sticking out into empty air.
+- You can make a rectangle of height 1 spanning all 6 bars -> Area = 1 * 6 = 6.
+- You can make a rectangle using the two tallest bars of height 5 and 6 -> Minimum height across them is 5, width is 2 -> Area = 5 * 2 = 10.
+The maximum possible rectangular area here is 10.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+A beginner might try every possible pair of left and right boundaries, find the minimum height between them, and compute `height * width`. But checking every pair of bars takes O(N^2) time, which fails when N = 100,000 bars.
+
+Let us ask a smarter question from the perspective of each individual bar:
+"If bar `i` is the shortest bar in a rectangle, how far can that rectangle expand to the left and to the right?"
+- It can expand to the left until it hits a bar that is *shorter* than it.
+- It can expand to the right until it hits a bar that is *shorter* than it.
+
+Once we know the index of the first shorter bar on the left and the first shorter bar on the right, the width is simply `right_boundary - left_boundary - 1`, and the area is `heights[i] * width`.
+
+How do we find these boundaries in one single pass? With a **Monotonic Stack**:
+1. We keep a stack of bar indices whose heights are strictly increasing.
+2. When we walk across the histogram and see a bar that is *shorter* than the bar on top of the stack, that shorter bar is the official right boundary for the taller bar on top!
+3. We pop the taller bar from the stack. Its left boundary is simply whatever bar is now sitting right beneath it in the stack.
+4. We calculate its area immediately! Because every bar is pushed once and popped once, the whole problem is solved in O(N) time.
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Largest Rectangle in Histogram</b></summary>
+
+```python
+from typing import List
+
+def largestRectangleArea(heights: List[int]) -> int:
+    # Add a zero height sentinel at the end to force all remaining bars to pop
+    extended_heights = heights + [0]
+    stack = []  # Stores indices of bars in strictly ascending height order
+    max_area = 0
+    
+    for current_idx, current_h in enumerate(extended_heights):
+        # While the current bar is shorter than the bar on top of our stack,
+        # the current bar serves as the right boundary for the bar on top!
+        while stack and extended_heights[stack[-1]] > current_h:
+            popped_idx = stack.pop()
+            h = extended_heights[popped_idx]
+            
+            # If stack is empty, it expanded all the way to index 0 (width = current_idx)
+            # Otherwise, the new top of the stack is the first shorter bar on the left
+            left_boundary = stack[-1] if stack else -1
+            width = current_idx - left_boundary - 1
+            max_area = max(max_area, h * width)
+            
+        stack.append(current_idx)
+        
+    return max_area
+
+if __name__ == "__main__":
+    bars = [2, 1, 5, 6, 2, 3]
+    result = largestRectangleArea(bars)
+    print("Histogram heights:", bars)
+    print("Maximum rectangular area:", result) # Expected 10
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Largest Rectangle in Histogram</b></summary>
+
+```java
+import java.util.*;
+
+public class HistogramBenchmark {
+    public static int largestRectangleArea(int[] heights) {
+        int n = heights.length;
+        // Append a 0-height sentinel at the end
+        int[] h = new int[n + 1];
+        System.arraycopy(heights, 0, h, 0, n);
+        h[n] = 0;
+        
+        Deque<Integer> stack = new ArrayDeque<>();
+        int maxArea = 0;
+        
+        for (int i = 0; i <= n; i++) {
+            // While current bar is lower than stack top bar, compute rectangle for stack top
+            while (!stack.isEmpty() && h[stack.peek()] > h[i]) {
+                int poppedIndex = stack.pop();
+                int height = h[poppedIndex];
+                int leftBoundary = stack.isEmpty() ? -1 : stack.peek();
+                int width = i - leftBoundary - 1;
+                maxArea = Math.max(maxArea, height * width);
+            }
+            stack.push(i);
+        }
+        return maxArea;
+    }
+
+    public static void main(String[] args) {
+        int[] bars = {2, 1, 5, 6, 2, 3};
+        System.out.println("Max area: " + largestRectangleArea(bars)); // 10
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Monotonic Stack & Deque</b></summary>
 
@@ -468,11 +792,171 @@ Because the tree is complete, the parent of index `i` is `i // 2` (or `(i - 1) /
 - **Extract Extremum**: Swap root with last leaf, pop, `sift_down` in `O(log N)`.
 - **Heapify**: Bottom-up construction of an entire heap from an array in `O(N)` linear time.
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"A strict military chain of command."* The General is always at the top; a strong newcomer challenges their officer to rise up the ranks until hitting someone better.
 >
 > **How It Solves the Problem (Plain English)**: You pack a complete pyramid of numbers into a simple flat list. The most important number is always at the very top. When you add a new number, you place it at the bottom and let it bubble up past anyone weaker. When you take the top number, you fill the hole with a bottom number and let it sink down until order is restored.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 23 - Merge k Sorted Lists
+- **Difficulty**: Hard / Classic Priority Queue (Heap) Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+You are given an array of `k` linked lists, where each individual list is already sorted in ascending order from smallest to largest.
+Your task is to merge all `k` lists together into one single giant sorted linked list and return it.
+
+For example, imagine you are given 3 sorted lists:
+- List 1: `1 -> 4 -> 5`
+- List 2: `1 -> 3 -> 4`
+- List 3: `2 -> 6`
+When you merge them all together into one continuous line, the result should be:
+`1 -> 1 -> 2 -> 3 -> 4 -> 4 -> 5 -> 6`.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+A beginner might say: "Let's take every single node, dump them all into a giant array, sort the array with a standard sort, and rebuild a linked list."
+While that works, it ignores the valuable fact that the lists are *already individually sorted*!
+
+Think about real life: imagine 3 lines of students waiting outside a cafeteria, each line sorted by height from shortest to tallest.
+- Who could possibly be the shortest person among everyone? Only the person standing at the very front of Line 1, Line 2, or Line 3!
+- You never have to check people in the back of the lines. You only ever compare the people at the **heads** of the active lines.
+
+This is the exact problem a **Min-Heap (Priority Queue)** solves:
+1. Put the front element of each of the `k` lists into a Min-Heap. The heap only holds `k` elements at any time.
+2. Pull out the smallest item from the heap. This item is guaranteed to be the overall minimum among all available choices! Attach it to your merged list.
+3. Whoever was standing right behind that person in their original list steps forward to the front. You push that next person into the heap.
+4. Repeat this until the heap is empty.
+Because the heap only ever holds `k` elements, inserting and extracting takes only `O(log k)` time. If there are `N` total numbers across all lists, the total time is `O(N log k)`.
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Merge K Sorted Lists</b></summary>
+
+```python
+import heapq
+from typing import List, Optional
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def mergeKLists(lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+    # Min-heap stores tuples: (node_value, unique_counter, node_object)
+    # The unique counter prevents comparison errors when node values are equal
+    heap = []
+    counter = 0
+    
+    # Step 1: Push the head of each non-empty list into the heap
+    for head in lists:
+        if head:
+            heapq.heappush(heap, (head.val, counter, head))
+            counter += 1
+            
+    dummy_head = ListNode(0)
+    current = dummy_head
+    
+    # Step 2: Continuously extract the minimum node and advance that list
+    while heap:
+        val, _, min_node = heapq.heappop(heap)
+        current.next = min_node
+        current = current.next
+        
+        # If the extracted node has a next node, push that successor into the heap
+        if min_node.next:
+            heapq.heappush(heap, (min_node.next.val, counter, min_node.next))
+            counter += 1
+            
+    return dummy_head.next
+
+# Helper to print linked lists for verification
+def print_list(node: Optional[ListNode]):
+    vals = []
+    while node:
+        vals.append(str(node.val))
+        node = node.next
+    print(" -> ".join(vals))
+
+if __name__ == "__main__":
+    # Create List 1: 1 -> 4 -> 5
+    l1 = ListNode(1, ListNode(4, ListNode(5)))
+    # Create List 2: 1 -> 3 -> 4
+    l2 = ListNode(1, ListNode(3, ListNode(4)))
+    # Create List 3: 2 -> 6
+    l3 = ListNode(2, ListNode(6))
+    
+    merged = mergeKLists([l1, l2, l3])
+    print("Merged K Sorted Lists result:")
+    print_list(merged) # 1 -> 1 -> 2 -> 3 -> 4 -> 4 -> 5 -> 6
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Merge K Sorted Lists</b></summary>
+
+```java
+import java.util.*;
+
+public class MergeKSortedListsBenchmark {
+    public static class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int val) { this.val = val; }
+        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+    }
+
+    public static ListNode mergeKLists(ListNode[] lists) {
+        if (lists == null || lists.length == 0) return null;
+        
+        // Priority queue sorted by node value ascending
+        PriorityQueue<ListNode> minHeap = new PriorityQueue<>(Comparator.comparingInt(a -> a.val));
+        
+        // Step 1: Add the head of each non-empty list to the heap
+        for (ListNode node : lists) {
+            if (node != null) {
+                minHeap.offer(node);
+            }
+        }
+        
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
+        
+        // Step 2: Pop minimum, link to result, and insert successor
+        while (!minHeap.isEmpty()) {
+            ListNode smallest = minHeap.poll();
+            current.next = smallest;
+            current = current.next;
+            
+            if (smallest.next != null) {
+                minHeap.offer(smallest.next);
+            }
+        }
+        
+        return dummy.next;
+    }
+
+    public static void main(String[] args) {
+        ListNode l1 = new ListNode(1, new ListNode(4, new ListNode(5)));
+        ListNode l2 = new ListNode(1, new ListNode(3, new ListNode(4)));
+        ListNode l3 = new ListNode(2, new ListNode(6));
+        
+        ListNode merged = mergeKLists(new ListNode[]{l1, l2, l3});
+        System.out.print("Merged: ");
+        while (merged != null) {
+            System.out.print(merged.val + (merged.next != null ? " -> " : ""));
+            merged = merged.next;
+        }
+        System.out.println();
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Complete Binary Heap from Scratch</b></summary>
 
@@ -644,11 +1128,104 @@ A **Hash Table** maps arbitrary keys to bucket indices using a hash function `ha
 - **Collision Resolution**: Handled via **Separate Chaining** (linked list or dynamic vector per bucket) or **Open Addressing** (linear probing).
 - **Load Factor**: When `size / capacity > load_factor_threshold` (typically `0.75`), the table allocates twice the capacity and re-hashes all keys to maintain `O(1)` amortized insertion and lookup.
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"Coat check hooks at a hotel."* Your ticket sends you to hook #17; if someone else is already hanging their coat there, you just hook your coat onto the same hanger behind theirs.
 >
 > **How It Solves the Problem (Plain English)**: You take an item's name and run it through a math formula to pick a bucket number. You put the item in that bucket. If two items pick the same bucket by accident, you just link them together in a short chain inside that bucket. As long as you have enough buckets, looking up an item is almost instant.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 1 - Two Sum
+- **Difficulty**: Easy / Universal Hash Table Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+You are given a list of numbers, and a single number called `target`.
+Your task is to find the indices of the *two distinct numbers* in the list that add up exactly to the `target`.
+
+For example, given `nums = [2, 7, 11, 15]` and `target = 9`:
+- `nums[0] + nums[1] = 2 + 7 = 9`.
+- Therefore, the answer is `[0, 1]`.
+You can assume that each input has exactly one valid solution, and you cannot use the same element twice.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+A beginner's first reaction is to use two nested loops: for every number `nums[i]`, loop through all subsequent numbers `nums[j]` and check if `nums[i] + nums[j] == target`.
+This takes O(N^2) time. If there are 50,000 numbers, checking all pairs takes 2.5 billion operations!
+
+How does a **Hash Table** solve this in one single pass?
+Notice that if we are currently looking at number `x`, what number are we desperately wishing we had seen before?
+We are looking for `complement = target - x`!
+1. Walk through the array once with a single loop.
+2. At each number `x`, ask your hash table: *"Have we already passed `target - x` earlier?"*
+   - If **YES**: We immediately found our pair! Return `[earlier_index, current_index]`.
+   - If **NO**: Store our current number and its index in the hash table so future numbers can find us!
+Because looking up an item in a hash table takes average O(1) time, checking all N numbers takes only O(N) total time.
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Two Sum</b></summary>
+
+```python
+from typing import List, Dict
+
+def twoSum(nums: List[int], target: int) -> List[int]:
+    # Maps number_value -> index_where_it_was_seen
+    seen_map: Dict[int, int] = {}
+    
+    for current_idx, num in enumerate(nums):
+        complement = target - num
+        # If the missing partner was already seen, we are done!
+        if complement in seen_map:
+            return [seen_map[complement], current_idx]
+        # Otherwise, save the current number for future candidates
+        seen_map[num] = current_idx
+        
+    return []
+
+if __name__ == "__main__":
+    test_nums = [2, 7, 11, 15]
+    test_target = 9
+    result = twoSum(test_nums, test_target)
+    print("Numbers:", test_nums, "Target:", test_target)
+    print("Indices found:", result) # Expected [0, 1]
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Two Sum</b></summary>
+
+```java
+import java.util.*;
+
+public class TwoSumBenchmark {
+    public static int[] twoSum(int[] nums, int target) {
+        // Maps value -> index
+        Map<Integer, Integer> seen = new HashMap<>();
+        
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (seen.containsKey(complement)) {
+                return new int[]{seen.get(complement), i};
+            }
+            seen.put(nums[i], i);
+        }
+        return new int[]{};
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {2, 7, 11, 15};
+        int target = 9;
+        int[] result = twoSum(nums, target);
+        System.out.println("Result indices: " + Arrays.toString(result)); // [0, 1]
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Hash Map with Separate Chaining</b></summary>
 
@@ -832,11 +1409,138 @@ public class HashMapChainingDemo<K, V> {
 A standard Binary Search Tree can degrade to `O(N)` if keys arrive sorted. A **Balanced BST** (such as an **AVL Tree**) maintains the strict invariant that the balance factor `height(left) - height(right)` of every node is within `{-1, 0, 1}`.
 When an insertion disrupts this invariant, the tree restores balance in `O(1)` via **Left and Right Rotations**, guaranteeing `O(log N)` search, insert, and delete operations.
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"A playground seesaw."* If too many kids sit on the left side, the board tilts dangerously; one quick rotation shifts a child to the right side to level it back out.
 >
 > **How It Solves the Problem (Plain English)**: In an ordinary search tree, if you add numbers in order (1, 2, 3, 4, 5), the tree stretches out into one long line and becomes just as slow as a regular list. A self-balancing tree checks the height of both sides after every insert. If one side gets more than 1 level taller than the other, it twists the branches (rotates them) so the tree stays short and bushy.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 1382 - Balance a Binary Search Tree
+- **Difficulty**: Medium / Classic Tree Balancing Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+You are given a Binary Search Tree (BST) that might be extremely deformed or skewed (for example, every node only has a right child, looking like a straight diagonal line).
+When a tree turns into a straight line of N nodes, searching for a number is as slow as searching through a regular list: O(N) time.
+
+Your task is to rearrange the exact same values into a **Balanced Binary Search Tree**, where the height difference between the left and right subtrees of any node is at most 1.
+In a balanced tree, looking up any number is guaranteed to take super-fast O(log N) time.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+In any Binary Search Tree, if you do an **In-Order Traversal** (visit Left Subtree, then Current Node, then Right Subtree), what order do you see the values in?
+They automatically come out in **strictly sorted order** from smallest to largest!
+
+Once you extract all values as a sorted list:
+1. Which value should be the absolute root of the tree? The exact **middle** element!
+2. All values to the left of the middle element will form the left balanced subtree.
+3. All values to the right of the middle element will form the right balanced subtree.
+4. By repeatedly picking the midpoint of each sub-array, both sides are always guaranteed to have almost the exact same number of nodes, creating a balanced tree of minimum height O(log N).
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Balance a BST</b></summary>
+
+```python
+from typing import List, Optional
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def balanceBST(root: Optional[TreeNode]) -> Optional[TreeNode]:
+    sorted_vals = []
+    
+    # Step 1: In-order traversal collects values in ascending sorted order
+    def inorder(node):
+        if not node:
+            return
+        inorder(node.left)
+        sorted_vals.append(node.val)
+        inorder(node.right)
+        
+    inorder(root)
+    
+    # Step 2: Divide and conquer - pick middle as root of balanced subtree
+    def build_balanced(left: int, right: int) -> Optional[TreeNode]:
+        if left > right:
+            return None
+        mid = (left + right) // 2
+        root_node = TreeNode(sorted_vals[mid])
+        root_node.left = build_balanced(left, mid - 1)
+        root_node.right = build_balanced(mid + 1, right)
+        return root_node
+        
+    return build_balanced(0, len(sorted_vals) - 1)
+
+def print_tree(node, depth=0):
+    if node:
+        print_tree(node.right, depth + 1)
+        print("    " * depth + str(node.val))
+        print_tree(node.left, depth + 1)
+
+if __name__ == "__main__":
+    # Create a severely unbalanced linear tree: 1 -> 2 -> 3 -> 4
+    unbalanced = TreeNode(1, None, TreeNode(2, None, TreeNode(3, None, TreeNode(4))))
+    balanced = balanceBST(unbalanced)
+    print("Rebalanced Tree Structure:")
+    print_tree(balanced)
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Balance a BST</b></summary>
+
+```java
+import java.util.*;
+
+public class BalanceBSTBenchmark {
+    public static class TreeNode {
+        int val;
+        TreeNode left, right;
+        TreeNode(int val) { this.val = val; }
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val; this.left = left; this.right = right;
+        }
+    }
+
+    public static TreeNode balanceBST(TreeNode root) {
+        List<Integer> sorted = new ArrayList<>();
+        inorder(root, sorted);
+        return build(sorted, 0, sorted.size() - 1);
+    }
+
+    private static void inorder(TreeNode node, List<Integer> list) {
+        if (node == null) return;
+        inorder(node.left, list);
+        list.add(node.val);
+        inorder(node.right, list);
+    }
+
+    private static TreeNode build(List<Integer> list, int left, int right) {
+        if (left > right) return null;
+        int mid = (left + right) / 2;
+        TreeNode root = new TreeNode(list.get(mid));
+        root.left = build(list, left, mid - 1);
+        root.right = build(list, mid + 1, right);
+        return root;
+    }
+
+    public static void main(String[] args) {
+        TreeNode skewed = new TreeNode(1, null, new TreeNode(2, null, new TreeNode(3, null, new TreeNode(4))));
+        TreeNode balanced = balanceBST(skewed);
+        System.out.println("Root of balanced tree: " + balanced.val); // Should be 2 or 3
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Complete AVL Tree</b></summary>
 
@@ -1022,11 +1726,153 @@ This allows:
 1. `find_by_order(k)`: Returns the `K`-th smallest element in `O(log N)`.
 2. `order_of_key(x)`: Returns the number of elements strictly smaller than `x` in `O(log N)`.
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"Headcount tally at every doorway."* Every room in a building keeps a counter showing how many people are inside it and all connected rooms deeper inside.
 >
 > **How It Solves the Problem (Plain English)**: Normal binary search trees cannot tell you who the "50th smallest person" is without counting everyone from the start. By recording the total number of items stored under every single branch, you can skip whole branches at once to jump directly to the exact rank you want.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 315 - Count of Smaller Numbers After Self
+- **Difficulty**: Hard / Classic Order Statistics Tree Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+You are given an integer array `nums`. For every element `nums[i]`, you need to count how many numbers located strictly to its right (after index `i`) are smaller than `nums[i]`.
+Return an array where each entry corresponds to this count.
+
+For example, given `nums = [5, 2, 6, 1]`:
+- To the right of 5: `[2, 6, 1]` -> 2 and 1 are smaller -> count = 2.
+- To the right of 2: `[6, 1]` -> only 1 is smaller -> count = 1.
+- To the right of 6: `[1]` -> only 1 is smaller -> count = 1.
+- To the right of 1: nothing to the right -> count = 0.
+Result: `[2, 1, 1, 0]`.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+If you compare every number with everything to its right, that takes O(N^2) time, which chokes on 100,000 numbers.
+
+Notice what happens if we process the numbers **in reverse** (from right to left):
+- When we are at the last number `1`, nobody has been processed yet -> count is 0. We insert `1` into an active container.
+- When we are at `6`, our container holds `[1]`. We ask: *"How many numbers currently in our container are smaller than 6?"* Exactly 1. Then we insert `6`.
+- When we are at `2`, our container holds `[1, 6]`. How many are smaller than 2? Exactly 1. We insert `2`.
+- When we are at `5`, our container holds `[1, 2, 6]`. How many are smaller than 5? Exactly 2. We insert `5`.
+
+An **Order Statistics Tree (Augmented BST)** is built for this query!
+Because each node remembers its `subtree_size`, we can query how many elements are smaller than any number (its exact rank) and insert the new number in `O(log N)` time.
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Count Smaller After Self</b></summary>
+
+```python
+from typing import List
+
+class OSTNode:
+    def __init__(self, val: int):
+        self.val = val
+        self.left = None
+        self.right = None
+        self.count = 1       # Multiplicity of this exact value
+        self.subtree_size = 1 # Total nodes in this subtree
+
+def countSmaller(nums: List[int]) -> List[int]:
+    if not nums:
+        return []
+        
+    def insert_and_count_smaller(root: OSTNode, val: int) -> tuple[OSTNode, int]:
+        if not root:
+            return OSTNode(val), 0
+            
+        root.subtree_size += 1
+        left_size = root.left.subtree_size if root.left else 0
+        
+        if val == root.val:
+            root.count += 1
+            # Numbers smaller than val are all in the left subtree
+            return root, left_size
+        elif val < root.val:
+            # val belongs in left subtree; nothing at or right of root is smaller
+            root.left, smaller = insert_and_count_smaller(root.left, val)
+            return root, smaller
+        else:
+            # val is strictly greater than root:
+            # All items in left subtree + root's own count are smaller than val!
+            root.right, smaller = insert_and_count_smaller(root.right, val)
+            return root, left_size + root.count + smaller
+
+    result = [0] * len(nums)
+    root = None
+    
+    # Process from right to left
+    for i in range(len(nums) - 1, -1, -1):
+        root, cnt = insert_and_count_smaller(root, nums[i])
+        result[i] = cnt
+        
+    return result
+
+if __name__ == "__main__":
+    test_nums = [5, 2, 6, 1]
+    ans = countSmaller(test_nums)
+    print("Input: ", test_nums)
+    print("Smaller after self:", ans) # [2, 1, 1, 0]
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Count Smaller After Self</b></summary>
+
+```java
+import java.util.*;
+
+public class CountSmallerBenchmark {
+    static class Node {
+        int val, count = 1, subtreeSize = 1;
+        Node left, right;
+        Node(int val) { this.val = val; }
+    }
+
+    private static Node insert(Node root, int val, int[] smallerCount, int runningSmaller) {
+        if (root == null) {
+            smallerCount[0] = runningSmaller;
+            return new Node(val);
+        }
+        root.subtreeSize++;
+        int leftSize = (root.left != null) ? root.left.subtreeSize : 0;
+
+        if (val == root.val) {
+            root.count++;
+            smallerCount[0] = runningSmaller + leftSize;
+        } else if (val < root.val) {
+            root.left = insert(root.left, val, smallerCount, runningSmaller);
+        } else {
+            root.right = insert(root.right, val, smallerCount, runningSmaller + leftSize + root.count);
+        }
+        return root;
+    }
+
+    public static List<Integer> countSmaller(int[] nums) {
+        Integer[] result = new Integer[nums.length];
+        Node root = null;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            int[] smaller = new int[1];
+            root = insert(root, nums[i], smaller, 0);
+            result[i] = smaller[0];
+        }
+        return Arrays.asList(result);
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {5, 2, 6, 1};
+        System.out.println("Result: " + countSmaller(nums)); // [2, 1, 1, 0]
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Complete Order Statistics Tree</b></summary>
 
@@ -1154,11 +2000,142 @@ public class OrderStatisticsTreeDemo {
 
 With **Path Compression** (re-pointing visited nodes directly to the root during find) and **Union by Rank** (attaching the shallower tree under the deeper tree), operations run in nearly constant time `O(alpha(N))`, where `alpha` is the inverse Ackermann function (`alpha(N) <= 4` for all practical universe sizes).
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"Marriage and royal family trees."* The smaller family takes the name of the bigger dynasty, and everyone keeps a direct hotline to the King.
 >
 > **How It Solves the Problem (Plain English)**: You keep track of separate groups of items. To check if two items belong together, you trace each one back to their group leader. When two groups merge, the leader with fewer followers joins under the leader with more followers. To make future lookups fast, anyone who asks for the leader is immediately rewired to point straight to the main boss.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 684 - Redundant Connection
+- **Difficulty**: Medium / Benchmark UFDS Problem
+
+#### Problem Statement (Plain English Breakdown)
+You are given a network that started out as a clean tree (where N nodes are connected by N - 1 edges and there are NO loops/cycles).
+However, someone accidentally added one extra edge! Now there are N nodes and N edges, which creates an illegal cycle.
+
+Your job is to find and return that exact duplicate/redundant edge that creates the cycle. If there are multiple candidates, return the one that occurs latest in the input.
+
+For example, given edges `[[1, 2], [1, 3], [2, 3]]`:
+- Connecting `1` to `2` creates a group `{1, 2}`.
+- Connecting `1` to `3` joins them into `{1, 2, 3}`.
+- Connecting `2` to `3`: Wait! `2` and `3` are *already* connected in the exact same group! Adding this edge forms a closed triangle (cycle).
+Therefore, `[2, 3]` is the redundant edge.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+How do we know if adding an edge `(u, v)` creates a loop?
+- If `u` and `v` are currently in **different islands/groups**, adding the bridge between them connects two separate worlds. It is completely safe! We union their groups.
+- If `u` and `v` are **already in the exact same group**, they are already connected by some path through other nodes. Adding a direct bridge between them instantly forms a redundant loop!
+
+This is the classic **Union-Find Disjoint Sets (UFDS)** problem:
+1. Every node starts out in its own private group.
+2. For each edge `(u, v)`:
+   - Ask `find(u)` and `find(v)`: *"Who are your group leaders?"*
+   - If `find(u) == find(v)`: They already share the same boss! This edge is the redundant cycle-maker! Return `[u, v]`.
+   - If they have different bosses: Call `union(u, v)` to merge their groups together.
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Redundant Connection</b></summary>
+
+```python
+from typing import List
+
+def findRedundantConnection(edges: List[List[int]]) -> List[int]:
+    # Nodes are 1-indexed up to N
+    n = len(edges)
+    parent = list(range(n + 1))
+    rank = [0] * (n + 1)
+    
+    # Find leader with Path Compression
+    def find(i: int) -> int:
+        if parent[i] != i:
+            parent[i] = find(parent[i])
+        return parent[i]
+        
+    # Union by Rank
+    def union(i: int, j: int) -> bool:
+        root_i, root_j = find(i), find(j)
+        if root_i == root_j:
+            return False  # Already in the same set -> Cycle detected!
+        if rank[root_i] < rank[root_j]:
+            parent[root_i] = root_j
+        elif rank[root_i] > rank[root_j]:
+            parent[root_j] = root_i
+        else:
+            parent[root_j] = root_i
+            rank[root_i] += 1
+        return True
+
+    for u, v in edges:
+        # If union fails, u and v were already connected!
+        if not union(u, v):
+            return [u, v]
+            
+    return []
+
+if __name__ == "__main__":
+    test_edges = [[1, 2], [1, 3], [2, 3]]
+    result = findRedundantConnection(test_edges)
+    print("Edges:", test_edges)
+    print("Redundant connection:", result) # Expected [2, 3]
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Redundant Connection</b></summary>
+
+```java
+import java.util.*;
+
+public class RedundantConnectionBenchmark {
+    static class UFDS {
+        int[] parent, rank;
+        UFDS(int n) {
+            parent = new int[n + 1];
+            rank = new int[n + 1];
+            for (int i = 0; i <= n; i++) parent[i] = i;
+        }
+        int find(int i) {
+            if (parent[i] != i) parent[i] = find(parent[i]);
+            return parent[i];
+        }
+        boolean union(int i, int j) {
+            int rootI = find(i), rootJ = find(j);
+            if (rootI == rootJ) return false;
+            if (rank[rootI] < rank[rootJ]) parent[rootI] = rootJ;
+            else if (rank[rootI] > rank[rootJ]) parent[rootJ] = rootI;
+            else {
+                parent[rootJ] = rootI;
+                rank[rootI]++;
+            }
+            return true;
+        }
+    }
+
+    public static int[] findRedundantConnection(int[][] edges) {
+        UFDS uf = new UFDS(edges.length);
+        for (int[] edge : edges) {
+            if (!uf.union(edge[0], edge[1])) {
+                return edge;
+            }
+        }
+        return new int[]{};
+    }
+
+    public static void main(String[] args) {
+        int[][] edges = {{1, 2}, {1, 3}, {2, 3}};
+        System.out.println("Redundant edge: " + Arrays.toString(findRedundantConnection(edges))); // [2, 3]
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Complete UFDS</b></summary>
 
@@ -1294,11 +2271,137 @@ It utilizes the **Lowest Significant Bit (LSB)** identity:
 - **Point Update `update(k, v)`**: Add +5`v` to `tree[k]` and repeatedly add `LSB(k)` until reaching table capacity.
 - **Range Sum Query**: `rsq(a, b) = rsq(b) - rsq(a - 1)`.
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"Ruler tick marks on an inch."* You jump between marks using power-of-two steps to measure any distance in just a few hops.
 >
 > **How It Solves the Problem (Plain English)**: Instead of recalculating a sum from scratch or updating every single position when a number changes, numbers are grouped into smart buckets of size 1, 2, 4, 8... When a number changes, you only update the handful of buckets that contain it. When you need a total, you just add up a few pre-calculated buckets.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 307 - Range Sum Query - Mutable
+- **Difficulty**: Medium / Benchmark Fenwick Tree (BIT) Problem
+
+#### Problem Statement (Plain English Breakdown)
+You are given an array of numbers. You need to handle two types of operations repeatedly:
+1. `update(index, val)`: Change the number at position `index` to a new value `val`.
+2. `sumRange(left, right)`: Calculate the total sum of all numbers between `left` and `right` inclusive (`nums[left] + nums[left+1] + ... + nums[right]`).
+
+There could be up to 30,000 updates and 30,000 queries intermixed.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+- If you use a simple array: `update` is fast `O(1)`, but `sumRange` requires looping across the range, taking `O(N)` time. Doing 30,000 sum queries takes almost 1 billion operations!
+- If you use a normal prefix sum array: `sumRange` is instant `O(1)`, but every single `update` forces you to recalculate all subsequent prefix sums, taking `O(N)` time.
+
+This dilemma is solved by the **Fenwick Tree (Binary Indexed Tree)**:
+It balances both operations! Both `update` and `sumRange` take only `O(log N)` time.
+1. We maintain an internal 1-indexed tree array.
+2. When a value is updated, we compute the difference `diff = new_val - old_val`, and propagate that `diff` forward to all parent buckets using `i += i & (-i)`.
+3. To calculate the sum from 1 to `k`, we walk backward through the binary ladder using `k -= k & (-k)`, adding up precomputed buckets.
+4. The range sum `sumRange(L, R)` is simply `prefix_sum(R) - prefix_sum(L - 1)`.
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Range Sum Query Mutable</b></summary>
+
+```python
+from typing import List
+
+class NumArray:
+    def __init__(self, nums: List[int]):
+        self.n = len(nums)
+        self.nums = nums[:]
+        # Fenwick Tree is 1-indexed of size N + 1
+        self.bit = [0] * (self.n + 1)
+        for i, val in enumerate(nums):
+            self._add(i + 1, val)
+
+    def _add(self, i: int, delta: int):
+        while i <= self.n:
+            self.bit[i] += delta
+            i += i & (-i)  # Add lowest significant bit
+
+    def _query(self, i: int) -> int:
+        total = 0
+        while i > 0:
+            total += self.bit[i]
+            i -= i & (-i)  # Strip lowest significant bit
+        return total
+
+    def update(self, index: int, val: int) -> None:
+        delta = val - self.nums[index]
+        self.nums[index] = val
+        self._add(index + 1, delta)
+
+    def sumRange(self, left: int, right: int) -> int:
+        return self._query(right + 1) - self._query(left)
+
+if __name__ == "__main__":
+    nums = [1, 3, 5]
+    obj = NumArray(nums)
+    print("Initial sumRange(0, 2):", obj.sumRange(0, 2)) # 1 + 3 + 5 = 9
+    obj.update(1, 2) # nums becomes [1, 2, 5]
+    print("sumRange(0, 2) after update(1, 2):", obj.sumRange(0, 2)) # 1 + 2 + 5 = 8
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Range Sum Query Mutable</b></summary>
+
+```java
+public class NumArrayBenchmark {
+    private final int[] nums;
+    private final int[] bit;
+    private final int n;
+
+    public NumArrayBenchmark(int[] nums) {
+        this.n = nums.length;
+        this.nums = new int[n];
+        this.bit = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            update(i, nums[i]);
+        }
+    }
+
+    private void add(int i, int delta) {
+        for (; i <= n; i += i & (-i)) {
+            bit[i] += delta;
+        }
+    }
+
+    private int query(int i) {
+        int sum = 0;
+        for (; i > 0; i -= i & (-i)) {
+            sum += bit[i];
+        }
+        return sum;
+    }
+
+    public void update(int index, int val) {
+        int delta = val - nums[index];
+        nums[index] = val;
+        add(index + 1, delta);
+    }
+
+    public int sumRange(int left, int right) {
+        return query(right + 1) - query(left);
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 3, 5};
+        NumArrayBenchmark na = new NumArrayBenchmark(arr);
+        System.out.println("sumRange(0, 2): " + na.sumRange(0, 2)); // 9
+        na.update(1, 2);
+        System.out.println("sumRange(0, 2) after update: " + na.sumRange(0, 2)); // 8
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Complete Fenwick Tree</b></summary>
 
@@ -1408,11 +2511,137 @@ public class FenwickTreeDemo {
 A **Segment Tree** is a versatile binary tree designed for dynamic interval queries (Range Minimum RMQ, Range Maximum, Range Sum RSQ, GCD).
 With **Lazy Propagation**, updates to entire ranges `[L..R]` are deferred: the update is applied immediately to the current segment node, but only pushed down to its children when subsequent queries or updates actually need to inspect that subtree. This reduces both arbitrary range updates and range queries to `O(log N)`.
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"A procrastinating boss with sticky notes."* Slaps a note on the department door saying *"pending bonus: +100"* and only hands it out to workers when an auditor walks in.
 >
 > **How It Solves the Problem (Plain English)**: If someone asks you to add 5 to a million items, doing it one by one is way too slow. Instead, you put an IOU tag on the big category containing those million items and stop. You only pass that IOU down to the sub-items later if a future question actually needs to look inside.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 732 - My Calendar III
+- **Difficulty**: Hard / Classic Range Update & Query Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+You are managing an event calendar. When a new event is scheduled, it reserves a continuous time span `[startTime, endTime)`.
+Events can overlap with one another. If 3 events are happening at 2:30 PM simultaneously, that is a "3-booking".
+
+Every time a user adds a new event `book(startTime, endTime)`, you must return an integer `k` representing the largest number of simultaneous overlapping events on the calendar across the entire timeline.
+Time coordinates can be up to 1,000,000,000.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+If you updated every individual minute between `startTime` and `endTime`, you would have to loop through up to a billion time units per booking, which instantly runs out of time.
+
+Notice what we really need to do:
+1. For every booking `[start, end - 1]`, we want to add `+1` to every single time unit inside that interval.
+2. Then, we want to know the global maximum value across all intervals.
+
+This is the exact purpose of a **Segment Tree with Lazy Propagation**:
+- When asked to add `+1` to interval `[L, R]`, the Segment Tree traverses downward to the canonical nodes that perfectly cover `[L, R]`.
+- Instead of recursing into all their millions of individual child minutes, it increments the node's maximum value and saves a `lazy = +1` sticky note right there!
+- The entire range update finishes in `O(log N)` time.
+- The root of the tree always reflects the global maximum overlap in the calendar!
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: My Calendar III</b></summary>
+
+```python
+from collections import defaultdict
+
+class MyCalendarThree:
+    def __init__(self):
+        # We implement dynamic coordinate Segment Tree with Lazy Propagation via hash maps
+        self.tree = defaultdict(int)
+        self.lazy = defaultdict(int)
+
+    def _update(self, node: int, start: int, end: int, l: int, r: int, val: int):
+        if l <= start and end <= r:
+            self.tree[node] += val
+            self.lazy[node] += val
+            return
+            
+        mid = (start + end) // 2
+        # Push lazy tag down to children if needed
+        if self.lazy[node] != 0:
+            self.tree[2 * node] += self.lazy[node]
+            self.lazy[2 * node] += self.lazy[node]
+            self.tree[2 * node + 1] += self.lazy[node]
+            self.lazy[2 * node + 1] += self.lazy[node]
+            self.lazy[node] = 0
+            
+        if l <= mid:
+            self._update(2 * node, start, mid, l, r, val)
+        if r > mid:
+            self._update(2 * node + 1, mid + 1, end, l, r, val)
+            
+        self.tree[node] = max(self.tree[2 * node], self.tree[2 * node + 1])
+
+    def book(self, start_time: int, end_time: int) -> int:
+        # Time coordinates up to 10^9; interval is [start_time, end_time - 1]
+        self._update(1, 0, 10**9, start_time, end_time - 1, 1)
+        return self.tree[1]
+
+if __name__ == "__main__":
+    cal = MyCalendarThree()
+    print("Booking [10, 20]:", cal.book(10, 20)) # 1
+    print("Booking [50, 60]:", cal.book(50, 60)) # 1
+    print("Booking [10, 40]:", cal.book(10, 40)) # 2 (overlaps with [10, 20])
+    print("Booking [5, 15]:", cal.book(5, 15))   # 3 (overlaps with [10, 20] and [10, 40])
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: My Calendar III</b></summary>
+
+```java
+import java.util.*;
+
+public class MyCalendarThreeBenchmark {
+    private final Map<Integer, Integer> tree = new HashMap<>();
+    private final Map<Integer, Integer> lazy = new HashMap<>();
+
+    private void update(int node, int start, int end, int l, int r, int val) {
+        if (l <= start && end <= r) {
+            tree.put(node, tree.getOrDefault(node, 0) + val);
+            lazy.put(node, lazy.getOrDefault(node, 0) + val);
+            return;
+        }
+        int mid = start + (end - start) / 2;
+        int lazyVal = lazy.getOrDefault(node, 0);
+        if (lazyVal != 0) {
+            tree.put(2 * node, tree.getOrDefault(2 * node, 0) + lazyVal);
+            lazy.put(2 * node, lazy.getOrDefault(2 * node, 0) + lazyVal);
+            tree.put(2 * node + 1, tree.getOrDefault(2 * node + 1, 0) + lazyVal);
+            lazy.put(2 * node + 1, lazy.getOrDefault(2 * node + 1, 0) + lazyVal);
+            lazy.put(node, 0);
+        }
+        if (l <= mid) update(2 * node, start, mid, l, r, val);
+        if (r > mid) update(2 * node + 1, mid + 1, end, l, r, val);
+
+        tree.put(node, Math.max(tree.getOrDefault(2 * node, 0), tree.getOrDefault(2 * node + 1, 0)));
+    }
+
+    public int book(int startTime, int endTime) {
+        update(1, 0, 1_000_000_000, startTime, endTime - 1, 1);
+        return tree.getOrDefault(1, 0);
+    }
+
+    public static void main(String[] args) {
+        MyCalendarThreeBenchmark cal = new MyCalendarThreeBenchmark();
+        System.out.println("Book [10, 20]: " + cal.book(10, 20)); // 1
+        System.out.println("Book [50, 60]: " + cal.book(50, 60)); // 1
+        System.out.println("Book [10, 40]: " + cal.book(10, 40)); // 2
+        System.out.println("Book [5, 15]: " + cal.book(5, 15));   // 3
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Segment Tree with Lazy Propagation</b></summary>
 
@@ -1579,11 +2808,133 @@ Because minimum is an **idempotent operation** (`min(x, x) = x`), an arbitrary q
 
 	ext{RMQ}(L, R) = \min(	ext{st}[L][k], \ 	ext{st}[R - 2^k + 1][k])
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"Two overlapping umbrellas covering a sidewalk bench."* Two umbrellas overlapping in the middle keep the entire bench 100% dry.
 >
 > **How It Solves the Problem (Plain English)**: To find the minimum value in a static list, you pre-calculate the minimums of all segments whose lengths are powers of two (1, 2, 4, 8...). Any range can be completely covered by two overlapping segments of the same power-of-two size. Since comparing the same number twice doesn't change the minimum, the overlap doesn't hurt.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: SPOJ (Sphere Online Judge)
+- **Problem Reference**: SPOJ RMQSQ - Range Minimum Query
+- **Difficulty**: Medium / The Archetypal Sparse Table Problem
+
+#### Problem Statement (Plain English Breakdown)
+You are given a fixed array of N numbers. The array never changes (zero updates).
+Next, you are bombarded with Q queries. Each query gives you a range `[L, R]`, and you must return the minimum number located within that range.
+Constraints: N up to 100,000, and Q up to 10,000,000 queries.
+
+When there are 10 million queries, even an `O(log N)` Segment Tree will cause a Time Limit Exceeded (TLE) because 10,000,000 * 17 steps = 170 million operations.
+You need queries to answer in true **O(1) constant time**!
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+How can we answer arbitrary range minimum queries in 1 step without precalculating all N^2 pairs?
+By precalculating only ranges whose lengths are powers of two (lengths 1, 2, 4, 8, 16...):
+- `st[i][k]` stores the minimum value in the segment starting at index `i` of length `2^k`.
+- We can build this table using simple Dynamic Programming: a segment of length 8 is just the minimum of two adjacent segments of length 4! Building takes `O(N log N)`.
+
+Now, when a query for range `[L, R]` arrives:
+1. Let the length of the query be `length = R - L + 1`.
+2. Find the largest power of two that fits inside this length: `k = floor(log2(length))`.
+3. Notice that we can cover the entire range `[L, R]` with just **two overlapping segments of size `2^k`**:
+   - One starting at the left boundary: `st[L][k]`.
+   - One ending at the right boundary: `st[R - 2^k + 1][k]`.
+4. Because finding the minimum is **idempotent** (`min(a, a) = a`), the fact that these two segments overlap in the middle does not change the answer at all!
+We compare those two values in 1 step and return the result. Query time: `O(1)`.
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Range Minimum Query</b></summary>
+
+```python
+import math
+from typing import List
+
+class StaticRMQ:
+    def __init__(self, arr: List[int]):
+        self.n = len(arr)
+        if self.n == 0:
+            return
+        self.max_log = int(math.log2(self.n)) + 1
+        # st[i][j] stores min in range [i, i + 2^j - 1]
+        self.st = [[0] * self.max_log for _ in range(self.n)]
+        
+        # Base case: segments of length 2^0 = 1
+        for i in range(self.n):
+            self.st[i][0] = arr[i]
+            
+        # Build table via DP: compare two halves of size 2^(j-1)
+        j = 1
+        while (1 << j) <= self.n:
+            i = 0
+            while (i + (1 << j) - 1) < self.n:
+                self.st[i][j] = min(self.st[i][j - 1], self.st[i + (1 << (j - 1))][j - 1])
+                i += 1
+            j += 1
+
+    def query(self, L: int, R: int) -> int:
+        length = R - L + 1
+        k = int(math.log2(length))
+        # Overlap two power-of-two segments covering [L, R]
+        return min(self.st[L][k], self.st[R - (1 << k) + 1][k])
+
+if __name__ == "__main__":
+    test_arr = [4, 6, 1, 5, 7, 3, 2, 8]
+    rmq = StaticRMQ(test_arr)
+    print("Array:", test_arr)
+    print("Min in [0, 3] (4, 6, 1, 5):", rmq.query(0, 3)) # 1
+    print("Min in [4, 7] (7, 3, 2, 8):", rmq.query(4, 7)) # 2
+    print("Min in [0, 7] (entire array):", rmq.query(0, 7)) # 1
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Range Minimum Query</b></summary>
+
+```java
+public class RMQBenchmark {
+    private final int[][] st;
+    private final int[] log2;
+
+    public RMQBenchmark(int[] arr) {
+        int n = arr.length;
+        int maxLog = 32 - Integer.numberOfLeadingZeros(n);
+        st = new int[n][maxLog];
+        log2 = new int[n + 1];
+        
+        // Precompute log2 table for O(1) lookups
+        for (int i = 2; i <= n; i++) log2[i] = log2[i / 2] + 1;
+
+        for (int i = 0; i < n; i++) st[i][0] = arr[i];
+
+        for (int j = 1; (1 << j) <= n; j++) {
+            for (int i = 0; i + (1 << j) - 1 < n; i++) {
+                st[i][j] = Math.min(st[i][j - 1], st[i + (1 << (j - 1))][j - 1]);
+            }
+        }
+    }
+
+    public int query(int L, int R) {
+        int length = R - L + 1;
+        int k = log2[length];
+        return Math.min(st[L][k], st[R - (1 << k) + 1][k]);
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {4, 6, 1, 5, 7, 3, 2, 8};
+        RMQBenchmark rmq = new RMQBenchmark(arr);
+        System.out.println("Min [0, 3]: " + rmq.query(0, 3)); // 1
+        System.out.println("Min [4, 7]: " + rmq.query(4, 7)); // 2
+        System.out.println("Min [0, 7]: " + rmq.query(0, 7)); // 1
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Complete Sparse Table</b></summary>
 
@@ -1683,11 +3034,152 @@ A **Trie** is an ordered tree data structure used to store an associative collec
 - **Search & Insert**: Executes in `O(L)` proportional to string length `L`, completely independent of the total number of words `N` stored in the dictionary.
 - **Applications**: Autocomplete, spell check, dictionary validation, IP routing tables, and Bitwise Max-XOR queries.
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"A dictionary thumb-index tree."* You walk down the 'c' hallway, turn into the 'a' room, and branch into 't' or 'r'.
 >
 > **How It Solves the Problem (Plain English)**: Words that start with the same letters share the same path. Instead of comparing a word against every other word in the dictionary, you just trace the word letter by letter down a branching tree. If you reach the end of your letters, you know immediately if the word or prefix exists.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 208 - Implement Trie (Prefix Tree)
+- **Difficulty**: Medium / The Definitive Prefix Tree Problem
+
+#### Problem Statement (Plain English Breakdown)
+You are building an autocomplete dictionary engine for a search bar. You need to implement a class called `Trie` with three core functions:
+1. `insert(word)`: Adds a new word string into the dictionary.
+2. `search(word)`: Returns `True` if the exact word exists in the dictionary, and `False` otherwise.
+3. `startsWith(prefix)`: Returns `True` if there is any word previously inserted that begins with this prefix, and `False` otherwise.
+
+Constraints: Words consist only of lowercase English letters (`a-z`). Up to 30,000 function calls.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+- If you use a simple list of words: `search` has to check every single word in the dictionary, taking `O(N * L)` time.
+- If you use a standard hash set: Exact `search` is fast, but `startsWith("app")` still has to loop through the entire dictionary to see if any word starts with `"app"`.
+
+A **Trie (Prefix Tree)** organizes words like branches of a tree:
+1. Every node represents a character. The root node represents an empty string.
+2. Each node contains an array of 26 pointers (one for each letter 'a' through 'z') and a boolean flag `is_end_of_word`.
+3. To `insert("apple")`: Start at root. For each letter 'a', 'p', 'p', 'l', 'e', walk down to that child node (creating it if it doesn't exist). At 'e', set `is_end_of_word = True`.
+4. To `search("apple")`: Follow the letters down. If any letter branch is missing, return `False`. If you reach the end, return `is_end_of_word`.
+5. To `startsWith("app")`: Follow the letters 'a', 'p', 'p'. If all 3 exist, return `True` immediately, regardless of what words continue afterward!
+Every operation takes strictly `O(L)` time (length of the word), completely independent of how many millions of words exist in the dictionary.
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Implement Trie</b></summary>
+
+```python
+class TrieNode:
+    def __init__(self):
+        # 26 children for lowercase letters 'a' through 'z'
+        self.children = {}
+        self.is_end_of_word = False
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
+    def insert(self, word: str) -> None:
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                node.children[char] = TrieNode()
+            node = node.children[char]
+        node.is_end_of_word = True
+
+    def search(self, word: str) -> bool:
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                return False
+            node = node.children[char]
+        return node.is_end_of_word
+
+    def startsWith(self, prefix: str) -> bool:
+        node = self.root
+        for char in prefix:
+            if char not in node.children:
+                return False
+            node = node.children[char]
+        return True
+
+if __name__ == "__main__":
+    trie = Trie()
+    trie.insert("apple")
+    print("search('apple'):", trie.search("apple"))     # True
+    print("search('app'):", trie.search("app"))         # False
+    print("startsWith('app'):", trie.startsWith("app")) # True
+    trie.insert("app")
+    print("search('app') after insert:", trie.search("app")) # True
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Implement Trie</b></summary>
+
+```java
+public class TrieBenchmark {
+    static class Node {
+        Node[] children = new Node[26];
+        boolean isEndOfWord = false;
+    }
+
+    private final Node root;
+
+    public TrieBenchmark() {
+        root = new Node();
+    }
+
+    public void insert(String word) {
+        Node curr = root;
+        for (char c : word.toCharArray()) {
+            int idx = c - 'a';
+            if (curr.children[idx] == null) {
+                curr.children[idx] = new Node();
+            }
+            curr = curr.children[idx];
+        }
+        curr.isEndOfWord = true;
+    }
+
+    public boolean search(String word) {
+        Node curr = root;
+        for (char c : word.toCharArray()) {
+            int idx = c - 'a';
+            if (curr.children[idx] == null) return false;
+            curr = curr.children[idx];
+        }
+        return curr.isEndOfWord;
+    }
+
+    public boolean startsWith(String prefix) {
+        Node curr = root;
+        for (char c : prefix.toCharArray()) {
+            int idx = c - 'a';
+            if (curr.children[idx] == null) return false;
+            curr = curr.children[idx];
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        TrieBenchmark trie = new TrieBenchmark();
+        trie.insert("apple");
+        System.out.println("search('apple'): " + trie.search("apple"));     // true
+        System.out.println("search('app'): " + trie.search("app"));         // false
+        System.out.println("startsWith('app'): " + trie.startsWith("app")); // true
+        trie.insert("app");
+        System.out.println("search('app') after insert: " + trie.search("app")); // true
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Complete Trie</b></summary>
 
@@ -1808,11 +3300,151 @@ Coupled with **Kasai's Algorithm**, which computes the **Longest Common Prefix (
 2. Finding the Longest Repeated Substring in `O(N)`.
 3. Finding the number of distinct substrings in `O(N)`.
 
-### [Memory Hook] Fast-Recall Guide
+### Memory Layer
 
 > **Memory Hook**: *"An alphabetical phonebook of all sentence endings."* You list every possible ending of a word, sort them alphabetically, and measure how many starting letters neighboring endings share.
 >
 > **How It Solves the Problem (Plain English)**: To quickly find patterns or repeated phrases in a long text, you write down every suffix (from the full text down to the last letter) and sort them alphabetically. Because similar endings are now grouped together, finding any word is a quick binary search, and finding the longest repeated text is just checking the biggest overlap between neighbors.
+
+### Canonical Benchmark Problem
+
+- **Online Judge Platform**: LeetCode
+- **Problem Reference**: LeetCode 1044 - Longest Duplicate Substring
+- **Difficulty**: Hard / Master Suffix Array & LCP Benchmark
+
+#### Problem Statement (Plain English Breakdown)
+You are given a long string `s`. You need to find the longest substring that appears at least two times in `s`.
+The duplicate occurrences may overlap. If no substring repeats, return an empty string `""`.
+
+For example, given `s = "banana"`:
+- `"a"` repeats 3 times (length 1).
+- `"an"` repeats 2 times (at index 1 and index 3, length 2).
+- `"ana"` repeats 2 times (at index 1 `"ana"` and index 3 `"ana"`, length 3).
+The longest repeated substring is `"ana"`.
+
+#### Beginner Intuition & Step-by-Step Solution Strategy
+A beginner might try checking all possible substrings of length N, then length N-1, and so on. But checking all substrings takes O(N^3) time, which crashes on a string of 30,000 characters.
+
+Notice a fundamental truth about repeated substrings:
+Any repeated substring is simply a **Common Prefix of two different suffixes** of the string!
+For `"banana"`:
+- Suffix 1: `"anana"` (starts at index 1)
+- Suffix 3: `"ana"` (starts at index 3)
+Notice that both suffixes start with the shared letters `"ana"`.
+
+How do we find which two suffixes have the largest shared beginning?
+1. Generate the **Suffix Array**: Take all suffixes and sort them alphabetically.
+   - Suffix 5: `"a"`
+   - Suffix 3: `"ana"`
+   - Suffix 1: `"anana"`
+   - Suffix 0: `"banana"`
+   - Suffix 4: `"na"`
+   - Suffix 2: `"nana"`
+2. Notice that sorting brings suffixes with the most matching letters **right next to each other**!
+3. Build the **Longest Common Prefix (LCP) Array** using Kasai's algorithm in linear O(N) time. The LCP array simply measures how many letters neighbor i and neighbor i+1 share.
+4. The maximum value in the LCP array tells you the exact length and position of the longest duplicate substring instantly!
+
+#### Fully Commented Benchmark Solution
+
+<details open>
+<summary><b>[Python] Python 3 Benchmark Solution: Longest Duplicate Substring</b></summary>
+
+```python
+def longestDupSubstring(s: str) -> str:
+    n = len(s)
+    # Step 1: Create Suffix Array by sorting starting indices of suffixes
+    suffixes = sorted(range(n), key=lambda i: s[i:])
+    
+    # Step 2: Compute LCP array using Kasai's Algorithm in O(N)
+    rank = [0] * n
+    for r, i in enumerate(suffixes):
+        rank[i] = r
+        
+    lcp = [0] * (n - 1)
+    h = 0
+    max_len = 0
+    start_pos = 0
+    
+    for i in range(n):
+        if rank[i] > 0:
+            j = suffixes[rank[i] - 1]
+            while i + h < n and j + h < n and s[i + h] == s[j + h]:
+                h += 1
+            lcp[rank[i] - 1] = h
+            if h > max_len:
+                max_len = h
+                start_pos = i
+            if h > 0:
+                h -= 1
+                
+    return s[start_pos : start_pos + max_len] if max_len > 0 else ""
+
+if __name__ == "__main__":
+    test_str = "banana"
+    result = longestDupSubstring(test_str)
+    print("String:", test_str)
+    print("Longest duplicate substring:", result) # Expected "ana"
+```
+</details>
+
+<details>
+<summary><b>[Java] Java 21 Benchmark Solution: Longest Duplicate Substring</b></summary>
+
+```java
+import java.util.*;
+
+public class LongestDuplicateSubstringBenchmark {
+    static class Suffix implements Comparable<Suffix> {
+        int index;
+        String text;
+        Suffix(int index, String text) {
+            this.index = index;
+            this.text = text;
+        }
+        public int compareTo(Suffix other) {
+            return this.text.compareTo(other.text);
+        }
+    }
+
+    public static String longestDupSubstring(String s) {
+        int n = s.length();
+        Suffix[] suffixes = new Suffix[n];
+        for (int i = 0; i < n; i++) {
+            suffixes[i] = new Suffix(i, s.substring(i));
+        }
+        Arrays.sort(suffixes);
+
+        int[] sa = new int[n];
+        for (int i = 0; i < n; i++) sa[i] = suffixes[i].index;
+
+        int[] rank = new int[n];
+        for (int i = 0; i < n; i++) rank[sa[i]] = i;
+
+        int maxLen = 0, startPos = 0, h = 0;
+        for (int i = 0; i < n; i++) {
+            if (rank[i] > 0) {
+                int j = sa[rank[i] - 1];
+                while (i + h < n && j + h < n && s.charAt(i + h) == s.charAt(j + h)) h++;
+                if (h > maxLen) {
+                    maxLen = h;
+                    startPos = i;
+                }
+                if (h > 0) h--;
+            }
+        }
+        return maxLen > 0 ? s.substring(startPos, startPos + maxLen) : "";
+    }
+
+    public static void main(String[] args) {
+        String test = "banana";
+        System.out.println("Longest duplicate: " + longestDupSubstring(test)); // "ana"
+    }
+}
+```
+</details>
+
+### Standard Library & Implementation Reference
+
 <details open>
 <summary><b>[Python] Python 3 Implementation: Suffix Array & Kasai LCP</b></summary>
 
