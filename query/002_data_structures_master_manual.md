@@ -118,11 +118,11 @@ flowchart TD
 An **Array** is a contiguous block of memory with `O(1)` random access. A **Dynamic Array** (Python `list`, Java `ArrayList`) doubles its capacity upon reaching saturation, achieving `O(1)` amortized append.
 **Coordinate Compression** maps arbitrary large coordinates (e.g., `-10^9 to 10^9`) to a compact contiguous rank space `[0..M-1]` in `O(N log N)`, making it possible to use arrays, Segment Trees, or Fenwick Trees without massive sparse tables.
 
-### [Memory Trick] Interview Memory Trick: "Seat Assignment on an Airplane"
-> **The 3-Second Mental Hook**:
-> - **Array vs List**: A static array is a fixed row of seats. A dynamic array is an expandable plane: when full, the airline buys a plane twice as large, migrates all passengers (`O(N)`), and offers empty seats for rapid boarding (`O(1)` amortized).
-> - **Coordinate Compression**: Imagine passenger ticket numbers are `[1000000000, -500000000, 42]`. Don't build a stadium with a billion rows! Sort the distinct values `[-500000000, 42, 1000000000]` and assign them seat numbers `[0, 1, 2]`.
+### [Memory Hook] Fast-Recall Guide
 
+> **Memory Hook**: *"Renaming scattered phone numbers to speed-dial buttons 1, 2, 3."* You don't need a keypad with 10-digit numbers; you just sort your contacts alphabetically and assign them buttons 0, 1, 2... based on their rank.
+>
+> **How It Solves the Problem (Plain English)**: If your numbers are huge (like -1,000,000,000 and +1,000,000,000), you can't use them as array slots without crashing your computer's memory. But if there are only 1,000 numbers in total, their exact values don't matter--only their relative order does. You sort them and replace them with their ranks: 0, 1, 2, ..., 999.
 <details open>
 <summary><b>[Python] Python 3 Implementation: Dynamic Array & Coordinate Compression</b></summary>
 
@@ -219,16 +219,11 @@ public class CoordinateCompressorDemo {
 
 A **Bitmask** uses the individual bits of an integer (32-bit `int` or 64-bit `long`) to represent a subset of up to 64 items. Every set operation (union, intersection, element toggle, lowest set bit isolation) executes in `O(1)` CPU cycles with zero memory overhead.
 
-### [Memory Trick] Interview Memory Trick: "Light Switches on a Wall"
-> **The 3-Second Mental Hook**:
-> - Think of an integer as a row of light switches: bit `0` is light 0, bit `1` is light 1.
-> - **Turn ON switch `i`**: `mask | (1 << i)`
-> - **Turn OFF switch `i`**: `mask & ~(1 << i)`
-> - **Flip switch `i`**: `mask ^ (1 << i)`
-> - **Check switch `i`**: `(mask >> i) & 1`
-> - **Isolate lowest ON switch**: `mask & (-mask)` (The secret weapon of Fenwick Trees!)
-> - **Turn off lowest ON switch**: `mask & (mask - 1)` (Kernighan's bit count algorithm)
+### [Memory Hook] Fast-Recall Guide
 
+> **Memory Hook**: *"A bank of light switches on a control board."* Each switch is either ON (1) or OFF (0); checking or flipping any light is instant.
+>
+> **How It Solves the Problem (Plain English)**: Instead of using heavy lists or sets to remember whether you picked item 1, item 2, or item 3, you use a single integer. Each binary digit of the integer represents one item (1 = picked, 0 = not picked). You can add, remove, or check items instantly using simple math.
 <details open>
 <summary><b>[Python] Python 3 Implementation: Bitmask Manipulation</b></summary>
 
@@ -343,12 +338,11 @@ public class BitmaskDemo {
 A **Monotonic Stack** maintains its elements in strictly monotonic (increasing or decreasing) order. Each element is pushed and popped at most once, providing an `O(N)` solution for finding the **Nearest Greater or Smaller Element** for every item in an array.
 A **Monotonic Deque** extends this to a sliding window of size `K`, maintaining elements in monotonic order by popping outdated indices from the front and smaller values from the back in amortized `O(1)` per window step.
 
-### [Memory Trick] Interview Memory Trick: "Line of People with Taller Newcomers"
-> **The 3-Second Mental Hook**:
-> - Imagine people standing in line. When a giant newcomer arrives, everyone shorter in front of them is completely obscured and useless for future line-of-sight queries.
-> - **Monotonic Stack**: Pop and evict everyone shorter! The first person remaining on the stack who is taller is your **Next Greater Element**.
-> - **Monotonic Deque (Sliding Window)**: Keep window indices. If the front person is older than `index - K + 1`, they have exited the sliding window (evict front). The front is always the reigning window champion!
+### [Memory Hook] Fast-Recall Guide
 
+> **Memory Hook**: *"Standing in line at a movie theater."* If someone taller stands in front of you, you can't see the screen anymore (you get kicked out of view).
+>
+> **How It Solves the Problem (Plain English)**: As you scan a list of numbers, you only care about numbers that still have a chance of being the "next bigger" thing. Whenever a new number arrives that is bigger than what you've seen, it kicks out all the smaller numbers behind it because they are blocked and will never be needed again. For sliding windows, old numbers also leave from the front as time expires.
 <details open>
 <summary><b>[Python] Python 3 Implementation: Monotonic Stack & Deque</b></summary>
 
@@ -474,11 +468,11 @@ Because the tree is complete, the parent of index `i` is `i // 2` (or `(i - 1) /
 - **Extract Extremum**: Swap root with last leaf, pop, `sift_down` in `O(log N)`.
 - **Heapify**: Bottom-up construction of an entire heap from an array in `O(N)` linear time.
 
-### [Memory Trick] Interview Memory Trick: "The Corporate Ladder"
-> **The 3-Second Mental Hook**:
-> - **Sift Up (Promotion)**: A great new employee enters at the very bottom. If they outperform their direct manager (`val < parent`), swap them! They rise up the ranks until reaching someone better.
-> - **Sift Down (Succession)**: The CEO resigns. The lowest intern is temporarily placed in the corner office. The intern looks at their two immediate vice presidents, picks the best one to take over, and steps down a rank repeatedly until reaching balance.
+### [Memory Hook] Fast-Recall Guide
 
+> **Memory Hook**: *"A strict military chain of command."* The General is always at the top; a strong newcomer challenges their officer to rise up the ranks until hitting someone better.
+>
+> **How It Solves the Problem (Plain English)**: You pack a complete pyramid of numbers into a simple flat list. The most important number is always at the very top. When you add a new number, you place it at the bottom and let it bubble up past anyone weaker. When you take the top number, you fill the hole with a bottom number and let it sink down until order is restored.
 <details open>
 <summary><b>[Python] Python 3 Implementation: Complete Binary Heap from Scratch</b></summary>
 
@@ -650,12 +644,11 @@ A **Hash Table** maps arbitrary keys to bucket indices using a hash function `ha
 - **Collision Resolution**: Handled via **Separate Chaining** (linked list or dynamic vector per bucket) or **Open Addressing** (linear probing).
 - **Load Factor**: When `size / capacity > load_factor_threshold` (typically `0.75`), the table allocates twice the capacity and re-hashes all keys to maintain `O(1)` amortized insertion and lookup.
 
-### [Memory Trick] Interview Memory Trick: "Coat Check with Numbered Hooks"
-> **The 3-Second Mental Hook**:
-> - Think of a hotel coat check with numbered hooks `[0..M-1]`.
-> - Your name hashes to hook number 14. If another guest also hashes to hook 14, don't panic! Just hang your coat on the same hanger chain (**Separate Chaining**).
-> - If the room gets more than 75% full, double the hooks and redistribute all coats (**Rehashing**).
+### [Memory Hook] Fast-Recall Guide
 
+> **Memory Hook**: *"Coat check hooks at a hotel."* Your ticket sends you to hook #17; if someone else is already hanging their coat there, you just hook your coat onto the same hanger behind theirs.
+>
+> **How It Solves the Problem (Plain English)**: You take an item's name and run it through a math formula to pick a bucket number. You put the item in that bucket. If two items pick the same bucket by accident, you just link them together in a short chain inside that bucket. As long as you have enough buckets, looking up an item is almost instant.
 <details open>
 <summary><b>[Python] Python 3 Implementation: Hash Map with Separate Chaining</b></summary>
 
@@ -839,12 +832,11 @@ public class HashMapChainingDemo<K, V> {
 A standard Binary Search Tree can degrade to `O(N)` if keys arrive sorted. A **Balanced BST** (such as an **AVL Tree**) maintains the strict invariant that the balance factor `height(left) - height(right)` of every node is within `{-1, 0, 1}`.
 When an insertion disrupts this invariant, the tree restores balance in `O(1)` via **Left and Right Rotations**, guaranteeing `O(log N)` search, insert, and delete operations.
 
-### [Memory Trick] Interview Memory Trick: "The Seesaw Balancing Act"
-> **The 3-Second Mental Hook**:
-> - Think of a playground seesaw. If the left side gets 2 children heavier than the right (`balance > 1`):
->   - If the child is on the outer left edge (Left-Left): One **Right Rotation** immediately levels the board!
->   - If the child is on the inner left edge (Left-Right): Do a **Left Rotation** on the child first to push weight outward, then a **Right Rotation** to level it.
+### [Memory Hook] Fast-Recall Guide
 
+> **Memory Hook**: *"A playground seesaw."* If too many kids sit on the left side, the board tilts dangerously; one quick rotation shifts a child to the right side to level it back out.
+>
+> **How It Solves the Problem (Plain English)**: In an ordinary search tree, if you add numbers in order (1, 2, 3, 4, 5), the tree stretches out into one long line and becomes just as slow as a regular list. A self-balancing tree checks the height of both sides after every insert. If one side gets more than 1 level taller than the other, it twists the branches (rotates them) so the tree stays short and bushy.
 <details open>
 <summary><b>[Python] Python 3 Implementation: Complete AVL Tree</b></summary>
 
@@ -1030,11 +1022,11 @@ This allows:
 1. `find_by_order(k)`: Returns the `K`-th smallest element in `O(log N)`.
 2. `order_of_key(x)`: Returns the number of elements strictly smaller than `x` in `O(log N)`.
 
-### [Memory Trick] Interview Memory Trick: "Headcount at the Turnstile"
-> **The 3-Second Mental Hook**:
-> - Imagine every tree node has a digital counter showing how many people are sitting in its entire subtree.
-> - To find the 50th person: Look at your left child. If 40 people are sitting to your left, you are person 41! The 50th person must be the 9th person inside your right subtree (`50 - 40 - 1 = 9`). No linear scanning required!
+### [Memory Hook] Fast-Recall Guide
 
+> **Memory Hook**: *"Headcount tally at every doorway."* Every room in a building keeps a counter showing how many people are inside it and all connected rooms deeper inside.
+>
+> **How It Solves the Problem (Plain English)**: Normal binary search trees cannot tell you who the "50th smallest person" is without counting everyone from the start. By recording the total number of items stored under every single branch, you can skip whole branches at once to jump directly to the exact rank you want.
 <details open>
 <summary><b>[Python] Python 3 Implementation: Complete Order Statistics Tree</b></summary>
 
@@ -1162,12 +1154,11 @@ public class OrderStatisticsTreeDemo {
 
 With **Path Compression** (re-pointing visited nodes directly to the root during find) and **Union by Rank** (attaching the shallower tree under the deeper tree), operations run in nearly constant time `O(alpha(N))`, where `alpha` is the inverse Ackermann function (`alpha(N) <= 4` for all practical universe sizes).
 
-### [Memory Trick] Interview Memory Trick: "Kingdom Alliances"
-> **The 3-Second Mental Hook**:
-> - Each person belongs to a kingdom led by a King (`parent[i] == i`).
-> - **Find with Path Compression**: You ask your boss who the King is, your boss asks their boss... When you finally meet the King, you exchange phone numbers directly with the King so you never have to climb the chain of command again!
-> - **Union by Rank**: When two kingdoms merge, the King with the smaller army yields the crown to the King with the larger army to keep kingdom hierarchy as flat as possible.
+### [Memory Hook] Fast-Recall Guide
 
+> **Memory Hook**: *"Marriage and royal family trees."* The smaller family takes the name of the bigger dynasty, and everyone keeps a direct hotline to the King.
+>
+> **How It Solves the Problem (Plain English)**: You keep track of separate groups of items. To check if two items belong together, you trace each one back to their group leader. When two groups merge, the leader with fewer followers joins under the leader with more followers. To make future lookups fast, anyone who asks for the leader is immediately rewired to point straight to the main boss.
 <details open>
 <summary><b>[Python] Python 3 Implementation: Complete UFDS</b></summary>
 
@@ -1303,12 +1294,11 @@ It utilizes the **Lowest Significant Bit (LSB)** identity:
 - **Point Update `update(k, v)`**: Add +5`v` to `tree[k]` and repeatedly add `LSB(k)` until reaching table capacity.
 - **Range Sum Query**: `rsq(a, b) = rsq(b) - rsq(a - 1)`.
 
-### [Memory Trick] Interview Memory Trick: "Powers of Two Step Ladders"
-> **The 3-Second Mental Hook**:
-> - Every positive integer is a sum of powers of two (e.g., `13 = 8 + 4 + 1`).
-> - **Query**: To get sum up to index 13, read index 13 (covers 1 element), jump back by LSB to index 12 (covers 4 elements), jump back by LSB to index 8 (covers 8 elements). Done in 3 jumps!
-> - **Update**: Adding value to index 5 ripples upward: add to 5, jump forward by LSB to 6, then to 8, then to 16.
+### [Memory Hook] Fast-Recall Guide
 
+> **Memory Hook**: *"Ruler tick marks on an inch."* You jump between marks using power-of-two steps to measure any distance in just a few hops.
+>
+> **How It Solves the Problem (Plain English)**: Instead of recalculating a sum from scratch or updating every single position when a number changes, numbers are grouped into smart buckets of size 1, 2, 4, 8... When a number changes, you only update the handful of buckets that contain it. When you need a total, you just add up a few pre-calculated buckets.
 <details open>
 <summary><b>[Python] Python 3 Implementation: Complete Fenwick Tree</b></summary>
 
@@ -1418,13 +1408,11 @@ public class FenwickTreeDemo {
 A **Segment Tree** is a versatile binary tree designed for dynamic interval queries (Range Minimum RMQ, Range Maximum, Range Sum RSQ, GCD).
 With **Lazy Propagation**, updates to entire ranges `[L..R]` are deferred: the update is applied immediately to the current segment node, but only pushed down to its children when subsequent queries or updates actually need to inspect that subtree. This reduces both arbitrary range updates and range queries to `O(log N)`.
 
-### [Memory Trick] Interview Memory Trick: "The Lazy Boss with Sticky Notes"
-> **The 3-Second Mental Hook**:
-> - Imagine an office manager told to update all employee records from department 5 to 50.
-> - A hardworking manager visits every desk individually (`O(N)`).
-> - **A Lazy Manager (Lazy Propagation)**: Writes a sticky note on the department door saying *"Add +5+5o everyone inside"* and goes to sleep (`O(1)`).
-> - Only when someone actually knocks on that door to ask about an individual employee does the manager push the sticky note down to the sub-departments!
+### [Memory Hook] Fast-Recall Guide
 
+> **Memory Hook**: *"A procrastinating boss with sticky notes."* Slaps a note on the department door saying *"pending bonus: +100"* and only hands it out to workers when an auditor walks in.
+>
+> **How It Solves the Problem (Plain English)**: If someone asks you to add 5 to a million items, doing it one by one is way too slow. Instead, you put an IOU tag on the big category containing those million items and stop. You only pass that IOU down to the sub-items later if a future question actually needs to look inside.
 <details open>
 <summary><b>[Python] Python 3 Implementation: Segment Tree with Lazy Propagation</b></summary>
 
@@ -1591,12 +1579,11 @@ Because minimum is an **idempotent operation** (`min(x, x) = x`), an arbitrary q
 
 	ext{RMQ}(L, R) = \min(	ext{st}[L][k], \ 	ext{st}[R - 2^k + 1][k])
 
-### [Memory Trick] Interview Memory Trick: "Overlapping Umbrella Protection"
-> **The 3-Second Mental Hook**:
-> - If it's raining on a sidewalk from meter 3 to meter 10 (length 8):
-> - Precompute umbrella shelters of size 1, 2, 4, 8, 16.
-> - Take the largest umbrella of size 2^k <= length. Open one umbrella starting at `L`, and another umbrella ending at `R`. They overlap in the middle, but because `min(A, A) == A`, the overlap causes zero distortion and covers the entire sidewalk in **1 single check**!
+### [Memory Hook] Fast-Recall Guide
 
+> **Memory Hook**: *"Two overlapping umbrellas covering a sidewalk bench."* Two umbrellas overlapping in the middle keep the entire bench 100% dry.
+>
+> **How It Solves the Problem (Plain English)**: To find the minimum value in a static list, you pre-calculate the minimums of all segments whose lengths are powers of two (1, 2, 4, 8...). Any range can be completely covered by two overlapping segments of the same power-of-two size. Since comparing the same number twice doesn't change the minimum, the overlap doesn't hurt.
 <details open>
 <summary><b>[Python] Python 3 Implementation: Complete Sparse Table</b></summary>
 
@@ -1696,11 +1683,11 @@ A **Trie** is an ordered tree data structure used to store an associative collec
 - **Search & Insert**: Executes in `O(L)` proportional to string length `L`, completely independent of the total number of words `N` stored in the dictionary.
 - **Applications**: Autocomplete, spell check, dictionary validation, IP routing tables, and Bitwise Max-XOR queries.
 
-### [Memory Trick] Interview Memory Trick: "Spell-Check Tree Branches"
-> **The 3-Second Mental Hook**:
-> - Every word is a walk down a tree of 26 branches (`a-z`).
-> - The words `"cat"`, `"car"`, and `"cart"` share the exact same root path `c -> a`. At `a`, `"cat"` and `"car"` diverge into `t` and `r`. Zero redundant character storage!
+### [Memory Hook] Fast-Recall Guide
 
+> **Memory Hook**: *"A dictionary thumb-index tree."* You walk down the 'c' hallway, turn into the 'a' room, and branch into 't' or 'r'.
+>
+> **How It Solves the Problem (Plain English)**: Words that start with the same letters share the same path. Instead of comparing a word against every other word in the dictionary, you just trace the word letter by letter down a branching tree. If you reach the end of your letters, you know immediately if the word or prefix exists.
 <details open>
 <summary><b>[Python] Python 3 Implementation: Complete Trie</b></summary>
 
@@ -1821,13 +1808,11 @@ Coupled with **Kasai's Algorithm**, which computes the **Longest Common Prefix (
 2. Finding the Longest Repeated Substring in `O(N)`.
 3. Finding the number of distinct substrings in `O(N)`.
 
-### [Memory Trick] Interview Memory Trick: "Lexicographical Telephone Directory"
-> **The 3-Second Mental Hook**:
-> - Imagine taking every ending of the word `"banana"`: `["banana", "anana", "nana", "ana", "na", "a"]`.
-> - Sort them like a dictionary: `"a"`, `"ana"`, `"anana"`, `"banana"`, `"na"`, `"nana"`.
-> - The Suffix Array simply records where each sorted ending began: `[5, 3, 1, 0, 4, 2]`.
-> - **Kasai's LCP Trick**: The longest common prefix between consecutive sorted entries reveals repeating patterns immediately without re-checking from scratch!
+### [Memory Hook] Fast-Recall Guide
 
+> **Memory Hook**: *"An alphabetical phonebook of all sentence endings."* You list every possible ending of a word, sort them alphabetically, and measure how many starting letters neighboring endings share.
+>
+> **How It Solves the Problem (Plain English)**: To quickly find patterns or repeated phrases in a long text, you write down every suffix (from the full text down to the last letter) and sort them alphabetically. Because similar endings are now grouped together, finding any word is a quick binary search, and finding the longest repeated text is just checking the biggest overlap between neighbors.
 <details open>
 <summary><b>[Python] Python 3 Implementation: Suffix Array & Kasai LCP</b></summary>
 

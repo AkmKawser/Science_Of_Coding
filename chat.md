@@ -103,3 +103,29 @@ This document records all instructions, architectural decisions, and agent conve
 2. **Automated Java Testing**: All 13 Java classes compiled and executed using OpenJDK 21 — 13/13 passed with exit code 0.
 3. **Character & Formatting Audit**: 0 non-ASCII characters; 26 `<details>` opening tags balanced with 26 `</details>` closing tags; zero prohibited author/book names.
 
+---
+
+## Session 20: Implementation of Two-Tier Fast-Recall Memory Hook Framework
+
+### User Request
+> "The concept of [Memory Trick] Interview Memory Trick: is absolutely horrible. it does not make any sence. I will remove it. what could be some technical memeory trick? show me options"
+> "no the idea is to remember that whole concept in one or two line"
+> "show me some non technical memory tricks"
+> "this works. but you can also add in few sentence how this concept solves the problem 1st in plane english then in technical term"
+> "remove the technical term lines"
+> "so update with these two tier formate for both 001 and 002 query"
+
+### Requirements & Design Directives Applied
+1. **Two-Tier Fast-Recall Format**:
+   - Replaced all verbose analogy sections in both `query/001_graph_and_tree_learning_roadmap.md` and `query/002_data_structures_master_manual.md` with:
+     - `> **Memory Hook**: *"..."* (Punchy 1–2 line real-world hook).`
+     - `> **How It Solves the Problem (Plain English)**: ... (Clear, plain-English explanation of the algorithmic mechanics).`
+2. **Total Scope**:
+   - Updated all **13 graph & tree topics** in `001_graph_and_tree_learning_roadmap.md`.
+   - Updated all **13 core data structures** in `002_data_structures_master_manual.md`.
+3. **Hygiene & Strict Standards**:
+   - Exactly **0 non-ASCII characters** in both manuals.
+   - Exactly **0 dollar sign ($) LaTeX break risks**.
+   - Exactly **26 balanced `<details>` / `</details>` tags** per document.
+   - Zero mentions of restricted author or book titles.
+
