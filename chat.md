@@ -151,3 +151,25 @@ This document records all instructions, architectural decisions, and agent conve
    - **`query/002_data_structures_master_manual.md`**: 26 Python code blocks (26/26 passed), 26 Java classes (26/26 compiled and passed with OpenJDK 21), 52 `<details>` opening/closing pairs, 0 non-ASCII characters, 0 raw LaTeX dollar signs.
    - **Zero External Citation**: 100% clean of author names or book references.
 
+---
+
+---
+
+## Session 22: Upcoming Updates Template Creation
+
+### User Request
+> "create a new folder named Upcoming Updates. put a .md file there named Upcoming Updates. also create a box if solved. give serial number as well."
+> "Remove the topics i will add them. You just create the template"
+
+### Actions Taken & Implementation Summary
+1. **Directory & File Initialized**:
+   - Folder: `Upcoming Updates/`
+   - File: `Upcoming Updates/Upcoming Updates.md`
+2. **Clean Template Structure Provided**:
+   - **Progress Summary Counters**: Total, Completed, and Pending counts.
+   - **Clean Milestone Table**:
+     - Columns: `Serial`, `Status` (with `[ ]` checkbox), `Title / Task Name`, `Target Location`, and `Description & Notes`.
+     - Left completely clean with comment placeholders (`<!-- Task Title -->`) so the user can freely add their own topics.
+   - **Instructions**: Guidelines for checking off solved tasks (`[x]`) and adding subsequent sequential rows (`004`, `005`, etc.).
+3. **Hygiene & Formatting**:
+   - 0 non-ASCII characters, 0 hardcoded topics, and 0 external citations.
