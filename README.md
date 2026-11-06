@@ -139,22 +139,24 @@ Science_Of_Coding/
 │   └── Templates/                          # Methodological blueprints guiding agent problem-solving
 │       └── Repetitive Structure Template.md # Step-by-step guide for states, loops, and trees
 ├── Skills_Output/                          # Central archive for skill-specific outputs
-│   ├── README.md                           # Directory overview and output protocols
+│   ├── Skills_Output_README.md             # Directory overview and output protocols
 │   ├── ProblemSkill_output/                # Dedicated output workspace for ProblemSkill
-│   │   ├── README.md                       # ProblemSkill output guide
-│   │   ├── Solution Files/Solution formating.md             # Code & derivation formatting specification
+│   │   ├── ProblemSkill_Output_README.md   # ProblemSkill output guide
+│   │   ├── Solution Files/Solution formating.md # Code & derivation formatting specification
 │   │   ├── Problem Files/                  # Problem database with full source attribution
-│   │   │   ├── README.md                   # Problem metadata schemas and indexing table
+│   │   │   ├── Problem_Files_README.md     # Problem metadata schemas and indexing table
 │   │   │   ├── problem catagories.docx     # Dynamic 2-tier Category & Subcategory registry
 │   │   │   ├── problem formatting.md       # Markdown schema required for all ingested problems
 │   │   │   ├── question bank.md            # Master persistent repository of ingested problems
 │   │   │   └── Source of Problem/          # Staging area for incoming problems
+│   │   │       ├── Source_Of_Problem_README.md # Source problem repository guide
 │   │   │       ├── write here.docx         # 100 colorful structured boxes for links & text
 │   │   │       └── put the file here/      # Drop PDFs and offline problem files here
+│   │   │           └── Put_The_File_Here_README.md # Ingestion drop-zone instructions
 │   │   └── Solution Files/                 # Categorized solutions (Python, Java, Derivations)
-│   │       └── README.md                   # Solution archive guide
+│   │       └── Solution_Files_README.md    # Solution archive guide
 │   └── cpbook4_output/                     # Dedicated output workspace for cpbook4
-│       ├── README.md                       # Output overview marker
+│       ├── cpbook4_Output_README.md        # Output overview marker
 │       └── query/                          # Deep-dive algorithmic manuals & query outputs
 │           ├── 001_graph_and_tree_learning_roadmap.md
 │           └── 002_data_structures_master_manual.md

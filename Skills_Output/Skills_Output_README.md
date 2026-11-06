@@ -14,15 +14,15 @@ Skills_Output/
 │   │   ├── problem catagories.docx # Dynamic 2-level taxonomy hierarchy
 │   │   ├── problem formatting.md   # Standard schema for problem statements
 │   │   ├── question bank.md        # Canonical repository of formatted problems
-│   │   └── README.md               # Problem schema standards and guidelines
+│   │   └── Problem_Files_README.md # Problem schema standards and guidelines
 │   ├── Solution Files/             # Categorized algorithmic solutions by Category/Subcategory
 │   │   ├── Solution formating.md   # Formatting specifications for code & derivations
-│   │   └── README.md               # Solutions directory guide
-│   └── README.md                   # ProblemSkill output overview
+│   │   └── Solution_Files_README.md # Solutions directory guide
+│   └── ProblemSkill_Output_README.md # ProblemSkill output overview
 │
 └── cpbook4_output/                 # Dedicated output repository for cpbook4
     ├── query/                      # Deep-dive query manuals, decision trees, and roadmaps
-    └── README.md                   # Reference-grounded template derivations and query solutions
+    └── cpbook4_Output_README.md    # Reference-grounded template derivations and query solutions
 ```
 
 ---

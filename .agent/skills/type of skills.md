@@ -22,7 +22,7 @@ A **PDF Book Skill** encapsulates an entire reference textbook or publication in
   - Covers complete reference volumes stored under [`Skills_Input/books/Overall/`](../../Skills_Input/books/Overall/):
     - *Foundations & Core Algorithms* (`Part-1.pdf`, 329 pages): Linear & non-linear data structures, complete search, greedy, dynamic programming, and graph algorithms.
     - *Advanced Systems & Mathematics* (`Part-2.pdf`, 352 pages): Mathematics, string processing, computational geometry, state-space search, network flow, and advanced data structures.
-  - Architecture & Guide: [`.agent/skills/SkillsOnFixedResources/cpbook4/SkillArchitecture/README.md`](SkillsOnFixedResources/cpbook4/SkillArchitecture/README.md).
+  - Architecture & Guide: [`.agent/skills/SkillsOnFixedResources/cpbook4/SkillArchitecture/cpbook4_Architecture_README.md`](SkillsOnFixedResources/cpbook4/SkillArchitecture/cpbook4_Architecture_README.md).
   - Dedicated Output Directory: [`Skills_Output/cpbook4_output/`](../../Skills_Output/cpbook4_output/) (stores template solutions and deep-dive query roadmaps in `query/`).
 
 ---
@@ -52,7 +52,7 @@ Instead of ungrounded or unstructured code generation, the Problem-Solution Skil
   - Located at: [`.agent/skills/SkillsOnDynamicResources/ProblemSkill/`](SkillsOnDynamicResources/ProblemSkill/)
   - Controls problem staging, queue inspection, selective box/file parsing, dynamic category loading, and atomic updates to [`question bank.md`](../../Skills_Output/ProblemSkill_output/Problem%20Files/question%20bank.md).
   - Controls structured solution generation under [`Solution Files/`](../../Skills_Output/ProblemSkill_output/Solution%20Files/).
-  - Architecture & Guide: [`.agent/skills/SkillsOnDynamicResources/ProblemSkill/SkillArchitecture/README.md`](SkillsOnDynamicResources/ProblemSkill/SkillArchitecture/README.md).
+  - Architecture & Guide: [`.agent/skills/SkillsOnDynamicResources/ProblemSkill/SkillArchitecture/ProblemSkill_Architecture_README.md`](SkillsOnDynamicResources/ProblemSkill/SkillArchitecture/ProblemSkill_Architecture_README.md).
   - Dedicated Output Directory: [`Skills_Output/ProblemSkill_output/`](../../Skills_Output/ProblemSkill_output/).
 
 ---

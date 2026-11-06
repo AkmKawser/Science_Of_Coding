@@ -427,7 +427,7 @@ This document records all instructions, architectural decisions, and agent conve
    - Moved `write here.docx` into [`Output/problems/Source of Problem/write here.docx`](Output/problems/Source%20of%20Problem/write%20here.docx).
    - Moved `put the file here/` into [`Output/problems/Source of Problem/put the file here/`](Output/problems/Source%20of%20Problem/put%20the%20file%20here/).
 2. **Documented Staging Protocols**:
-   - Added [`Output/problems/Source of Problem/README.md`](Output/problems/Source%20of%20Problem/README.md) detailing how inputs staged here are extracted and cleared.
+   - Added [`Output/problems/Source of Problem/Source_Of_Problem_README.md`](Output/problems/Source%20of%20Problem/Source_Of_Problem_README.md) detailing how inputs staged here are extracted and cleared.
    - Updated [`Output/problems/README.md`](Output/problems/README.md) to link to `Source of Problem/`.
 3. **Committed and Pushed to GitHub**:
    - Pushed commit `fa86b0b` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
@@ -855,7 +855,7 @@ This document records all instructions, architectural decisions, and agent conve
 
 2. **Cross-Reference & Script Updates**:
    - Updated [`Output/README.md`](Output/README.md) to document the skill-specific output architecture and input/output contracts.
-   - Updated [`.agent/skills/ProblemSkill/SKILL.md`](.agent/skills/ProblemSkill/SKILL.md) and [`SkillArchitecture/README.md`](.agent/skills/ProblemSkill/SkillArchitecture/README.md).
+   - Updated [`.agent/skills/ProblemSkill/SKILL.md`](.agent/skills/ProblemSkill/SKILL.md) and [`SkillArchitecture/README.md`](.agent/skills/ProblemSkill/SkillArchitecture/ProblemSkill_Architecture_README.md).
    - Updated paths in [`.agent/skills/ProblemSkill/scripts/ingest_manager.py`](.agent/skills/ProblemSkill/scripts/ingest_manager.py) to reference `Output/ProblemSkill` (verified functional via CLI `--status`).
    - Updated [`.agent/skills/cpbook4/SKILL.md`](.agent/skills/cpbook4/SKILL.md), [`.agent/skills/type of skills.md`](.agent/skills/type%20of%20skills.md), and repository [`README.md`](README.md).
 
@@ -885,7 +885,7 @@ This document records all instructions, architectural decisions, and agent conve
    - `.agent/skills/SkillsOnFixedResources/cpbook4/SKILL.md` & `SkillArchitecture/`: Updated book references to `Input/books/` and template paths to `Input/Templates/`.
    - `Output/ProblemSkill_output/question bank.md`: Updated 53 template links to `Input/Templates/Repetitive Structure Template.md`.
    - `Output/ProblemSkill_output/problem formatting.md` & `README.md`: Updated output paths and schemas.
-   - `Output/README.md` & `Output/cpbook4_output/README.md`: Updated output directory architecture.
+   - `Output/README.md` & `Output/cpbook4_output/cpbook4_Output_README.md`: Updated output directory architecture.
    - `README.md`: Updated master repository layout and command invocation paths.
 4. **Git Synchronization**:
    - Committed and pushed all changes to `origin/main` (`823f802`).
@@ -916,7 +916,7 @@ This document records all instructions, architectural decisions, and agent conve
    - `ingest_manager.py`: Pointed to `Skills_Output/ProblemSkill_output/Problem Files/` (tested and functional via `--status`).
    - `query_cpbook.py`: Pointed to `Skills_Input/books/Overall/` (tested and functional via `--search`).
    - `question bank.md`: Updated 53 template relative links to point to `Skills_Input/Templates/Repetitive Structure Template.md`.
-   - `problem formatting.md`, `Problem Files/README.md`, `Solution Files/README.md`, `Skills_Output/README.md`, and repository `README.md`: Updated all paths, schemas, and architecture trees.
+   - `problem formatting.md`, `Problem Files/Problem_Files_README.md`, `Solution Files/Solution_Files_README.md`, `Skills_Output/Skills_Output_README.md`, and repository `README.md`: Updated all paths, schemas, and architecture trees.
    - `SKILL.md` for both `ProblemSkill` and `cpbook4`, along with their `SkillArchitecture/` guides and `type of skills.md`: Updated to incorporate the new solution pipeline.
 4. **Git Synchronization**:
    - Committed and pushed all changes to `origin/main` (`b2c4029`).
@@ -976,7 +976,7 @@ This document records all instructions, architectural decisions, and agent conve
         - `<Problem-ID>_java.java`: Standalone Java 21 with Fast I/O, package-private runner class, and 64-bit integer overflow protection (`long`).
      5. **Bidirectional Traceability**: Bidirectional linking between solutions, templates, and problem statement anchors in `question bank.md`.
 2. **Linked Guides**:
-   - Updated [`.agent/skills/SkillsOnDynamicResources/ProblemSkill/SkillArchitecture/README.md`](.agent/skills/SkillsOnDynamicResources/ProblemSkill/SkillArchitecture/README.md) to cross-reference `SOLUTION_ARCHITECTURE.md`.
+   - Updated [`.agent/skills/SkillsOnDynamicResources/ProblemSkill/SkillArchitecture/ProblemSkill_Architecture_README.md`](.agent/skills/SkillsOnDynamicResources/ProblemSkill/SkillArchitecture/ProblemSkill_Architecture_README.md) to cross-reference `SOLUTION_ARCHITECTURE.md`.
 3. **Git Synchronization**:
    - Committed and pushed changes to GitHub `origin/main` (`5c375eb`).
 
@@ -1092,9 +1092,9 @@ This document records all instructions, architectural decisions, and agent conve
    - Adjusted relative links to `question bank.md`: `../Problem Files/question bank.md`.
    - Adjusted relative links to templates: `../../../../Skills_Input/Templates/`.
 3. **Synchronized All Related References**:
-   - Updated [`.agent/skills/SkillsOnDynamicResources/ProblemSkill/SKILL.md`](.agent/skills/SkillsOnDynamicResources/ProblemSkill/SKILL.md) & [`SkillArchitecture/README.md`](.agent/skills/SkillsOnDynamicResources/ProblemSkill/SkillArchitecture/README.md).
+   - Updated [`.agent/skills/SkillsOnDynamicResources/ProblemSkill/SKILL.md`](.agent/skills/SkillsOnDynamicResources/ProblemSkill/SKILL.md) & [`SkillArchitecture/README.md`](.agent/skills/SkillsOnDynamicResources/ProblemSkill/SkillArchitecture/ProblemSkill_Architecture_README.md).
    - Updated [`.agent/skills/type of skills.md`](.agent/skills/type%20of%20skills.md) and repository [`README.md`](README.md).
-   - Updated [`Skills_Output/README.md`](Skills_Output/README.md), [`Skills_Output/ProblemSkill_output/README.md`](Skills_Output/ProblemSkill_output/README.md), and [`Skills_Output/ProblemSkill_output/Solution Files/README.md`](Skills_Output/ProblemSkill_output/Solution%20Files/README.md).
+   - Updated [`Skills_Output/Skills_Output_README.md`](Skills_Output/Skills_Output_README.md), [`Skills_Output/ProblemSkill_output/ProblemSkill_Output_README.md`](Skills_Output/ProblemSkill_output/ProblemSkill_Output_README.md), and [`Skills_Output/ProblemSkill_output/Solution Files/Solution_Files_README.md`](Skills_Output/ProblemSkill_output/Solution%20Files/Solution_Files_README.md).
 4. **Git Synchronization**:
    - Committed and pushed all synchronized files to GitHub `origin/main` (`6ded84b`).
 
@@ -1344,3 +1344,32 @@ This document records all instructions, architectural decisions, and agent conve
    - Updated directory tree blueprints and schemas in [`Solution formating.md`](Skills_Output/ProblemSkill_output/Solution%20Files/Solution%20formating.md) and [`SOLUTION_ARCHITECTURE.md`](.agent/skills/SkillsOnDynamicResources/ProblemSkill/SkillArchitecture/SOLUTION_ARCHITECTURE.md).
 4. **Git Synchronization**:
    - Committed and synchronized all restructured directories and files with GitHub `origin/main`.
+
+
+---
+
+## Session 72: Eliminate Duplicate Markdown Filenames & Enforce Unique Naming Protocol
+
+### User Request
+> "Apply Proposed Unique Name. except the 1st readme.md should be kept. also from the next time never add any readme.md file. if i do by mistake you fix it or warn me."
+
+### Actions Taken & Implementation Summary
+1. **Renamed Subfolder `README.md` Files to Descriptive Unique Names**:
+   - Preserved only the root [`README.md`](README.md).
+   - Applied specific, descriptive unique names to all 9 subfolder overview files:
+     - `.agent/skills/SkillsOnDynamicResources/ProblemSkill/SkillArchitecture/README.md` $\to$ [`ProblemSkill_Architecture_README.md`](.agent/skills/SkillsOnDynamicResources/ProblemSkill/SkillArchitecture/ProblemSkill_Architecture_README.md)
+     - `.agent/skills/SkillsOnFixedResources/cpbook4/SkillArchitecture/README.md` $\to$ [`cpbook4_Architecture_README.md`](.agent/skills/SkillsOnFixedResources/cpbook4/SkillArchitecture/cpbook4_Architecture_README.md)
+     - `Skills_Output/README.md` $\to$ [`Skills_Output_README.md`](Skills_Output/Skills_Output_README.md)
+     - `Skills_Output/cpbook4_output/README.md` $\to$ [`cpbook4_Output_README.md`](Skills_Output/cpbook4_output/cpbook4_Output_README.md)
+     - `Skills_Output/ProblemSkill_output/README.md` $\to$ [`ProblemSkill_Output_README.md`](Skills_Output/ProblemSkill_output/ProblemSkill_Output_README.md)
+     - `Skills_Output/ProblemSkill_output/Problem Files/README.md` $\to$ [`Problem_Files_README.md`](Skills_Output/ProblemSkill_output/Problem%20Files/Problem_Files_README.md)
+     - `Skills_Output/ProblemSkill_output/Problem Files/Source of Problem/README.md` $\to$ [`Source_Of_Problem_README.md`](Skills_Output/ProblemSkill_output/Problem%20Files/Source%20of%20Problem/Source_Of_Problem_README.md)
+     - `Skills_Output/ProblemSkill_output/Problem Files/Source of Problem/put the file here/README.md` $\to$ [`Put_The_File_Here_README.md`](Skills_Output/ProblemSkill_output/Problem%20Files/Source%20of%20Problem/put%20the%20file%20here/Put_The_File_Here_README.md)
+     - `Skills_Output/ProblemSkill_output/Solution Files/README.md` $\to$ [`Solution_Files_README.md`](Skills_Output/ProblemSkill_output/Solution%20Files/Solution_Files_README.md)
+2. **Updated Cross-References Across the Codebase**:
+   - Updated link references in [`README.md`](README.md), [`Skills_Output_README.md`](Skills_Output/Skills_Output_README.md), [`.agent/skills/type of skills.md`](.agent/skills/type%20of%20skills.md), and documentation logs.
+3. **Established Repository Invariant Rule**:
+   - **No Duplicate `.md` Filenames**: Every Markdown file must have a unique filename across the entire repository.
+   - **Single `README.md` Rule**: The repository root [`README.md`](README.md) is the ONLY permitted `README.md`. No new `README.md` files shall ever be created; any created by mistake will be immediately flagged and converted to a unique, descriptive filename.
+4. **Git Synchronization**:
+   - Committed and synchronized all changes with GitHub `origin/main`.
