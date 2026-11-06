@@ -305,3 +305,32 @@ This document records all instructions, architectural decisions, and agent conve
 3. **Committed and Pushed**:
    - Pushed commit `707b79e` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 29: Precision Retrieval Architecture - Tri-Source Knowledge Ingestion & Mandatory Template-Driven Output
+
+### User Request
+> "in the architecture is the agentic ai will take knowledge from the text books to learn. also they will use their own trained knowledge and google search but the output must be generated using the templates in the template folder. I will add more templatees their on each topic. so far i have added only one."
+
+### Architectural Updates & Actions Taken
+1. **Redefined Architectural Flow (Decoupled Ingestion & Generation)**:
+   - Formally updated the architecture to separate **Knowledge Ingestion** from **Output Generation**:
+     - **Tri-Source Knowledge Ingestion**:
+       1. *Curated Reference Textbooks* (`skill/books/` accessed via zero-token ToC routing and surgical page extraction CLI).
+       2. *Agent's Pre-trained Reasoning* (language idioms, data structure theory, algorithmic problem-solving).
+       3. *Targeted Web Search & Documentation* (live platform lookups, API specifications, and competitive programming archives).
+     - **Mandatory Template-Driven Output Synthesis Layer (`Templates/`)**:
+       - Irrespective of the knowledge source used for learning or lookup, **all final problem-solving outputs must be strictly formatted and generated following the steps in the designated template** from the `Templates/` directory.
+       - Outputs must rigorously adhere to the template's phased stages: candidate variable inventory, role classification (Free, Carried, Derived, Fixed), minimal state formulation, state-space tree construction, invariant verification, and failure mode auditing.
+     - **Modular Template Repository**:
+       - Documented that the `Templates/` folder is an evolving collection of problem-solving blueprints that will continually expand across diverse topics.
+2. **Updated Files**:
+   - [`README.md`](README.md): Updated ASCII architecture flowchart and detailed pipeline explanation to reflect Tri-Source Ingestion $\to$ Mandatory Template Synthesis $\to$ Collaborative Consensus $\to$ Output.
+   - [`skill/ARCHITECTURE.md`](skill/ARCHITECTURE.md): Updated Mermaid flowchart (`flowchart TD`) and pipeline descriptions to reflect the decoupled learning sources and mandatory template output contract.
+3. **Hygiene & Compliance**:
+   - Zero mentions of restricted author or book names.
+   - Preserved all copyright terms and file conventions.
+4. **Committed and Pushed**:
+   - Committed changes and pushed to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
+
