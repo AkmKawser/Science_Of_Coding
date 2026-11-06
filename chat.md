@@ -1666,3 +1666,30 @@ yes apply it"
      Structured tabular reference specifying the exact relationship between variable classification (Fixed, Free Outer/Inner, Derived, Carried Base/Update/Flag) and the resulting code placement in the loop lifecycle.
 2. **Git Synchronization**:
    - Committed and synchronized all changes with GitHub `origin/main`.
+
+
+---
+
+## Session 85: Add Detailed End-to-End Code Decomposition Example for Master Mapping Table
+
+### User Request
+> "add example with detail explkanation about the table above"
+
+### Actions Taken & Implementation Summary
+1. **Added End-to-End Walkthrough to [`Repetitive Structure Template.md`](Skills_Input/Templates/Repetitive%20Structure%20Template.md)**:
+   - Added a dedicated subsection: **"🔍 Comprehensive End-to-End Example: Mapping a 2D Problem into Code"** directly following the Master Mapping Table in Section 2.
+   - Deconstructed **Problem P-17 (Triangular Pyramid Pattern with Summation)** step by step:
+     - **Phase 1 (Variable Classification)**: Mapped all 6 candidate variables (`n`, `total`, `i`, `j`, `val`, `delim`) to their respective mathematical classes.
+     - **Phase 3 (Line-by-Line Code Decomposition)**: Provided a heavily annotated Java implementation mapping every single line of code to its corresponding row in the Master Mapping Table:
+       - Prolog / Guard Actions (`if (n <= 0) return; total = 0`)
+       - Outer Header (`for int i = 1; i <= n; i++`)
+       - Inner Header (`for int j = 1; j <= i; j++`)
+       - Instantaneous Derived Computation (`int val = j;`)
+       - Delimiter Action (`if (j > 1) out.append("   ");`)
+       - Inner Leaf Action (`out.append(val);`)
+       - Carried Accumulation Action (`total += val;`)
+       - Boundary / EOL Action (`out.append("\n");` after inner loop)
+       - Epilogue Action (`System.out.println("Sum = " + total);` after all loops)
+     - **Correctness Guarantees**: Documented how this mapping guarantees zero state pollution, deterministic delimiter formatting, and inductive invariant maintenance.
+2. **Git Synchronization**:
+   - Committed and synchronized all changes with GitHub `origin/main`.

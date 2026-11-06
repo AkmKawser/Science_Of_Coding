@@ -480,6 +480,89 @@ Actions fall into **5 distinct architectural types**:
 | **Free (Inner Reset)** | Inner walker reaches bound ($j = i$) | Coordinate reset: $j' \leftarrow 1, i' \leftarrow i + 1$ | **Boundary / EOL Action** | `out.append("\n");` | **Outer Body (After Inner)** |
 | **Free (Outer Term)** | Stepper reaches exit ($i = n + 1$) | Loop condition falsified: $i \le n \to \text{False}$ | **Epilogue Action** | `print(f"Sum = {total}")` | **Epilogue (After All Loops)** |
 
+---
+
+### 🔍 Comprehensive End-to-End Example: Mapping a 2D Problem into Code
+
+To demonstrate how the **Master Mapping Table** translates theory into executable code, consider the classic **P-17 Problem (Triangular Pyramid Pattern with Row-Level Accumulation)**:
+
+> **Problem**: Given $N = 4$, print the triangular number pattern where row $i$ outputs numbers $1 \dots i$ separated by 3 spaces, followed by a newline. Simultaneously, accumulate the total sum of all printed values and print `Sum = <total>` at the end.
+
+#### 1. Variable Classification & State Definition (Phase 1)
+- `n`: User input bound $\implies$ **Fixed**
+- `total`: Cumulative sum $\implies$ **Carried (Gatherer)**
+- `i`: Row counter ($1 \le i \le n$) $\implies$ **Free (Parent Stepper)**
+- `j`: Column counter ($1 \le j \le i$) $\implies$ **Free (Child Walker)**
+- `val`: Number printed at cell $(i, j)$ ($\text{val} = j$) $\implies$ **Derived**
+- `delim`: Space separator between numbers $\implies$ **Derived / Temporary**
+- **Minimal State**: $\text{State} = (i, j, \text{total})$
+
+#### 2. Detailed Line-by-Line Code Decomposition (Phase 3)
+Observing the table above, each code line corresponds strictly to its row in the Master Mapping:
+
+```java
+// =========================================================================
+// 1. FIXED & CARRIED (BASE): Validation & Prolog Actions (Before Loops)
+// =========================================================================
+if (n <= 0) return;                     // [Fixed] Guard action: aborts invalid domain
+long total = 0;                         // [Carried Base] Prolog action: neutral accumulator (0)
+StringBuilder out = new StringBuilder(); // [Action Buffer] Prolog action: output staging
+
+// =========================================================================
+// 2. FREE (OUTER): Parent Stepper Header (Governs Row Dimensions)
+// =========================================================================
+for (int i = 1; i <= n; i++) {          // [Free Outer] Monotonic advance: i' <- i + 1
+    
+    // =====================================================================
+    // 3. FREE (INNER): Child Walker Header (Governs Column Domain)
+    // =====================================================================
+    for (int j = 1; j <= i; j++) {      // [Free Inner] Step within parent: j' <- j + 1
+        
+        // -----------------------------------------------------------------
+        // 4. DERIVED: Instantaneous Formula (Computed On-the-Fly)
+        // -----------------------------------------------------------------
+        int val = j;                    // [Derived] val = j (No memory, instantaneous)
+        
+        // -----------------------------------------------------------------
+        // 5. DELIMITER ACTION: Formatting Control
+        // -----------------------------------------------------------------
+        if (j > 1) {                    // [Delimiter Action] Suppresses leading space
+            out.append("   ");          // Delimiter: 3 spaces between elements
+        }
+        
+        // -----------------------------------------------------------------
+        // 6. INNER / LEAF ACTION: Core Observable Work at State Leaf (i, j)
+        // -----------------------------------------------------------------
+        out.append(val);                // [Inner Action] Emits current cell value
+        
+        // -----------------------------------------------------------------
+        // 7. CARRIED (UPDATE): Inductive State Memory Transition
+        // -----------------------------------------------------------------
+        total += val;                   // [Accumulation Action] total' <- total + val
+    }
+    
+    // =====================================================================
+    // 8. FREE (INNER RESET): Boundary / EOL Action (Outer Body, Post-Inner)
+    // =====================================================================
+    // At this point, inner walker j reached bound i.
+    // Transition resets j <- 1 and signals row wrap:
+    out.append("\n");                   // [Boundary/EOL Action] Emits newline delimiter
+}
+
+// =========================================================================
+// 9. FREE (OUTER TERM): Epilogue Action (Completely After All Loops)
+// =========================================================================
+// Outer stepper reached i = n + 1; loop condition (i <= n) is now False.
+// The invariant guarantees that 'total' holds the completed sum of all cells.
+System.out.print(out.toString());       // [Epilogue Action] Flushes rendered 2D pattern
+System.out.println("Sum = " + total);   // [Epilogue Action] Outputs final accumulated result
+```
+
+#### 3. Why This Architecture Guarantees Correctness:
+1. **Zero State Pollution**: Inner variables (`j`, `val`) are naturally scoped or reset on the EOL transition; they cannot leak across rows.
+2. **Deterministic Delimiting**: The `if (j > 1)` delimiter action guarantees that no trailing spaces pollute the end of lines.
+3. **Provable Invariant Maintenance**: The accumulation `total += val` occurs precisely at each leaf, ensuring the inductive invariant $\text{total} = \sum_{\text{leaves visited}} \text{val}$ holds at every boundary.
+
 > [!TIP]
 > **Why Formal Transition Analysis Eliminates Bugs**:
 > Writing the transition rule explicitly before coding prevents the most pervasive loop bugs:
