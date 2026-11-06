@@ -481,6 +481,26 @@ This document records all instructions, architectural decisions, and agent conve
 2. **Committed and Pushed to GitHub**:
    - Pushed commit `7da7c83` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 37: Cleaning Placeholder Text from 100 Problem Boxes
+
+### User Request
+> "remove the texts like Paste problem text, constraints, test cases, or notes here"
+
+### Actions Taken & Implementation Summary
+1. **Removed Boilerplate Hints and Provided Clean Open Boxes**:
+   - Removed all placeholder lines:
+     - Removed `👉 [ Paste problem text, constraints, test cases, or notes here ]`
+     - Removed `📝 Content / Problem Statement & Sample Tests:`
+     - Removed `📌 Source / URL:`
+     - Simplified header banner to clean: `📘 Problem #001 | Problem Name: `
+   - Configured each box with a clean, open, shaded pasting cell (`w:trHeight="1440"`) so you can directly click and type or paste content freely without deleting placeholder text.
+2. **File Handling Note**:
+   - Because `write here.docx` was open in Microsoft Word, generated the updated version as [`Output/problems/Source of Problem/write here_new.docx`](Output/problems/Source%20of%20Problem/write%20here_new.docx).
+   - Once closed in Word, `write here_new.docx` will immediately replace `write here.docx`.
+
+
 
 
 
