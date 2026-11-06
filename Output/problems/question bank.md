@@ -2347,7 +2347,7 @@ A
 Given an integer $N$ representing the number of rows/height, construct and print the following 2D geometric pyramid / triangle pattern:
 
 ```text
-1 
+                1
             1   2 
         1   2   3 
     1   2   3   4 
@@ -2378,7 +2378,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 #### Output
 ```text
-1 
+                1
             1   2 
         1   2   3 
     1   2   3   4 
@@ -2413,7 +2413,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 Given an integer $N$ representing the number of rows/height, construct and print the following 2D geometric pyramid / triangle pattern:
 
 ```text
-1 
+                1
             2   2 
         3   3   3 
     4   4   4   4 
@@ -2444,7 +2444,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 #### Output
 ```text
-1 
+                1
             2   2 
         3   3   3 
     4   4   4   4 
@@ -2479,7 +2479,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 Given an integer $N$ representing the number of rows/height, construct and print the following 2D geometric pyramid / triangle pattern:
 
 ```text
-1 
+                1
             0   0 
         1   1   1 
     0   0   0   0 
@@ -2510,7 +2510,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 #### Output
 ```text
-1 
+                1
             0   0 
         1   1   1 
     0   0   0   0 
@@ -2545,7 +2545,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 Given an integer $N$ representing the number of rows/height, construct and print the following 2D geometric pyramid / triangle pattern:
 
 ```text
-1 
+                1
             1   0 
         1   0   1 
     1   0   1   0 
@@ -2576,7 +2576,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 #### Output
 ```text
-1 
+                1
             1   0 
         1   0   1 
     1   0   1   0 
@@ -2611,7 +2611,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 Given an integer $N$ representing the number of rows/height, construct and print the following 2D geometric pyramid / triangle pattern:
 
 ```text
-1 
+        1
       2   2 
     3   3   3 
   4   4   4   4 
@@ -2642,7 +2642,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 #### Output
 ```text
-1 
+        1
       2   2 
     3   3   3 
   4   4   4   4 
@@ -2677,7 +2677,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 Given an integer $N$ representing the number of rows/height, construct and print the following 2D geometric pyramid / triangle pattern:
 
 ```text
-A 
+        A
       B   B 
     C   C   C 
   D   D   D   D 
@@ -2708,7 +2708,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 #### Output
 ```text
-A 
+        A
       B   B 
     C   C   C 
   D   D   D   D 
@@ -2743,7 +2743,7 @@ E   E   E   E   E
 Given an integer $N$ representing the number of rows/height, construct and print the following 2D geometric pyramid / triangle pattern:
 
 ```text
-A 
+        A
       B   B 
     C   C   C 
   D   D   D   D 
@@ -2778,7 +2778,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 #### Output
 ```text
-A 
+        A
       B   B 
     C   C   C 
   D   D   D   D 
@@ -2817,7 +2817,7 @@ E   E   E   E   E
 Given an integer $N$ representing the number of rows/height, construct and print the following 2D geometric pyramid / triangle pattern:
 
 ```text
-1 
+        1
       2   2 
     3   3   3 
   4   4   4   4 
@@ -2852,7 +2852,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 #### Output
 ```text
-1 
+        1
       2   2 
     3   3   3 
   4   4   4   4 
@@ -2965,7 +2965,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 Given an integer $N$ representing the number of rows/height, construct and print the following 2D geometric pyramid / triangle pattern:
 
 ```text
-1 
+                1
             2   2 
         3   3   3 
     4   4   4   4 
@@ -3000,7 +3000,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 #### Output
 ```text
-1 
+                1
             2   2 
         3   3   3 
     4   4   4   4 
@@ -3039,7 +3039,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 Given an integer $N$ representing the number of rows/height, construct and print the following 2D geometric pyramid / triangle pattern:
 
 ```text
-1 
+                1
             1   2   1 
         1   2   3   2   1 
     1   2   3   4   3   2   1 
@@ -3070,7 +3070,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 #### Output
 ```text
-1 
+                1
             1   2   1 
         1   2   3   2   1 
     1   2   3   4   3   2   1 
@@ -3105,7 +3105,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 Given an integer $N$ representing the number of rows/height, construct and print the following 2D geometric pyramid / triangle pattern:
 
 ```text
-1 
+                1
             1   2   1 
         1   2   3   2   1 
     1   2   3   4   3   2   1 
@@ -3140,7 +3140,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 #### Output
 ```text
-1 
+                1
             1   2   1 
         1   2   3   2   1 
     1   2   3   4   3   2   1 
@@ -3179,7 +3179,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 Given an integer $N$ representing the number of rows/height, construct and print the following 2D geometric pyramid / triangle pattern:
 
 ```text
-1 
+                        1
                     2   3   2 
                 3   4   5   4   3 
             4   5   6   7   6   5   4 
@@ -3218,7 +3218,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 #### Output
 ```text
-1 
+                        1
                     2   3   2 
                 3   4   5   4   3 
             4   5   6   7   6   5   4 
@@ -3261,7 +3261,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 Given an integer $N$ representing the number of rows/height, construct and print the following 2D geometric pyramid / triangle pattern:
 
 ```text
-1 
+                        1
                     2   3   2 
                 3   4   5   4   3 
             4   5   6   7   6   5   4 
@@ -3300,7 +3300,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 #### Output
 ```text
-1 
+                        1
                     2   3   2 
                 3   4   5   4   3 
             4   5   6   7   6   5   4 
@@ -3343,7 +3343,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 Given an integer $N$ representing the number of rows/height, construct and print the following 2D geometric pyramid / triangle pattern:
 
 ```text
-1 
+   1
    2   3 
    4   5   6 
    7   8   9  10 
@@ -3374,7 +3374,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 #### Output
 ```text
-1 
+   1
    2   3 
    4   5   6 
    7   8   9  10 
@@ -3409,7 +3409,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 Given an integer $N$ representing the number of rows/height, construct and print the following 2D geometric pyramid / triangle pattern:
 
 ```text
-1 
+   1
    2   1 
    3   3   1 
    4   6   4   1 
@@ -3441,7 +3441,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 #### Output
 ```text
-1 
+   1
    2   1 
    3   3   1 
    4   6   4   1 
@@ -3477,7 +3477,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 Given an integer $N$ representing the number of rows/height, construct and print the following 2D geometric pyramid / triangle pattern:
 
 ```text
-1 
+   1
    1   1 
    1   2   1 
    1   3   3   1 
@@ -3510,7 +3510,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 #### Output
 ```text
-1 
+   1
    1   1 
    1   2   1 
    1   3   3   1 
