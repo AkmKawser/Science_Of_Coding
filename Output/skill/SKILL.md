@@ -7,6 +7,9 @@ description: Dedicated skill for managing and formatting problems into question 
 
 The **`ProblemSkill`** controls the entire lifecycle of problem ingestion into [`Output/problems/question bank.md`](../../problems/question%20bank.md) from the staging directory ([`Output/problems/Source of Problem/`](../../problems/Source%20of%20Problem/)).
 
+For complete architectural details and visual flowcharts, consult:
+- **Skill Architecture & Guide**: [`SkillArchitecture/README.md`](SkillArchitecture/README.md)
+
 ---
 
 ## 🎯 Primary Triggers & Capabilities
