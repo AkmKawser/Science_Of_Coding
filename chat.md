@@ -753,6 +753,33 @@ This document records all instructions, architectural decisions, and agent conve
 3. **Committed and Pushed to GitHub**:
    - Pushed commit `480e679` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 51: Documentation of Skill Paradigms (`type of skills.md`)
+
+### User Request
+> "in the skills folder create a .md file named type of skills. so far there are two type of skills we are focused to create.. skill based on pdf books. where the whole book will be used as a skill. and skill on Problem Solution where different type of sources are used you know the sources already. so write about that."
+
+### Actions Taken & Implementation Summary
+1. **Authored `.agent/skills/type of skills.md`**:
+   - Outlined and structured the two core skill paradigms in the project:
+     - **Type 1: PDF Book Skills (Knowledge Grounding)**:
+       - Uses full reference textbooks as skills.
+       - Implements zero-token Table of Contents routing (`references/`).
+       - Provides CLI-based surgical page extraction (`scripts/query_cpbook.py`) to eliminate context exhaustion.
+       - Enforces collaborative design check rules before coding.
+       - Represented by: [`cpbook4`](.agent/skills/cpbook4/).
+     - **Type 2: Problem-Solution Skills (Intake, Classification & Synthesis)**:
+       - Ingests diverse sources: structured multi-box Word documents (`write here.docx`), offline PDF companion files (`put the file here/`), and online competitive programming platforms.
+       - Dynamic 2-tier Hierarchical Classification (HITL) powered by live parsing of `problem catagories.docx`.
+       - Non-destructive atomic migration into `question bank.md` with explicit anchors and single-line clickable jump links.
+       - Mandatory template synthesis via `Templates/` (deriving states, variable roles, invariants, and verified code).
+       - Represented by: [`ProblemSkill`](.agent/skills/ProblemSkill/).
+   - Added a detailed comparative reference table across goals, primary artifacts, sources, workflows, and outputs.
+2. **Committed and Pushed to GitHub**:
+   - Pushed commit `2bfa80a` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
+
 
 
 
