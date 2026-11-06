@@ -36,11 +36,12 @@ To easily ingest problems from different sources:
 
 ### Components:
 1. **[`Source of Problem/`](Source%20of%20Problem/)**: The dedicated incoming staging directory.
-   - **[`Source of Problem/write here.docx`](Source%20of%20Problem/write%20here.docx)**: Drop links, copy-pasted problem descriptions, or source URLs here.
+   - **[`Source of Problem/write here.docx`](Source%20of%20Problem/write%20here.docx)**: Drop links, copy-pasted problem descriptions, or source URLs across 100 clean boxes.
    - **[`Source of Problem/put the file here/`](Source%20of%20Problem/put%20the%20file%20here/)**: Place PDF chapters, documents, or files containing problem statements here.
-2. **[`problem formatting.md`](problem%20formatting.md)**: The mandatory markdown schema governing how every problem must be formatted.
-3. **[`question bank.md`](question%20bank.md)**: The centralized repository storing all ingested, formatted problem statements with full source attribution.
-4. **Automatic Cleanup**: Once a problem's content is successfully copied and formatted into `question bank.md`, the agent clears `write here.docx` or removes the processed file from `put the file here/`.
+2. **[`problem catagories.docx`](problem%20catagories.docx)**: Dynamic registry of problem domains and algorithmic topics. Update this file to dynamically expand the categories offered during interactive HITL prompt selection.
+3. **[`problem formatting.md`](problem%20formatting.md)**: The mandatory markdown schema governing how every problem must be formatted.
+4. **[`question bank.md`](question%20bank.md)**: The centralized repository storing all ingested, formatted problem statements with full source attribution.
+5. **Automatic Cleanup**: Once a problem's content is successfully copied and formatted into `question bank.md`, the agent clears the processed box in `write here.docx` or removes the processed file from `put the file here/`.
 
 ---
 

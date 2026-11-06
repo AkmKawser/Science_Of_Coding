@@ -1,73 +1,79 @@
 ---
 name: ProblemSkill
-description: Dedicated skill for the Output folder to monitor, selectively extract, and format problems from 'Output/problems/Source of Problem/' into 'question bank.md'. Supports querying pending items, selective ingestion of specific files or problem numbers, and non-destructive atomic cleanup only after verified writes.
+description: Dedicated skill for managing and formatting problems into question bank.md. Inspects 'Output/problems/Source of Problem/', parses specified files or box numbers, presents dynamic categories from 'problem catagories.docx' via Human-in-the-Loop (HITL) prompt, and safely ingests entries into question bank.md without data loss.
 ---
 
-# Problem Ingestion & Processing Skill (`ProblemSkill`)
+# Problem Ingestion & Question Bank Control Skill (`ProblemSkill`)
 
-The **`ProblemSkill`** manages and automates problem ingestion into [`Output/problems/question bank.md`](../../problems/question%20bank.md) from the staging directory ([`Output/problems/Source of Problem/`](../../problems/Source%20of%20Problem/)).
-
----
-
-## 🎯 When to Use & Capabilities
-
-Trigger this skill whenever:
-1. You mention `@skill:ProblemSkill` to check whether there are any pending problems or source documents to be processed.
-2. You mention `@skill:ProblemSkill` with a **specific folder path or filename** (e.g., `Recursion_Vs_Iteration_Complete_Codes.pdf` or a relative path in `put the file here/`).
-3. You mention `@skill:ProblemSkill` with a **specific problem number or title** from the `write here.docx` document (e.g., *"process problem 2 from the doc"*).
+The **`ProblemSkill`** controls the entire lifecycle of problem ingestion into [`Output/problems/question bank.md`](../../problems/question%20bank.md) from the staging directory ([`Output/problems/Source of Problem/`](../../problems/Source%20of%20Problem/)).
 
 ---
 
-## 🚨 MANDATORY PROTOCOLS
+## 🎯 Primary Triggers & Capabilities
 
-### 1. Selective Processing
-- If a specific file or problem number/entry is mentioned, the agent **MUST ONLY** process that specific item into `question bank.md`.
-- All other files in `put the file here/` and all other entries in `write here.docx` must remain completely untouched.
-
-### 2. Zero-Loss Non-Destructive Ingestion
-- **NEVER destroy, delete, or remove any file or text from `write here.docx` or `put the file here/` until the entry is fully extracted, formatted, and verified inside `question bank.md`**.
-- Cleanup is atomic:
-  - If a file is processed, delete **only that specific file** after `question bank.md` is updated.
-  - If a specific problem number from `write here.docx` is processed, remove **only that specific text/entry** from `write here.docx`, leaving all other entries intact.
+Activate this skill when:
+1. The user mentions `@skill:ProblemSkill` or presses Enter using the skill to check, format, or process problems.
+2. The user requests to process a specific file path or document (e.g., in `put the file here/`).
+3. The user requests to process a specific box or problem number from `write here.docx` (e.g., *"process Problem #001"*).
 
 ---
 
-## 🛠️ Step-by-Step Execution Guide
+## 🤝 Human-in-the-Loop (HITL) Topic & Domain Consultation
 
-### Step 1: Check Pending Queue
-To discover all pending items awaiting processing:
+Whenever processing a problem (from `write here.docx` or `put the file here/`), the agent **MUST NOT** guess the category arbitrarily.
+
+### Dynamic Category Protocol:
+1. **Dynamic Category Loading**:
+   - The agent reads the real-time categories from [`Output/problems/problem catagories.docx`](../../problems/problem%20catagories.docx) using:
+     ```bash
+     python Output/skill/scripts/ingest_manager.py --categories
+     ```
+2. **Interactive Consultation (HITL Prompt)**:
+   - Present the dynamically retrieved category list to the user and ask:
+     > *"Which problem category/domain from `problem catagories.docx` does this problem belong to?"*
+   - Or use the `ask_question` tool with the options populated dynamically from `problem catagories.docx`.
+3. **Dynamic User Expansion**:
+   - The user may update `problem catagories.docx` at any time with new domains. The agent must always reflect the updated list on demand.
+
+---
+
+## 🚨 CRITICAL RULE: Non-Destructive Ingestion
+
+1. **Selective Ingestion**:
+   - When a specific file or box number is requested, the agent **ONLY** processes that specific target. All other files and doc boxes remain completely untouched.
+2. **Zero Data Loss Guarantee**:
+   - **NEVER** delete any file from `put the file here/` or clear any box in `write here.docx` until the complete entry is 100% formatted and verified on disk in [`question bank.md`](../../problems/question%20bank.md).
+
+---
+
+## 🛠️ Step-by-Step Workflow
+
+### Step 1: Discover Pending Queue
+Run the status command to inspect filled boxes and pending files:
 ```bash
 python Output/skill/scripts/ingest_manager.py --status
 ```
-This inspects:
-- Text paragraphs and URLs inside `Output/problems/Source of Problem/write here.docx`
-- Files and PDFs inside `Output/problems/Source of Problem/put the file here/`
 
-### Step 2: Filter by User Target
-- **General Check / Process All**: If no specific target is given, list pending items and proceed sequentially.
-- **Specific File**: If the user provides a path or filename, target that exact file inside `put the file here/`.
-- **Specific Problem Number / Text**: If the user specifies a problem index (e.g., #1, #2) or title from the doc, isolate that paragraph.
+### Step 2: Target Isolation
+- Isolate the requested target (e.g., Box #001 or a specific file like `Recursion_Vs_Iteration_Complete_Codes.pdf`).
 
-### Step 3: Format according to `problem formatting.md`
-Transform the target problem into the required format specified in [`Output/problems/problem formatting.md`](../../problems/problem%20formatting.md):
+### Step 3: HITL Category Selection
+- Fetch the dynamic category list from `problem catagories.docx` and consult the user to confirm the problem domain.
+
+### Step 4: Reformat according to `problem formatting.md`
+Format into the strict schema defined in [`problem formatting.md`](../../problems/problem%20formatting.md):
 - `# Problem [ID]: [Title]`
-- `## 📌 Metadata & Source Attribution` (Source, link/book reference, topic, difficulty, target template)
+- `## 📌 Metadata & Source Attribution` (Source, link, confirmed category, difficulty, target template)
 - `## 📝 Problem Statement`
 - `## 📥 Input Specification`
 - `## 📤 Output Specification`
-- `## 🧪 Sample Tests` (Input, Output, Explanation)
+- `## 🧪 Sample Tests`
 - `## ⚙️ Constraints & System Limits`
 - `## 💡 Notes & Special Edge Cases`
 
-### Step 4: Write to `question bank.md` & Update Index
-1. Append the formatted problem to [`Output/problems/question bank.md`](../../problems/question%20bank.md).
-2. Add a new row to the **Master Problem Index** table at the top of `question bank.md`.
+### Step 5: Append to `question bank.md` & Update Table
+- Add the entry to [`Output/problems/question bank.md`](../../problems/question%20bank.md).
+- Append a new row to the **Master Problem Index** table at the top.
 
-### Step 5: Verified Non-Destructive Cleanup
-Verify that the entry in `question bank.md` is complete and saved on disk. Only then:
-- For a targeted file:
-  ```bash
-  python Output/skill/scripts/ingest_manager.py --delete-file "<filename>"
-  ```
-- For a targeted docx entry:
-  Update `write here.docx` to remove only that specific entry while preserving the remaining text.
+### Step 6: Atomic Verified Cleanup
+- Only after `question bank.md` is updated, remove the processed file from `put the file here/` or clear only that specific box in `write here.docx`.
