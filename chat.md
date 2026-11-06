@@ -1267,3 +1267,32 @@ This document records all instructions, architectural decisions, and agent conve
    - Added transition/invariant errors and the **Pre-Coding Verification Checklist** under Part 4.
 4. **Git Synchronization**:
    - Committed and pushed all updates to GitHub `origin/main`.
+
+
+---
+
+## Session 69: Reorganize Repetitive Structure Template Architecture
+
+### User Request
+> "Dont put the theory at the beginning. Simply put the template how the agent will solve it. Then later start convering the detail concepts. so take the template and place it at the very beginning."
+
+### Actions Taken & Implementation Summary
+1. **Architectural Restructuring of [`Repetitive Structure Template.md`](Skills_Input/Templates/Repetitive%20Structure%20Template.md)**:
+   - Elevated the actionable 4-part problem-solving protocol to the very top:
+     - **SECTION 1: PROBLEM-SOLVING EXECUTION TEMPLATE**:
+       - **Part 1: Define the state** (List Candidate Variables $\to$ Assign Roles & Classify $\to$ Form Minimal State).
+       - **Part 2: Find the relationships and draw the tree** (Parent Variable $\to$ Draw Tree $\to$ Read Loop Facts).
+       - **Part 3: Build the loop from the tree** (Initialization $\to$ Bounds $\to$ Transition $\to$ Termination $\to$ Result $+$ Mapping Table).
+       - **Part 4: Verify against the tree** (Validity $\to$ Missing Cases $\to$ Complexity $+$ Verification Table).
+   - Moved all foundational definitions, proofs, diagrams, and reference manuals to the second half:
+     - **SECTION 2: DETAILED THEORETICAL CONCEPTS & REFERENCE MANUAL**:
+       - What is a state? Single vs Multi-variable state.
+       - Why only Free and Carried variables form the state.
+       - Systematic 4-class diagnostic decision tree & image.
+       - Cheatsheet: How many loops are required (The Golden Law).
+       - The 5 Core Concepts of an Iterative Structure & Transition Cycle Image.
+       - Variable classes in detail.
+       - Step-by-step deep dives (Init, Bounds, Transition Derivations, Neutral Identities, Termination, Worked Verification).
+       - Common mistakes & Pre-Coding Checklist.
+2. **Git Synchronization**:
+   - Committed and synchronized all changes with GitHub `origin/main`.
