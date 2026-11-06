@@ -14,7 +14,7 @@ import sys
 import argparse
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[3] if "Output" in str(Path(__file__).resolve()) else Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[4]
 PROBLEMS_DIR = REPO_ROOT / "Output" / "problems"
 SOURCE_DIR = PROBLEMS_DIR / "Source of Problem"
 DOCX_PATH = SOURCE_DIR / "write here.docx"

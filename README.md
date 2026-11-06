@@ -25,13 +25,15 @@ Modern LLM-powered coding assistants frequently suffer from two fatal failure mo
 1. **The Science of Coding Manual**: Structured guides, mathematical proofs, pattern decompositions, and battle-tested code templates with side-by-side runnable implementations in **Python 3** and **Java 21**.
 2. **`Templates/` Directory (Agent Solution Blueprints)**: Explicit step-by-step methodologies and conceptual frameworks instructing the agent on *how* to deconstruct, design, and verify code systematically.
 3. **`Output/` Directory (Central Archive for Problems & Solutions)**:
-   - **`Output/problems/`**: Preserves complete copies of all tackled problem statements with full source attribution.
+   - **`Output/problems/`**: Preserves complete copies of all tackled problem statements with full source attribution, dynamic categories (`problem catagories.docx`), and formatting standards.
    - **`Output/solution/`**: Stores template-synthesized, step-by-step verified algorithmic implementations.
-   - **`Output/skill/` (`ProblemSkill`)**: Autonomous ingestion skill managing staging inspection, selective problem parsing, non-destructive formatting, and safe atomic cleanup into `question bank.md`.
-4. **`cpbook4` Agentic Skill**: A portable, self-contained AI agent skill that enables any Agentic AI (Antigravity, Claude Code, Cursor, Copilot, ChatGPT, or custom LLM harnesses) to retrieve exact formulas, theorems, and implementations on demand without context exhaustion or hallucinations.
-5. **`query/` Knowledgebase**: A dedicated library of deep-dive query documents featuring visual decision trees, interview memory mnemonics, and real-world problem mappings.
-6. **`Upcoming Updates/` Roadmap**: A centralized milestone tracker with task status boxes for planned features and upcoming manuals.
-7. **`chat.md`**: A chronological record of all conversations, architectural decisions, and design sessions.
+4. **`.agent/skills/` (Centralized Agent Skills Hub)**:
+   - **`cpbook4`**: Deep algorithmic knowledge base, data structures, and reference skill with surgical page extraction.
+   - **`ProblemSkill`**: Autonomous ingestion skill managing staging inspection, selective problem parsing, dynamic HITL category selection, and non-destructive archival into `question bank.md`.
+5. **`books/` (Reference Library)**: Curated textbooks and domain books (Flowchart, Overall algorithms, Programming Logic & Loops).
+6. **`query/` Knowledgebase**: A dedicated library of deep-dive query documents featuring visual decision trees, interview memory mnemonics, and real-world problem mappings.
+7. **`Upcoming Updates/` Roadmap**: A centralized milestone tracker with task status boxes for planned features and upcoming manuals.
+8. **`chat.md`**: A chronological record of all conversations, architectural decisions, and design sessions.
 
 ---
 
@@ -127,50 +129,42 @@ Loading ~436,000 tokens into an AI context window causes severe degradation and 
 ```
 Science_Of_Coding/
 ├── .agent/
-│   └── skills/
-│       ├── cpbook4/
-│       │   └── SKILL.md            # Entrypoint for Antigravity native skill discovery
-│       └── ProblemSkill/
-│           ├── SKILL.md            # Problem staging, selective extraction, & cleanup skill
-│           └── scripts/
-│               └── ingest_manager.py # CLI manager for problem status and atomic cleanups
-├── Templates/                      # Methodological blueprints guiding agent problem-solving
+│   └── skills/                      # Central Agent Skills Hub (Native AI auto-discovery)
+│       ├── cpbook4/                 # Algorithmic engineering knowledge base & CLI
+│       │   ├── SKILL.md             # Specification & algorithm decision matrix
+│       │   ├── SkillArchitecture/   # Technical architecture & agent instructions
+│       │   ├── references/          # Table of contents & outline trees
+│       │   └── scripts/             # Surgical query CLI (query_cpbook.py)
+│       └── ProblemSkill/            # Problem intake, classification, & archival skill
+│           ├── SKILL.md             # Ingestion protocol & HITL trigger specification
+│           ├── SkillArchitecture/   # Lifecycle architecture & execution workflow
+│           └── scripts/             # Status discovery & safe cleanup (ingest_manager.py)
+├── books/                           # Curated coding & reference books library
+│   ├── Flowchart/                   # Flowchart & programming techniques
+│   ├── Overall/                     # Comprehensive algorithm references (Part-1.pdf, Part-2.pdf)
+│   └── Programming Logic/           # Programming logic & loop patterns
+├── Templates/                       # Methodological blueprints guiding agent problem-solving
 │   └── Repetitive Structure Template.md # Step-by-step guide for states, loops, and trees
-├── Output/                         # Central archive for problems and template-guided solutions
-│   ├── README.md                   # Directory overview and dual-repository protocol
-│   ├── skill/                      # Output problem management skill package
-│   │   ├── SKILL.md                # Portable specification for ProblemSkill
-│   │   └── scripts/
-│   │       └── ingest_manager.py   # Ingestion status and safe cleanup CLI utility
-│   ├── problems/                   # Problem database with full source attribution
-│   │   ├── README.md               # Problem metadata schemas and indexing table
-│   │   ├── problem formatting.md   # Markdown schema required for all ingested problems
-│   │   ├── question bank.md        # Master persistent repository of ingested problems
-│   │   └── Source of Problem/      # Staging area for incoming problems
-│   │       ├── write here.docx     # Drop links and copied text here
-│   │       └── put the file here/  # Drop PDFs and offline problem files here
-│   └── solution/                   # Phased, template-derived algorithmic implementations
-│       └── README.md               # Solution directory marker
-├── Upcoming Updates/               # Roadmap, milestone checklist, and feature tracking
-│   └── Upcoming Updates.md         # Serialized progress tracking template
-├── query/                          # Deep-dive algorithmic manuals & query outputs
+├── Output/                          # Central archive for problems and template-guided solutions
+│   ├── README.md                    # Directory overview and dual-repository protocol
+│   ├── problems/                    # Problem database with full source attribution
+│   │   ├── README.md                # Problem metadata schemas and indexing table
+│   │   ├── problem catagories.docx  # Dynamic 2-tier Category & Subcategory registry
+│   │   ├── problem formatting.md    # Markdown schema required for all ingested problems
+│   │   ├── question bank.md         # Master persistent repository of ingested problems
+│   │   └── Source of Problem/       # Staging area for incoming problems
+│   │       ├── write here.docx      # 100 colorful structured boxes for links & text
+│   │       └── put the file here/   # Drop PDFs and offline problem files here
+│   └── solution/                    # Phased, template-derived algorithmic implementations
+│       └── README.md                # Solution directory marker
+├── Upcoming Updates/                # Roadmap, milestone checklist, and feature tracking
+│   └── Upcoming Updates.md          # Serialized progress tracking template
+├── query/                           # Deep-dive algorithmic manuals & query outputs
 │   ├── 001_graph_and_tree_learning_roadmap.md
 │   └── 002_data_structures_master_manual.md
-├── skill/                          # Standalone, portable Agent Skill package
-│   ├── ARCHITECTURE.md             # Detailed architectural specification & mechanics
-│   ├── SKILL.md                    # Universal agent skill instructions & decision matrix
-│   ├── books/                      # Curated coding & reference books library
-│   │   ├── Flowchart/              # Flowchart & programming techniques
-│   │   ├── Overall/                # Comprehensive algorithm references
-│   │   │   ├── Part-1.pdf          # Volume 1 (329 pages)
-│   │   │   └── Part-2.pdf          # Volume 2 (352 pages)
-│   │   └── Programming Logic/      # Programming logic & loop patterns
-│   ├── references/                 # Table of contents and machine-readable outline trees
-│   │   ├── table_of_contents.md    # Fast topic-to-page navigation map
-│   │   ├── toc_book1.json          # Book 1 JSON outline tree
-│   │   └── toc_book2.json          # Book 2 JSON outline tree
-│   └── scripts/
-│       └── query_cpbook.py         # Search and page extraction CLI utility
+├── chat.md                          # Persistent project conversation & decision log
+└── README.md                        # Repository overview and usage guide
+```
 ├── chat.md                         # Persistent project conversation & decision log
 └── README.md                       # Repository overview and usage guide
 ```

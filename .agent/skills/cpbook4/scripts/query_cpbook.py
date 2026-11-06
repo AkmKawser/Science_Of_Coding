@@ -17,18 +17,18 @@ def find_pdf_file(book_num):
     ]
     
     script_dir = os.path.dirname(os.path.abspath(__file__))
+    repo_root = os.path.abspath(os.path.join(script_dir, "..", "..", "..", ".."))
     possible_roots = [
-        os.path.abspath(os.path.join(script_dir, "..", "books", "Overall")),   # New location: skill/books/Overall/
-        os.path.abspath(os.path.join(script_dir, "..", "books")),              # skill/books/
-        os.path.abspath(os.path.join(script_dir, "..")),                       # skill/
-        os.path.abspath(os.path.join(script_dir, "..", "..", "..")),           # repo root
-        os.path.abspath(os.path.join(script_dir, "..", "..", "..", "Books")),   # Books/
-        os.path.abspath(os.path.join(script_dir, "..", "..", "..", "skill", "books", "Overall")),
-        os.path.abspath(os.path.join(script_dir, "..", "..", "..", "skill", "books")),
+        os.path.join(repo_root, "books", "Overall"),                           # books/Overall/
+        os.path.join(repo_root, "books"),                                      # books/
+        os.path.abspath(os.path.join(script_dir, "..", "books", "Overall")),   # local fallback
+        os.path.abspath(os.path.join(script_dir, "..", "books")),              
+        os.path.abspath(os.path.join(script_dir, "..")),                       
+        repo_root,                                                             # repo root
     ]
     
-    # Also recursively search within skill/books if needed
-    books_dir = os.path.abspath(os.path.join(script_dir, "..", "books"))
+    # Also recursively search within repo_root/books if exists
+    books_dir = os.path.join(repo_root, "books")
     if os.path.exists(books_dir):
         for root, _, files in os.walk(books_dir):
             for fname in filename_candidates:
