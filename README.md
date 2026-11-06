@@ -24,9 +24,10 @@ Modern LLM-powered coding assistants frequently suffer from two fatal failure mo
 
 1. **The Science of Coding Manual**: Structured guides, mathematical proofs, pattern decompositions, and battle-tested code templates with side-by-side runnable implementations in **Python 3** and **Java 21**.
 2. **`Templates/` Directory (Agent Solution Blueprints)**: Explicit step-by-step methodologies and conceptual frameworks instructing the agent on *how* to deconstruct, design, and verify code systematically.
-3. **`Output/` Directory (Central Archive for Problems & Solutions)**:
-   - **`Output/problems/`**: Preserves complete copies of all tackled problem statements with full source attribution, dynamic categories (`problem catagories.docx`), and formatting standards.
-   - **`Output/solution/`**: Stores template-synthesized, step-by-step verified algorithmic implementations.
+3. **`Output/` Directory (Skill-Specific Outputs Hub)**:
+   - Each skill maintains its own isolated output repository under `Output/`.
+   - **`Output/ProblemSkill/`**: Houses the problem ingestion staging area (`Source of Problem/`), dynamic taxonomy (`problem catagories.docx`), formatting specifications (`problem formatting.md`), and the central [`question bank.md`](Output/ProblemSkill/question%20bank.md).
+   - **`Output/cpbook4/`**: Houses reference-grounded algorithmic solutions, proofs, and template-synthesized code derived via [`Templates/`](Templates/).
 4. **`.agent/skills/` (Centralized Agent Skills Hub)**:
    - **`cpbook4`**: Deep algorithmic knowledge base, data structures, and reference skill with surgical page extraction.
    - **`ProblemSkill`**: Autonomous ingestion skill managing staging inspection, selective problem parsing, dynamic HITL category selection, and non-destructive archival into `question bank.md`.
@@ -52,17 +53,17 @@ The primary purpose of the [`Templates/`](Templates/) directory is to **instruct
 
 ## 🗄️ `Output/`: Central Problems & Solutions Archive
 
-The [`Output/`](Output/) directory unifies problem statement preservation and template-derived solutions:
+The [`Output/`](Output/) directory houses dedicated output repositories for each skill:
 
-### 1. `Output/problems/` (Preservation & Attribution Protocol):
+### 1. `Output/ProblemSkill/` (Preservation & Ingestion Protocol):
 No matter where a problem originates—whether:
 1. **Local Markdown Files** (`.md`)
 2. **Online Competitive Programming Platforms** (e.g., Codeforces, LeetCode, CSES, AtCoder, HackerRank, UVa)
 3. **Reference Textbooks & Books** (e.g., Reference Volume 1, Reference Volume 2)
 
-**The agent must always create and keep a clean copy of the problem statement in [`Output/problems/`](Output/problems/) and explicitly document its source name, URL or page reference, difficulty, and applicable template.**
+**The agent must always preserve a clean copy of the problem statement in [`Output/ProblemSkill/`](Output/ProblemSkill/) and explicitly document its source name, URL or page reference, difficulty, and applicable template.**
 
-### 2. `Output/solution/` (Template Synthesis Protocol):
+### 2. `Output/cpbook4/` (Template Synthesis Protocol):
 - Every solution must directly reference and execute the step-by-step phases of the matching template in [`Templates/`](Templates/).
 - Solutions provide minimal state definitions, variable role tables, state-space trees, invariant checks, and runnable reference implementations in **Python 3** and **Java 21**.
 

@@ -1,11 +1,11 @@
 ---
 name: ProblemSkill
-description: Dedicated skill for managing and formatting problems into question bank.md. Inspects 'Output/problems/Source of Problem/', parses specified files or box numbers, presents dynamic categories and nested subcategories from 'problem catagories.docx' via Human-in-the-Loop (HITL) prompt, and safely ingests entries into question bank.md without data loss.
+description: Dedicated skill for managing and formatting problems into question bank.md. Inspects 'Output/ProblemSkill/Source of Problem/', parses specified files or box numbers, presents dynamic categories and nested subcategories from 'problem catagories.docx' via Human-in-the-Loop (HITL) prompt, and safely ingests entries into question bank.md without data loss.
 ---
 
 # Problem Ingestion & Question Bank Control Skill (`ProblemSkill`)
 
-The **`ProblemSkill`** controls the entire lifecycle of problem ingestion into [`Output/problems/question bank.md`](../../problems/question%20bank.md) from the staging directory ([`Output/problems/Source of Problem/`](../../problems/Source%20of%20Problem/)).
+The **`ProblemSkill`** controls the entire lifecycle of problem ingestion into [`Output/ProblemSkill/question bank.md`](../../../Output/ProblemSkill/question%20bank.md) from the staging directory ([`Output/ProblemSkill/Source of Problem/`](../../../Output/ProblemSkill/Source%20of%20Problem/)).
 
 For complete architectural details and visual flowcharts, consult:
 - **Skill Architecture & Guide**: [`SkillArchitecture/README.md`](SkillArchitecture/README.md)
@@ -27,9 +27,9 @@ Whenever processing a problem (from `write here.docx` or `put the file here/`), 
 
 ### Dynamic Hierarchical Category Protocol:
 1. **Dynamic Category Loading**:
-   - The agent reads the real-time categories and nested subcategories from [`Output/problems/problem catagories.docx`](../../problems/problem%20catagories.docx) using:
+   - The agent reads the real-time categories and nested subcategories from [`Output/ProblemSkill/problem catagories.docx`](../../../Output/ProblemSkill/problem%20catagories.docx) using:
      ```bash
-     python Output/skill/scripts/ingest_manager.py --categories
+     python .agent/skills/ProblemSkill/scripts/ingest_manager.py --categories
      ```
 2. **Interactive Consultation (HITL Prompt)**:
    - Present the dynamically retrieved primary categories and subcategories to the user (e.g. `Dynamic Programming ↳ 2D Grid & Interval DP` or `Graph Algorithms ↳ Shortest Paths (SSSP)`).
@@ -44,7 +44,7 @@ Whenever processing a problem (from `write here.docx` or `put the file here/`), 
 1. **Selective Ingestion**:
    - When a specific file or box number is requested, the agent **ONLY** processes that specific target. All other files and doc boxes remain completely untouched.
 2. **Zero Data Loss Guarantee**:
-   - **NEVER** delete any file from `put the file here/` or clear any box in `write here.docx` until the complete entry is 100% formatted and verified on disk in [`question bank.md`](../../problems/question%20bank.md).
+   - **NEVER** delete any file from `put the file here/` or clear any box in `write here.docx` until the complete entry is 100% formatted and verified on disk in [`question bank.md`](../../../Output/ProblemSkill/question%20bank.md).
 
 ---
 
@@ -53,7 +53,7 @@ Whenever processing a problem (from `write here.docx` or `put the file here/`), 
 ### Step 1: Discover Pending Queue
 Run the status command to inspect filled boxes and pending files:
 ```bash
-python Output/skill/scripts/ingest_manager.py --status
+python .agent/skills/ProblemSkill/scripts/ingest_manager.py --status
 ```
 
 ### Step 2: Target Isolation
@@ -63,7 +63,7 @@ python Output/skill/scripts/ingest_manager.py --status
 - Fetch the dynamic category & subcategory hierarchy from `problem catagories.docx` and consult the user to confirm both the **Primary Category** and **Subcategory**.
 
 ### Step 4: Reformat according to `problem formatting.md`
-Format into the strict schema defined in [`problem formatting.md`](../../problems/problem%20formatting.md):
+Format into the strict schema defined in [`problem formatting.md`](../../../Output/ProblemSkill/problem%20formatting.md):
 - `# Problem [ID]: [Title]`
 - `## 📌 Metadata & Source Attribution`
   - **Category**: [Primary Category]
@@ -80,7 +80,7 @@ Format into the strict schema defined in [`problem formatting.md`](../../problem
 - `## 💡 Notes & Special Edge Cases`
 
 ### Step 5: Append to `question bank.md` & Update Table
-- Add the entry to [`Output/problems/question bank.md`](../../problems/question%20bank.md).
+- Add the entry to [`Output/ProblemSkill/question bank.md`](../../../Output/ProblemSkill/question%20bank.md).
 - Append a new row to the **Master Problem Index** table at the top including both Category and Subcategory.
 
 ### Step 6: Atomic Verified Cleanup

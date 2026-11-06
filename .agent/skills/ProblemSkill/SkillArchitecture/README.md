@@ -6,13 +6,13 @@ This document defines the technical architecture, execution lifecycle, and human
 
 ## 🏛️ System Architecture
 
-`ProblemSkill` automates the intake, classification, and safe archival of algorithmic problems into [`Output/problems/question bank.md`](../../problems/question%20bank.md) without risk of data loss.
+`ProblemSkill` automates the intake, classification, and safe archival of algorithmic problems into [`Output/ProblemSkill/question bank.md`](../../../Output/ProblemSkill/question%20bank.md) without risk of data loss.
 
 ```mermaid
 flowchart TD
     User([User Invocation: @skill:ProblemSkill]) --> Agent[Agentic AI System]
     
-    subgraph StagingArea["Staging Area (Output/problems/Source of Problem/)"]
+    subgraph StagingArea["Staging Area (Output/ProblemSkill/Source of Problem/)"]
         Docx["write here.docx / write here_new.docx<br/>(100 Clean Themed Boxes for Links & Text)"]
         Files["put the file here/<br/>(PDFs, Book Chapters, Docs)"]
     end
@@ -37,7 +37,7 @@ flowchart TD
     HITL -->|User Selection Confirmed| Formatter["Transform into Markdown Schema<br/>(problem formatting.md)"]
     
     subgraph PersistentDatabase["Permanent Archive"]
-        QBank["Output/problems/question bank.md<br/>1. Appends Problem Specification<br/>2. Updates Master Index Table"]
+        QBank["Output/ProblemSkill/question bank.md<br/>1. Appends Problem Specification<br/>2. Updates Master Index Table"]
     end
     
     Formatter --> PersistentDatabase

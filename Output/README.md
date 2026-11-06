@@ -1,27 +1,32 @@
-# Output Directory: Problems & Solutions Archive
+# Skill Outputs Directory (`Output/`)
 
-This directory serves as the unified output space for problems, benchmark tasks, and template-guided algorithmic solutions.
+Each specialized skill in this project is designed to receive specific inputs and produce structured, reproducible outputs. Under `Output/`, every skill maintains its own isolated output repository.
 
 ---
 
-## 📁 Directory Structure
+## 📁 Directory Architecture
 
 ```
 Output/
-├── problems/                       # Original problem statements preserved with source attribution
+├── ProblemSkill/                   # Dedicated output repository for ProblemSkill
+│   ├── Source of Problem/          # Ingestion staging area (write here.docx, put the file here/)
+│   ├── problem catagories.docx     # Dynamic 2-level taxonomy hierarchy
+│   ├── problem formatting.md       # Standard schema & blueprint for problem entries
+│   ├── question bank.md            # Canonical central repository of formatted problems
 │   └── README.md                   # Problem schema, metadata standards, and indexing protocols
-└── solution/                       # Template-synthesized problem solutions
-    └── README.md                   # Solution blueprint formatting and derivation standards
+│
+└── cpbook4/                        # Dedicated output repository for cpbook4
+    └── README.md                   # Reference-grounded template derivations and query solutions
 ```
 
 ---
 
-## 🎯 Dual-Repository Protocol
+## 🎯 Skill-Specific Output Protocols
 
-1. **`Output/problems/`**:
-   - Preserves an exact, self-contained copy of every problem analyzed or tackled.
-   - Requires full metadata: Source name (e.g., Codeforces, LeetCode, CSES, UVa, or Reference Book), Source URL/citation, topic, and difficulty.
+1. **`Output/ProblemSkill/`**:
+   - **Input**: Problem statements from multi-box Word documents (`Source of Problem/write here.docx`), external offline PDF companion files (`Source of Problem/put the file here/`), or online problem URLs.
+   - **Output**: Cleanly ingested, categorized, and linked problems added to [`question bank.md`](ProblemSkill/question%20bank.md), classified dynamically against [`problem catagories.docx`](ProblemSkill/problem%20catagories.docx).
 
-2. **`Output/solution/`**:
-   - Stores the verified, step-by-step solutions derived using the templates in [`Templates/`](../Templates/).
-   - Every solution must explicitly follow the phased steps of the applied template (state definition, variable role classification, state-space tree, invariant verification, and failure mode auditing).
+2. **`Output/cpbook4/`**:
+   - **Input**: Algorithmic queries, paradigm inquiries, and code decomposition prompts cross-referenced against the two reference volumes.
+   - **Output**: Verified step-by-step solutions derived using the templates in [`Templates/`](../Templates/), complete with state definitions, variable role tables, state-space trees, invariant proofs, and complexity bounds.
