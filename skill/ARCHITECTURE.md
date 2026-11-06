@@ -37,11 +37,14 @@ skill/
 
 ```mermaid
 flowchart TD
-    User["User Request / Task"] --> Agent["Agentic AI (Antigravity / Claude / Cursor / LLM)"]
-    Agent --> SkillSpec["skill/SKILL.md (Decision Framework & Rules)"]
+    User["User Request / Coding Problem"] --> Agent["Agentic AI (Antigravity / Claude / Cursor / LLM)"]
     
-    subgraph SkillPackage["skill/ (Self-Contained Knowledge Module)"]
-        SkillSpec --> TOC["references/table_of_contents.md<br/>& JSON Outlines"]
+    subgraph BlueprintLayer["Templates/ (Methodological Blueprint Layer)"]
+        TemplateDoc["Templates/*.md<br/>(States, Invariant Rules, State-Space Trees)"]
+    end
+    
+    subgraph SkillPackage["skill/ (Precision Knowledge Retrieval)"]
+        SkillSpec["skill/SKILL.md (Decision Framework)"] --> TOC["references/table_of_contents.md<br/>& JSON Outlines"]
         TOC --> Script["scripts/query_cpbook.py"]
         
         subgraph DataStore["books/ (Complete Ground Truth)"]
@@ -49,40 +52,47 @@ flowchart TD
             PDF2["Part-2.pdf (352 pages)"]
         end
         
-        Script -->|1. Keyword Search| DataStore
-        Script -->|2. Exact Page Extraction| DataStore
+        Script -->|Keyword Search| DataStore
+        Script -->|Exact Page Extraction| DataStore
     end
     
-    Script --> Context["Precise, Grounded Context (0 Hallucination)"]
-    Context --> Agent
-    Agent --> Response["Science of Coding Manual Output"]
+    Agent -->|1. Decompose & Structure| BlueprintLayer
+    Agent -->|2. Route & Retrieve| SkillPackage
+    
+    BlueprintLayer --> GroundedContext["Grounded & Structured Context<br/>(State Definitions + Verified Invariants)"]
+    SkillPackage --> GroundedContext
+    
+    GroundedContext --> Consensus{"Collaborative Consensus?<br/>(Ask User if Multiple Choices)"}
+    Consensus -->|Confirmed| CodeOutput["Deterministic, Verified Code Output"]
 ```
 
 ---
 
-## 4. Why This Architecture? (Context Efficiency vs. Ground Truth)
+## 4. Why This Architecture? (Context Efficiency + Structured Problem Solving)
 
-Loading raw text of 436,000 tokens into an LLM context window at every step causes:
-1. Context overflow and excessive token latency.
-2. Context degradation ("lost in the middle" phenomenon and hallucinated algorithm details).
-3. Exponential compute cost.
+Loading raw text of 436,000 tokens into an LLM context window at every step causes context overflow, hallucinated details, and high latency. Furthermore, retrieving raw algorithmic theory without a structured decomposition methodology causes agents to guess loops and produce unverified code.
 
-### The 3-Tier Retrieval Strategy:
-Instead of dumping raw tokens into memory, the skill implements a **3-tier precision pipeline**:
+### The 4-Tier Precision Pipeline:
 
-1. **Tier 1: Global Routing (Zero Token Overhead)**:
-   - When the agent receives a topic (e.g. *Segment Tree with Lazy Propagation* or *Pollard's Rho*), it inspects [`references/table_of_contents.md`](references/table_of_contents.md).
-   - This pinpoints the exact volume (`Book 1` or `Book 2`) and exact page range (e.g., `Book 1, Section 2.4.4, pages 143-152`).
+Instead of dumping raw tokens or writing unstructured code, the system implements a **4-tier precision pipeline**:
 
-2. **Tier 2: Targeted Index Search**:
+1. **Tier 1: Methodological Blueprints (`Templates/`)**:
+   - Before writing code or choosing libraries, the agent selects the matching template (e.g., [`Templates/Repetitive Structure Template.md`](../Templates/Repetitive%20Structure%20Template.md)).
+   - This guides the agent to inventory candidate variables, classify variable roles (Free, Carried, Derived, Fixed), construct the state-space tree, derive bounds, and audit failure modes.
+
+2. **Tier 2: Global Routing (Zero Token Overhead)**:
+   - When the agent needs algorithmic ground truth (e.g. *Segment Tree with Lazy Propagation* or *Pollard's Rho*), it inspects [`references/table_of_contents.md`](references/table_of_contents.md).
+   - This pinpoints the exact volume (`Volume 1` or `Volume 2`) and exact page range (e.g., `Volume 1, Section 2.4.4, pages 143-152`).
+
+3. **Tier 3: Targeted Index Search**:
    - If the agent needs to check if a niche problem or variation appears in the books:
      ```bash
      python skill/scripts/query_cpbook.py search --book 1 --query "Lazy Propagation" --limit 3
      ```
    - Returns matched page numbers and snippet contexts in milliseconds.
 
-3. **Tier 3: Surgical Page Extraction**:
-   - The agent reads only the relevant 5–10 pages containing the formal proofs, edge cases, formulas, and C++/Python/Java implementations:
+4. **Tier 4: Surgical Page Extraction**:
+   - The agent extracts only the relevant 3–5 pages containing the formal proofs, edge cases, formulas, and reference implementations:
      ```bash
      python skill/scripts/query_cpbook.py extract --book 1 --start 143 --end 148 --output st_lazy.txt
      ```

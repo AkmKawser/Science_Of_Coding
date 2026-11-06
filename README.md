@@ -53,33 +53,48 @@ The `cpbook4` skill encapsulates comprehensive reference libraries:
   *Mathematics (Number Theory, Combinatorics, Probability, Game Theory, Matrix Power), String Processing (KMP, Suffix Trie/Tree/Array, Hashing, Manacher), Computational Geometry, Advanced Search & DP, Network Flow, Matching, NP-hard Problems, Problem Decomposition, and Rare Topics (Sparse Table, HLD, LCA, FFT/NTT, Simplex).*
 - **Total Volume**: 681 pages, ~328,000 words (~436,000 tokens).
 
-### 3-Tier Precision Retrieval Architecture
+### 4-Tier Precision Retrieval & Problem-Solving Architecture
 
-Loading ~436,000 tokens into an AI context window causes severe degradation and token bloat. The `cpbook4` skill uses a **3-Tier Precision Pipeline** described in detail in [`skill/ARCHITECTURE.md`](skill/ARCHITECTURE.md):
+Loading ~436,000 tokens into an AI context window causes severe degradation and token bloat. Furthermore, retrieving raw algorithmic theory without a structured decomposition methodology causes agents to generate hasty, unverified code. 
+
+**Science of Coding** solves this through a **4-Tier Precision Pipeline** described in detail in [`skill/ARCHITECTURE.md`](skill/ARCHITECTURE.md):
 
 ```
-                   Task / User Query
-                           │
-                           ▼
-                 Any Agentic AI System
-                           │
-         ┌─────────────────┴─────────────────┐
-         ▼                                   ▼
-  Tier 1: Instant TOC                 Tier 2: Search
-  skill/references/table_of_contents.md  query_cpbook.py search
-         │                                   │
-         └─────────────────┬─────────────────┘
-                           ▼
-                  Tier 3: Extraction
-               query_cpbook.py extract
-                           │
-                           ▼
-             skill/books/Overall/ (PDFs)
-                           │
-                           ▼
-               100% Grounded Context
-              (Zero Hallucination Code)
+                        Task / User Coding Problem
+                                    │
+                                    ▼
+                          Any Agentic AI System
+                                    │
+      ┌─────────────────────────────┼─────────────────────────────┐
+      ▼                             ▼                             ▼
+Tier 1: Methodological      Tier 2: Knowledge Router      Tier 3: Targeted Search
+Blueprint                   skill/references/             python query_cpbook.py search
+Templates/*.md              table_of_contents.md
+(States, Invariants,               │                             │
+Derivation Steps)                  └──────────────┬──────────────┘
+      │                                           ▼
+      │                                  Tier 4: Surgical Extract
+      │                                  python query_cpbook.py extract
+      │                                  skill/books/Overall/ (PDFs)
+      │                                           │
+      └─────────────────────┬─────────────────────┘
+                            ▼
+               Grounded & Structured Context
+        (Step-by-Step State Tree + Mathematical Proof)
+                            │
+                            ▼
+               Collaborative Design Check
+             (Propose Options & Confirm with User)
+                            │
+                            ▼
+               Deterministic Code Generation
 ```
+
+#### The Four Tiers Explained:
+1. **Tier 1: Methodological Blueprints (`Templates/`)**: Before writing code or choosing libraries, the agent selects the appropriate template (e.g., [`Templates/Repetitive Structure Template.md`](Templates/Repetitive%20Structure%20Template.md)) to formulate the state, classify variable roles, construct the state-space tree, and catalog boundary edge cases.
+2. **Tier 2: Knowledge Router (`skill/references/table_of_contents.md`)**: Instant, zero-token routing that pinpoints the exact chapter, section, and page range in the books.
+3. **Tier 3: Targeted Search (`query_cpbook.py search`)**: High-speed keyword search across indexed volumes for niche constraints or problem variations.
+4. **Tier 4: Surgical Page Extraction (`query_cpbook.py extract`)**: Extracts only the specific 3-5 pages containing verified proofs, lemmas, and reference implementations directly into the prompt context.
 
 ---
 
