@@ -92,11 +92,11 @@ If more than one data structure, algorithm, or paradigm can solve the user's pro
 
 ---
 
-### 🚨 Mandatory Problem Preservation Protocol (`problems/` Database)
+### 🚨 Mandatory Output Preservation Protocol (`Output/` Directory)
 Whenever a problem is provided, tackled, or analyzed—regardless of whether it originates from a local markdown file, an online judge (Codeforces, LeetCode, CSES, AtCoder, etc.), or a reference book:
-1. **Store a Copy**: You MUST create and preserve a self-contained copy of the problem statement inside the `problems/` directory.
-2. **Attribute the Source**: Explicitly document the source name (e.g., platform name, contest, problem number, or book volume and page) and URL/citation in the problem metadata.
-3. **Apply Template**: Map and apply the corresponding template from `Templates/` to formulate the solution.
+1. **Preserve Problem Statement (`Output/problems/`)**: You MUST create and preserve a self-contained copy of the problem statement inside `Output/problems/` with source name, URL or book reference, topic, and difficulty.
+2. **Synthesize Solution (`Output/solution/`)**: Derive and store the step-by-step solution inside `Output/solution/` strictly applying the designated blueprint from `Templates/`.
+3. **Verify Implementation**: Provide verified code implementations in Python 3 and Java 21 adhering to the template's invariants and failure audits.
 
 ---
 
