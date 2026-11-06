@@ -31,6 +31,101 @@ The last column shows that the number of variables in the state and the number o
 
 In step 1 you list every candidate variable the problem touches. In step 2 you classify them and identify their roles. In step 3 you form the true state. Fixed values (given and unchanging) and derived variables (a formula of the others) do not describe where you are, and temporaries live inside one iteration only, so they are dropped. What remains, the free and carried variables, is the state in the strict sense.
 
+### Why only Free and Carried variables form the State
+
+$$\text{State} = (\text{Free Variables}, \text{Carried Variables})$$
+
+To understand why this equation holds rigorously, consider what happens when you pause an ongoing algorithm and write a note for someone else to resume it:
+
+1. **Why Free variables MUST be in the state**:
+   - Free variables (steppers and walkers, like `i`, `j`, `left`, `right`) tell you **WHERE you are** in the iteration space.
+   - If you pause in the middle of a loop and omit `i`, the person resuming does not know which iteration to execute next—they cannot know if they are at element 3 or element 97.
+   - Therefore, free variables are essential for knowing the current location and boundaries.
+
+2. **Why Carried variables MUST be in the state**:
+   - Carried variables (gatherers, holders, flags, like `total`, `best`, `found`) tell you **WHAT you have accumulated or discovered so far**.
+   - Because carried variables depend on their own past history across iterations, their values **cannot be recomputed on the fly** without restarting the entire loop from the beginning.
+   - If you omit `total`, the person resuming knows they are at element 5, but has completely lost the running sum of elements 1 through 4.
+
+3. **Why Fixed values are EXCLUDED from the state**:
+   - Fixed values (like `n`, `k`, `target`) are invariant constraints given once by the problem statement.
+   - They do not change from iteration to iteration. Since they are global constants known everywhere in the function, they do not describe "where you currently are" or "what you just accumulated".
+
+4. **Why Derived variables are EXCLUDED from the state**:
+   - Derived variables (like `term = 2*i - 1`, `value = n + 1 - i + j`, `mirror = n - 1 - i`) have **zero memory**.
+   - Their values depend exclusively on the current instantaneous values of the free/fixed variables.
+   - If you have the free variable `i = 5`, you can instantly recalculate `term = 2*(5) - 1 = 9` using the algebraic formula at any moment. Storing them in the resume note would be pure redundancy.
+
+5. **Why Temporaries are EXCLUDED from the state**:
+   - Temporaries (like `tmp` in a swap, or `line` read per line) exist only inside a single iteration and die at the iteration boundary. They never cross from step $i$ to step $i+1$.
+
+---
+
+### How to Analyse a Problem to Find the 4 Variable Classes
+
+When reading an algorithmic problem, do not begin by writing `for` loops. Follow this systematic 4-question decomposition technique:
+
+```
+                            [ Candidate Variable ]
+                                       │
+                      Does its value ever change after input?
+                                ├── NO ──────> [ FIXED ] (e.g., n, k)
+                                └── YES
+                                       │
+                    Can it be calculated from other variables
+                         WITHOUT using its own past value?
+                                ├── YES ─────> [ DERIVED ] (e.g., 2*i - 1)
+                                └── NO
+                                       │
+                     Does it iterate through an independent range
+                        or advance across a domain/sequence?
+                                ├── YES ─────> [ FREE ] (Stepper/Walker -> Adds a Loop)
+                                └── NO
+                                       │
+                       Does it update using its own prior value
+                           to accumulate or remember history?
+                                └── YES ─────> [ CARRIED ] (Gatherer/Holder -> Inside Loop)
+```
+
+#### The Diagnostic Questions:
+1. **The Fixed Test**: *"Is this variable provided once by the input and strictly constant throughout all iterations?"*
+   - If **YES** $\implies$ **Fixed**. (Example: size $N$, target sum $K$, modulus $M$).
+2. **The Derived Test**: *"If I know the current loop indices, can I compute this variable right now with a single formula without knowing previous iterations?"*
+   - If **YES** $\implies$ **Derived**. (Example: in row `i`, col `j`, the value printed is $i \times j$, or $(i+j)\%2$, or $2i-1$. It needs no loop, no storage).
+3. **The Free Test**: *"Must I actively enumerate or try every value in a discrete sequence/range to visit every state?"*
+   - If **YES** $\implies$ **Free**. (Example: row counter `i` from $1$ to $N$, inner column counter `j` from $1$ to $i$, sliding window left/right pointers). Each free variable creates an enumeration dimension.
+4. **The Carried Test**: *"Does this variable appear on both sides of an update statement (e.g., `x = x + ...`, `best = max(best, ...)`), requiring memory of previous iterations?"*
+   - If **YES** $\implies$ **Carried**. (Example: running sum `total += term`, minimum element `min_val = min(min_val, val)`, boolean flag `found = true`).
+
+---
+
+### 🚀 Cheatsheet: How to Know Exactly How Many Loops are Required
+
+A common beginner mistake is thinking that if a state has 3 variables, the program needs 3 loops. **This is completely false.**
+
+> [!IMPORTANT]
+> **The Golden Law of Loop Counting**:
+> $$\text{Number of Nested Loops} = \text{Number of Independent Enumeration Dimensions among FREE Variables}$$
+> - **Carried variables NEVER add a loop.** (They are updated inside existing loops).
+> - **Derived variables NEVER add a loop.** (They are formulas evaluated inside the loop body).
+> - **Fixed variables NEVER add a loop.** (They merely define the outer bounds).
+
+#### Loop Decision Matrix Cheatsheet:
+
+| Problem Archetype / Pattern | Identified Variables & Classes | Free Variables Count | Loops Required | Structural Implementation Pattern |
+| :--- | :--- | :---: | :---: | :--- |
+| **Linear Series Summation**<br>($1 + 2 + \dots + n$ or $1 + 3 + \dots$) | `n` (Fixed)<br>`i` (Free)<br>`term = 2i-1` (Derived)<br>`total` (Carried) | **1** (`i`) | **1 Loop** | `for i in 1..n:`<br>&nbsp;&nbsp;`total += (2*i - 1)` |
+| **Linear Search / Min / Max**<br>(Scan array of size $N$) | `n` (Fixed)<br>`i` (Free)<br>`best` (Carried) | **1** (`i`) | **1 Loop** | `for i in 0..n-1:`<br>&nbsp;&nbsp;`best = max(best, arr[i])` |
+| **Sliding Window / Two Pointers**<br>(Subarray sum, pair sum) | `arr` (Fixed)<br>`left`, `right` (Free)<br>`curr_sum` (Carried) | **2** (`left`, `right` coupled) | **1 Loop** | Two pointers move in the same direction or converge; they share **1 while loop**: `while right < n:` |
+| **2D Matrix Traversal / Grid**<br>(Scan rows and columns) | `rows`, `cols` (Fixed)<br>`r`, `c` (Free)<br>`grid[r][c]` (Derived) | **2** (`r`, `c` independent) | **2 Nested Loops** | `for r in 0..rows-1:`<br>&nbsp;&nbsp;`for c in 0..cols-1:` |
+| **Triangular Pattern Printing**<br>(Pyramids, Floyd triangle) | `n` (Fixed)<br>`row` (Free)<br>`col` (Free, depends on row)<br>`val` (Derived) | **2** (`row`, `col`) | **2 Nested Loops** | `for row in 1..n:`<br>&nbsp;&nbsp;`for col in 1..row:` |
+| **Centered Diamond / Pyramid with Padding**<br>(Rows with spaces & numbers) | `n` (Fixed)<br>`row` (Free)<br>`spaces` (Derived or Free)<br>`cols` (Free) | **2** (`row`, `col`) | **2 Nested Loops**<br>*(or outer loop + string repeat)* | `for row in 1..n:`<br>&nbsp;&nbsp;`print spaces(n - row)`<br>&nbsp;&nbsp;`for col in 1..row:` |
+| **Subarray Enumeration ($O(N^2)$)**<br>(Check every pair $[i, j]$) | `n` (Fixed)<br>`i` (Free - start)<br>`j` (Free - end)<br>`total` (Carried/Derived) | **2** (`i`, `j`) | **2 Nested Loops** | `for i in 0..n-1:`<br>&nbsp;&nbsp;`for j in i..n-1:` |
+| **3-Sum / Triplet Complete Search**<br>(Check all triplets $a < b < c$) | `n` (Fixed)<br>`i`, `j`, `k` (Free steppers) | **3** (`i`, `j`, `k`) | **3 Nested Loops** | `for i in 0..n-1:`<br>&nbsp;&nbsp;`for j in i+1..n-1:`<br>&nbsp;&nbsp;&nbsp;&nbsp;`for k in j+1..n-1:` |
+| **$k$-Combination Exhaustive Search**<br>(e.g. Choose 6 numbers out of $N$) | `n` (Fixed)<br>`a, b, c, d, e, f` (Free) | **6** (`a` through `f`) | **6 Nested Loops** | Six nested `for` loops (or recursive backtracking if $k$ is variable). |
+
+---
+
 ### State space
 
 The **state space** is the set of every state the program can be in. Each time the loop body runs, the program is in one state. The tree in Part 2 is a drawing of the state space: every leaf is one state. This is why counting leaves gives the time cost.
