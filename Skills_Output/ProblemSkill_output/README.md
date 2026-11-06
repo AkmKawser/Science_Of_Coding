@@ -21,3 +21,4 @@ This directory houses all outputs produced and managed by the [`ProblemSkill`](.
 
 3. **[`output formating.md`](output%20formating.md)**:
    - Mandatory specification governing naming conventions, directory structure, and derivation phases for all solutions.
+
