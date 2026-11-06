@@ -1057,7 +1057,8 @@ Sum = [Total sum]
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #1)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../../Skills_Input/Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [Templates/Repetitive Structure Template.md](../../../Skills_Input/Templates/Repetitive%20Structure%20Template.md)
+- **Solution Folder**: [Solution Files/Repetitive Structures/Pattern Printing/P-17/](../Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-17/) ([Python](../Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-17/P-17_python.py) | [Java](../Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-17/P-17_java.java) | [Derivation](../Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-17/P-17_derivation.md))
 
 ---
 
