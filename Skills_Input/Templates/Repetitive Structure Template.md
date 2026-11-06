@@ -88,18 +88,21 @@ Derived variables, such as `value = n + 1 - i + j`, have no role in the chart. T
 
 Part 3 turns the tree and transition model from Part 2 into code. Do not guess the loops from the printed output. Copy each fact from the tree, using the mapping below, and the loops follow.
 
-### From the tree to the code
+### From the tree to the code: Structural & Transition Mapping
 
-| What you need                      | Where to read it in the tree                      | What goes into the code                                    |
-| ---------------------------------- | ------------------------------------------------- | ---------------------------------------------------------- |
-| Number of loops                    | Number of levels below the root                   | One loop per level                                         |
-| Nesting order                      | Top level is the outermost                        | Level 1 is the outer loop, the last level is the innermost |
-| Start of a loop                    | First child under a node                          | Initialization, such as `j = 1`                          |
-| End of a loop                      | Last child under a node                           | Bound, such as `j <= n - i + 1`                          |
-| Step size                          | Difference between neighbouring children          | Update, such as `++j`                                    |
-| How a bound changes                | Child counts under different parents              | A bound that uses the parent variable                      |
-| What happens at a leaf             | The leaf value                                    | The loop body                                              |
-| What happens when a level finishes | Moving on to the next sibling at the parent level | Code placed after the inner loop, such as a newline        |
+| What you need | Where to read it in the tree / transition | What goes into the code |
+| :--- | :--- | :--- |
+| **Number of loops** | Number of levels below the root | One loop per level |
+| **Nesting order** | Top level is the outermost | Level 1 is outer loop, last level is innermost |
+| **Start of a loop** | First child under a node | Initialization, such as `j = 1` |
+| **End of a loop** | Last child under a node | Bound, such as `j <= n - i + 1` |
+| **Step size** | Difference between neighbouring children | Update, such as `++j` |
+| **How a bound changes** | Child counts under different parents | A bound that uses the parent variable |
+| **Inner Leaf Action** | Action attached to tree leaf | Inner loop body: `out.append(val)` or `print(term)` |
+| **Delimiter Action** | Inter-element spacing check | Condition in inner loop: `if (j > 1) out.append("   ")` |
+| **Boundary / EOL Action** | End of inner row in tree traversal | Code placed after inner loop: `out.append("\n")` |
+| **Accumulation Action** | Carried update on tree edge | Loop body accumulator update: `total += term` |
+| **Epilogue Action** | Final termination leaf | Code placed after all loops: `print(f"Sum = {total}")` |
 
 ---
 
@@ -447,6 +450,35 @@ Every solution derivation in Phase 2 must include the **Transition Analysis Tabl
 | **Carried Accumulator** | `total` | $\text{total}$ | $\text{total} \leftarrow \text{total} + \text{term}(i)$ | $\text{total} + \text{term}$ | Loop Body |
 | **Carried Holder** | `best` | $\text{best}$ | $\text{best} \leftarrow \max(\text{best}, \text{item})$ | $\text{best}'$ | Loop Body |
 | **Action / Emission** | `stdout` | Buffer so far | Output: `val`, delimiter, or `\n` | Stream updated | Leaf / EOL |
+
+---
+
+### Actions in Repetitive Structures: The Taxonomy of Actions
+
+While **transitions** describe internal state changes in memory ($\text{State}(t) \to \text{State}(t+1)$), **actions** describe the *observable work or side-effects* performed during those transitions.
+
+Actions fall into **5 distinct architectural types**:
+1. **Inner / Leaf Action (Cell Work)**: Executes once per leaf in the state-space tree inside the innermost loop body (e.g. `out.append(val)`, `arr[i] = 2 * val`).
+2. **Delimiter / Inter-Element Action**: Executes between consecutive elements to prevent trailing spaces or formatting artifacts (e.g. `if (j > 1) out.append("   ")`).
+3. **Boundary / EOL Action**: Executes when an inner walker finishes its range and wraps to the next parent stepper (e.g. `out.append("\n")`, resetting row-level accumulators).
+4. **Control / Early-Exit Action (Pruning)**: Executes when an invariant or target condition is met before natural bounds (e.g. `found = true; break`).
+5. **Epilogue / Final Action**: Executes completely after all loops terminate, displaying the final accumulated answer (e.g. `print(f"Sum = {total}")`).
+
+#### Master Mapping: Variable Class $\to$ Transition Rule $\to$ Action $\to$ Code Placement
+
+| State Variable Class | Role in Algorithm | Exact Transition Rule | Triggered Action Type | Concrete Code Example | Execution Placement |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Fixed** | Constant bound (`n`, `k`) | Invariant across execution ($n' = n$) | **Validation / Guard Action** | `if (n <= 0) return;` | **Prolog (Before Loop)** |
+| **Carried (Base)** | Initial accumulator (`total`, `best`) | Neutral initialization: $\text{total} \leftarrow 0$ | **Prolog Action** | `total = 0; terms = []` | **Prolog (Before Loop)** |
+| **Free (Outer)** | Parent Stepper (`i`) | Monotonic advance: $i' \leftarrow i + 1$ | — *(Advances outer loop)* | `for i in range(1, n + 1):` | **Outer Loop Header** |
+| **Free (Inner)** | Child Walker (`j`) | Step within parent: $j' \leftarrow j + 1$ | — *(Advances inner loop)* | `for j in range(1, i + 1):` | **Inner Loop Header** |
+| **Derived** | Instantaneous closed formula | Computed on the fly without memory | — *(Instant calculation)* | `val = j` *(or `2*i - 1`)* | **Top of Inner Loop Body** |
+| **Derived / Temporary** | Inter-element spacing indicator | Boundary check: $j > 1$ | **Delimiter Action** | `if (j > 1) out.append("   ");` | **Inner Body (Before Value)** |
+| **Action Node** | Side-effect emission at tree leaf | Transition to leaf state $(i, j)$ | **Inner / Leaf Action** | `out.append(val);` | **Core of Inner Loop Body** |
+| **Carried (Update)** | Gatherer accumulating history | Inductive update: $\text{total}' \leftarrow \text{total} + \text{val}$ | **Accumulation Action** | `total += val` | **Bottom of Loop Body** |
+| **Carried (Flag)** | Search target or failure flag | Boolean latch update: `found = true` | **Early-Exit Action** | `if (val == target) return true;`| **Inner Body (Conditional)** |
+| **Free (Inner Reset)** | Inner walker reaches bound ($j = i$) | Coordinate reset: $j' \leftarrow 1, i' \leftarrow i + 1$ | **Boundary / EOL Action** | `out.append("\n");` | **Outer Body (After Inner)** |
+| **Free (Outer Term)** | Stepper reaches exit ($i = n + 1$) | Loop condition falsified: $i \le n \to \text{False}$ | **Epilogue Action** | `print(f"Sum = {total}")` | **Epilogue (After All Loops)** |
 
 > [!TIP]
 > **Why Formal Transition Analysis Eliminates Bugs**:

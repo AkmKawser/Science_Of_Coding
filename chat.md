@@ -1644,3 +1644,25 @@ yes apply it"
      - [`chat.md`](chat.md)
 3. **Git Synchronization**:
    - Committed and synchronized all changes with GitHub `origin/main`.
+
+
+---
+
+## Session 84: Document Action Taxonomy and Master Mapping Matrix in Repetitive Structure Template
+
+### User Request
+> "now oragnize these and add it to @[c:\Users\USER\Documents\.MYGITHUB\Science_Of_Coding\Skills_Input\Templates\Repetitive Structure Template.md]"
+
+### Actions Taken & Implementation Summary
+1. **Integrated Action Taxonomy & Master Mapping Matrix into [`Repetitive Structure Template.md`](Skills_Input/Templates/Repetitive%20Structure%20Template.md)**:
+   - **Section 1 (Part 3: From Tree to Code)**: Expanded the structural mapping table to include exact mappings for **Inner Leaf Actions**, **Delimiter Actions**, **Boundary / EOL Actions**, **Accumulation Actions**, and **Epilogue Actions**.
+   - **Section 2 (Reference Manual - Actions in Repetitive Structures)**: Added a comprehensive architectural guide defining the 5 primary action types:
+     1. *Inner / Leaf Action (Cell Work)*: Core inner loop body emissions.
+     2. *Delimiter / Inter-Element Action*: Formatting checks (`if (j > 1) ...`).
+     3. *Boundary / EOL Action*: Outer loop row wraps (`\n`, resetting row state).
+     4. *Control / Early-Exit Action (Pruning)*: Conditional termination (`break` / `return`).
+     5. *Epilogue / Final Action*: Displaying or returning the carried answer after loops end.
+   - **Added Master Matrix: Variable Class $\to$ Transition Rule $\to$ Action $\to$ Code Placement**:
+     Structured tabular reference specifying the exact relationship between variable classification (Fixed, Free Outer/Inner, Derived, Carried Base/Update/Flag) and the resulting code placement in the loop lifecycle.
+2. **Git Synchronization**:
+   - Committed and synchronized all changes with GitHub `origin/main`.
