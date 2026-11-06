@@ -70,8 +70,11 @@ $$\text{State} = (i, j)$$
 
 ### 2. State-Space Tree Diagram (Trace for $N = 4$)
 - **Tree Type**: **Hierarchical 2D Coordinate Tree (Nested Loops)**
-- **Branching Factor**: Variable branching from parent row node $i$ to $i$ inner column children ($j \in [1, i]$).
-- **Topology**: Level 1 represents outer row steps ($i \in [1, N]$); Level 2 represents inner column leaf evaluations emitting values and row termination newlines.
+- **Branching Factor**: Multi-branching from Root to $N$ row nodes ($i \in [1, 4]$), and dependent branching from each row node $i$ to $i$ column children ($j \in [1, i]$).
+- **Topology**: True 2D top-down hierarchical tree:
+  - **Level 0 (Root)**: Top-center starting state ($N = 4$).
+  - **Level 1 (Row Steppers)**: Horizontal spread of 4 outer row nodes ($i = 1, 2, 3, 4$).
+  - **Level 2 (Column Walkers / Leaves)**: Downward branching from each row node into its respective column leaves ($1$ leaf under row 1, $2$ under row 2, $3$ under row 3, $4$ under row 4), each emitting its printed value and newline.
 
 ![P-17 State-Space Tree Trace](P-17_state_space_tree.png)
 
