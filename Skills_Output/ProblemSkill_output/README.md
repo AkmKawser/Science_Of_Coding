@@ -19,6 +19,6 @@ This directory houses all outputs produced and managed by the [`ProblemSkill`](.
    - Separate code files for Python (`<ID>_python.py`) and Java (`<ID>_java.java`).
    - Phased derivation documents (`<ID>_derivation.md`) grounded in templates.
 
-3. **[`output formating.md`](output%20formating.md)**:
-   - Mandatory specification governing naming conventions, directory structure, and derivation phases for all solutions.
+3. **[`Solution formating.md`](Solution%20formating.md)**:
+   - Mandatory specification governing naming conventions (unpadded IDs, e.g. `P-1`), directory structure, and derivation phases for all solutions.
 

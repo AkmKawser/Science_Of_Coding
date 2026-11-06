@@ -15,7 +15,7 @@ Every problem ingested into `question bank.md` must adhere to the following temp
 # Problem [ID]: [Problem Title]
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: [Unique ID or sequential number, e.g., P-001]
+- **Problem ID**: [Unique ID without leading zeroes, e.g., P-1, P-2, P-10]
 - **Problem Title**: [Exact title of the problem]
 - **Primary Category**: [Primary Domain from problem catagories.docx, e.g., Dynamic Programming]
 - **Subcategory**: [Subcategory from problem catagories.docx, e.g., 2D Grid & Interval DP]

@@ -1,5 +1,5 @@
 /**
- * Problem ID: P-001
+ * Problem ID: P-1
  * Problem Title: Series Summation: 1 + 2 + 3 + 4 + .............
  * Category: Repetitive Structures
  * Subcategory: Pattern Printing

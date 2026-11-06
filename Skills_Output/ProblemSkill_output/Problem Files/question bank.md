@@ -8,67 +8,67 @@ This document serves as the unified, centralized question bank storing all pract
 
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Title | Primary Category | Subcategory | Source / Reference |
 | :--- | :--- | :--- | :--- | :--- |
-| [&nbsp;P&#8209;001&nbsp;](#p-001) | [Series Summation: 1 + 2 + 3 + 4 + .............](#p-001) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #1) |
-| [&nbsp;P&#8209;002&nbsp;](#p-002) | [Series Summation: 2 + 4 + 6 + 8 + .............](#p-002) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #2) |
-| [&nbsp;P&#8209;003&nbsp;](#p-003) | [Series Summation: 1 + 3 + 5 + 7 + .............](#p-003) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #3) |
-| [&nbsp;P&#8209;004&nbsp;](#p-004) | [Series Summation: 4 + 12 + 20 + 28 + .............](#p-004) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #4) |
-| [&nbsp;P&#8209;005&nbsp;](#p-005) | [Series Summation: 2 + 5 + 8 + 11 + .............](#p-005) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #5) |
-| [&nbsp;P&#8209;006&nbsp;](#p-006) | [Series Summation: 1.2 + 2.3 + 3.4 + .............](#p-006) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #6) |
-| [&nbsp;P&#8209;007&nbsp;](#p-007) | [Series Summation: 2.1 + 5.3 + 8.5 + .............](#p-007) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #7) |
-| [&nbsp;P&#8209;008&nbsp;](#p-008) | [Series Summation: 1.3 + 3.5 + 5.7 + .............](#p-008) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #8) |
-| [&nbsp;P&#8209;009&nbsp;](#p-009) | [Series Summation: 1^2 + 3^2 + 5^2 + .............](#p-009) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #9) |
-| [&nbsp;P&#8209;010&nbsp;](#p-010) | [Series Summation: 1.1^2 + 2.3^2 + 3.5^2 + .............](#p-010) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #10) |
-| [&nbsp;P&#8209;011&nbsp;](#p-011) | [Series Summation: 1.2^2 + 2.3^2 + 3.4^2 + .............](#p-011) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #11) |
-| [&nbsp;P&#8209;012&nbsp;](#p-012) | [Series Summation: 1^2.2^2 + 2^2.3^2 + 3^2.4^2 + ..](#p-012) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #12) |
-| [&nbsp;P&#8209;013&nbsp;](#p-013) | [Series Summation: 1.2.3 + 2.3.4 + 3.4.5 + .............](#p-013) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #13) |
-| [&nbsp;P&#8209;014&nbsp;](#p-014) | [Series Summation: 1.3.5.7 + 3.5.7.9 + 5.7.9.11 + ........](#p-014) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #14) |
-| [&nbsp;P&#8209;015&nbsp;](#p-015) | [Series Summation: 2.5.8 + 5.8.11 + 8.11.14 + ..............](#p-015) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #15) |
-| [&nbsp;P&#8209;016&nbsp;](#p-016) | [Series Summation: 5.6.7 + 6.7.8 + 7.8.9 + .............](#p-016) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #16) |
-| [&nbsp;P&#8209;017&nbsp;](#p-017) | [Pattern Printing: Pyramid #01 (starts with '1')](#p-017) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #1) |
-| [&nbsp;P&#8209;018&nbsp;](#p-018) | [Pattern Printing: Pyramid #02 (starts with '1')](#p-018) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #2) |
-| [&nbsp;P&#8209;019&nbsp;](#p-019) | [Pattern Printing: Pyramid #03 (starts with '1')](#p-019) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #3) |
-| [&nbsp;P&#8209;020&nbsp;](#p-020) | [Pattern Printing: Pyramid #04 (starts with '1')](#p-020) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #4) |
-| [&nbsp;P&#8209;021&nbsp;](#p-021) | [Pattern Printing: Pyramid #05 (starts with '2')](#p-021) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #5) |
-| [&nbsp;P&#8209;022&nbsp;](#p-022) | [Pattern Printing: Pyramid #06 (starts with '1')](#p-022) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #6) |
-| [&nbsp;P&#8209;023&nbsp;](#p-023) | [Pattern Printing: Pyramid #07 (starts with '0')](#p-023) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #7) |
-| [&nbsp;P&#8209;024&nbsp;](#p-024) | [Pattern Printing: Pyramid #08 (starts with '1')](#p-024) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #8) |
-| [&nbsp;P&#8209;025&nbsp;](#p-025) | [Pattern Printing: Pyramid #09 (starts with 'A')](#p-025) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #9) |
-| [&nbsp;P&#8209;026&nbsp;](#p-026) | [Pattern Printing: Pyramid #10 (starts with 'A')](#p-026) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #10) |
-| [&nbsp;P&#8209;027&nbsp;](#p-027) | [Pattern Printing: Pyramid #11 (starts with '1   2   3   4   5')](#p-027) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #11) |
-| [&nbsp;P&#8209;028&nbsp;](#p-028) | [Pattern Printing: Pyramid #12 (starts with '5   5   5   5   5')](#p-028) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #12) |
-| [&nbsp;P&#8209;029&nbsp;](#p-029) | [Pattern Printing: Pyramid #13 (starts with '1   1   1   1   1')](#p-029) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #13) |
-| [&nbsp;P&#8209;030&nbsp;](#p-030) | [Pattern Printing: Pyramid #14 (starts with '1   0   1   0   1')](#p-030) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #14) |
-| [&nbsp;P&#8209;031&nbsp;](#p-031) | [Pattern Printing: Pyramid #15 (starts with '6   7   8   9  10')](#p-031) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #15) |
-| [&nbsp;P&#8209;032&nbsp;](#p-032) | [Pattern Printing: Pyramid #16 (starts with '5   6   7   8   9')](#p-032) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #16) |
-| [&nbsp;P&#8209;033&nbsp;](#p-033) | [Pattern Printing: Pyramid #17 (starts with '0   1   0   1   0')](#p-033) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #17) |
-| [&nbsp;P&#8209;034&nbsp;](#p-034) | [Pattern Printing: Pyramid #18 (starts with '1   0   1   0   1')](#p-034) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #18) |
-| [&nbsp;P&#8209;035&nbsp;](#p-035) | [Pattern Printing: Pyramid #19 (starts with 'E   E   E   E   E')](#p-035) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #19) |
-| [&nbsp;P&#8209;036&nbsp;](#p-036) | [Pattern Printing: Pyramid #20 (starts with 'A   B   C   D   E')](#p-036) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #20) |
-| [&nbsp;P&#8209;037&nbsp;](#p-037) | [Pattern Printing: Pyramid #21 (starts with '1')](#p-037) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #21) |
-| [&nbsp;P&#8209;038&nbsp;](#p-038) | [Pattern Printing: Pyramid #22 (starts with '1')](#p-038) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #22) |
-| [&nbsp;P&#8209;039&nbsp;](#p-039) | [Pattern Printing: Pyramid #23 (starts with '1')](#p-039) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #23) |
-| [&nbsp;P&#8209;040&nbsp;](#p-040) | [Pattern Printing: Pyramid #24 (starts with '1')](#p-040) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #24) |
-| [&nbsp;P&#8209;041&nbsp;](#p-041) | [Pattern Printing: Pyramid #25 (starts with '1')](#p-041) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #25) |
-| [&nbsp;P&#8209;042&nbsp;](#p-042) | [Pattern Printing: Pyramid #26 (starts with 'A')](#p-042) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #26) |
-| [&nbsp;P&#8209;043&nbsp;](#p-043) | [Pattern Printing: Pyramid #27 (starts with 'A')](#p-043) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #27) |
-| [&nbsp;P&#8209;044&nbsp;](#p-044) | [Pattern Printing: Pyramid #28 (starts with '1')](#p-044) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #28) |
-| [&nbsp;P&#8209;045&nbsp;](#p-045) | [Pattern Printing: Pyramid #29 (starts with '1')](#p-045) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #29) |
-| [&nbsp;P&#8209;046&nbsp;](#p-046) | [Pattern Printing: Pyramid #30 (starts with '1')](#p-046) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #30) |
-| [&nbsp;P&#8209;047&nbsp;](#p-047) | [Pattern Printing: Pyramid #31 (starts with '1')](#p-047) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #31) |
-| [&nbsp;P&#8209;048&nbsp;](#p-048) | [Pattern Printing: Pyramid #32 (starts with '1')](#p-048) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #32) |
-| [&nbsp;P&#8209;049&nbsp;](#p-049) | [Pattern Printing: Pyramid #33 (starts with '1')](#p-049) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #33) |
-| [&nbsp;P&#8209;050&nbsp;](#p-050) | [Pattern Printing: Pyramid #34 (starts with '1')](#p-050) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #34) |
-| [&nbsp;P&#8209;051&nbsp;](#p-051) | [Pattern Printing: Pyramid #35 (starts with '1')](#p-051) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #35) |
-| [&nbsp;P&#8209;052&nbsp;](#p-052) | [Pattern Printing: Pyramid #36 (starts with '1')](#p-052) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #36) |
-| [&nbsp;P&#8209;053&nbsp;](#p-053) | [Pattern Printing: Pyramid #37 (starts with '1')](#p-053) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #37) |
+| [&nbsp;P&#8209;1&nbsp;](#p-1) | [Series Summation: 1 + 2 + 3 + 4 + .............](#p-1) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #1) |
+| [&nbsp;P&#8209;2&nbsp;](#p-2) | [Series Summation: 2 + 4 + 6 + 8 + .............](#p-2) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #2) |
+| [&nbsp;P&#8209;3&nbsp;](#p-3) | [Series Summation: 1 + 3 + 5 + 7 + .............](#p-3) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #3) |
+| [&nbsp;P&#8209;4&nbsp;](#p-4) | [Series Summation: 4 + 12 + 20 + 28 + .............](#p-4) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #4) |
+| [&nbsp;P&#8209;5&nbsp;](#p-5) | [Series Summation: 2 + 5 + 8 + 11 + .............](#p-5) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #5) |
+| [&nbsp;P&#8209;6&nbsp;](#p-6) | [Series Summation: 1.2 + 2.3 + 3.4 + .............](#p-6) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #6) |
+| [&nbsp;P&#8209;7&nbsp;](#p-7) | [Series Summation: 2.1 + 5.3 + 8.5 + .............](#p-7) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #7) |
+| [&nbsp;P&#8209;8&nbsp;](#p-8) | [Series Summation: 1.3 + 3.5 + 5.7 + .............](#p-8) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #8) |
+| [&nbsp;P&#8209;9&nbsp;](#p-9) | [Series Summation: 1^2 + 3^2 + 5^2 + .............](#p-9) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #9) |
+| [&nbsp;P&#8209;10&nbsp;](#p-10) | [Series Summation: 1.1^2 + 2.3^2 + 3.5^2 + .............](#p-10) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #10) |
+| [&nbsp;P&#8209;11&nbsp;](#p-11) | [Series Summation: 1.2^2 + 2.3^2 + 3.4^2 + .............](#p-11) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #11) |
+| [&nbsp;P&#8209;12&nbsp;](#p-12) | [Series Summation: 1^2.2^2 + 2^2.3^2 + 3^2.4^2 + ..](#p-12) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #12) |
+| [&nbsp;P&#8209;13&nbsp;](#p-13) | [Series Summation: 1.2.3 + 2.3.4 + 3.4.5 + .............](#p-13) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #13) |
+| [&nbsp;P&#8209;14&nbsp;](#p-14) | [Series Summation: 1.3.5.7 + 3.5.7.9 + 5.7.9.11 + ........](#p-14) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #14) |
+| [&nbsp;P&#8209;15&nbsp;](#p-15) | [Series Summation: 2.5.8 + 5.8.11 + 8.11.14 + ..............](#p-15) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #15) |
+| [&nbsp;P&#8209;16&nbsp;](#p-16) | [Series Summation: 5.6.7 + 6.7.8 + 7.8.9 + .............](#p-16) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 1 (Series #16) |
+| [&nbsp;P&#8209;17&nbsp;](#p-17) | [Pattern Printing: Pyramid #01 (starts with '1')](#p-17) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #1) |
+| [&nbsp;P&#8209;18&nbsp;](#p-18) | [Pattern Printing: Pyramid #02 (starts with '1')](#p-18) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #2) |
+| [&nbsp;P&#8209;19&nbsp;](#p-19) | [Pattern Printing: Pyramid #03 (starts with '1')](#p-19) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #3) |
+| [&nbsp;P&#8209;20&nbsp;](#p-20) | [Pattern Printing: Pyramid #04 (starts with '1')](#p-20) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #4) |
+| [&nbsp;P&#8209;21&nbsp;](#p-21) | [Pattern Printing: Pyramid #05 (starts with '2')](#p-21) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #5) |
+| [&nbsp;P&#8209;22&nbsp;](#p-22) | [Pattern Printing: Pyramid #06 (starts with '1')](#p-22) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #6) |
+| [&nbsp;P&#8209;23&nbsp;](#p-23) | [Pattern Printing: Pyramid #07 (starts with '0')](#p-23) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #7) |
+| [&nbsp;P&#8209;24&nbsp;](#p-24) | [Pattern Printing: Pyramid #08 (starts with '1')](#p-24) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #8) |
+| [&nbsp;P&#8209;25&nbsp;](#p-25) | [Pattern Printing: Pyramid #09 (starts with 'A')](#p-25) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #9) |
+| [&nbsp;P&#8209;26&nbsp;](#p-26) | [Pattern Printing: Pyramid #10 (starts with 'A')](#p-26) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #10) |
+| [&nbsp;P&#8209;27&nbsp;](#p-27) | [Pattern Printing: Pyramid #11 (starts with '1   2   3   4   5')](#p-27) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #11) |
+| [&nbsp;P&#8209;28&nbsp;](#p-28) | [Pattern Printing: Pyramid #12 (starts with '5   5   5   5   5')](#p-28) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #12) |
+| [&nbsp;P&#8209;29&nbsp;](#p-29) | [Pattern Printing: Pyramid #13 (starts with '1   1   1   1   1')](#p-29) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #13) |
+| [&nbsp;P&#8209;30&nbsp;](#p-30) | [Pattern Printing: Pyramid #14 (starts with '1   0   1   0   1')](#p-30) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #14) |
+| [&nbsp;P&#8209;31&nbsp;](#p-31) | [Pattern Printing: Pyramid #15 (starts with '6   7   8   9  10')](#p-31) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #15) |
+| [&nbsp;P&#8209;32&nbsp;](#p-32) | [Pattern Printing: Pyramid #16 (starts with '5   6   7   8   9')](#p-32) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #16) |
+| [&nbsp;P&#8209;33&nbsp;](#p-33) | [Pattern Printing: Pyramid #17 (starts with '0   1   0   1   0')](#p-33) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #17) |
+| [&nbsp;P&#8209;34&nbsp;](#p-34) | [Pattern Printing: Pyramid #18 (starts with '1   0   1   0   1')](#p-34) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #18) |
+| [&nbsp;P&#8209;35&nbsp;](#p-35) | [Pattern Printing: Pyramid #19 (starts with 'E   E   E   E   E')](#p-35) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #19) |
+| [&nbsp;P&#8209;36&nbsp;](#p-36) | [Pattern Printing: Pyramid #20 (starts with 'A   B   C   D   E')](#p-36) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #20) |
+| [&nbsp;P&#8209;37&nbsp;](#p-37) | [Pattern Printing: Pyramid #21 (starts with '1')](#p-37) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #21) |
+| [&nbsp;P&#8209;38&nbsp;](#p-38) | [Pattern Printing: Pyramid #22 (starts with '1')](#p-38) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #22) |
+| [&nbsp;P&#8209;39&nbsp;](#p-39) | [Pattern Printing: Pyramid #23 (starts with '1')](#p-39) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #23) |
+| [&nbsp;P&#8209;40&nbsp;](#p-40) | [Pattern Printing: Pyramid #24 (starts with '1')](#p-40) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #24) |
+| [&nbsp;P&#8209;41&nbsp;](#p-41) | [Pattern Printing: Pyramid #25 (starts with '1')](#p-41) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #25) |
+| [&nbsp;P&#8209;42&nbsp;](#p-42) | [Pattern Printing: Pyramid #26 (starts with 'A')](#p-42) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #26) |
+| [&nbsp;P&#8209;43&nbsp;](#p-43) | [Pattern Printing: Pyramid #27 (starts with 'A')](#p-43) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #27) |
+| [&nbsp;P&#8209;44&nbsp;](#p-44) | [Pattern Printing: Pyramid #28 (starts with '1')](#p-44) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #28) |
+| [&nbsp;P&#8209;45&nbsp;](#p-45) | [Pattern Printing: Pyramid #29 (starts with '1')](#p-45) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #29) |
+| [&nbsp;P&#8209;46&nbsp;](#p-46) | [Pattern Printing: Pyramid #30 (starts with '1')](#p-46) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #30) |
+| [&nbsp;P&#8209;47&nbsp;](#p-47) | [Pattern Printing: Pyramid #31 (starts with '1')](#p-47) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #31) |
+| [&nbsp;P&#8209;48&nbsp;](#p-48) | [Pattern Printing: Pyramid #32 (starts with '1')](#p-48) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #32) |
+| [&nbsp;P&#8209;49&nbsp;](#p-49) | [Pattern Printing: Pyramid #33 (starts with '1')](#p-49) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #33) |
+| [&nbsp;P&#8209;50&nbsp;](#p-50) | [Pattern Printing: Pyramid #34 (starts with '1')](#p-50) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #34) |
+| [&nbsp;P&#8209;51&nbsp;](#p-51) | [Pattern Printing: Pyramid #35 (starts with '1')](#p-51) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #35) |
+| [&nbsp;P&#8209;52&nbsp;](#p-52) | [Pattern Printing: Pyramid #36 (starts with '1')](#p-52) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #36) |
+| [&nbsp;P&#8209;53&nbsp;](#p-53) | [Pattern Printing: Pyramid #37 (starts with '1')](#p-53) | Repetitive Structures | Pattern Printing | Recursion Vs Iteration, Part 2 (Pyramid #37) |
 
 ---
 
-<a id="p-001"></a>
-# Problem P-001: Series Summation: 1 + 2 + 3 + 4 + .............
+<a id="p-1"></a>
+# Problem P-1: Series Summation: 1 + 2 + 3 + 4 + .............
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-001
+- **Problem ID**: P-1
 - **Problem Title**: Series Summation: 1 + 2 + 3 + 4 + .............
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -123,11 +123,11 @@ Sum = [Total sum]
 
 ---
 
-<a id="p-002"></a>
-# Problem P-002: Series Summation: 2 + 4 + 6 + 8 + .............
+<a id="p-2"></a>
+# Problem P-2: Series Summation: 2 + 4 + 6 + 8 + .............
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-002
+- **Problem ID**: P-2
 - **Problem Title**: Series Summation: 2 + 4 + 6 + 8 + .............
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -182,11 +182,11 @@ Sum = [Total sum]
 
 ---
 
-<a id="p-003"></a>
-# Problem P-003: Series Summation: 1 + 3 + 5 + 7 + .............
+<a id="p-3"></a>
+# Problem P-3: Series Summation: 1 + 3 + 5 + 7 + .............
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-003
+- **Problem ID**: P-3
 - **Problem Title**: Series Summation: 1 + 3 + 5 + 7 + .............
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -241,11 +241,11 @@ Sum = [Total sum]
 
 ---
 
-<a id="p-004"></a>
-# Problem P-004: Series Summation: 4 + 12 + 20 + 28 + .............
+<a id="p-4"></a>
+# Problem P-4: Series Summation: 4 + 12 + 20 + 28 + .............
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-004
+- **Problem ID**: P-4
 - **Problem Title**: Series Summation: 4 + 12 + 20 + 28 + .............
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -300,11 +300,11 @@ Sum = [Total sum]
 
 ---
 
-<a id="p-005"></a>
-# Problem P-005: Series Summation: 2 + 5 + 8 + 11 + .............
+<a id="p-5"></a>
+# Problem P-5: Series Summation: 2 + 5 + 8 + 11 + .............
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-005
+- **Problem ID**: P-5
 - **Problem Title**: Series Summation: 2 + 5 + 8 + 11 + .............
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -359,11 +359,11 @@ Sum = [Total sum]
 
 ---
 
-<a id="p-006"></a>
-# Problem P-006: Series Summation: 1.2 + 2.3 + 3.4 + .............
+<a id="p-6"></a>
+# Problem P-6: Series Summation: 1.2 + 2.3 + 3.4 + .............
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-006
+- **Problem ID**: P-6
 - **Problem Title**: Series Summation: 1.2 + 2.3 + 3.4 + .............
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -418,11 +418,11 @@ Sum = [Total sum]
 
 ---
 
-<a id="p-007"></a>
-# Problem P-007: Series Summation: 2.1 + 5.3 + 8.5 + .............
+<a id="p-7"></a>
+# Problem P-7: Series Summation: 2.1 + 5.3 + 8.5 + .............
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-007
+- **Problem ID**: P-7
 - **Problem Title**: Series Summation: 2.1 + 5.3 + 8.5 + .............
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -477,11 +477,11 @@ Sum = [Total sum]
 
 ---
 
-<a id="p-008"></a>
-# Problem P-008: Series Summation: 1.3 + 3.5 + 5.7 + .............
+<a id="p-8"></a>
+# Problem P-8: Series Summation: 1.3 + 3.5 + 5.7 + .............
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-008
+- **Problem ID**: P-8
 - **Problem Title**: Series Summation: 1.3 + 3.5 + 5.7 + .............
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -536,11 +536,11 @@ Sum = [Total sum]
 
 ---
 
-<a id="p-009"></a>
-# Problem P-009: Series Summation: 1^2 + 3^2 + 5^2 + .............
+<a id="p-9"></a>
+# Problem P-9: Series Summation: 1^2 + 3^2 + 5^2 + .............
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-009
+- **Problem ID**: P-9
 - **Problem Title**: Series Summation: 1^2 + 3^2 + 5^2 + .............
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -595,11 +595,11 @@ Sum = [Total sum]
 
 ---
 
-<a id="p-010"></a>
-# Problem P-010: Series Summation: 1.1^2 + 2.3^2 + 3.5^2 + .............
+<a id="p-10"></a>
+# Problem P-10: Series Summation: 1.1^2 + 2.3^2 + 3.5^2 + .............
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-010
+- **Problem ID**: P-10
 - **Problem Title**: Series Summation: 1.1^2 + 2.3^2 + 3.5^2 + .............
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -654,11 +654,11 @@ Sum = [Total sum]
 
 ---
 
-<a id="p-011"></a>
-# Problem P-011: Series Summation: 1.2^2 + 2.3^2 + 3.4^2 + .............
+<a id="p-11"></a>
+# Problem P-11: Series Summation: 1.2^2 + 2.3^2 + 3.4^2 + .............
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-011
+- **Problem ID**: P-11
 - **Problem Title**: Series Summation: 1.2^2 + 2.3^2 + 3.4^2 + .............
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -713,11 +713,11 @@ Sum = [Total sum]
 
 ---
 
-<a id="p-012"></a>
-# Problem P-012: Series Summation: 1^2.2^2 + 2^2.3^2 + 3^2.4^2 + ..
+<a id="p-12"></a>
+# Problem P-12: Series Summation: 1^2.2^2 + 2^2.3^2 + 3^2.4^2 + ..
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-012
+- **Problem ID**: P-12
 - **Problem Title**: Series Summation: 1^2.2^2 + 2^2.3^2 + 3^2.4^2 + ..
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -772,11 +772,11 @@ Sum = [Total sum]
 
 ---
 
-<a id="p-013"></a>
-# Problem P-013: Series Summation: 1.2.3 + 2.3.4 + 3.4.5 + .............
+<a id="p-13"></a>
+# Problem P-13: Series Summation: 1.2.3 + 2.3.4 + 3.4.5 + .............
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-013
+- **Problem ID**: P-13
 - **Problem Title**: Series Summation: 1.2.3 + 2.3.4 + 3.4.5 + .............
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -831,11 +831,11 @@ Sum = [Total sum]
 
 ---
 
-<a id="p-014"></a>
-# Problem P-014: Series Summation: 1.3.5.7 + 3.5.7.9 + 5.7.9.11 + ........
+<a id="p-14"></a>
+# Problem P-14: Series Summation: 1.3.5.7 + 3.5.7.9 + 5.7.9.11 + ........
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-014
+- **Problem ID**: P-14
 - **Problem Title**: Series Summation: 1.3.5.7 + 3.5.7.9 + 5.7.9.11 + ........
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -890,11 +890,11 @@ Sum = [Total sum]
 
 ---
 
-<a id="p-015"></a>
-# Problem P-015: Series Summation: 2.5.8 + 5.8.11 + 8.11.14 + ..............
+<a id="p-15"></a>
+# Problem P-15: Series Summation: 2.5.8 + 5.8.11 + 8.11.14 + ..............
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-015
+- **Problem ID**: P-15
 - **Problem Title**: Series Summation: 2.5.8 + 5.8.11 + 8.11.14 + ..............
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -949,11 +949,11 @@ Sum = [Total sum]
 
 ---
 
-<a id="p-016"></a>
-# Problem P-016: Series Summation: 5.6.7 + 6.7.8 + 7.8.9 + .............
+<a id="p-16"></a>
+# Problem P-16: Series Summation: 5.6.7 + 6.7.8 + 7.8.9 + .............
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-016
+- **Problem ID**: P-16
 - **Problem Title**: Series Summation: 5.6.7 + 6.7.8 + 7.8.9 + .............
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -1008,11 +1008,11 @@ Sum = [Total sum]
 
 ---
 
-<a id="p-017"></a>
-# Problem P-017: Pattern Printing: Pyramid #01 (starts with '1')
+<a id="p-17"></a>
+# Problem P-17: Pattern Printing: Pyramid #01 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-017
+- **Problem ID**: P-17
 - **Problem Title**: Pattern Printing: Pyramid #01 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -1074,11 +1074,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-018"></a>
-# Problem P-018: Pattern Printing: Pyramid #02 (starts with '1')
+<a id="p-18"></a>
+# Problem P-18: Pattern Printing: Pyramid #02 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-018
+- **Problem ID**: P-18
 - **Problem Title**: Pattern Printing: Pyramid #02 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -1140,11 +1140,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-019"></a>
-# Problem P-019: Pattern Printing: Pyramid #03 (starts with '1')
+<a id="p-19"></a>
+# Problem P-19: Pattern Printing: Pyramid #03 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-019
+- **Problem ID**: P-19
 - **Problem Title**: Pattern Printing: Pyramid #03 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -1206,11 +1206,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-020"></a>
-# Problem P-020: Pattern Printing: Pyramid #04 (starts with '1')
+<a id="p-20"></a>
+# Problem P-20: Pattern Printing: Pyramid #04 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-020
+- **Problem ID**: P-20
 - **Problem Title**: Pattern Printing: Pyramid #04 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -1272,11 +1272,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-021"></a>
-# Problem P-021: Pattern Printing: Pyramid #05 (starts with '2')
+<a id="p-21"></a>
+# Problem P-21: Pattern Printing: Pyramid #05 (starts with '2')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-021
+- **Problem ID**: P-21
 - **Problem Title**: Pattern Printing: Pyramid #05 (starts with '2')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -1338,11 +1338,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-022"></a>
-# Problem P-022: Pattern Printing: Pyramid #06 (starts with '1')
+<a id="p-22"></a>
+# Problem P-22: Pattern Printing: Pyramid #06 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-022
+- **Problem ID**: P-22
 - **Problem Title**: Pattern Printing: Pyramid #06 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -1404,11 +1404,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-023"></a>
-# Problem P-023: Pattern Printing: Pyramid #07 (starts with '0')
+<a id="p-23"></a>
+# Problem P-23: Pattern Printing: Pyramid #07 (starts with '0')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-023
+- **Problem ID**: P-23
 - **Problem Title**: Pattern Printing: Pyramid #07 (starts with '0')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -1470,11 +1470,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-024"></a>
-# Problem P-024: Pattern Printing: Pyramid #08 (starts with '1')
+<a id="p-24"></a>
+# Problem P-24: Pattern Printing: Pyramid #08 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-024
+- **Problem ID**: P-24
 - **Problem Title**: Pattern Printing: Pyramid #08 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -1536,11 +1536,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-025"></a>
-# Problem P-025: Pattern Printing: Pyramid #09 (starts with 'A')
+<a id="p-25"></a>
+# Problem P-25: Pattern Printing: Pyramid #09 (starts with 'A')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-025
+- **Problem ID**: P-25
 - **Problem Title**: Pattern Printing: Pyramid #09 (starts with 'A')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -1602,11 +1602,11 @@ E   E   E   E   E
 
 ---
 
-<a id="p-026"></a>
-# Problem P-026: Pattern Printing: Pyramid #10 (starts with 'A')
+<a id="p-26"></a>
+# Problem P-26: Pattern Printing: Pyramid #10 (starts with 'A')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-026
+- **Problem ID**: P-26
 - **Problem Title**: Pattern Printing: Pyramid #10 (starts with 'A')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -1668,11 +1668,11 @@ A   B   C   D   E
 
 ---
 
-<a id="p-027"></a>
-# Problem P-027: Pattern Printing: Pyramid #11 (starts with '1   2   3   4   5')
+<a id="p-27"></a>
+# Problem P-27: Pattern Printing: Pyramid #11 (starts with '1   2   3   4   5')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-027
+- **Problem ID**: P-27
 - **Problem Title**: Pattern Printing: Pyramid #11 (starts with '1   2   3   4   5')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -1734,11 +1734,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-028"></a>
-# Problem P-028: Pattern Printing: Pyramid #12 (starts with '5   5   5   5   5')
+<a id="p-28"></a>
+# Problem P-28: Pattern Printing: Pyramid #12 (starts with '5   5   5   5   5')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-028
+- **Problem ID**: P-28
 - **Problem Title**: Pattern Printing: Pyramid #12 (starts with '5   5   5   5   5')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -1800,11 +1800,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-029"></a>
-# Problem P-029: Pattern Printing: Pyramid #13 (starts with '1   1   1   1   1')
+<a id="p-29"></a>
+# Problem P-29: Pattern Printing: Pyramid #13 (starts with '1   1   1   1   1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-029
+- **Problem ID**: P-29
 - **Problem Title**: Pattern Printing: Pyramid #13 (starts with '1   1   1   1   1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -1866,11 +1866,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-030"></a>
-# Problem P-030: Pattern Printing: Pyramid #14 (starts with '1   0   1   0   1')
+<a id="p-30"></a>
+# Problem P-30: Pattern Printing: Pyramid #14 (starts with '1   0   1   0   1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-030
+- **Problem ID**: P-30
 - **Problem Title**: Pattern Printing: Pyramid #14 (starts with '1   0   1   0   1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -1932,11 +1932,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-031"></a>
-# Problem P-031: Pattern Printing: Pyramid #15 (starts with '6   7   8   9  10')
+<a id="p-31"></a>
+# Problem P-31: Pattern Printing: Pyramid #15 (starts with '6   7   8   9  10')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-031
+- **Problem ID**: P-31
 - **Problem Title**: Pattern Printing: Pyramid #15 (starts with '6   7   8   9  10')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -1998,11 +1998,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-032"></a>
-# Problem P-032: Pattern Printing: Pyramid #16 (starts with '5   6   7   8   9')
+<a id="p-32"></a>
+# Problem P-32: Pattern Printing: Pyramid #16 (starts with '5   6   7   8   9')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-032
+- **Problem ID**: P-32
 - **Problem Title**: Pattern Printing: Pyramid #16 (starts with '5   6   7   8   9')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -2064,11 +2064,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-033"></a>
-# Problem P-033: Pattern Printing: Pyramid #17 (starts with '0   1   0   1   0')
+<a id="p-33"></a>
+# Problem P-33: Pattern Printing: Pyramid #17 (starts with '0   1   0   1   0')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-033
+- **Problem ID**: P-33
 - **Problem Title**: Pattern Printing: Pyramid #17 (starts with '0   1   0   1   0')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -2130,11 +2130,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-034"></a>
-# Problem P-034: Pattern Printing: Pyramid #18 (starts with '1   0   1   0   1')
+<a id="p-34"></a>
+# Problem P-34: Pattern Printing: Pyramid #18 (starts with '1   0   1   0   1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-034
+- **Problem ID**: P-34
 - **Problem Title**: Pattern Printing: Pyramid #18 (starts with '1   0   1   0   1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -2196,11 +2196,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-035"></a>
-# Problem P-035: Pattern Printing: Pyramid #19 (starts with 'E   E   E   E   E')
+<a id="p-35"></a>
+# Problem P-35: Pattern Printing: Pyramid #19 (starts with 'E   E   E   E   E')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-035
+- **Problem ID**: P-35
 - **Problem Title**: Pattern Printing: Pyramid #19 (starts with 'E   E   E   E   E')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -2262,11 +2262,11 @@ A
 
 ---
 
-<a id="p-036"></a>
-# Problem P-036: Pattern Printing: Pyramid #20 (starts with 'A   B   C   D   E')
+<a id="p-36"></a>
+# Problem P-36: Pattern Printing: Pyramid #20 (starts with 'A   B   C   D   E')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-036
+- **Problem ID**: P-36
 - **Problem Title**: Pattern Printing: Pyramid #20 (starts with 'A   B   C   D   E')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -2328,11 +2328,11 @@ A
 
 ---
 
-<a id="p-037"></a>
-# Problem P-037: Pattern Printing: Pyramid #21 (starts with '1')
+<a id="p-37"></a>
+# Problem P-37: Pattern Printing: Pyramid #21 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-037
+- **Problem ID**: P-37
 - **Problem Title**: Pattern Printing: Pyramid #21 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -2394,11 +2394,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-038"></a>
-# Problem P-038: Pattern Printing: Pyramid #22 (starts with '1')
+<a id="p-38"></a>
+# Problem P-38: Pattern Printing: Pyramid #22 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-038
+- **Problem ID**: P-38
 - **Problem Title**: Pattern Printing: Pyramid #22 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -2460,11 +2460,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-039"></a>
-# Problem P-039: Pattern Printing: Pyramid #23 (starts with '1')
+<a id="p-39"></a>
+# Problem P-39: Pattern Printing: Pyramid #23 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-039
+- **Problem ID**: P-39
 - **Problem Title**: Pattern Printing: Pyramid #23 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -2526,11 +2526,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-040"></a>
-# Problem P-040: Pattern Printing: Pyramid #24 (starts with '1')
+<a id="p-40"></a>
+# Problem P-40: Pattern Printing: Pyramid #24 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-040
+- **Problem ID**: P-40
 - **Problem Title**: Pattern Printing: Pyramid #24 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -2592,11 +2592,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-041"></a>
-# Problem P-041: Pattern Printing: Pyramid #25 (starts with '1')
+<a id="p-41"></a>
+# Problem P-41: Pattern Printing: Pyramid #25 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-041
+- **Problem ID**: P-41
 - **Problem Title**: Pattern Printing: Pyramid #25 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -2658,11 +2658,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-042"></a>
-# Problem P-042: Pattern Printing: Pyramid #26 (starts with 'A')
+<a id="p-42"></a>
+# Problem P-42: Pattern Printing: Pyramid #26 (starts with 'A')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-042
+- **Problem ID**: P-42
 - **Problem Title**: Pattern Printing: Pyramid #26 (starts with 'A')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -2724,11 +2724,11 @@ E   E   E   E   E
 
 ---
 
-<a id="p-043"></a>
-# Problem P-043: Pattern Printing: Pyramid #27 (starts with 'A')
+<a id="p-43"></a>
+# Problem P-43: Pattern Printing: Pyramid #27 (starts with 'A')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-043
+- **Problem ID**: P-43
 - **Problem Title**: Pattern Printing: Pyramid #27 (starts with 'A')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -2798,11 +2798,11 @@ E   E   E   E   E
 
 ---
 
-<a id="p-044"></a>
-# Problem P-044: Pattern Printing: Pyramid #28 (starts with '1')
+<a id="p-44"></a>
+# Problem P-44: Pattern Printing: Pyramid #28 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-044
+- **Problem ID**: P-44
 - **Problem Title**: Pattern Printing: Pyramid #28 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -2872,11 +2872,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-045"></a>
-# Problem P-045: Pattern Printing: Pyramid #29 (starts with '1')
+<a id="p-45"></a>
+# Problem P-45: Pattern Printing: Pyramid #29 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-045
+- **Problem ID**: P-45
 - **Problem Title**: Pattern Printing: Pyramid #29 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -2946,11 +2946,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-046"></a>
-# Problem P-046: Pattern Printing: Pyramid #30 (starts with '1')
+<a id="p-46"></a>
+# Problem P-46: Pattern Printing: Pyramid #30 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-046
+- **Problem ID**: P-46
 - **Problem Title**: Pattern Printing: Pyramid #30 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -3020,11 +3020,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-047"></a>
-# Problem P-047: Pattern Printing: Pyramid #31 (starts with '1')
+<a id="p-47"></a>
+# Problem P-47: Pattern Printing: Pyramid #31 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-047
+- **Problem ID**: P-47
 - **Problem Title**: Pattern Printing: Pyramid #31 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -3086,11 +3086,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-048"></a>
-# Problem P-048: Pattern Printing: Pyramid #32 (starts with '1')
+<a id="p-48"></a>
+# Problem P-48: Pattern Printing: Pyramid #32 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-048
+- **Problem ID**: P-48
 - **Problem Title**: Pattern Printing: Pyramid #32 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -3160,11 +3160,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-049"></a>
-# Problem P-049: Pattern Printing: Pyramid #33 (starts with '1')
+<a id="p-49"></a>
+# Problem P-49: Pattern Printing: Pyramid #33 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-049
+- **Problem ID**: P-49
 - **Problem Title**: Pattern Printing: Pyramid #33 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -3242,11 +3242,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-050"></a>
-# Problem P-050: Pattern Printing: Pyramid #34 (starts with '1')
+<a id="p-50"></a>
+# Problem P-50: Pattern Printing: Pyramid #34 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-050
+- **Problem ID**: P-50
 - **Problem Title**: Pattern Printing: Pyramid #34 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -3324,11 +3324,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-051"></a>
-# Problem P-051: Pattern Printing: Pyramid #35 (starts with '1')
+<a id="p-51"></a>
+# Problem P-51: Pattern Printing: Pyramid #35 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-051
+- **Problem ID**: P-51
 - **Problem Title**: Pattern Printing: Pyramid #35 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -3390,11 +3390,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-052"></a>
-# Problem P-052: Pattern Printing: Pyramid #36 (starts with '1')
+<a id="p-52"></a>
+# Problem P-52: Pattern Printing: Pyramid #36 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-052
+- **Problem ID**: P-52
 - **Problem Title**: Pattern Printing: Pyramid #36 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
@@ -3458,11 +3458,11 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 ---
 
-<a id="p-053"></a>
-# Problem P-053: Pattern Printing: Pyramid #37 (starts with '1')
+<a id="p-53"></a>
+# Problem P-53: Pattern Printing: Pyramid #37 (starts with '1')
 
 ## 📌 Metadata & Source Attribution
-- **Problem ID**: P-053
+- **Problem ID**: P-53
 - **Problem Title**: Pattern Printing: Pyramid #37 (starts with '1')
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing

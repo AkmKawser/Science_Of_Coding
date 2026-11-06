@@ -1,4 +1,4 @@
-# Problem Solution Output Formatting Specification (`output formating.md`)
+# Problem Solution Output Formatting Specification (`Solution formating.md`)
 
 This document defines the strict, required architecture and formatting standards for algorithmic solutions generated in **`ProblemSkill_output/Solution Files/`**.
 
@@ -6,7 +6,7 @@ This document defines the strict, required architecture and formatting standards
 
 ## 🏛️ Directory & Folder Architecture
 
-All solutions are organized into a clean 2-level directory tree matching the **Primary Category** and **Subcategory** defined in [`problem catagories.docx`](../Problem%20Files/problem%20catagories.docx).
+All solutions are organized into a clean 2-level directory tree matching the **Primary Category** and **Subcategory** defined in [`problem catagories.docx`](Problem%20Files/problem%20catagories.docx).
 
 ### Hierarchy:
 ```
@@ -29,13 +29,13 @@ Skills_Output/ProblemSkill_output/Solution Files/
 
 ## 🏷️ File Naming Conventions
 
-The file names are strictly based on the **Problem ID** from [`question bank.md`](../Problem%20Files/question%20bank.md):
+The file names are strictly based on the unpadded **Problem ID** from [`question bank.md`](Problem%20Files/question%20bank.md) (formatted without leading zeroes, e.g., `P-1`, `P-2`, `P-10`):
 
-| Artifact | File Naming Pattern | Concrete Example (`P-001`) |
+| Artifact | File Naming Pattern | Concrete Example (`P-1`) |
 | :--- | :--- | :--- |
-| **Python Solution** | `<Problem-ID>_python.py` | `P-001_python.py` |
-| **Java Solution** | `<Problem-ID>_java.java` (or matching public class) | `P-001_java.java` |
-| **Derivation Document** | `<Problem-ID>_derivation.md` | `P-001_derivation.md` |
+| **Python Solution** | `<Problem-ID>_python.py` | `P-1_python.py` |
+| **Java Solution** | `<Problem-ID>_java.java` | `P-1_java.java` |
+| **Derivation Document** | `<Problem-ID>_derivation.md` | `P-1_derivation.md` |
 
 > [!IMPORTANT]
 > The Python and Java solution files are distinct and kept completely separate to ensure full independence and language-idiomatic syntax.
@@ -50,11 +50,11 @@ Every derivation file must rigorously execute the phased steps defined in the ma
 # Solution Derivation: [Problem ID] - [Problem Title]
 
 ## 📌 Metadata
-- **Problem ID**: [e.g., P-001]
+- **Problem ID**: [e.g., P-1]
 - **Category**: [Primary Category]
 - **Subcategory**: [Subcategory]
 - **Applied Template**: [`Skills_Input/Templates/<Template Name>.md`](../../../Skills_Input/Templates/<Template%20Name>.md)
-- **Problem Reference**: [`question bank.md#<problem-id-lowercase>`](../../Problem%20Files/question%20bank.md#p-001)
+- **Problem Reference**: [`question bank.md#<problem-id-lowercase>`](Problem%20Files/question%20bank.md#p-1)
 
 ---
 
@@ -107,7 +107,7 @@ Every derivation file must rigorously execute the phased steps defined in the ma
 
 ```python
 """
-Problem ID: P-001
+Problem ID: P-1
 Problem Title: Sum of Numbers from 1 to N
 Category: Repetitive Structures / Linear Accumulation
 Template: Skills_Input/Templates/Repetitive Structure Template.md
@@ -140,13 +140,13 @@ if __name__ == "__main__":
 - **Language Version**: Java 21
 - **Input Handling**: Fast reading (`BufferedReader`, `StringTokenizer`).
 - **Structure**:
-  - Class named cleanly (e.g., `Main` or `P001_Solution`).
+  - Class named cleanly (e.g., `Main` or `P1_Solution`).
   - Strict type safety, 64-bit integer handling (`long` where sum can overflow 32-bit int).
   - Explicit comments referencing state variables and invariant checkpoints.
 
 ```java
 /**
- * Problem ID: P-001
+ * Problem ID: P-1
  * Problem Title: Sum of Numbers from 1 to N
  * Category: Repetitive Structures / Linear Accumulation
  * Template: Skills_Input/Templates/Repetitive Structure Template.md
@@ -158,7 +158,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-public class Solution {
+class Solution {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String line = reader.readLine();

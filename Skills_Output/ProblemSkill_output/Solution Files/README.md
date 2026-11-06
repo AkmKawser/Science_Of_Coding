@@ -12,15 +12,15 @@ Solutions are categorized hierarchically by **Primary Category** and **Subcatego
 Solution Files/
 ├── Repetitive Structures/
 │   ├── Pattern Printing/
-│   │   ├── P-001_python.py
-│   │   ├── P-001_java.java
-│   │   └── P-001_derivation.md
+│   │   ├── P-1_python.py
+│   │   ├── P-1_java.java
+│   │   └── P-1_derivation.md
 │   └── ...
 └── [Other Categories]/
 ```
 
 For complete naming rules, template schemas, and coding standards, refer to:
-- [`output formating.md`](../output%20formating.md)
+- [`Solution formating.md`](../Solution%20formating.md)
 - [`problem catagories.docx`](../Problem%20Files/problem%20catagories.docx)
 - Template blueprints in [`Skills_Input/Templates/`](../../../Skills_Input/Templates/)
 

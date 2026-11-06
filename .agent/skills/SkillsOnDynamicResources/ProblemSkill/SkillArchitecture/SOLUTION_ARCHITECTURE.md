@@ -72,15 +72,15 @@ flowchart TD
 
 ## 📁 3. Directory Layout & Concrete Example
 
-Taking **Problem P-001** (*Series Summation: 1 + 2 + 3 + 4 + .............*) as a concrete instance:
+Taking **Problem P-1** (*Series Summation: 1 + 2 + 3 + 4 + .............*) as a concrete instance:
 
 ```
 Skills_Output/ProblemSkill_output/Solution Files/
 └── Repetitive Structures/
     └── Pattern Printing/
-        ├── P-001_derivation.md   # Mathematical derivation & state tree
-        ├── P-001_python.py       # Standalone Python 3 runnable script
-        └── P-001_java.java       # Standalone Java 21 runnable class
+        ├── P-1_derivation.md   # Mathematical derivation & state tree
+        ├── P-1_python.py       # Standalone Python 3 runnable script
+        └── P-1_java.java       # Standalone Java 21 runnable class
 ```
 
 ---
@@ -123,3 +123,4 @@ Every solution file maintains bidirectional trace links:
 - The derivation file links back to the original statement anchor in [`question bank.md#<problem-id>`](../../../../Skills_Output/ProblemSkill_output/Problem%20Files/question%20bank.md).
 - The derivation file links to the foundational methodology in [`Skills_Input/Templates/`](../../../../Skills_Input/Templates/).
 - The code files embed metadata tags in their headers, allowing both human engineers and AI agents to trace code directly back to its mathematical derivation and problem statement.
+

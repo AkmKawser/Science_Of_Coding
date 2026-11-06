@@ -179,7 +179,7 @@ Science_Of_Coding/
 - **Interactive Prompts**:
   - *"Check if there are any pending problems to process."*
   - *"Process Box 1 from write here.docx using @skill:ProblemSkill."*
-  - *"Solve problem P-001 in question bank.md and format the outputs according to output formating.md."*
+  - *"Solve problem P-1 in question bank.md and format the outputs according to Solution formating.md."*
 
 ---
 
