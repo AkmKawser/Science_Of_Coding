@@ -861,3 +861,31 @@ This document records all instructions, architectural decisions, and agent conve
 
 3. **Git Synchronization**:
    - Committed and pushed all reorganized files and updated documentation to GitHub `origin/main` (`b7125dc`).
+
+
+---
+
+## Session 54: Folder Reorganization & Path Synchronization
+
+### User Request
+> "i have updated the folder structure. plz make changes in the files linked with that."
+
+### Actions Taken & Implementation Summary
+1. **Audited New Repository Structure**:
+   - Analyzed the restructured workspace:
+     - **Skills**: Split into `.agent/skills/SkillsOnFixedResources/cpbook4/` and `.agent/skills/SkillsOnDynamicResources/ProblemSkill/`.
+     - **Input**: Unified assets under `Input/books/` and `Input/Templates/`.
+     - **Output**: Skills outputs segregated under `Output/ProblemSkill_output/` and `Output/cpbook4_output/` (including `query/`).
+2. **Updated Tooling & Scripts**:
+   - `ingest_manager.py`: Updated relative parent depth and directory pointers to `Output/ProblemSkill_output/` (verified via `--status`).
+   - `query_cpbook.py`: Updated root discovery and fallback search paths to `Input/books/` and `Input/books/Overall/` (verified via `--search`).
+3. **Updated Markdown Specifications & Links**:
+   - `.agent/skills/type of skills.md`: Updated relative links and architectural mapping to `SkillsOnFixedResources`, `SkillsOnDynamicResources`, `Input/`, and `Output/`.
+   - `.agent/skills/SkillsOnDynamicResources/ProblemSkill/SKILL.md` & `SkillArchitecture/README.md`: Updated all documentation paths and relative markdown links to `Output/ProblemSkill_output/` and `Input/Templates/`.
+   - `.agent/skills/SkillsOnFixedResources/cpbook4/SKILL.md` & `SkillArchitecture/`: Updated book references to `Input/books/` and template paths to `Input/Templates/`.
+   - `Output/ProblemSkill_output/question bank.md`: Updated 53 template links to `Input/Templates/Repetitive Structure Template.md`.
+   - `Output/ProblemSkill_output/problem formatting.md` & `README.md`: Updated output paths and schemas.
+   - `Output/README.md` & `Output/cpbook4_output/README.md`: Updated output directory architecture.
+   - `README.md`: Updated master repository layout and command invocation paths.
+4. **Git Synchronization**:
+   - Committed and pushed all changes to `origin/main` (`823f802`).
