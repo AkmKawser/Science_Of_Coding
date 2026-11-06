@@ -802,3 +802,32 @@ This document records all instructions, architectural decisions, and agent conve
 
 
 
+
+
+---
+
+## Session 52: Pyramid Top-Row Shape Alignment Fix in Question Bank
+
+### User Request
+> "in the question bank.md file the pyramid outputs formate is not correct. the 1st value of the triangle is wrong shape. plz solve it."
+
+### Actions Taken & Implementation Summary
+1. **Root Cause Analysis**:
+   - Inspected `Output/problems/question bank.md` across pyramid pattern problems `P-037` to `P-053` (right-aligned pyramids, centered equilateral pyramids, and Pascal's triangles).
+   - Identified that during automated parsing, the first row of each pattern block had leading indentation stripped (starting as `'1 '` or `'A '` with 0 leading spaces), whereas rows 2..$N$ retained their proper geometric indentation offsets (e.g., 12, 8, 4, 0 leading spaces).
+   - This caused the apex/first element of the triangle to be erroneously left-aligned rather than properly centered or right-aligned with the rest of the pyramid.
+
+2. **Geometric Alignment Rectification**:
+   - Fixed all 32 occurrences (both in `## 📝 Problem Statement` target pattern and `### Sample 1` output blocks) across problems `P-037` through `P-053`:
+     - **P-037 to P-040 (Right-aligned 4-space step pyramids)**: Indented top row to `                1` (16 leading spaces).
+     - **P-041, P-042 (Centered 2-space step pyramids)**: Indented top row to `        1` and `        A` (8 leading spaces).
+     - **P-043, P-044 (Diamond patterns)**: Indented top row to `        A` and `        1` (8 leading spaces).
+     - **P-046 (Right-aligned diamond)**: Indented top row to `                1` (16 leading spaces).
+     - **P-047, P-048 (Full symmetric pyramids / diamonds)**: Indented top row to `                1` (16 leading spaces).
+     - **P-049, P-050 (High-order pyramids)**: Indented top row to `                        1` (24 leading spaces).
+     - **P-051 to P-053 (Pascal / Floyd triangles with 3-space offset)**: Indented top row to `   1` (3 leading spaces).
+   - Left-aligned triangles (`P-017` to `P-036`) remained unchanged as their first row legitimately begins at index 0.
+
+3. **Verification & Git Synchronization**:
+   - Inspected all modified blocks to confirm precise geometric apex alignment.
+   - Committed changes and pushed to GitHub main branch.
