@@ -129,8 +129,7 @@ Science_Of_Coding/
 │   └── scripts/
 │       └── query_cpbook.py         # Search and page extraction CLI utility
 ├── chat.md                         # Persistent project conversation & decision log
-├── README.md                       # Repository overview and usage guide
-└── LICENSE
+└── README.md                       # Repository overview and usage guide
 ```
 
 ---
@@ -198,3 +197,11 @@ python skill/scripts/query_cpbook.py extract --book 1 --start 143 --end 148
 # Save Dinic's Algorithm pages from Book 2 to a file
 python skill/scripts/query_cpbook.py extract --book 2 --start 156 --end 160 --output dinic.txt
 ```
+
+---
+
+## 🔒 Copyright & Terms of Use
+
+**Copyright © 2026. All rights reserved.**
+
+This repository and all its contents—including but not limited to the manuals, query guides, architectural designs, agentic templates, decision trees, and code implementations—are proprietary copyrighted material. **No unauthorized copying, distribution, reproduction, modification, or commercial use is permitted without explicit prior written consent from the author.**
