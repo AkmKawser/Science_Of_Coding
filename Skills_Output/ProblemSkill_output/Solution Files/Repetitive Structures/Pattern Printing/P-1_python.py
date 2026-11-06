@@ -19,11 +19,17 @@ def solve() -> None:
     
     n = int(input_text[0])
     
-    # State Definition:
-    # State tuple = (i, total)
-    # - i: Stepper (Free variable, controls loop index from 1 to N)
-    # - total: Gatherer (Carried variable, accumulates sum of terms)
-    # - n: Fixed value
+    # State Machine & Invariant Architecture:
+    # - Minimal State Tuple: (i, total)
+    #   * i: Free Stepper, enumerates discrete iteration space [1..N]
+    #   * total: Carried Gatherer, accumulates sequence terms across iterations
+    # - Invariant: total = sum(1..i-1) before step i; total = sum(1..i) after step i
+    # - Base Case: i = 1, total = 0 (neutral identity for addition)
+    # - Transition: (i, total) -> (i + 1, total + i)
+    # - Progress Metric: (N - i) strictly shrinks by 1 on each pass
+    # - Termination: i > N (exits when i = N + 1, total holds sum(1..N))
+    # - Fixed parameter: n (constant constraint)
+    # - Derived value: term = i (instantaneous identity formula)
     
     terms = []
     total = 0
