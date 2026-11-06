@@ -699,6 +699,28 @@ This document records all instructions, architectural decisions, and agent conve
 4. **Committed and Pushed to GitHub**:
    - Pushed commit `1003e68` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 48: Streamlining Master Problem Index Table
+
+### User Request
+> "The table colum spacing is not write. make sure the ID and Title are completely visible not in two lines. Also remove the difficulty sesion from the table. remove the source colum from the table. Source Link / Source name should be one column."
+
+### Actions Taken & Implementation Summary
+1. **Restructured Table Columns in `question bank.md`**:
+   - Removed the separate **Difficulty** column from the table.
+   - Merged **Source** and **Source Link / Ref** into a single clean column: **`Source / Reference`** (e.g., `Recursion Vs Iteration, Part 1 (Series #1)`).
+   - Revised table schema:
+     `| ID | Title | Primary Category | Subcategory | Source / Reference |`
+2. **Fixed Column Spacing & Wrapping**:
+   - Calculated dynamic maximum string widths across all 53 rows and padded each column with trailing spaces.
+   - Ensured **ID** and **Title** render on a clean, single line without unwanted wrapping in Markdown viewers.
+3. **Synchronized Formatting Specification**:
+   - Updated [`Output/problems/problem formatting.md`](Output/problems/problem%20formatting.md) to enforce the streamlined 5-column table layout for all future ingested problems.
+4. **Committed and Pushed to GitHub**:
+   - Pushed commit `98af9e0` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
+
 
 
 
