@@ -1214,3 +1214,28 @@ This document records all instructions, architectural decisions, and agent conve
 2. **Synchronized Output**:
    - Re-rendered [`Skills_Input/Templates/images/variable_classification_decision_tree.png`](Skills_Input/Templates/images/variable_classification_decision_tree.png).
    - Committed and pushed changes to GitHub `origin/main`.
+
+
+---
+
+## Session 67: Stacked Two-Line Labeling for Branch Conditions in Diagram
+
+### User Request
+> "in the image write like this 
+> 
+>       No
+> (Unchanging)
+> 
+> by this way all of the text will be clear"
+
+### Actions Taken & Implementation Summary
+1. **Implemented Stacked Two-Line Connector Labels**:
+   - Replaced all horizontal single-line connector annotations (`No (Unchanging)`, `Yes (Changes)`, etc.) with clean 2-line vertically stacked typography:
+     - Top line: Bold condition keyword (`No` or `Yes`).
+     - Bottom line: Descriptive clarification in parentheses (`(Unchanging)`, `(Changes)`, `(Formula)`, `(Has Memory)`, `(Stepper)`, `(Accumulator)`, `(History)`).
+2. **Enhanced Readability & Visual Balance**:
+   - Stacked labels naturally fit within the horizontal gap between question cards and class outcome cards.
+   - Preserved color-coded routing cues (green for `Yes`, red for `No`) with high-contrast text rendering.
+3. **Re-rendered & Synchronized**:
+   - Updated [`Skills_Input/Templates/images/variable_classification_decision_tree.png`](Skills_Input/Templates/images/variable_classification_decision_tree.png).
+   - Committed and pushed all updates to GitHub `origin/main`.
