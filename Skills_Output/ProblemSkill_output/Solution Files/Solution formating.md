@@ -80,11 +80,13 @@ Every derivation file must rigorously execute the phased steps defined in the ma
 
 ## 🌲 Phase 2: State-Space & Relationship Derivation
 1. **Relationship Mapping**: Dependencies between outer and inner loops.
-2. **State-Space Tree Diagram**: High-resolution graphical image diagram (`<Problem-ID>_state_space_tree.png`) representing state transitions, action branches, and termination leaf.
+2. **Loop Bounds & Iteration Spaces**: Formal arithmetic intervals for every stepper/walker.
+3. **State-Space Tree Diagram**: High-resolution graphical image diagram (`<Problem-ID>_state_space_tree.png`) representing state transitions, action branches, and termination leaf.
    - **Explicit Tree Type**: Both the derivation document and the rendered graphical image diagram must explicitly declare the tree type (e.g. `Type 1: Linear Chain / Degenerate Tree (b = 1)` for single loops, `Type 2: Hierarchical 2D Coordinate Tree (Nested Loops)` for matrix/patterns, or `Type 3: Binary Decision Tree (b = 2)` for choice/backtracking).
    > [!IMPORTANT]
    > State-space trees must NEVER be text or ASCII art diagrams. They must be generated as graphical images (`.png`) and linked using Markdown image tags: `![<Problem-ID> State-Space Tree Trace](<Problem-ID>_state_space_tree.png)`.
-3. **Loop Bounds & Iteration Spaces**: Formal arithmetic intervals for every stepper/walker.
+4. **State Transition Analysis Table ($T: \text{State}_t \to \text{State}_{t+1}$)**:
+   Explicit mathematical formulation of state updates along tree edges across all dimensions (stepper advances, inner resets, carried updates, derived evaluations, and emitted actions).
 
 ---
 

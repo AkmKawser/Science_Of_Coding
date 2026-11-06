@@ -7,7 +7,7 @@
 
 # SECTION 1: PROBLEM-SOLVING EXECUTION TEMPLATE
 
-## Part 1: Define the state
+## Part 1: State Analysis : Define the state
 
 1. **List Candidate Variables.** Write down every variable the problem touches (inputs, counters, totals, results, helpers).
 2. **Assign Roles and Classify:**
@@ -18,30 +18,33 @@
      - **Carried:** accumulated across iterations (an update inside the loop)
      - **Fixed:** given and unchanging (`n`, `k`)
 3. **Form the True State.** Filter down to the minimal note needed to pause and resume:
-   $$\text{State} = (\text{Free Variables}, \text{Carried Variables})$$
+   $$
+   \text{State} = (\text{Free Variables}, \text{Carried Variables})
+   $$
+
    *(Fixed values, derived formulas, and temporaries are dropped from the state tuple).*
 
 **Variable roles.** For each candidate variable, determine its role first, then read its class from this table. Only steppers and walkers add loops.
 
-| Role | Typical example | Class |
-| --- | --- | --- |
-| Fixed value | `n`, `k` | Fixed |
-| Stepper | `i`, `j`, `a` to `f` | Free (becomes a loop) |
-| Walker | `left`, `right`, a pointer through a structure | Free (often a single loop) |
-| Gatherer | `total`, `current_sum` | Carried |
-| Most-wanted holder | `best`, `max_so_far` | Carried |
-| Most-recent holder | `last`, `prev_value` | Carried |
-| Follower | `prev` trailing `curr` | Carried |
-| Flag | `found`, `is_valid` | Carried |
-| Container | an array or list you fill | Carried |
-| Organizer | an array you sort or rearrange | Carried |
-| Temporary | `tmp` in a swap | Not part of the state |
+| Role               | Typical example                                    | Class                      |
+| ------------------ | -------------------------------------------------- | -------------------------- |
+| Fixed value        | `n`, `k`                                       | Fixed                      |
+| Stepper            | `i`, `j`, `a` to `f`                       | Free (becomes a loop)      |
+| Walker             | `left`, `right`, a pointer through a structure | Free (often a single loop) |
+| Gatherer           | `total`, `current_sum`                         | Carried                    |
+| Most-wanted holder | `best`, `max_so_far`                           | Carried                    |
+| Most-recent holder | `last`, `prev_value`                           | Carried                    |
+| Follower           | `prev` trailing `curr`                         | Carried                    |
+| Flag               | `found`, `is_valid`                            | Carried                    |
+| Container          | an array or list you fill                          | Carried                    |
+| Organizer          | an array you sort or rearrange                     | Carried                    |
+| Temporary          | `tmp` in a swap                                  | Not part of the state      |
 
 Derived variables, such as `value = n + 1 - i + j`, have no role in the chart. They are computed fresh each time and need no loop. A Temporary lives inside one iteration only, so drop it from the state.
 
 ---
 
-## Part 2: Find the relationships and draw the tree
+## Part 2: Find the relationships, draw the tree, and analyze transitions
 
 4. **Parent variable.** Among the free variables, find whose range depends on whose. The one that sets the range is the **parent**, and the other is the **child**.
    - Dependent ranges: nested loops, parent outermost
@@ -59,7 +62,15 @@ Derived variables, such as `value = n + 1 - i + j`, have no role in the chart. T
      - **Binary Decision / Backtracking ($b = 2$)**: 2 choices per node (Take/Skip) $\implies$ **Binary tree** with $2^N$ leaves.
    - Use a small input (`n = 4` or `5`) so the whole tree fits.
    - See [Section 2: Taxonomy of State-Space Trees](#state-space-and-tree-geometry-why-is-the-tree-a-straight-line-vs-a-branched-tree) for the full diagram and step-by-step drawing tips.
-6. **Read the loop facts off the tree.** These are the facts you will code.
+6. **Detailed State Transition Analysis ($T: \text{State}_t \to \text{State}_{t+1}$).**
+   Every edge in the tree represents a state transition. Formulate the explicit transition function across all dimensions of the minimal state:
+   - **Free Variables (Steppers/Walkers)**: How the index advances toward the bound ($i' = i + \Delta i$).
+   - **Inner Reset Rules**: When an inner walker finishes ($j = \text{bound}$), how it resets ($j' = 1$) while the parent steps ($i' = i + 1$).
+   - **Carried Variables (Accumulators/Holders)**: The recursive recurrence relation $\text{carried}' = f(\text{carried}, \text{derived})$.
+   - **Derived Variables (Instantaneous)**: Recomputed instantaneously from current indices ($\text{val} = g(i, j)$) without memory.
+   - **Action / Side-Effect**: What side-effect is emitted on this transition (e.g., printing term, emitting newline).
+   - *Construct the Formal Transition Table* (see Section 2 for full schema).
+7. **Read the loop facts off the tree.** These are the facts you will code.
    - **Start and end of each loop:** the first and last child under a node
    - **Child count per parent:** the same for every parent means independent ranges, and different counts mean dependent ranges. The pattern of counts (1, 2, 3... or 5, 4, 3...) gives the bound formula.
    - **Leaf value:** what is printed or computed at each leaf, which is where the derived variables go
@@ -69,26 +80,26 @@ Derived variables, such as `value = n + 1 - i + j`, have no role in the chart. T
 
 ## Part 3: Build the loop from the tree
 
-7. **Initialization.** Starting values, including the smallest case.
-8. **Bounds.** Copy them from step 6, and leave room for the descendants (`a < k-5`).
-9. **Transition.** How the derived and carried variables update.
-10. **Termination.** Each iteration makes progress toward the bound.
-11. **Result.** What is returned or printed, and when.
+8. **Initialization.** Starting values, including the smallest case.
+9. **Bounds.** Copy them from step 7, and leave room for the descendants (`a < k-5`).
+10. **Transition Implementation.** Implement the exact transition updates derived in step 6.
+11. **Termination.** Each iteration makes progress toward the bound.
+12. **Result.** What is returned or printed, and when.
 
-Part 3 turns the tree from Part 2 into code. Do not guess the loops from the printed output. Copy each fact from the tree, using the mapping below, and the loops follow.
+Part 3 turns the tree and transition model from Part 2 into code. Do not guess the loops from the printed output. Copy each fact from the tree, using the mapping below, and the loops follow.
 
 ### From the tree to the code
 
-| What you need | Where to read it in the tree | What goes into the code |
-| --- | --- | --- |
-| Number of loops | Number of levels below the root | One loop per level |
-| Nesting order | Top level is the outermost | Level 1 is the outer loop, the last level is the innermost |
-| Start of a loop | First child under a node | Initialization, such as `j = 1` |
-| End of a loop | Last child under a node | Bound, such as `j <= n - i + 1` |
-| Step size | Difference between neighbouring children | Update, such as `++j` |
-| How a bound changes | Child counts under different parents | A bound that uses the parent variable |
-| What happens at a leaf | The leaf value | The loop body |
-| What happens when a level finishes | Moving on to the next sibling at the parent level | Code placed after the inner loop, such as a newline |
+| What you need                      | Where to read it in the tree                      | What goes into the code                                    |
+| ---------------------------------- | ------------------------------------------------- | ---------------------------------------------------------- |
+| Number of loops                    | Number of levels below the root                   | One loop per level                                         |
+| Nesting order                      | Top level is the outermost                        | Level 1 is the outer loop, the last level is the innermost |
+| Start of a loop                    | First child under a node                          | Initialization, such as `j = 1`                          |
+| End of a loop                      | Last child under a node                           | Bound, such as `j <= n - i + 1`                          |
+| Step size                          | Difference between neighbouring children          | Update, such as `++j`                                    |
+| How a bound changes                | Child counts under different parents              | A bound that uses the parent variable                      |
+| What happens at a leaf             | The leaf value                                    | The loop body                                              |
+| What happens when a level finishes | Moving on to the next sibling at the parent level | Code placed after the inner loop, such as a newline        |
 
 ---
 
@@ -108,7 +119,6 @@ Compare the code with the tree in two directions:
 - **Nothing missing.** Every leaf in the tree must be visited by the code. If a leaf is never reached, a valid state is absent. This is the missing-cases check.
 
 The practical method is a trace. Write the leaves of the tree from left to right as the expected output, trace the code by hand (or run it on a small input), and compare line by line. Also compare the order: a depth-first walk of the tree visits leaves from left to right, so the output should come out in that order.
-
 
 ---
 
@@ -132,14 +142,14 @@ Several values are needed together. This happens in three situations:
 - **You are choosing several things at once.** Picking 6 numbers from a list needs `(a, b, c, d, e, f)`.
 - **You must remember something about the past.** Summing an array needs `(i, total)`, because `i` alone does not tell you what has been added so far.
 
-| Problem | State | Single or multi | Number of loops |
-| --- | --- | --- | --- |
-| Print 1 to n | `(i)` | Single | 1 |
-| Sum of an array | `(i, total)` | Multi | 1 (`total` is carried) |
-| Number triangle | `(i, j)` | Multi | 2 |
-| Kadane's maximum subarray | `(i, current_sum, best)` | Multi | 1 (the other two are carried) |
-| Two pointers | `(left, right)` | Multi | 1 (they move together) |
-| Choose 6 of k | `(a, b, c, d, e, f)` | Multi | 6 |
+| Problem                   | State                      | Single or multi | Number of loops               |
+| ------------------------- | -------------------------- | --------------- | ----------------------------- |
+| Print 1 to n              | `(i)`                    | Single          | 1                             |
+| Sum of an array           | `(i, total)`             | Multi           | 1 (`total` is carried)      |
+| Number triangle           | `(i, j)`                 | Multi           | 2                             |
+| Kadane's maximum subarray | `(i, current_sum, best)` | Multi           | 1 (the other two are carried) |
+| Two pointers              | `(left, right)`          | Multi           | 1 (they move together)        |
+| Choose 6 of k             | `(a, b, c, d, e, f)`     | Multi           | 6                             |
 
 The last column shows that the number of variables in the state and the number of loops are different things. The number of loops is the number of **free** variables, the ones you must enumerate. Variables that are carried or derived never add a loop.
 
@@ -149,30 +159,33 @@ In step 1 you list every candidate variable the problem touches. In step 2 you c
 
 ### Why only Free and Carried variables form the State
 
-$$\text{State} = (\text{Free Variables}, \text{Carried Variables})$$
+$$
+\text{State} = (\text{Free Variables}, \text{Carried Variables})
+$$
 
 To understand why this equation holds rigorously, consider what happens when you pause an ongoing algorithm and write a note for someone else to resume it:
 
 1. **Why Free variables MUST be in the state**:
+
    - Free variables (steppers and walkers, like `i`, `j`, `left`, `right`) tell you **WHERE you are** in the iteration space.
    - If you pause in the middle of a loop and omit `i`, the person resuming does not know which iteration to execute next—they cannot know if they are at element 3 or element 97.
    - Therefore, free variables are essential for knowing the current location and boundaries.
-
 2. **Why Carried variables MUST be in the state**:
+
    - Carried variables (gatherers, holders, flags, like `total`, `best`, `found`) tell you **WHAT you have accumulated or discovered so far**.
    - Because carried variables depend on their own past history across iterations, their values **cannot be recomputed on the fly** without restarting the entire loop from the beginning.
    - If you omit `total`, the person resuming knows they are at element 5, but has completely lost the running sum of elements 1 through 4.
-
 3. **Why Fixed values are EXCLUDED from the state**:
+
    - Fixed values (like `n`, `k`, `target`) are invariant constraints given once by the problem statement.
    - They do not change from iteration to iteration. Since they are global constants known everywhere in the function, they do not describe "where you currently are" or "what you just accumulated".
-
 4. **Why Derived variables are EXCLUDED from the state**:
+
    - Derived variables (like `term = 2*i - 1`, `value = n + 1 - i + j`, `mirror = n - 1 - i`) have **zero memory**.
    - Their values depend exclusively on the current instantaneous values of the free/fixed variables.
    - If you have the free variable `i = 5`, you can instantly recalculate `term = 2*(5) - 1 = 9` using the algebraic formula at any moment. Storing them in the resume note would be pure redundancy.
-
 5. **Why Temporaries are EXCLUDED from the state**:
+
    - Temporaries (like `tmp` in a swap, or `line` read per line) exist only inside a single iteration and die at the iteration boundary. They never cross from step $i$ to step $i+1$.
 
 ---
@@ -184,6 +197,7 @@ When reading an algorithmic problem, do not begin by writing `for` loops. Follow
 ![4-Class Variable Diagnostic Decision Tree](images/variable_classification_decision_tree.png)
 
 #### The Diagnostic Questions:
+
 1. **The Fixed Test**: *"Is this variable provided once by the input and strictly constant throughout all iterations?"*
    - If **YES** $\implies$ **Fixed**. (Example: size $N$, target sum $K$, modulus $M$).
 2. **The Derived Test**: *"If I know the current loop indices, can I compute this variable right now with a single formula without knowing previous iterations?"*
@@ -201,24 +215,28 @@ A common beginner mistake is thinking that if a state has 3 variables, the progr
 
 > [!IMPORTANT]
 > **The Golden Law of Loop Counting**:
-> $$\text{Number of Nested Loops} = \text{Number of Independent Enumeration Dimensions among FREE Variables}$$
+>
+> $$
+> \text{Number of Nested Loops} = \text{Number of Independent Enumeration Dimensions among FREE Variables}
+> $$
+>
 > - **Carried variables NEVER add a loop.** (They are updated inside existing loops).
 > - **Derived variables NEVER add a loop.** (They are formulas evaluated inside the loop body).
 > - **Fixed variables NEVER add a loop.** (They merely define the outer bounds).
 
 #### Loop Decision Matrix Cheatsheet:
 
-| Problem Archetype / Pattern | Identified Variables & Classes | Free Variables Count | Loops Required | Structural Implementation Pattern |
-| :--- | :--- | :---: | :---: | :--- |
-| **Linear Series Summation**<br>($1 + 2 + \dots + n$ or $1 + 3 + \dots$) | `n` (Fixed)<br>`i` (Free)<br>`term = 2i-1` (Derived)<br>`total` (Carried) | **1** (`i`) | **1 Loop** | `for i in 1..n:`<br>&nbsp;&nbsp;`total += (2*i - 1)` |
-| **Linear Search / Min / Max**<br>(Scan array of size $N$) | `n` (Fixed)<br>`i` (Free)<br>`best` (Carried) | **1** (`i`) | **1 Loop** | `for i in 0..n-1:`<br>&nbsp;&nbsp;`best = max(best, arr[i])` |
-| **Sliding Window / Two Pointers**<br>(Subarray sum, pair sum) | `arr` (Fixed)<br>`left`, `right` (Free)<br>`curr_sum` (Carried) | **2** (`left`, `right` coupled) | **1 Loop** | Two pointers move in the same direction or converge; they share **1 while loop**: `while right < n:` |
-| **2D Matrix Traversal / Grid**<br>(Scan rows and columns) | `rows`, `cols` (Fixed)<br>`r`, `c` (Free)<br>`grid[r][c]` (Derived) | **2** (`r`, `c` independent) | **2 Nested Loops** | `for r in 0..rows-1:`<br>&nbsp;&nbsp;`for c in 0..cols-1:` |
-| **Triangular Pattern Printing**<br>(Pyramids, Floyd triangle) | `n` (Fixed)<br>`row` (Free)<br>`col` (Free, depends on row)<br>`val` (Derived) | **2** (`row`, `col`) | **2 Nested Loops** | `for row in 1..n:`<br>&nbsp;&nbsp;`for col in 1..row:` |
-| **Centered Diamond / Pyramid with Padding**<br>(Rows with spaces & numbers) | `n` (Fixed)<br>`row` (Free)<br>`spaces` (Derived or Free)<br>`cols` (Free) | **2** (`row`, `col`) | **2 Nested Loops**<br>*(or outer loop + string repeat)* | `for row in 1..n:`<br>&nbsp;&nbsp;`print spaces(n - row)`<br>&nbsp;&nbsp;`for col in 1..row:` |
-| **Subarray Enumeration ($O(N^2)$)**<br>(Check every pair $[i, j]$) | `n` (Fixed)<br>`i` (Free - start)<br>`j` (Free - end)<br>`total` (Carried/Derived) | **2** (`i`, `j`) | **2 Nested Loops** | `for i in 0..n-1:`<br>&nbsp;&nbsp;`for j in i..n-1:` |
-| **3-Sum / Triplet Complete Search**<br>(Check all triplets $a < b < c$) | `n` (Fixed)<br>`i`, `j`, `k` (Free steppers) | **3** (`i`, `j`, `k`) | **3 Nested Loops** | `for i in 0..n-1:`<br>&nbsp;&nbsp;`for j in i+1..n-1:`<br>&nbsp;&nbsp;&nbsp;&nbsp;`for k in j+1..n-1:` |
-| **$k$-Combination Exhaustive Search**<br>(e.g. Choose 6 numbers out of $N$) | `n` (Fixed)<br>`a, b, c, d, e, f` (Free) | **6** (`a` through `f`) | **6 Nested Loops** | Six nested `for` loops (or recursive backtracking if $k$ is variable). |
+| Problem Archetype / Pattern                                                       | Identified Variables & Classes                                                 |           Free Variables Count           |                       Loops Required                       | Structural Implementation Pattern                                                                            |
+| :-------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- | :---------------------------------------: | :---------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------- |
+| **Linear Series Summation**($1 + 2 + \dots + n$ or $1 + 3 + \dots$)     | `n` (Fixed)`i` (Free)`term = 2i-1` (Derived)`total` (Carried)          |            **1** (`i`)            |                      **1 Loop**                      | `for i in 1..n:`&nbsp;&nbsp;`total += (2*i - 1)`                                                         |
+| **Linear Search / Min / Max**(Scan array of size $N$)                     | `n` (Fixed)`i` (Free)`best` (Carried)                                    |            **1** (`i`)            |                      **1 Loop**                      | `for i in 0..n-1:`&nbsp;&nbsp;`best = max(best, arr[i])`                                                 |
+| **Sliding Window / Two Pointers**(Subarray sum, pair sum)                   | `arr` (Fixed)`left`, `right` (Free)`curr_sum` (Carried)                | **2** (`left`, `right` coupled) |                      **1 Loop**                      | Two pointers move in the same direction or converge; they share **1 while loop**: `while right < n:` |
+| **2D Matrix Traversal / Grid**(Scan rows and columns)                       | `rows`, `cols` (Fixed)`r`, `c` (Free)`grid[r][c]` (Derived)          |  **2** (`r`, `c` independent)  |                  **2 Nested Loops**                  | `for r in 0..rows-1:`&nbsp;&nbsp;`for c in 0..cols-1:`                                                   |
+| **Triangular Pattern Printing**(Pyramids, Floyd triangle)                   | `n` (Fixed)`row` (Free)`col` (Free, depends on row)`val` (Derived)     |      **2** (`row`, `col`)      |                  **2 Nested Loops**                  | `for row in 1..n:`&nbsp;&nbsp;`for col in 1..row:`                                                       |
+| **Centered Diamond / Pyramid with Padding**(Rows with spaces & numbers)     | `n` (Fixed)`row` (Free)`spaces` (Derived or Free)`cols` (Free)         |      **2** (`row`, `col`)      | **2 Nested Loops***(or outer loop + string repeat)* | `for row in 1..n:`&nbsp;&nbsp;`print spaces(n - row)`&nbsp;&nbsp;`for col in 1..row:`                  |
+| **Subarray Enumeration ($O(N^2)$)**(Check every pair $[i, j]$)          | `n` (Fixed)`i` (Free - start)`j` (Free - end)`total` (Carried/Derived) |        **2** (`i`, `j`)        |                  **2 Nested Loops**                  | `for i in 0..n-1:`&nbsp;&nbsp;`for j in i..n-1:`                                                         |
+| **3-Sum / Triplet Complete Search**(Check all triplets $a < b < c$)       | `n` (Fixed)`i`, `j`, `k` (Free steppers)                               |     **3** (`i`, `j`, `k`)     |                  **3 Nested Loops**                  | `for i in 0..n-1:`&nbsp;&nbsp;`for j in i+1..n-1:`&nbsp;&nbsp;&nbsp;&nbsp;`for k in j+1..n-1:`         |
+| **$k$-Combination Exhaustive Search**(e.g. Choose 6 numbers out of $N$) | `n` (Fixed)`a, b, c, d, e, f` (Free)                                       |     **6** (`a` through `f`)     |                  **6 Nested Loops**                  | Six nested `for` loops (or recursive backtracking if $k$ is variable).                                   |
 
 ---
 
@@ -231,7 +249,10 @@ The **state space** is the set of every state the program can reach. The tree in
 > [!NOTE]
 > **Why is the state-space tree of a single loop a straight line (degenerate tree) instead of a binary tree?**
 > A common point of confusion is assuming all state-space trees must look like binary trees. In computer science:
-> $$\text{Tree Branching Factor } (b) = \text{number of possible next transitions from a given state}$$
+>
+> $$
+> \text{Tree Branching Factor } (b) = \text{number of possible next transitions from a given state}
+> $$
 >
 > 1. **Deterministic Repetitive Loop ($b = 1 \implies$ Linear Chain / Straight Line)**:
 >    - In a deterministic loop (`for i from 1 to n`), there is **no branching, choice, or backtracking**.
@@ -244,12 +265,13 @@ The **state space** is the set of every state the program can reach. The tree in
 >    - It becomes a **$K$-ary tree** for multi-way choices (e.g., $N$-Queens, Permutations, Sudoku).
 
 #### Search Tree Geometry vs. Loop Structure:
-| Algorithmic Paradigm | Branching Factor ($b$) | Tree Geometry | Code Equivalent |
-| :--- | :---: | :--- | :--- |
-| **Simple Loop / Series (P-1, P-2, P-3)** | $b = 1$ | **Linear Chain / Straight Line** | Single `for` loop |
-| **Grid / Pattern Traversal** | $b = \text{col count}$ | **Hierarchical Spine / Forest** | Nested `for` loops |
-| **Binary Decision / Backtracking** | $b = 2$ | **Binary Tree** | Recursion (`choose` / `skip`) |
-| **$K$-Way Permutations / Complete Search** | $b = K$ | **General Multi-way Tree** | Backtracking over $K$ choices |
+
+| Algorithmic Paradigm                               | Branching Factor ($b$) | Tree Geometry                          | Code Equivalent                   |
+| :------------------------------------------------- | :----------------------: | :------------------------------------- | :-------------------------------- |
+| **Simple Loop / Series (P-1, P-2, P-3)**     |        $b = 1$        | **Linear Chain / Straight Line** | Single `for` loop               |
+| **Grid / Pattern Traversal**                 | $b = \text{col count}$ | **Hierarchical Spine / Forest**  | Nested `for` loops              |
+| **Binary Decision / Backtracking**           |        $b = 2$        | **Binary Tree**                  | Recursion (`choose` / `skip`) |
+| **$K$-Way Permutations / Complete Search** |        $b = K$        | **General Multi-way Tree**       | Backtracking over $K$ choices   |
 
 ---
 
@@ -354,13 +376,13 @@ for (int i = 1; i <= n; ++i) {              // initialization: i = 1 | bound: i 
 
 Five foundational concepts define the execution of any loop:
 
-| Term | Question it Answers | Example (Sum of 1 to $n$) |
-| :--- | :--- | :--- |
-| **State** | What do I need to know to describe where the computation is? | `(i, s)` where `i` is Free stepper and `s` is Carried gatherer |
-| **Invariant** | What is always true about the state before and after every pass? | `s = 1 + 2 + ... + i` |
-| **Base Case (Initialization)** | Where does the computation start? | `i = 0, s = 0` (or `i = 1, s = 0`), which makes the invariant true initially |
-| **Transition** | How does one state become the next one? | `(i, s)` becomes `(i + 1, s + i + 1)` |
-| **Progress** | What guarantees the computation ends? | `n - i` shrinks by 1 on every pass and cannot go below 0 |
+| Term                                 | Question it Answers                                              | Example (Sum of 1 to $n$)                                                      |
+| :----------------------------------- | :--------------------------------------------------------------- | :------------------------------------------------------------------------------- |
+| **State**                      | What do I need to know to describe where the computation is?     | `(i, s)` where `i` is Free stepper and `s` is Carried gatherer             |
+| **Invariant**                  | What is always true about the state before and after every pass? | `s = 1 + 2 + ... + i`                                                          |
+| **Base Case (Initialization)** | Where does the computation start?                                | `i = 0, s = 0` (or `i = 1, s = 0`), which makes the invariant true initially |
+| **Transition**                 | How does one state become the next one?                          | `(i, s)` becomes `(i + 1, s + i + 1)`                                        |
+| **Progress**                   | What guarantees the computation ends?                            | `n - i` shrinks by 1 on every pass and cannot go below 0                       |
 
 > [!IMPORTANT]
 > **The Invariant vs. The Transition**:
@@ -371,6 +393,7 @@ Five foundational concepts define the execution of any loop:
 ![Transition Cycle in Iterative Structures](images/iterative_transition_cycle.png)
 
 A loop executes this cycle with state reassignment:
+
 1. **Base Case / Initialization**: Sets starting values of the state so the invariant is true initially.
 2. **Exit Check**: Evaluates if the termination bound has been reached. If reached, the loop exits.
 3. **Transition & Progress**: Reassigns state variables to advance to the next step, preserving the invariant while guaranteeing strict progress toward termination.
@@ -392,19 +415,45 @@ The start and end of each loop. In the tree they are the first and last child un
 ### Invariant
 
 The fundamental mathematical property of the state that remains true throughout the lifecycle of the loop:
+
 - **Initialization Invariant**: True immediately after initialization, before the first pass.
 - **Maintenance Invariant**: If true before step $k$, the transition ensures it remains true after step $k$.
 - **Termination Invariant**: When the loop terminates, the invariant combined with the exit condition proves that the final carried variable holds the correct problem answer.
 
-### Transition
+### Transition & The State Transition Function $T(S)$
 
-How the state changes from one iteration to the next.
+The **transition** is the exact mathematical rule governing how the state changes along the directed edges of the state-space tree:
+$$T: \text{State}_t \to \text{State}_{t+1}$$
 
-- A free variable moves to its next value (`++j`, `left++`).
-- A carried variable is updated from the current item (`total += x`, `best = max(best, x)`).
-- A derived variable is recomputed from its parents, with no stored update.
+In any iterative program, state transitions are structured into four coordinated layers:
+1. **Free Stepper Update (Progress)**: The free variable advances monotonically along its arithmetic interval toward the loop exit bound:
+   $$i_{t+1} = i_t + \Delta i$$
+   *(Guarantees termination progress by strictly reducing the distance to the bound).*
+2. **Inner Walker Reset Rule (Coordinate Transitions)**: In nested loops, when the inner walker $j$ reaches its upper bound $j = \text{bound}(i)$, the next transition executes a **composite step**:
+   $$\begin{cases} j_{t+1} = j_{\text{start}} & (\text{Inner loop resets}) \\ i_{t+1} = i_t + 1 & (\text{Outer loop steps}) \end{cases}$$
+3. **Carried Variable Update (Inductive Accumulation)**: The carried variable is updated from its previous state and the current iteration's contribution:
+   $$\text{carried}_{t+1} = f(\text{carried}_t, \text{derived}_t)$$
+   *(Examples: $\text{total}_{t+1} = \text{total}_t + \text{term}_t$; $\text{best}_{t+1} = \max(\text{best}_t, \text{val}_t)$).*
+4. **Instantaneous Derived Value Evaluation**: Derived values are computed fresh from the new coordinates without carrying memory:
+   $$\text{derived}_{t+1} = g(i_{t+1}, j_{t+1})$$
 
-In the tree, a transition is the move from one node to the next node in the traversal.
+#### The Formal State Transition Matrix:
+Every solution derivation in Phase 2 must include the **Transition Analysis Table**:
+
+| State Component | Variable | Current State ($S_t$) | Transition Rule / Operator | Next State ($S_{t+1}$) | Loop Level |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Outer Stepper** | `i` | $i$ | $i \leftarrow i + 1$ | $i + 1$ | Outer Loop |
+| **Inner Walker** | `j` | $j$ | If $j < \text{bound}(i)$ then $j + 1$ else $j_{\text{start}}$ | $j'$ | Inner Loop |
+| **Carried Accumulator** | `total` | $\text{total}$ | $\text{total} \leftarrow \text{total} + \text{term}(i)$ | $\text{total} + \text{term}$ | Loop Body |
+| **Carried Holder** | `best` | $\text{best}$ | $\text{best} \leftarrow \max(\text{best}, \text{item})$ | $\text{best}'$ | Loop Body |
+| **Action / Emission** | `stdout` | Buffer so far | Output: `val`, delimiter, or `\n` | Stream updated | Leaf / EOL |
+
+> [!TIP]
+> **Why Formal Transition Analysis Eliminates Bugs**:
+> Writing the transition rule explicitly before coding prevents the most pervasive loop bugs:
+> - **Off-by-one errors**: Clarifies whether the update happens before or after using the variable.
+> - **State pollution**: Identifies exactly when inner variables must reset.
+> - **Invariant preservation**: The transition formula directly provides the inductive step required for the mathematical proof in Phase 3.
 
 ### Progress and Termination
 
@@ -442,12 +491,12 @@ How the work grows with the input. The number of **leaves** is the number of tim
 
 Every variable in a loop falls into one of four classes: free, derived, carried or fixed. The class tells you what the variable does to the loop design: whether it needs its own loop, whether it belongs in the state, and where it shows up in the tree. This section explains each class, how to recognise it, and how to tell the classes apart.
 
-| Class | Who decides its value | Adds a loop? | Part of the state? | In the tree | Example |
-| --- | --- | --- | --- | --- | --- |
-| Free | You choose it by trying every value in a range | Yes, one loop for each | Yes | One level of the tree | `i`, `j` |
-| Derived | A formula of other variables' current values | No | No | The leaf value | `value = n + 1 - i + j` |
-| Carried | Its own previous value and the current item | No | Yes | Information passed along a path | `total`, `best` |
-| Fixed | The problem, once and for all | No | No | Sets the size of the tree | `n`, `k` |
+| Class   | Who decides its value                          | Adds a loop?           | Part of the state? | In the tree                     | Example                   |
+| ------- | ---------------------------------------------- | ---------------------- | ------------------ | ------------------------------- | ------------------------- |
+| Free    | You choose it by trying every value in a range | Yes, one loop for each | Yes                | One level of the tree           | `i`, `j`              |
+| Derived | A formula of other variables' current values   | No                     | No                 | The leaf value                  | `value = n + 1 - i + j` |
+| Carried | Its own previous value and the current item    | No                     | Yes                | Information passed along a path | `total`, `best`       |
+| Fixed   | The problem, once and for all                  | No                     | No                 | Sets the size of the tree       | `n`, `k`              |
 
 ### Free
 
@@ -596,28 +645,28 @@ In an all-pairs problem, `i` and `j` are both free. In the mirror problem, `j` i
 
 ### Worked examples
 
-| Problem | Variable | Class | Why |
-| --- | --- | --- | --- |
-| Number triangle (n = 5) | `n` | Fixed | Given by the problem |
-| Number triangle (n = 5) | `i` (row) | Free | Try every row |
-| Number triangle (n = 5) | `j` (position in row) | Free | Try every position, range set by `i` |
-| Number triangle (n = 5) | `value` | Derived | A formula of `n`, `i` and `j` |
-| Alternating 1 and 0 triangle | `value` | Derived | 1 if `i + j` is even, otherwise 0 |
-| Kadane's maximum subarray | `n` | Fixed | Given by the problem |
-| Kadane's maximum subarray | `i` | Free | Try every position |
-| Kadane's maximum subarray | `current_sum` | Carried | Uses its own old value |
-| Kadane's maximum subarray | `best` | Carried | Keeps the best so far |
-| Two-pointer target sum | `target` | Fixed | Given by the problem |
-| Two-pointer target sum | `left`, `right` | Free | Chosen by the search, and they move together in one loop |
-| Two-pointer target sum | `found` | Carried | Remembers whether a pair was seen |
-| Six nested loops (choose 6 of k) | `k`, `S[]` | Fixed | The input never changes |
-| Six nested loops (choose 6 of k) | `a`, `b`, `c`, `d`, `e`, `f` | Free | Each is a choice, ordered by `parent + 1` |
-| Mirror pairs | `i` | Free | Try every position |
-| Mirror pairs | `j = n - 1 - i` | Derived | Fully determined by `i` |
-| Bubble sort | `n` | Fixed | Given by the problem |
-| Bubble sort | `i`, `j` | Free | Try every pass and position |
-| Bubble sort | `arr` | Carried | Its contents change as you go |
-| Bubble sort | `tmp` | Not in the state | Lives inside one swap |
+| Problem                          | Variable                                 | Class            | Why                                                      |
+| -------------------------------- | ---------------------------------------- | ---------------- | -------------------------------------------------------- |
+| Number triangle (n = 5)          | `n`                                    | Fixed            | Given by the problem                                     |
+| Number triangle (n = 5)          | `i` (row)                              | Free             | Try every row                                            |
+| Number triangle (n = 5)          | `j` (position in row)                  | Free             | Try every position, range set by `i`                   |
+| Number triangle (n = 5)          | `value`                                | Derived          | A formula of `n`, `i` and `j`                      |
+| Alternating 1 and 0 triangle     | `value`                                | Derived          | 1 if `i + j` is even, otherwise 0                      |
+| Kadane's maximum subarray        | `n`                                    | Fixed            | Given by the problem                                     |
+| Kadane's maximum subarray        | `i`                                    | Free             | Try every position                                       |
+| Kadane's maximum subarray        | `current_sum`                          | Carried          | Uses its own old value                                   |
+| Kadane's maximum subarray        | `best`                                 | Carried          | Keeps the best so far                                    |
+| Two-pointer target sum           | `target`                               | Fixed            | Given by the problem                                     |
+| Two-pointer target sum           | `left`, `right`                      | Free             | Chosen by the search, and they move together in one loop |
+| Two-pointer target sum           | `found`                                | Carried          | Remembers whether a pair was seen                        |
+| Six nested loops (choose 6 of k) | `k`, `S[]`                           | Fixed            | The input never changes                                  |
+| Six nested loops (choose 6 of k) | `a`, `b`, `c`, `d`, `e`, `f` | Free             | Each is a choice, ordered by `parent + 1`              |
+| Mirror pairs                     | `i`                                    | Free             | Try every position                                       |
+| Mirror pairs                     | `j = n - 1 - i`                        | Derived          | Fully determined by `i`                                |
+| Bubble sort                      | `n`                                    | Fixed            | Given by the problem                                     |
+| Bubble sort                      | `i`, `j`                             | Free             | Try every pass and position                              |
+| Bubble sort                      | `arr`                                  | Carried          | Its contents change as you go                            |
+| Bubble sort                      | `tmp`                                  | Not in the state | Lives inside one swap                                    |
 
 In every row, the number of **Free** variables is the number of loops. That is why the number triangle has two loops, Kadane's has one, and the six-loop problem has six.
 
@@ -639,14 +688,14 @@ Initialization sets the starting state. Do it variable by variable.
 - **Free variables.** Use the first child in the tree. The outer variable starts at the first child under the root. An inner variable starts at the first child under a node. If that start changes with the parent (`b` starts at `a + 1`), write it as a formula of the parent.
 - **Carried variables.** Use a neutral start, one that cannot change the answer before the first item arrives.
 
-| Carried variable | Neutral start |
-| --- | --- |
-| Sum or count | 0 |
-| Product | 1 |
-| Maximum | The first element, or a very small number |
-| Minimum | The first element, or a very large number |
-| Flag | The answer you expect before seeing any evidence |
-| Container | Empty |
+| Carried variable | Neutral start                                    |
+| ---------------- | ------------------------------------------------ |
+| Sum or count     | 0                                                |
+| Product          | 1                                                |
+| Maximum          | The first element, or a very small number        |
+| Minimum          | The first element, or a very large number        |
+| Flag             | The answer you expect before seeing any evidence |
+| Container        | Empty                                            |
 
 - **Where to initialise.** A carried variable belongs to one level of the tree. If it must restart for every node of level 1 (a total for each row), initialise it inside the outer loop, before the inner loop. If it lives for the whole run (a grand total), initialise it before the outer loop.
 - **The empty case.** If a range is empty (`n = 0`), the loop must simply not run. Check that your starting values and bound give that.
@@ -668,12 +717,12 @@ A bound is a formula for the last child of a loop. Find it by reading the tree f
 For the descending triangle with `n = 5`:
 
 | Parent `i` | Children of `i` (the values of `j`) | Last `j` |
-| --- | --- | --- |
-| 1 | 1 to 5 | 5 |
-| 2 | 1 to 4 | 4 |
-| 3 | 1 to 3 | 3 |
-| 4 | 1 to 2 | 2 |
-| 5 | 1 to 1 | 1 |
+| ------------ | --------------------------------------- | ---------- |
+| 1            | 1 to 5                                  | 5          |
+| 2            | 1 to 4                                  | 4          |
+| 3            | 1 to 3                                  | 3          |
+| 4            | 1 to 2                                  | 2          |
+| 5            | 1 to 1                                  | 1          |
 
 The last `j` drops by 1 each time `i` grows by 1, starting at 5 when `i = 1`. The formula is `n - i + 1`, so the loop is `j <= n - i + 1`.
 
@@ -686,7 +735,9 @@ The last `j` drops by 1 each time `i` grows by 1, starting at 5 when `i = 1`. Th
 A transition moves the state from one iteration to the next.
 
 #### How to Derive a Transition from the Invariant
+
 The update line is **never guessed**—it is derived directly from the invariant:
+
 1. **Choose the state**: The minimal set of Free and Carried variables: $\text{State} = (\text{Free}, \text{Carried})$.
 2. **Write the invariant in one plain sentence**: Express what mathematical truth holds about the state before and after each pass.
 3. **Establish the Base Case**: Set initialization values so that the invariant holds true at step 0 (before entering the loop).
@@ -695,32 +746,34 @@ The update line is **never guessed**—it is derived directly from the invariant
 6. **Formulate the Exit**: The loop exits when the bound condition is met; the invariant evaluated at exit yields the exact problem result.
 
 #### The Update Rule: Free, Carried, and Derived
+
 - **Free variable:** advances across its discrete range. The loop header performs it (`++j`, `left++`, `i++`).
 - **Carried variable:** is updated from the current item (`total += x`, `best = max(best, x)`).
 - **Derived variable:** is recomputed freshly from current variables without needing memory.
 
 #### Accumulating with the Right Neutral Identity
+
 Carried variables that aggregate sequences must be initialized to the mathematical identity of the operation:
 
-| Question / Operation | Neutral Start (Base Case) | Update Rule | Reason |
-| :--- | :--- | :--- | :--- |
-| **Sum / Total** | `0` | `s = s + x` | $0 + x = x$ (Additive identity) |
-| **Product** | `1` | `p = p * x` | $1 \times x = x$ (Multiplicative identity) |
-| **Count** | `0` | `c = c + 1` | Zero elements counted before starting |
-| **Maximum** | First element (or $-\infty$) | `m = max(m, x)` | Any real element dominates $-\infty$ |
-| **Minimum** | First element (or $+\infty$) | `m = min(m, x)` | Any real element is smaller than $+\infty$ |
-| **Any Match (Existential $\exists$)** | `false` | `found = found || test(x)` | Neutral for OR; becomes true on first match |
-| **All Match (Universal $\forall$)** | `true` | `ok = ok && test(x)` | Neutral for AND; becomes false on first mismatch |
+| Question / Operation                          | Neutral Start (Base Case)      | Update Rule            | Reason                                           |
+| :-------------------------------------------- | :----------------------------- | :--------------------- | :----------------------------------------------- |
+| **Sum / Total**                         | `0`                          | `s = s + x`          | $0 + x = x$ (Additive identity)                |
+| **Product**                             | `1`                          | `p = p * x`          | $1 \times x = x$ (Multiplicative identity)     |
+| **Count**                               | `0`                          | `c = c + 1`          | Zero elements counted before starting            |
+| **Maximum**                             | First element (or $-\infty$) | `m = max(m, x)`      | Any real element dominates $-\infty$           |
+| **Minimum**                             | First element (or $+\infty$) | `m = min(m, x)`      | Any real element is smaller than $+\infty$     |
+| **Any Match (Existential $\exists$)** | `false`                      | `found = found         |                                                  |
+| **All Match (Universal $\forall$)**   | `true`                       | `ok = ok && test(x)` | Neutral for AND; becomes false on first mismatch |
 
 #### Canonical Iterative Patterns & Their Transitions
 
-| Problem Archetype | State | Invariant | Transition (State Update) | Progress Metric |
-| :--- | :--- | :--- | :--- | :--- |
-| **Fibonacci** | `(a, b)` | `a = F(k-1)`, `b = F(k)` | `(a, b) = (b, a + b)` | $n - k$ decreases by 1 |
-| **Euclidean GCD** | `(a, b)` | $\gcd(a, b) = \gcd(\text{orig}_a, \text{orig}_b)$ | `(a, b) = (b, a % b)`, stop when `b == 0` | $b$ strictly decreases |
-| **Binary Search** | `(lo, hi)` | If target exists, index $\in [\text{lo}, \text{hi}]$ | `lo = mid + 1` or `hi = mid - 1`, stop when `lo > hi` | $\text{hi} - \text{lo} + 1$ at least halves |
-| **Array Reversal** | `(l, r)` | Elements outside $[l, r]$ are swapped into place | `swap(arr[l], arr[r]); l++; r--;`, stop when `l >= r` | $r - l$ decreases by 2 |
-| **Digit Sum** | `(n, s)` | $s + \text{digits}(n) = \text{digits}(\text{orig}_n)$ | `s += n % 10; n /= 10;`, stop when `n == 0` | $n$ drops by factor of 10 |
+| Problem Archetype        | State        | Invariant                                               | Transition (State Update)                                   | Progress Metric                               |
+| :----------------------- | :----------- | :------------------------------------------------------ | :---------------------------------------------------------- | :-------------------------------------------- |
+| **Fibonacci**      | `(a, b)`   | `a = F(k-1)`, `b = F(k)`                            | `(a, b) = (b, a + b)`                                     | $n - k$ decreases by 1                      |
+| **Euclidean GCD**  | `(a, b)`   | $\gcd(a, b) = \gcd(\text{orig}_a, \text{orig}_b)$     | `(a, b) = (b, a % b)`, stop when `b == 0`               | $b$ strictly decreases                      |
+| **Binary Search**  | `(lo, hi)` | If target exists, index $\in [\text{lo}, \text{hi}]$  | `lo = mid + 1` or `hi = mid - 1`, stop when `lo > hi` | $\text{hi} - \text{lo} + 1$ at least halves |
+| **Array Reversal** | `(l, r)`   | Elements outside $[l, r]$ are swapped into place      | `swap(arr[l], arr[r]); l++; r--;`, stop when `l >= r`   | $r - l$ decreases by 2                      |
+| **Digit Sum**      | `(n, s)`   | $s + \text{digits}(n) = \text{digits}(\text{orig}_n)$ | `s += n % 10; n /= 10;`, stop when `n == 0`             | $n$ drops by factor of 10                   |
 
 **Order matters.** Inside one iteration, use a carried variable's old value before you overwrite it, and move a follower before its leader.
 
@@ -743,11 +796,11 @@ Termination means every loop ends. Check each loop with three questions:
 2. **Does the bound stay put while the loop runs?** If the loop body changes a variable that the bound uses, the loop can run longer than the tree says.
 3. **Does the number of passes match the tree?** The number of iterations of an inner loop must equal the child count of its parent.
 
-| Loop | Moves toward the bound by | Passes | Ends when |
-| --- | --- | --- | --- |
-| `for (i = 1; i <= n; ++i)` | +1 | `n` | `i` becomes `n + 1` |
-| `for (j = 1; j <= n - i + 1; ++j)` | +1 | `n - i + 1` | `j` becomes `n - i + 2` |
-| `while (left < right)` | `left` up or `right` down | at most `n` | the pointers meet |
+| Loop                                 | Moves toward the bound by     | Passes        | Ends when                   |
+| ------------------------------------ | ----------------------------- | ------------- | --------------------------- |
+| `for (i = 1; i <= n; ++i)`         | +1                            | `n`         | `i` becomes `n + 1`     |
+| `for (j = 1; j <= n - i + 1; ++j)` | +1                            | `n - i + 1` | `j` becomes `n - i + 2` |
+| `while (left < right)`             | `left` up or `right` down | at most `n` | the pointers meet           |
 
 For a `while` loop, name the statement inside the loop that changes the condition. If you cannot point to one, the loop may never end. If you leave early with `break` or a flag, check that the early exit happens only when the answer is already known.
 
@@ -755,11 +808,11 @@ For a `while` loop, name the statement inside the loop that changes the conditio
 
 The result is what the program returns or prints. In the tree, it can happen at three places:
 
-| Where in the tree | What it means | Example |
-| --- | --- | --- |
-| At every leaf | Output something for each state | Printing each number of the triangle |
-| When a level finishes | Output something for each parent | A newline after each row, a row total |
-| At the root, after everything | Output one final answer | `total`, `best`, `found` after the loop |
+| Where in the tree             | What it means                    | Example                                       |
+| ----------------------------- | -------------------------------- | --------------------------------------------- |
+| At every leaf                 | Output something for each state  | Printing each number of the triangle          |
+| When a level finishes         | Output something for each parent | A newline after each row, a row total         |
+| At the root, after everything | Output one final answer          | `total`, `best`, `found` after the loop |
 
 Decide this before writing the loop, so you know which variable holds the answer and where the output line goes.
 
@@ -767,13 +820,13 @@ Decide this before writing the loop, so you know which variable holds the answer
 
 The problem (`n = 5`) prints rows `6 7 8 9 10`, `5 6 7 8`, `4 5 6`, `3 4`, `2`. Using the facts from the tree:
 
-| Step | Decision |
-| --- | --- |
-| 6. Initialization | `i = 1` (first child of the root), `j = 1` (first child under any row). No carried variables. |
-| 7. Bounds | `i <= n`. `j <= n - i + 1`, from child counts 5, 4, 3, 2, 1. |
-| 8. Transition | `++i`, `++j`. The leaf value is derived: `n + 1 - i + j`, with no update to write. |
-| 9. Termination | Both variables grow by 1 toward fixed bounds. The inner loop runs `n - i + 1` times per row, matching the tree. |
-| 10. Result | Print the derived value at each leaf. Print a newline when a row (level 1 node) finishes. |
+| Step              | Decision                                                                                                          |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------- |
+| 6. Initialization | `i = 1` (first child of the root), `j = 1` (first child under any row). No carried variables.                 |
+| 7. Bounds         | `i <= n`. `j <= n - i + 1`, from child counts 5, 4, 3, 2, 1.                                                  |
+| 8. Transition     | `++i`, `++j`. The leaf value is derived: `n + 1 - i + j`, with no update to write.                          |
+| 9. Termination    | Both variables grow by 1 toward fixed bounds. The inner loop runs `n - i + 1` times per row, matching the tree. |
+| 10. Result        | Print the derived value at each leaf. Print a newline when a row (level 1 node) finishes.                         |
 
 ```c
 int n = 5;
@@ -789,15 +842,15 @@ for (int i = 1; i <= n; ++i) {               // level 1: rows
 
 Look at the shape of your tree and pick the loop shape from this table.
 
-| Shape of the tree | Loop shape | Example |
-| --- | --- | --- |
-| Every parent has the same number of children | Nested loops with fixed bounds | A grid with `rows` and `cols` |
-| Child count grows with the parent | The child's bound uses the parent (`j <= i`) | The ascending triangle |
-| Child count shrinks as the parent grows | The child's bound counts down (`j <= n - i + 1`) | The descending triangle |
-| Each child must come after its parent | The child starts at `parent + 1` | Pairs and combinations, the six-loop code |
-| One child per node, a single long path | One loop with carried variables | Sum, Kadane's algorithm |
-| Two separate groups of children under one parent | Two sequential loops inside the parent | Leading spaces, then numbers, on each row |
-| A single path driven by a condition | A `while` loop with walkers | Two pointers |
+| Shape of the tree                                | Loop shape                                         | Example                                   |
+| ------------------------------------------------ | -------------------------------------------------- | ----------------------------------------- |
+| Every parent has the same number of children     | Nested loops with fixed bounds                     | A grid with `rows` and `cols`         |
+| Child count grows with the parent                | The child's bound uses the parent (`j <= i`)     | The ascending triangle                    |
+| Child count shrinks as the parent grows          | The child's bound counts down (`j <= n - i + 1`) | The descending triangle                   |
+| Each child must come after its parent            | The child starts at `parent + 1`                 | Pairs and combinations, the six-loop code |
+| One child per node, a single long path           | One loop with carried variables                    | Sum, Kadane's algorithm                   |
+| Two separate groups of children under one parent | Two sequential loops inside the parent             | Leading spaces, then numbers, on each row |
+| A single path driven by a condition              | A `while` loop with walkers                      | Two pointers                              |
 
 ### Common mistakes in Part 3
 
@@ -823,23 +876,23 @@ Validity means every state the code visits is allowed by the relationship you as
 **2. Spot-check leaves.** Choose the first leaf, the last leaf, and some in the middle, including the first and last child under a parent. For the descending triangle with `n = 5`:
 
 | Leaf `(i, j)` | Formula `n + 1 - i + j` | Value in the tree | Match |
-| --- | --- | --- | --- |
-| (1, 1) | 6 | 6 | Yes |
-| (1, 5) | 10 | 10 | Yes |
-| (3, 3) | 6 | 6 | Yes |
-| (4, 2) | 4 | 4 | Yes |
-| (5, 1) | 2 | 2 | Yes |
+| --------------- | ------------------------- | ----------------- | ----- |
+| (1, 1)          | 6                         | 6                 | Yes   |
+| (1, 5)          | 10                        | 10                | Yes   |
+| (3, 3)          | 6                         | 6                 | Yes   |
+| (4, 2)          | 4                         | 4                 | Yes   |
+| (5, 1)          | 2                         | 2                 | Yes   |
 
 **3. Count the passes of each inner loop.** The inner loop must run exactly as many times as the child count of its parent. For the descending triangle, `i = 1` to `5` must give 5, 4, 3, 2, 1 passes, and `n - i + 1` does.
 
 **4. Check that every access is in range.** If the body reads an array, the largest value the loop variable can reach must still be a valid index. In the six-loop code, `f` stops at `k - 1`, so `S[f]` is always inside the array. If `f` could reach `k`, the program would read outside it.
 
-| Symptom | Likely cause |
-| --- | --- |
-| Wrong value at some leaves, right at others | The formula is off by one |
-| Duplicate or reordered tuples | A child does not start at `parent + 1` |
-| Crash or garbage values | A bound allows an index outside the array |
-| One row too long or too short | A bound uses `<` where `<=` is needed, or the reverse |
+| Symptom                                     | Likely cause                                              |
+| ------------------------------------------- | --------------------------------------------------------- |
+| Wrong value at some leaves, right at others | The formula is off by one                                 |
+| Duplicate or reordered tuples               | A child does not start at `parent + 1`                  |
+| Crash or garbage values                     | A bound allows an index outside the array                 |
+| One row too long or too short               | A bound uses `<` where `<=` is needed, or the reverse |
 
 ### Step 13 in detail: Missing cases
 
@@ -847,24 +900,24 @@ A case is missing when a valid state never appears. A case is extra when an inva
 
 **1. Compare the counts.** Count the leaves in the tree and the lines (or states) the code produces. They must be equal.
 
-| Problem | Expected leaves | How to count |
-| --- | --- | --- |
-| Print 1 to `n` | `n` | One leaf per value |
-| Number triangle | `n(n + 1) / 2` | Add the child counts: 1 + 2 + ... + n |
+| Problem                      | Expected leaves  | How to count                               |
+| ---------------------------- | ---------------- | ------------------------------------------ |
+| Print 1 to `n`             | `n`            | One leaf per value                         |
+| Number triangle              | `n(n + 1) / 2` | Add the child counts: 1 + 2 + ... + n      |
 | Grid of `rows` by `cols` | `rows × cols` | Child count is the same under every parent |
-| Choose 6 of `k` | C(k, 6) | One leaf per combination |
+| Choose 6 of `k`            | C(k, 6)          | One leaf per combination                   |
 
 **2. Test the edge cases.** Use the tree to predict what each one should do, then confirm the code agrees.
 
-| Case | What the tree looks like | Expected behaviour |
-| --- | --- | --- |
-| Empty input (`n = 0`) | Only the root | The loop does not run and nothing is printed |
-| Smallest input (`n = 1`) | One node on each level | One leaf, one printed value |
-| Fewer elements than needed (`k < 6`) | The bounds remove every branch | Nothing is printed, and no out-of-range access happens |
-| Exactly enough (`k = 6`) | A single path | One line is printed |
-| Duplicate values in the input | The tree is built on positions, not values | Equal values at different positions are different states, unless the problem says otherwise |
-| All values equal | Same tree as any other input | Every leaf prints the same values |
-| Largest allowed input | Many leaves | The time fits and no number overflows |
+| Case                                   | What the tree looks like                   | Expected behaviour                                                                          |
+| -------------------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------- |
+| Empty input (`n = 0`)                | Only the root                              | The loop does not run and nothing is printed                                                |
+| Smallest input (`n = 1`)             | One node on each level                     | One leaf, one printed value                                                                 |
+| Fewer elements than needed (`k < 6`) | The bounds remove every branch             | Nothing is printed, and no out-of-range access happens                                      |
+| Exactly enough (`k = 6`)             | A single path                              | One line is printed                                                                         |
+| Duplicate values in the input          | The tree is built on positions, not values | Equal values at different positions are different states, unless the problem says otherwise |
+| All values equal                       | Same tree as any other input               | Every leaf prints the same values                                                           |
+| Largest allowed input                  | Many leaves                                | The time fits and no number overflows                                                       |
 
 **3. Check the pruned branches.** Find the branches that the bounds removed and confirm that they have no valid state. For the six-loop tree with `k = 7`, there is no `a = 2` node, because it would leave only four numbers after it, and six are needed.
 
@@ -882,13 +935,13 @@ Complexity tells you how the work grows with the input. The loop body runs once 
 - **One loop with carried variables:** one pass over the input, so the leaves number `n`.
 - **Two walkers moving toward each other:** each walker only moves forward, so the total number of moves is at most `n`.
 
-| Problem | Leaves | Complexity |
-| --- | --- | --- |
-| Sum, Kadane's algorithm | `n` | O(n) |
-| Two pointers | at most `n` moves | O(n) |
-| Grid | `rows × cols` | O(rows × cols) |
-| Number triangle | `n(n + 1) / 2` | O(n²) |
-| Choose 6 of `k` | C(k, 6) | About `k⁶ / 720` for large `k` |
+| Problem                 | Leaves              | Complexity                          |
+| ----------------------- | ------------------- | ----------------------------------- |
+| Sum, Kadane's algorithm | `n`               | O(n)                                |
+| Two pointers            | at most `n` moves | O(n)                                |
+| Grid                    | `rows × cols`    | O(rows × cols)                     |
+| Number triangle         | `n(n + 1) / 2`    | O(n²)                              |
+| Choose 6 of `k`       | C(k, 6)             | About `k⁶ / 720` for large `k` |
 
 **Is it fast enough?** A rough rule is that a computer does around 10⁸ simple operations per second, so a limit of one second allows about that many leaves. The number of leaves can grow quickly: for the six-loop code, `k = 13` gives 1,716 lines, and `k = 49` gives 13,983,816 lines. If the leaf count is too large, look for a smarter design:
 
@@ -902,16 +955,16 @@ Complexity tells you how the work grows with the input. The loop body runs once 
 
 The code picks 6 sorted numbers from `k` numbers and prints each choice, using the tree with 7 leaves.
 
-| Check | What to look at | Result |
-| --- | --- | --- |
-| Validity: relationship | Each child starts at `parent + 1`, so every path is strictly increasing | Holds, so there are no duplicates or reorderings |
-| Validity: spot-check | The first leaf is `(0, 1, 2, 3, 4, 5)` and the last is `(1, 2, 3, 4, 5, 6)` | Both appear in the tree |
-| Validity: index range | `f` stops at `k - 1 = 6` | `S[f]` is always inside the array |
-| Missing: counts | The tree has 7 leaves, and C(7, 6) = 7 | The counts match |
-| Missing: pruned branch | There is no `a = 2` node, since only four numbers would remain | Correct, as the bound `a < k - 5` removes it |
-| Edge: `k = 5` | `a < 0` is false at once | Nothing is printed, and no array access happens |
-| Edge: `k = 6` | One path | Exactly one line is printed |
-| Complexity | C(7, 6) = 7 leaves | Tiny, and C(k, 6) in general |
+| Check                  | What to look at                                                                 | Result                                           |
+| ---------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------ |
+| Validity: relationship | Each child starts at `parent + 1`, so every path is strictly increasing       | Holds, so there are no duplicates or reorderings |
+| Validity: spot-check   | The first leaf is `(0, 1, 2, 3, 4, 5)` and the last is `(1, 2, 3, 4, 5, 6)` | Both appear in the tree                          |
+| Validity: index range  | `f` stops at `k - 1 = 6`                                                    | `S[f]` is always inside the array              |
+| Missing: counts        | The tree has 7 leaves, and C(7, 6) = 7                                          | The counts match                                 |
+| Missing: pruned branch | There is no `a = 2` node, since only four numbers would remain                | Correct, as the bound `a < k - 5` removes it   |
+| Edge: `k = 5`        | `a < 0` is false at once                                                      | Nothing is printed, and no array access happens  |
+| Edge: `k = 6`        | One path                                                                        | Exactly one line is printed                      |
+| Complexity             | C(7, 6) = 7 leaves                                                              | Tiny, and C(k, 6) in general                     |
 
 ### Common mistakes in Part 4
 
@@ -930,6 +983,7 @@ The code picks 6 sorted numbers from `k` numbers and prints each choice, using t
 ### 📋 Pre-Coding Verification Checklist
 
 Before you write code, verify every item on this checklist:
+
 - [ ] **Minimal State Tuple**: Formulated as $\text{State} = (\text{Free}, \text{Carried})$; every variable is strictly needed.
 - [ ] **Loop Invariant**: Stated in one clear sentence describing what mathematical property holds true across every iteration.
 - [ ] **Base Case / Starting Values**: Verified that initial values make the invariant strictly true at step 0.
