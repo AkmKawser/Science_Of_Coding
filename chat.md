@@ -393,6 +393,28 @@ This document records all instructions, architectural decisions, and agent conve
 2. **Committed and Pushed to GitHub**:
    - Pushed commit `28c1334` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 33: Automated Problem Ingestion System (`write here.docx`, `put the file here/`, `problem formatting.md`, & `question bank.md`)
+
+### User Request
+> "You keep a microsoft doc file in the problems folder the file name is write here. I will the source there. the source could be a pdf book , a link , or direct copy paste from somewhere. also make another folder put the file here. in this file source lnk pdf or other documents will be kept. and link and copy pasting text contnet will be store in the doc file. what you have to do is you have to copy the sources content in a md file named question bank follwong accodring to the fomrate that was written in a md file named problem formating.md file. when you completely copy the sources content in that md file just remove it from the write here doc or place the file here folder"
+
+### Actions Taken & Implementation Summary
+1. **Created Problem Ingestion Hub Inside `Output/problems/`**:
+   - [`Output/problems/write here.docx`](Output/problems/write%20here.docx): Dedicated Microsoft Word document for the user to paste problem links, web URLs, or copy-pasted text.
+   - [`Output/problems/put the file here/`](Output/problems/put%20the%20file%20here/): Dedicated folder for storing uploaded source PDF books, problem documents, and offline files.
+2. **Defined Formatting Schema & Database**:
+   - [`Output/problems/problem formatting.md`](Output/problems/problem%20formatting.md): Outlines the strict standard schema (Problem ID, Title, Source Metadata & Attribution, Problem Statement, Input/Output Specifications, Sample Tests with Explanations, Constraints, and Edge Case Notes).
+   - [`Output/problems/question bank.md`](Output/problems/question%20bank.md): Master question repository that holds all ingested, structured problems alongside an indexing table.
+3. **Established the Agent Ingestion & Cleanup Lifecycle**:
+   - **Step 1 (Extraction)**: The agent monitors and reads `write here.docx` (links, text) and `put the file here/` (PDFs, files).
+   - **Step 2 (Transformation)**: The agent reformats the problem according to `problem formatting.md` and appends it to `question bank.md`.
+   - **Step 3 (Cleanup)**: Once the content is safely preserved in `question bank.md`, the agent clears `write here.docx` (resets document) and deletes or moves the source files from `put the file here/`.
+4. **Committed and Pushed to GitHub**:
+   - Pushed commit `3e00bdd` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
+
 
 
 
