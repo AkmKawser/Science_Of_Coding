@@ -736,6 +736,24 @@ This document records all instructions, architectural decisions, and agent conve
 3. **Committed and Pushed to GitHub**:
    - Pushed commit `6d1881a` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 50: Absolute Non-Breaking Hyphen Entity for ID Column
+
+### User Request
+> "still id is not fixed"
+
+### Actions Taken & Implementation Summary
+1. **Identified Limitation of `<nobr>` in Certain Markdown Renderers**:
+   - Some markdown renderers strip raw HTML tags like `<nobr>` or refuse to parse markdown links nested inside them.
+2. **Applied Universal Character-Level Solution**:
+   - Replaced standard ASCII hyphen `-` with the universal Unicode Non-Breaking Hyphen HTML entity **`&#8209;`**:
+     `[&nbsp;P&#8209;001&nbsp;](#p-001)`
+   - Padded the header column with non-breaking spaces `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;` to enforce a wide minimum column width that prevents layout engines from compressing the column.
+3. **Committed and Pushed to GitHub**:
+   - Pushed commit `480e679` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
+
 
 
 
