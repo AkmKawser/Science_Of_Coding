@@ -1195,3 +1195,22 @@ This document records all instructions, architectural decisions, and agent conve
    - Clear edge annotations for all branch conditions (`NO: Unchanging`, `YES: Changes`, `YES: Formula`, `NO: Has Memory`, etc.).
 3. **Git Synchronization**:
    - Committed and synchronized the corrected image with GitHub `origin/main`.
+
+
+---
+
+## Session 66: Visual Perfection & Text Fitting of Variable Classification Diagram
+
+### User Request
+> "the previous image was better just make sure the text fits."
+
+### Actions Taken & Implementation Summary
+1. **Restored and Refined Original Card-Based Visual Aesthetic**:
+   - Kept the crisp, executive card-based visual design (white question cards with badge numbers, colorful outcome cards with pill badges, and dual-axis YES/NO color-coded routing arrows).
+   - Expanded canvas width from $1100\text{px} \to 1350\text{px}$ and height from $820\text{px} \to 920\text{px}$ to give ample margin and padding.
+   - Expanded Question Cards width to $480\text{px}$ and Outcome Cards width to $570\text{px}$.
+   - Dynamically positioned the status pill badge (`EXCLUDED FROM STATE`, `ADDS 1 NESTED LOOP`, `LIVES INSIDE LOOP`) on the top-right corner using measured bounds, preventing any collision with the main class title.
+   - Embedded bounded text layout rectangles (`RectangleF`) for subtitles and descriptions with clean vertical line spacing so no text is truncated, clipped, or overlapping.
+2. **Synchronized Output**:
+   - Re-rendered [`Skills_Input/Templates/images/variable_classification_decision_tree.png`](Skills_Input/Templates/images/variable_classification_decision_tree.png).
+   - Committed and pushed changes to GitHub `origin/main`.
