@@ -11,6 +11,7 @@ Every problem ingested into `question bank.md` must adhere to the following temp
 ```markdown
 ---
 
+<a id="[problem-id-lowercase]"></a>
 # Problem [ID]: [Problem Title]
 
 ## 📌 Metadata & Source Attribution
@@ -78,8 +79,9 @@ Every problem ingested into `question bank.md` must adhere to the following temp
 When processing input from `write here.docx` or `put the file here/`:
 1. **Extraction**:
    - Extract raw text, problem links, or PDF excerpts.
-2. **Formatting**:
-   - Convert the extracted content into the markdown format defined above.
-   - Append or insert the entry into [`Output/problems/question bank.md`](question%20bank.md).
+2. **Formatting & Linking**:
+   - Convert the extracted content into the markdown format defined above, inserting `<a id="p-xxx"></a>` directly above the `# Problem P-XXX:` header.
+   - Add a row to the **Master Problem Index** table with both ID and Title formatted as clickable links pointing to the anchor: `| [P-XXX](#p-xxx) | [Problem Title](#p-xxx) | ...`.
+   - Append the entry into [`Output/problems/question bank.md`](question%20bank.md).
 3. **Purge / Cleanup**:
    - Once successfully extracted and formatted into `question bank.md`, clear the content from `write here.docx` (reset to empty document) or delete/move the source file from `put the file here/`.
