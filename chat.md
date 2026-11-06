@@ -357,5 +357,28 @@ This document records all instructions, architectural decisions, and agent conve
 4. **Committed and Pushed to GitHub**:
    - Pushed commit `1f62cf6` containing the new `problems/` database infrastructure to `origin/main`.
 
+---
+
+## Session 31: Restructuring `Output/` Directory (Encapsulating `problems/` & `solution/`)
+
+### User Request
+> "create a solution folder. keep both problem and solution folder inside a folder named Output"
+
+### Actions Taken & Implementation Summary
+1. **Restructured Directory Hierarchy**:
+   - Created the top-level [`Output/`](Output/) directory.
+   - Relocated `problems/` inside `Output/` $\to$ [`Output/problems/`](Output/problems/).
+   - Created the designated solution repository $\to$ [`Output/solution/`](Output/solution/).
+2. **Authored Directory Governance & Index Standards**:
+   - [`Output/README.md`](Output/README.md): High-level overview of the dual-repository structure and workflow linking problem statements to template-derived solutions.
+   - [`Output/problems/README.md`](Output/problems/README.md): Updated relative links and schema requirements for preserving full problem statements with source attribution.
+   - [`Output/solution/README.md`](Output/solution/README.md): Established standards for template-guided solutions, requiring phased derivation (variable roles, state tree, invariants, failure audit) and multi-language implementations (Python 3 & Java 21).
+3. **Synchronized Documentation & Agent Skills**:
+   - Updated [`README.md`](README.md): Documented the new `Output/` structure in Key Deliverables, the dedicated protocol section, and the repository tree.
+   - Updated [`skill/SKILL.md`](skill/SKILL.md) and [`.agent/skills/cpbook4/SKILL.md`](.agent/skills/cpbook4/SKILL.md): Updated the operational protocol instructing agents to preserve problem statements under `Output/problems/` and generate template-derived solutions under `Output/solution/`.
+4. **Committed and Pushed to GitHub**:
+   - Pushed commit `3964e2e` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
+
 
 
