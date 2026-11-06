@@ -266,3 +266,23 @@ This document records all instructions, architectural decisions, and agent conve
 4. **Committed and Pushed**:
    - Pushed commit `b8b1a9b` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 27: Upgrade Precision Retrieval Architecture to 4-Tier Pipeline
+
+### User Request
+> "can you please also update the Precision Retrieval Architecture considering the new template concept"
+
+### Changes Made
+1. **Upgraded to 4-Tier Precision Retrieval & Problem-Solving Pipeline**:
+   - Integrated the `Templates/` directory as **Tier 1 (Methodological Blueprints)** in both [`README.md`](README.md) and [`skill/ARCHITECTURE.md`](skill/ARCHITECTURE.md).
+   - The updated 4-tier pipeline:
+     - **Tier 1: Methodological Blueprints (`Templates/*.md`)**: Guides state formulation, role classification, state-space tree derivation, and edge-case failure mode prevention before code is generated.
+     - **Tier 2: Knowledge Router (`skill/references/table_of_contents.md`)**: Zero-token instant routing to exact book chapters and sections.
+     - **Tier 3: Targeted Search (`query_cpbook.py search`)**: Fast keyword search for niche variants across reference texts.
+     - **Tier 4: Surgical Page Extraction (`query_cpbook.py extract`)**: Extracts only the exact 3-5 pages containing verified proofs, lemmas, and code patterns directly into the prompt context.
+2. **Updated Visual Architecture Flowcharts**:
+   - Replaced old 3-tier ASCII and Mermaid diagrams with the unified 4-tier system workflow linking problem decomposition, knowledge retrieval, and user consensus checks.
+3. **Committed and Pushed**:
+   - Pushed commit `d38b3cf` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
