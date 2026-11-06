@@ -4,6 +4,45 @@ Welcome to the **Problems Database** of the *Science of Coding* project.
 
 ---
 
+## 📌 Problem Ingestion Pipeline
+
+To easily ingest problems from different sources:
+
+```
+                  ┌────────────────────────────────────────┐
+                  │              Problem Input             │
+                  └───────────────────┬────────────────────┘
+                                      │
+                 ┌────────────────────┴────────────────────┐
+                 │                                         │
+                 ▼                                         ▼
+   Links, Pasted Text, Notes                  Files, PDFs, Documents
+     `write here.docx`                         `put the file here/`
+                 │                                         │
+                 └────────────────────┬────────────────────┘
+                                      │
+                                      ▼
+                        Agent Ingestion & Conversion
+                    (Converts to `problem formatting.md`)
+                                      │
+                                      ▼
+                          `question bank.md`
+                     (Persistent Question Archive)
+                                      │
+                                      ▼
+                           Automatic Cleanup
+                (Purges `write here.docx` & `put the file here/`)
+```
+
+### Components:
+1. **[`write here.docx`](write%20here.docx)**: Drop links, copy-pasted problem descriptions, or source URLs here.
+2. **[`put the file here/`](put%20the%20file%20here/)**: Place PDF chapters, documents, or files containing problem statements here.
+3. **[`problem formatting.md`](problem%20formatting.md)**: The mandatory markdown schema governing how every problem must be formatted.
+4. **[`question bank.md`](question%20bank.md)**: The centralized repository storing all ingested, formatted problem statements with full source attribution.
+5. **Automatic Cleanup**: Once a problem's content is successfully copied and formatted into `question bank.md`, the agent clears `write here.docx` or removes the processed file from `put the file here/`.
+
+---
+
 ## 📌 Purpose & Storage Policy
 
 This directory acts as the central, categorized repository for all practice, benchmark, and illustrative problems across algorithmic paradigms.
