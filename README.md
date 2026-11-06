@@ -23,9 +23,24 @@ Modern LLM-powered coding assistants frequently suffer from two fatal failure mo
 ## 📖 Key Deliverables
 
 1. **The Science of Coding Manual**: Structured guides, mathematical proofs, pattern decompositions, and battle-tested code templates with side-by-side runnable implementations in **Python 3** and **Java 21**.
-2. **`cpbook4` Agentic Skill**: A portable, self-contained AI agent skill that enables any Agentic AI (Antigravity, Claude Code, Cursor, Copilot, ChatGPT, or custom LLM harnesses) to retrieve exact formulas, theorems, and implementations on demand without context exhaustion or hallucinations.
-3. **`query/` Knowledgebase**: A dedicated library of deep-dive query documents featuring visual decision trees, interview memory mnemonics, and real-world problem mappings.
-4. **`chat.md`**: A chronological record of all conversations, architectural decisions, and design sessions.
+2. **`Templates/` Directory (Agent Solution Blueprints)**: Explicit step-by-step methodologies and conceptual frameworks instructing the agent on *how* to deconstruct, design, and verify code systematically.
+3. **`cpbook4` Agentic Skill**: A portable, self-contained AI agent skill that enables any Agentic AI (Antigravity, Claude Code, Cursor, Copilot, ChatGPT, or custom LLM harnesses) to retrieve exact formulas, theorems, and implementations on demand without context exhaustion or hallucinations.
+4. **`query/` Knowledgebase**: A dedicated library of deep-dive query documents featuring visual decision trees, interview memory mnemonics, and real-world problem mappings.
+5. **`Upcoming Updates/` Roadmap**: A centralized milestone tracker with task status boxes for planned features and upcoming manuals.
+6. **`chat.md`**: A chronological record of all conversations, architectural decisions, and design sessions.
+
+---
+
+## 🧩 Templates: Guiding Agent Problem-Solving
+
+The primary purpose of the [`Templates/`](Templates/) directory is to **instruct the agent on the exact mental model and step-by-step procedure required to solve a problem**. Rather than allowing the agent to jump straight to writing ungrounded loops or ad-hoc logic, each template provides:
+- **Core Conceptual Foundations**: Formal definitions (e.g., What is a state? What are the variable roles? What are state transitions and invariants?).
+- **Step-by-Step Problem-Solving Recipes**: Strict, phased instructions (e.g., Phase 1: List Candidate Variables $\to$ Classify Roles $\to$ Define the Minimal State; Phase 2: Map Relationships & Draw the State Tree; Phase 3: Synthesize Loops; Phase 4: Mathematical Verification & Edge Case Auditing).
+- **Failure Mode & Edge Case Prevention**: Detailed catalogs of common implementation traps, off-by-one errors, and invariant violations to check against before code generation.
+
+### Available Templates
+
+- [`Templates/Repetitive Structure Template.md`](Templates/Repetitive%20Structure%20Template.md): A comprehensive blueprint for designing and deriving loops, nested iterations, multi-variable states, and state-space trees from first principles.
 
 ---
 
@@ -76,8 +91,13 @@ Science_Of_Coding/
 │   └── skills/
 │       └── cpbook4/
 │           └── SKILL.md            # Entrypoint for Antigravity native skill discovery
+├── Templates/                      # Methodological blueprints guiding agent problem-solving
+│   └── Repetitive Structure Template.md # Step-by-step guide for states, loops, and trees
+├── Upcoming Updates/               # Roadmap, milestone checklist, and feature tracking
+│   └── Upcoming Updates.md         # Serialized progress tracking template
 ├── query/                          # Deep-dive algorithmic manuals & query outputs
-│   └── 001_graph_and_tree_learning_roadmap.md
+│   ├── 001_graph_and_tree_learning_roadmap.md
+│   └── 002_data_structures_master_manual.md
 ├── skill/                          # Standalone, portable Agent Skill package
 │   ├── ARCHITECTURE.md             # Detailed architectural specification & mechanics
 │   ├── SKILL.md                    # Universal agent skill instructions & decision matrix
@@ -109,8 +129,8 @@ Antigravity automatically discovers skills inside `.agent/skills/`:
 - **Auto-Discovery**: Pre-configured at [`.agent/skills/cpbook4/SKILL.md`](.agent/skills/cpbook4/SKILL.md).
 - **Interactive Prompts**:
   - *"Using @skill:cpbook4, I need to design a system for dynamic range minimum queries with updates. Present the available options and ask me which one fits best before writing code."*
-  - *"Using cpbook4, check how to handle SSSP with negative weights and present the trade-offs."*
-- **Agent Behavior**: Antigravity reads the decision trees in `SKILL.md`, executes `query_cpbook.py` behind the scenes, presents the available algorithmic options, and waits for your confirmation.
+  - *"Using cpbook4 and `Templates/Repetitive Structure Template.md`, decompose this multi-variable nested loop problem step by step."*
+- **Agent Behavior**: Antigravity reads the decision trees in `SKILL.md`, references the appropriate methodology in `Templates/`, executes `query_cpbook.py` behind the scenes, presents the available algorithmic options, and waits for your confirmation.
 
 ### 2. Claude Code
 Claude Code discovers skills via `.claude/skills/` or prompt inclusion:
@@ -123,7 +143,7 @@ Claude Code discovers skills via `.claude/skills/` or prompt inclusion:
 - **Project Rule in `CLAUDE.md`**:
   ```markdown
   When handling algorithmic or data structure tasks:
-  1. Always consult the cpbook4 skill in `skill/SKILL.md`.
+  1. Always consult the cpbook4 skill in `skill/SKILL.md` and relevant blueprints in `Templates/`.
   2. If more than one viable design or data structure exists, present the trade-offs and ask the user for their preferred design before coding.
   3. Query books using: python skill/scripts/query_cpbook.py search|extract
   ```
@@ -136,11 +156,10 @@ For Cursor, Copilot Workspace, OpenAI Codex, or LangChain agents:
   ```markdown
   ### Algorithmic Design Protocol:
   1. Consult `skill/SKILL.md` and `skill/references/table_of_contents.md`.
-  2. Query exact reference pages using: python skill/scripts/query_cpbook.py search|extract
-  3. MANDATORY: If more than one algorithmic solution exists (e.g., Kruskal vs. Prim, Top-Down vs. Bottom-Up DP, Fenwick vs. Segment Tree), present the options with time/space trade-offs and ASK the user which design they prefer before generating code.
+  2. For structured problem decomposition, follow the guidelines in `Templates/`.
+  3. Query exact reference pages using: python skill/scripts/query_cpbook.py search|extract
+  4. MANDATORY: If more than one algorithmic solution exists (e.g., Kruskal vs. Prim, Top-Down vs. Bottom-Up DP, Fenwick vs. Segment Tree), present the options with time/space trade-offs and ASK the user which design they prefer before generating code.
   ```
-- **Interactive Prompting**:
-  > *"Search the reference books for Eulerian path algorithms. Show me the candidate approaches and ask me for my design choice."*
 
 ---
 
