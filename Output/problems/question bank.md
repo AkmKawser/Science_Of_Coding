@@ -6,8 +6,8 @@ This document serves as the unified, centralized question bank storing all pract
 
 ## 📑 Master Problem Index
 
-| ID | Title | Topic | Difficulty | Source | Source Link / Ref |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| *—* | *(Awaiting first ingested problem)* | *—* | *—* | *—* | *—* |
+| ID | Title | Primary Category | Subcategory | Difficulty | Source | Source Link / Ref |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *—* | *(Awaiting first ingested problem)* | *—* | *—* | *—* | *—* | *—* |
 
 ---

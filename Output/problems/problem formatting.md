@@ -16,9 +16,10 @@ Every problem ingested into `question bank.md` must adhere to the following temp
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: [Unique ID or sequential number, e.g., P-001]
 - **Problem Title**: [Exact title of the problem]
+- **Primary Category**: [Primary Domain from problem catagories.docx, e.g., Dynamic Programming]
+- **Subcategory**: [Subcategory from problem catagories.docx, e.g., 2D Grid & Interval DP]
 - **Source**: [Source Name, e.g., Codeforces / LeetCode / CSES / Book Volume & Page]
 - **Source Link / Reference**: [URL link, PDF filename, or Book Chapter/Page]
-- **Topic**: [e.g., Repetitive Structures, Two Pointers, Dynamic Programming, Graphs]
 - **Difficulty**: [Easy / Medium / Hard / Rating]
 - **Target Template**: [Matching template from Templates/, e.g., Templates/Repetitive Structure Template.md]
 

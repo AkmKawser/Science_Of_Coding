@@ -1,6 +1,6 @@
 ---
 name: ProblemSkill
-description: Dedicated skill for managing and formatting problems into question bank.md. Inspects 'Output/problems/Source of Problem/', parses specified files or box numbers, presents dynamic categories from 'problem catagories.docx' via Human-in-the-Loop (HITL) prompt, and safely ingests entries into question bank.md without data loss.
+description: Dedicated skill for managing and formatting problems into question bank.md. Inspects 'Output/problems/Source of Problem/', parses specified files or box numbers, presents dynamic categories and nested subcategories from 'problem catagories.docx' via Human-in-the-Loop (HITL) prompt, and safely ingests entries into question bank.md without data loss.
 ---
 
 # Problem Ingestion & Question Bank Control Skill (`ProblemSkill`)
@@ -18,22 +18,21 @@ Activate this skill when:
 
 ---
 
-## 🤝 Human-in-the-Loop (HITL) Topic & Domain Consultation
+## 🤝 Human-in-the-Loop (HITL) Category & Subcategory Consultation
 
-Whenever processing a problem (from `write here.docx` or `put the file here/`), the agent **MUST NOT** guess the category arbitrarily.
+Whenever processing a problem (from `write here.docx` or `put the file here/`), the agent **MUST NOT** guess the category or subcategory arbitrarily.
 
-### Dynamic Category Protocol:
+### Dynamic Hierarchical Category Protocol:
 1. **Dynamic Category Loading**:
-   - The agent reads the real-time categories from [`Output/problems/problem catagories.docx`](../../problems/problem%20catagories.docx) using:
+   - The agent reads the real-time categories and nested subcategories from [`Output/problems/problem catagories.docx`](../../problems/problem%20catagories.docx) using:
      ```bash
      python Output/skill/scripts/ingest_manager.py --categories
      ```
 2. **Interactive Consultation (HITL Prompt)**:
-   - Present the dynamically retrieved category list to the user and ask:
-     > *"Which problem category/domain from `problem catagories.docx` does this problem belong to?"*
-   - Or use the `ask_question` tool with the options populated dynamically from `problem catagories.docx`.
+   - Present the dynamically retrieved primary categories and subcategories to the user (e.g. `Dynamic Programming ↳ 2D Grid & Interval DP` or `Graph Algorithms ↳ Shortest Paths (SSSP)`).
+   - Use the `ask_question` tool or prompt selection to ask the user to confirm the exact **Category** and **Subcategory**.
 3. **Dynamic User Expansion**:
-   - The user may update `problem catagories.docx` at any time with new domains. The agent must always reflect the updated list on demand.
+   - The user may update `problem catagories.docx` at any time with new primary categories or new subcategories. The agent dynamically parses the updated hierarchy.
 
 ---
 
@@ -57,13 +56,19 @@ python Output/skill/scripts/ingest_manager.py --status
 ### Step 2: Target Isolation
 - Isolate the requested target (e.g., Box #001 or a specific file like `Recursion_Vs_Iteration_Complete_Codes.pdf`).
 
-### Step 3: HITL Category Selection
-- Fetch the dynamic category list from `problem catagories.docx` and consult the user to confirm the problem domain.
+### Step 3: HITL Category & Subcategory Selection
+- Fetch the dynamic category & subcategory hierarchy from `problem catagories.docx` and consult the user to confirm both the **Primary Category** and **Subcategory**.
 
 ### Step 4: Reformat according to `problem formatting.md`
 Format into the strict schema defined in [`problem formatting.md`](../../problems/problem%20formatting.md):
 - `# Problem [ID]: [Title]`
-- `## 📌 Metadata & Source Attribution` (Source, link, confirmed category, difficulty, target template)
+- `## 📌 Metadata & Source Attribution`
+  - **Category**: [Primary Category]
+  - **Subcategory**: [Subcategory]
+  - **Source**: [Source name]
+  - **Source Link / Ref**: [URL or book page]
+  - **Difficulty**: [Easy / Medium / Hard]
+  - **Target Template**: [Matching template from Templates/]
 - `## 📝 Problem Statement`
 - `## 📥 Input Specification`
 - `## 📤 Output Specification`
@@ -73,7 +78,7 @@ Format into the strict schema defined in [`problem formatting.md`](../../problem
 
 ### Step 5: Append to `question bank.md` & Update Table
 - Add the entry to [`Output/problems/question bank.md`](../../problems/question%20bank.md).
-- Append a new row to the **Master Problem Index** table at the top.
+- Append a new row to the **Master Problem Index** table at the top including both Category and Subcategory.
 
 ### Step 6: Atomic Verified Cleanup
 - Only after `question bank.md` is updated, remove the processed file from `put the file here/` or clear only that specific box in `write here.docx`.

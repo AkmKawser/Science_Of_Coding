@@ -4,8 +4,8 @@ Supports:
   - Checking pending items in 'Output/problems/Source of Problem/'
   - Inspecting boxes in 'write here.docx'
   - Inspecting files in 'put the file here/'
-  - Reading dynamic problem categories from 'Output/problems/problem catagories.docx'
-  - Formatting entries into 'Output/problems/question bank.md' with chosen domain
+  - Reading dynamic categories and nested subcategories from 'Output/problems/problem catagories.docx'
+  - Formatting entries into 'Output/problems/question bank.md' with chosen Category & Subcategory
   - Safe, non-destructive atomic cleanup ONLY after verified writes
 """
 
@@ -25,48 +25,53 @@ FORMATTING_SPEC = PROBLEMS_DIR / "problem formatting.md"
 
 def load_categories():
     """
-    Dynamically loads categories from 'Output/problems/problem catagories.docx'.
-    Reads table or paragraphs.
+    Dynamically loads categories and subcategories from 'Output/problems/problem catagories.docx'.
+    Returns a dict: { PrimaryCategory: [ (Subcategory, Description), ... ] }
     """
     if not CATEGORIES_DOCX.exists():
-        return [
-            "Repetitive Structures",
-            "State-Space Search",
-            "Two Pointers & Sliding Window",
-            "Binary Search & Ternary Search",
-            "Divide and Conquer",
-            "Dynamic Programming",
-            "Graph Algorithms",
-            "Advanced Data Structures",
-            "String Algorithms",
-            "Mathematics & Number Theory"
-        ]
+        return {
+            "Repetitive Structures": [("Single Loop", "Linear scans"), ("Nested Loops", "Grids & dependent ranges")],
+            "Dynamic Programming": [("1D Linear", "Sequences"), ("2D Grid", "Grids/Intervals")],
+            "Graph Algorithms": [("Traversals", "DFS/BFS"), ("Shortest Paths", "Dijkstra/Bellman-Ford")]
+        }
     try:
         import docx
         doc = docx.Document(str(CATEGORIES_DOCX))
-        categories = []
+        hierarchy = {}
         if doc.tables:
-            for row in doc.tables[0].rows[1:]:  # skip header
-                if len(row.cells) >= 2:
-                    cat_name = row.cells[1].text.strip()
-                    if cat_name and cat_name not in categories:
-                        categories.append(cat_name)
-        if not categories:
-            for p in doc.paragraphs:
-                txt = p.text.strip()
-                if txt and not txt.startswith("🏷️") and len(txt) < 80:
-                    categories.append(txt)
-        return categories
+            table = doc.tables[0]
+            # Check column count
+            for row in table.rows[1:]:  # skip header
+                cells = [c.text.strip() for c in row.cells]
+                if len(cells) >= 4:
+                    # Format: #, Primary Category, Subcategory, Description
+                    primary = cells[1]
+                    subcat = cells[2].replace("↳", "").strip()
+                    desc = cells[3]
+                    if primary not in hierarchy:
+                        hierarchy[primary] = []
+                    if subcat and (subcat, desc) not in hierarchy[primary]:
+                        hierarchy[primary].append((subcat, desc))
+                elif len(cells) >= 3:
+                    primary = cells[1]
+                    desc = cells[2]
+                    if primary not in hierarchy:
+                        hierarchy[primary] = []
+                    hierarchy[primary].append((primary, desc))
+        return hierarchy
     except Exception as e:
         print(f"[Warning loading categories]: {e}")
-        return ["Repetitive Structures", "Dynamic Programming", "Graph Algorithms"]
+        return {"General": [("Algorithms", "Standard algorithms")]}
 
-def list_categories():
-    cats = load_categories()
-    print("=== Dynamic Problem Categories (from problem catagories.docx) ===")
-    for idx, c in enumerate(cats, 1):
-        print(f"  [{idx:02d}] {c}")
-    return cats
+def list_categories(detailed=True):
+    hierarchy = load_categories()
+    print("=== Dynamic Problem Categories & Subcategories (from problem catagories.docx) ===")
+    for idx, (primary, subcats) in enumerate(hierarchy.items(), 1):
+        print(f"[{idx:02d}] 📁 {primary}")
+        if detailed:
+            for s_idx, (sub_name, desc) in enumerate(subcats, 1):
+                print(f"      ↳ [{idx}.{s_idx}] {sub_name} - {desc}")
+    return hierarchy
 
 def get_docx_boxes():
     if not DOCX_PATH.exists():
@@ -121,16 +126,16 @@ def status():
     if not boxes and not put_files:
         print("\nAll clear! No pending problems in staging.")
         
-    print("\n--- Available Problem Categories ---")
-    list_categories()
+    print("\n--- Available Category & Subcategory Registry ---")
+    list_categories(detailed=False)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Problem Ingestion Script")
     parser.add_argument("--status", action="store_true", help="Check for pending problems to process")
-    parser.add_argument("--categories", action="store_true", help="List dynamic problem categories from docx")
+    parser.add_argument("--categories", action="store_true", help="List dynamic problem categories and subcategories")
     args = parser.parse_args()
     
     if args.categories:
-        list_categories()
+        list_categories(detailed=True)
     else:
         status()
