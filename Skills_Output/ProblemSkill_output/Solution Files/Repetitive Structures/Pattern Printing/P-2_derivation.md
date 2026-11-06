@@ -111,3 +111,4 @@ $$\text{total} = \sum_{k=1}^{i-1} 2k = 2 \sum_{k=1}^{i-1} k = 2 \cdot \frac{(i -
   - Each step carries out $\mathcal{O}(1)$ multiplication, addition, and formatting operations.
 - **Auxiliary Space Complexity**: $\mathcal{O}(1)$
   - Only two scalar registers (`i` and `total`) are maintained in memory across the loop.
+
