@@ -1155,3 +1155,24 @@ This document records all instructions, architectural decisions, and agent conve
 
 3. **Git Synchronization**:
    - Committed and synchronized all changes with GitHub `origin/main`.
+
+
+---
+
+## Session 64: Image-Based Decision Tree in Repetitive Structure Template
+
+### User Request
+> "in Repetitive Structure Template.md How to Analyse a Problem to Find the 4 Variable Classes make the diagram in image cuz with the text the diagram is not clear. always use image when making diagram"
+
+### Actions Taken & Implementation Summary
+1. **Rendered High-Resolution Graphic Diagram**:
+   - Programmatically rendered a professional, vector-smoothed decision tree image:
+     - Target: [`Skills_Input/Templates/images/variable_classification_decision_tree.png`](Skills_Input/Templates/images/variable_classification_decision_tree.png)
+     - Content: Complete 4-step diagnostic decision pipeline (Fixed Test $\to$ Derived Test $\to$ Free Test $\to$ Carried Test) with clear branching paths (`YES`/`NO`), color-coded classification badges (`FIXED`, `DERIVED`, `FREE`, `CARRIED`), loop impact notes, and the Minimal State Theorem summary.
+2. **Updated `Repetitive Structure Template.md`**:
+   - Replaced ASCII text diagram with the embedded image link:
+     `![4-Class Variable Diagnostic Decision Tree](images/variable_classification_decision_tree.png)`
+3. **Established Project Rule**:
+   - Recorded the principle: Always use graphical image diagrams rather than plain-text/ASCII trees for visual architecture and decision flows.
+4. **Git Synchronization**:
+   - Committed and pushed all updates to GitHub `origin/main`.

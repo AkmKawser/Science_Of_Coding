@@ -63,29 +63,9 @@ To understand why this equation holds rigorously, consider what happens when you
 
 ### How to Analyse a Problem to Find the 4 Variable Classes
 
-When reading an algorithmic problem, do not begin by writing `for` loops. Follow this systematic 4-question decomposition technique:
+When reading an algorithmic problem, do not begin by writing `for` loops. Follow this systematic 4-question decomposition technique illustrated in the diagram below:
 
-```
-                            [ Candidate Variable ]
-                                       │
-                      Does its value ever change after input?
-                                ├── NO ──────> [ FIXED ] (e.g., n, k)
-                                └── YES
-                                       │
-                    Can it be calculated from other variables
-                         WITHOUT using its own past value?
-                                ├── YES ─────> [ DERIVED ] (e.g., 2*i - 1)
-                                └── NO
-                                       │
-                     Does it iterate through an independent range
-                        or advance across a domain/sequence?
-                                ├── YES ─────> [ FREE ] (Stepper/Walker -> Adds a Loop)
-                                └── NO
-                                       │
-                       Does it update using its own prior value
-                           to accumulate or remember history?
-                                └── YES ─────> [ CARRIED ] (Gatherer/Holder -> Inside Loop)
-```
+![4-Class Variable Diagnostic Decision Tree](images/variable_classification_decision_tree.png)
 
 #### The Diagnostic Questions:
 1. **The Fixed Test**: *"Is this variable provided once by the input and strictly constant throughout all iterations?"*
