@@ -109,3 +109,4 @@ $$\text{total} = \sum_{k=1}^{i-1} k = \frac{(i - 1) \cdot i}{2}$$
   - Each iteration performs $\mathcal{O}(1)$ arithmetic additions and string formatting operations.
 - **Auxiliary Space Complexity**: $\mathcal{O}(1)$
   - Only two scalar registers (`i` and `total`) are maintained throughout the iteration.
+

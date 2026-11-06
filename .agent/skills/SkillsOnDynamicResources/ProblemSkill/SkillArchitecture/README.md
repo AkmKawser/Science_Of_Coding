@@ -1,6 +1,9 @@
 # Skill Architecture & Usage Instructions: `ProblemSkill`
 
-This document defines the technical architecture, execution lifecycle, and human-in-the-loop (HITL) procedures for the **`ProblemSkill`**.
+For complete architectural details and visual flowcharts, consult:
+- **Solution Files Architecture & Synthesis Pipeline**: [`SOLUTION_ARCHITECTURE.md`](SOLUTION_ARCHITECTURE.md)
+- **Problem Statement Formatting**: [`problem formatting.md`](../../../../Skills_Output/ProblemSkill_output/Problem%20Files/problem%20formatting.md)
+- **Solution Output Formatting**: [`output formating.md`](../../../../Skills_Output/ProblemSkill_output/output%20formating.md)
 
 ---
 
