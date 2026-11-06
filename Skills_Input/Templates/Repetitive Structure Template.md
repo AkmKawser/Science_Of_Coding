@@ -53,6 +53,7 @@ Derived variables, such as `value = n + 1 - i + j`, have no role in the chart. T
    - **One node per value** of that variable
    - **Edges** from each parent value to the child values it allows
    - **Leaves** are the complete states, where the loop body runs
+   - **Tree Geometry Note**: A single deterministic loop has branching factor $b = 1$ (no binary search/choice), forming a **linear vertical chain / straight line of depth $N$**. A binary tree only arises when binary choices exist ($b = 2$).
    - Use a small input (`n = 4` or `5`) so the whole tree fits
 6. **Read the loop facts off the tree.** These are the facts you will code.
    - **Start and end of each loop:** the first and last child under a node
@@ -217,9 +218,34 @@ A common beginner mistake is thinking that if a state has 3 variables, the progr
 
 ---
 
-### State space
+### State space and Tree Geometry (Why is the tree a straight line vs. a branched tree?)
 
-The **state space** is the set of every state the program can be in. Each time the loop body runs, the program is in one state. The tree in Part 2 is a drawing of the state space: every leaf is one state. This is why counting leaves gives the time cost.
+The **state space** is the set of every state the program can reach. The tree in Part 2 is an explicit structural trace of this state space: every leaf represents one completed iteration step where the loop body runs.
+
+> [!NOTE]
+> **Why is the state-space tree of a single loop a straight line (degenerate tree) instead of a binary tree?**
+> A common point of confusion is assuming all state-space trees must look like binary trees. In computer science:
+> $$\text{Tree Branching Factor } (b) = \text{number of possible next transitions from a given state}$$
+>
+> 1. **Deterministic Repetitive Loop ($b = 1 \implies$ Linear Chain / Straight Line)**:
+>    - In a deterministic loop (`for i from 1 to n`), there is **no branching, choice, or backtracking**.
+>    - From state $(i, \text{total})$, the algorithm deterministically advances to exactly one next state: $(i + 1, \text{total} + \text{term})$.
+>    - Because each node has exactly **1 deterministic child**, the tree has branching factor $b = 1$, collapsing into a **straight vertical spine / degenerate tree of depth $N$**.
+> 2. **Nested Deterministic Loops ($b = 1$ at inner level, $k$ at outer)**:
+>    - In pattern printing or 2D matrix traversal, the outer loop forks into $k$ inner loop iterations, each forming its own sequential chain of leaves.
+> 3. **Non-deterministic / Decision Search Trees ($b = 2$ or $b = K$)**:
+>    - A state-space tree becomes a **binary tree ($b = 2$)** ONLY when an algorithm makes binary choices at each step (e.g., 0/1 Knapsack: *Take* vs. *Skip*, Subset Generation, Branch & Bound).
+>    - It becomes a **$K$-ary tree** for multi-way choices (e.g., $N$-Queens, Permutations, Sudoku).
+
+#### Search Tree Geometry vs. Loop Structure:
+| Algorithmic Paradigm | Branching Factor ($b$) | Tree Geometry | Code Equivalent |
+| :--- | :---: | :--- | :--- |
+| **Simple Loop / Series (P-1, P-2, P-3)** | $b = 1$ | **Linear Chain / Straight Line** | Single `for` loop |
+| **Grid / Pattern Traversal** | $b = \text{col count}$ | **Hierarchical Spine / Forest** | Nested `for` loops |
+| **Binary Decision / Backtracking** | $b = 2$ | **Binary Tree** | Recursion (`choose` / `skip`) |
+| **$K$-Way Permutations / Complete Search** | $b = K$ | **General Multi-way Tree** | Backtracking over $K$ choices |
+
+---
 
 ### How to find the state
 
