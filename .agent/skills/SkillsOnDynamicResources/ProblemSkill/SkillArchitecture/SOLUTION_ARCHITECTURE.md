@@ -25,7 +25,7 @@ Skills_Output/ProblemSkill_output/
 ```
 
 ### Core Tenets of the Solution Architecture:
-1. **Zero Hallucination / Zero Ad-hoc Coding**: Code is never generated spontaneously. Every implementation is derived from an invariant-grounded blueprint in [`Skills_Input/Templates/`](../../../../Skills_Input/Templates/).
+1. **Zero Hallucination / Zero Ad-hoc Coding**: Code is never generated spontaneously. Every implementation is derived from an invariant-grounded blueprint in [`Skills_Input/Templates/`](../../../../../Skills_Input/Templates/).
 2. **Deterministic Folder Hierarchy**: Solutions are categorized under `Primary Category / Subcategory /`, matching the dynamic classification assigned during problem ingestion.
 3. **Multi-Language Independence**: Python 3 and Java 21 are implemented in separate, standalone, runnable files named deterministically using the problem ID (`<Problem-ID>_python.py` and `<Problem-ID>_java.java`).
 4. **Permanent Derivation Trace**: Code is always paired with `<Problem-ID>_derivation.md`, preserving the complete cognitive path from state exploration to Big-O bounds.
@@ -122,7 +122,7 @@ The derivation document documents the complete reasoning process across five man
 ## 🔗 5. Bidirectional Linkage
 
 Every solution file maintains bidirectional trace links:
-- The derivation file links back to the original statement anchor in [`question bank.md#<problem-id>`](../../../../Skills_Output/ProblemSkill_output/Problem%20Files/question%20bank.md).
-- The derivation file links to the foundational methodology in [`Skills_Input/Templates/`](../../../../Skills_Input/Templates/).
+- The derivation file links back to the original statement anchor in [`question bank.md#<problem-id>`](../../../../../Skills_Output/ProblemSkill_output/Problem%20Files/question%20bank.md).
+- The derivation file links to the foundational methodology in [`Skills_Input/Templates/`](../../../../../Skills_Input/Templates/).
 - The code files embed metadata tags in their headers, allowing both human engineers and AI agents to trace code directly back to its mathematical derivation and problem statement.
 

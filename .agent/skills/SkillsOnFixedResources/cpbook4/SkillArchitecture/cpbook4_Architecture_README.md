@@ -54,4 +54,4 @@ python .agent/skills/SkillsOnFixedResources/cpbook4/scripts/query_cpbook.py extr
 ```
 
 ### 3. Template Enforcement
-Every algorithmic solution generated must strictly follow the phases in [`Skills_Input/Templates/`](../../../../Skills_Input/Templates/).
+Every algorithmic solution generated must strictly follow the phases in [`Skills_Input/Templates/`](../../../../../Skills_Input/Templates/).

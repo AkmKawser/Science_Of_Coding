@@ -113,5 +113,5 @@ Each problem file must clearly state its origin and metadata:
 
 | ID | Problem Title | Topic | Source | Solution / Template Used |
 | :--- | :--- | :--- | :--- | :--- |
-| *000* | *(Initial problem index)* | *—* | *Repository Setup* | *[`README.md`](../../README.md)* |
+| *000* | *(Initial problem index)* | *—* | *Repository Setup* | *[`README.md`](../../../README.md)* |
 

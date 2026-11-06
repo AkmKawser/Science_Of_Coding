@@ -8,7 +8,7 @@ description: Dedicated skill for managing and formatting problems into question 
 The **`ProblemSkill`** controls the entire lifecycle of problem ingestion into [`Skills_Output/ProblemSkill_output/Problem Files/question bank.md`](../../../../Skills_Output/ProblemSkill_output/Problem%20Files/question%20bank.md) and the synthesis of template-grounded solutions into [`Skills_Output/ProblemSkill_output/Solution Files/`](../../../../Skills_Output/ProblemSkill_output/Solution%20Files/).
 
 For complete architectural details and visual flowcharts, consult:
-- **Skill Architecture & Guide**: [`SkillArchitecture/README.md`](SkillArchitecture/README.md)
+- **Skill Architecture & Guide**: [`ProblemSkill_Architecture_README.md`](SkillArchitecture/ProblemSkill_Architecture_README.md)
 - **Problem Statement Formatting**: [`problem formatting.md`](../../../../Skills_Output/ProblemSkill_output/Problem%20Files/problem%20formatting.md)
 - **Solution Output Formatting**: [`Solution formating.md`](../../../../Skills_Output/ProblemSkill_output/Solution%20Files/Solution%20formating.md)
 

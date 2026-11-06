@@ -54,8 +54,8 @@ Every derivation file must rigorously execute the phased steps defined in the ma
 - **Problem ID**: [e.g., P-1]
 - **Category**: [Primary Category]
 - **Subcategory**: [Subcategory]
-- **Applied Template**: [`Skills_Input/Templates/<Template Name>.md`](../../../../Skills_Input/Templates/<Template%20Name>.md)
-- **Problem Reference**: [`question bank.md#<problem-id-lowercase>`](../Problem%20Files/question%20bank.md#p-1)
+- **Applied Template**: [`Skills_Input/Templates/<Template Name>.md`](../../../Skills_Input/Templates/)
+- **Problem Reference**: [`question bank.md#<problem-id-lowercase>`](../../Problem%20Files/question%20bank.md#p-1)
 
 ---
 

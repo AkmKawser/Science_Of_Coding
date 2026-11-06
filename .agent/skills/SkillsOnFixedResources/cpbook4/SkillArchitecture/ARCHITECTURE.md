@@ -27,7 +27,7 @@ This package can be moved into any AI agent environment (Antigravity, Claude Cod
     └── query_cpbook.py             <-- Resilient, UTF-8 safe CLI search & page extractor
 ```
 
-*(Note: Reference books are stored centrally under [`Skills_Input/books/Overall/`](../../../../Skills_Input/books/Overall/))*
+*(Note: Reference books are stored centrally under [`Skills_Input/books/Overall/`](../../../../../Skills_Input/books/Overall/))*
 
 ---
 

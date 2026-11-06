@@ -4,6 +4,7 @@ This document serves as the unified, centralized question bank storing all pract
 
 ---
 
+<a id="master-problem-index"></a>
 ## 📑 Master Problem Index
 
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Title | Primary Category | Subcategory | Source / Reference |
@@ -67,6 +68,8 @@ This document serves as the unified, centralized question bank storing all pract
 <a id="p-1"></a>
 # Problem P-1: Series Summation: 1 + 2 + 3 + 4 + .............
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-1
 - **Problem Title**: Series Summation: 1 + 2 + 3 + 4 + .............
@@ -126,6 +129,8 @@ Sum = [Total sum]
 
 <a id="p-2"></a>
 # Problem P-2: Series Summation: 2 + 4 + 6 + 8 + .............
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-2
@@ -187,6 +192,8 @@ Sum = [Total sum]
 <a id="p-3"></a>
 # Problem P-3: Series Summation: 1 + 3 + 5 + 7 + .............
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-3
 - **Problem Title**: Series Summation: 1 + 3 + 5 + 7 + .............
@@ -247,6 +254,8 @@ Sum = [Total sum]
 <a id="p-4"></a>
 # Problem P-4: Series Summation: 4 + 12 + 20 + 28 + .............
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-4
 - **Problem Title**: Series Summation: 4 + 12 + 20 + 28 + .............
@@ -305,6 +314,8 @@ Sum = [Total sum]
 
 <a id="p-5"></a>
 # Problem P-5: Series Summation: 2 + 5 + 8 + 11 + .............
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-5
@@ -365,6 +376,8 @@ Sum = [Total sum]
 <a id="p-6"></a>
 # Problem P-6: Series Summation: 1.2 + 2.3 + 3.4 + .............
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-6
 - **Problem Title**: Series Summation: 1.2 + 2.3 + 3.4 + .............
@@ -423,6 +436,8 @@ Sum = [Total sum]
 
 <a id="p-7"></a>
 # Problem P-7: Series Summation: 2.1 + 5.3 + 8.5 + .............
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-7
@@ -483,6 +498,8 @@ Sum = [Total sum]
 <a id="p-8"></a>
 # Problem P-8: Series Summation: 1.3 + 3.5 + 5.7 + .............
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-8
 - **Problem Title**: Series Summation: 1.3 + 3.5 + 5.7 + .............
@@ -541,6 +558,8 @@ Sum = [Total sum]
 
 <a id="p-9"></a>
 # Problem P-9: Series Summation: 1^2 + 3^2 + 5^2 + .............
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-9
@@ -601,6 +620,8 @@ Sum = [Total sum]
 <a id="p-10"></a>
 # Problem P-10: Series Summation: 1.1^2 + 2.3^2 + 3.5^2 + .............
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-10
 - **Problem Title**: Series Summation: 1.1^2 + 2.3^2 + 3.5^2 + .............
@@ -659,6 +680,8 @@ Sum = [Total sum]
 
 <a id="p-11"></a>
 # Problem P-11: Series Summation: 1.2^2 + 2.3^2 + 3.4^2 + .............
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-11
@@ -719,6 +742,8 @@ Sum = [Total sum]
 <a id="p-12"></a>
 # Problem P-12: Series Summation: 1^2.2^2 + 2^2.3^2 + 3^2.4^2 + ..
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-12
 - **Problem Title**: Series Summation: 1^2.2^2 + 2^2.3^2 + 3^2.4^2 + ..
@@ -777,6 +802,8 @@ Sum = [Total sum]
 
 <a id="p-13"></a>
 # Problem P-13: Series Summation: 1.2.3 + 2.3.4 + 3.4.5 + .............
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-13
@@ -837,6 +864,8 @@ Sum = [Total sum]
 <a id="p-14"></a>
 # Problem P-14: Series Summation: 1.3.5.7 + 3.5.7.9 + 5.7.9.11 + ........
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-14
 - **Problem Title**: Series Summation: 1.3.5.7 + 3.5.7.9 + 5.7.9.11 + ........
@@ -895,6 +924,8 @@ Sum = [Total sum]
 
 <a id="p-15"></a>
 # Problem P-15: Series Summation: 2.5.8 + 5.8.11 + 8.11.14 + ..............
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-15
@@ -955,6 +986,8 @@ Sum = [Total sum]
 <a id="p-16"></a>
 # Problem P-16: Series Summation: 5.6.7 + 6.7.8 + 7.8.9 + .............
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-16
 - **Problem Title**: Series Summation: 5.6.7 + 6.7.8 + 7.8.9 + .............
@@ -1013,6 +1046,8 @@ Sum = [Total sum]
 
 <a id="p-17"></a>
 # Problem P-17: Pattern Printing: Pyramid #01 (starts with '1')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-17
@@ -1080,6 +1115,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 <a id="p-18"></a>
 # Problem P-18: Pattern Printing: Pyramid #02 (starts with '1')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-18
 - **Problem Title**: Pattern Printing: Pyramid #02 (starts with '1')
@@ -1145,6 +1182,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 <a id="p-19"></a>
 # Problem P-19: Pattern Printing: Pyramid #03 (starts with '1')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-19
@@ -1212,6 +1251,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 <a id="p-20"></a>
 # Problem P-20: Pattern Printing: Pyramid #04 (starts with '1')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-20
 - **Problem Title**: Pattern Printing: Pyramid #04 (starts with '1')
@@ -1277,6 +1318,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 <a id="p-21"></a>
 # Problem P-21: Pattern Printing: Pyramid #05 (starts with '2')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-21
@@ -1344,6 +1387,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 <a id="p-22"></a>
 # Problem P-22: Pattern Printing: Pyramid #06 (starts with '1')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-22
 - **Problem Title**: Pattern Printing: Pyramid #06 (starts with '1')
@@ -1409,6 +1454,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 <a id="p-23"></a>
 # Problem P-23: Pattern Printing: Pyramid #07 (starts with '0')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-23
@@ -1476,6 +1523,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 <a id="p-24"></a>
 # Problem P-24: Pattern Printing: Pyramid #08 (starts with '1')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-24
 - **Problem Title**: Pattern Printing: Pyramid #08 (starts with '1')
@@ -1541,6 +1590,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 <a id="p-25"></a>
 # Problem P-25: Pattern Printing: Pyramid #09 (starts with 'A')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-25
@@ -1608,6 +1659,8 @@ E   E   E   E   E
 <a id="p-26"></a>
 # Problem P-26: Pattern Printing: Pyramid #10 (starts with 'A')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-26
 - **Problem Title**: Pattern Printing: Pyramid #10 (starts with 'A')
@@ -1673,6 +1726,8 @@ A   B   C   D   E
 
 <a id="p-27"></a>
 # Problem P-27: Pattern Printing: Pyramid #11 (starts with '1   2   3   4   5')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-27
@@ -1740,6 +1795,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 <a id="p-28"></a>
 # Problem P-28: Pattern Printing: Pyramid #12 (starts with '5   5   5   5   5')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-28
 - **Problem Title**: Pattern Printing: Pyramid #12 (starts with '5   5   5   5   5')
@@ -1805,6 +1862,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 <a id="p-29"></a>
 # Problem P-29: Pattern Printing: Pyramid #13 (starts with '1   1   1   1   1')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-29
@@ -1872,6 +1931,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 <a id="p-30"></a>
 # Problem P-30: Pattern Printing: Pyramid #14 (starts with '1   0   1   0   1')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-30
 - **Problem Title**: Pattern Printing: Pyramid #14 (starts with '1   0   1   0   1')
@@ -1937,6 +1998,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 <a id="p-31"></a>
 # Problem P-31: Pattern Printing: Pyramid #15 (starts with '6   7   8   9  10')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-31
@@ -2004,6 +2067,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 <a id="p-32"></a>
 # Problem P-32: Pattern Printing: Pyramid #16 (starts with '5   6   7   8   9')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-32
 - **Problem Title**: Pattern Printing: Pyramid #16 (starts with '5   6   7   8   9')
@@ -2069,6 +2134,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 <a id="p-33"></a>
 # Problem P-33: Pattern Printing: Pyramid #17 (starts with '0   1   0   1   0')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-33
@@ -2136,6 +2203,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 <a id="p-34"></a>
 # Problem P-34: Pattern Printing: Pyramid #18 (starts with '1   0   1   0   1')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-34
 - **Problem Title**: Pattern Printing: Pyramid #18 (starts with '1   0   1   0   1')
@@ -2201,6 +2270,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 <a id="p-35"></a>
 # Problem P-35: Pattern Printing: Pyramid #19 (starts with 'E   E   E   E   E')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-35
@@ -2268,6 +2339,8 @@ A
 <a id="p-36"></a>
 # Problem P-36: Pattern Printing: Pyramid #20 (starts with 'A   B   C   D   E')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-36
 - **Problem Title**: Pattern Printing: Pyramid #20 (starts with 'A   B   C   D   E')
@@ -2333,6 +2406,8 @@ A
 
 <a id="p-37"></a>
 # Problem P-37: Pattern Printing: Pyramid #21 (starts with '1')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-37
@@ -2400,6 +2475,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 <a id="p-38"></a>
 # Problem P-38: Pattern Printing: Pyramid #22 (starts with '1')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-38
 - **Problem Title**: Pattern Printing: Pyramid #22 (starts with '1')
@@ -2465,6 +2542,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 <a id="p-39"></a>
 # Problem P-39: Pattern Printing: Pyramid #23 (starts with '1')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-39
@@ -2532,6 +2611,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 <a id="p-40"></a>
 # Problem P-40: Pattern Printing: Pyramid #24 (starts with '1')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-40
 - **Problem Title**: Pattern Printing: Pyramid #24 (starts with '1')
@@ -2597,6 +2678,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 <a id="p-41"></a>
 # Problem P-41: Pattern Printing: Pyramid #25 (starts with '1')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-41
@@ -2664,6 +2747,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 <a id="p-42"></a>
 # Problem P-42: Pattern Printing: Pyramid #26 (starts with 'A')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-42
 - **Problem Title**: Pattern Printing: Pyramid #26 (starts with 'A')
@@ -2729,6 +2814,8 @@ E   E   E   E   E
 
 <a id="p-43"></a>
 # Problem P-43: Pattern Printing: Pyramid #27 (starts with 'A')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-43
@@ -2804,6 +2891,8 @@ E   E   E   E   E
 <a id="p-44"></a>
 # Problem P-44: Pattern Printing: Pyramid #28 (starts with '1')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-44
 - **Problem Title**: Pattern Printing: Pyramid #28 (starts with '1')
@@ -2877,6 +2966,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 <a id="p-45"></a>
 # Problem P-45: Pattern Printing: Pyramid #29 (starts with '1')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-45
@@ -2952,6 +3043,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 <a id="p-46"></a>
 # Problem P-46: Pattern Printing: Pyramid #30 (starts with '1')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-46
 - **Problem Title**: Pattern Printing: Pyramid #30 (starts with '1')
@@ -3026,6 +3119,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 <a id="p-47"></a>
 # Problem P-47: Pattern Printing: Pyramid #31 (starts with '1')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-47
 - **Problem Title**: Pattern Printing: Pyramid #31 (starts with '1')
@@ -3091,6 +3186,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 <a id="p-48"></a>
 # Problem P-48: Pattern Printing: Pyramid #32 (starts with '1')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-48
@@ -3165,6 +3262,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 <a id="p-49"></a>
 # Problem P-49: Pattern Printing: Pyramid #33 (starts with '1')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-49
@@ -3248,6 +3347,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 <a id="p-50"></a>
 # Problem P-50: Pattern Printing: Pyramid #34 (starts with '1')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-50
 - **Problem Title**: Pattern Printing: Pyramid #34 (starts with '1')
@@ -3330,6 +3431,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 <a id="p-51"></a>
 # Problem P-51: Pattern Printing: Pyramid #35 (starts with '1')
 
+[🔙 Back to Master Problem Index](#master-problem-index)
+
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-51
 - **Problem Title**: Pattern Printing: Pyramid #35 (starts with '1')
@@ -3395,6 +3498,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 <a id="p-52"></a>
 # Problem P-52: Pattern Printing: Pyramid #36 (starts with '1')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-52
@@ -3463,6 +3568,8 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 
 <a id="p-53"></a>
 # Problem P-53: Pattern Printing: Pyramid #37 (starts with '1')
+
+[🔙 Back to Master Problem Index](#master-problem-index)
 
 ## 📌 Metadata & Source Attribution
 - **Problem ID**: P-53

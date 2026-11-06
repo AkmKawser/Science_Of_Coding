@@ -31,7 +31,7 @@ The skill directly references the reference library stored in this repository:
 ## 2. Fast Navigation & Reference Map
 
 Agents should consult the detailed topic mapping and architecture files located at:
-- **Architecture & System Design**: [`SkillArchitecture/README.md`](SkillArchitecture/README.md) & [`SkillArchitecture/ARCHITECTURE.md`](SkillArchitecture/ARCHITECTURE.md)
+- **Architecture & System Design**: [`SkillArchitecture/cpbook4_Architecture_README.md`](SkillArchitecture/cpbook4_Architecture_README.md) & [`SkillArchitecture/ARCHITECTURE.md`](SkillArchitecture/ARCHITECTURE.md)
 - [`references/table_of_contents.md`](references/table_of_contents.md)
 - [`references/toc_book1.json`](references/toc_book1.json)
 - [`references/toc_book2.json`](references/toc_book2.json)

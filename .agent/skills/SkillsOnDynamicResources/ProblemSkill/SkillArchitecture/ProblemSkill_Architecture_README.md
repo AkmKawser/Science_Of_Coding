@@ -2,8 +2,8 @@
 
 For complete architectural details and visual flowcharts, consult:
 - **Solution Files Architecture & Synthesis Pipeline**: [`SOLUTION_ARCHITECTURE.md`](SOLUTION_ARCHITECTURE.md)
-- **Problem Statement Formatting**: [`problem formatting.md`](../../../../Skills_Output/ProblemSkill_output/Problem%20Files/problem%20formatting.md)
-- **Solution Output Formatting**: [`Solution formating.md`](../../../../Skills_Output/ProblemSkill_output/Solution%20Files/Solution%20formating.md)
+- **Problem Statement Formatting**: [`problem formatting.md`](../../../../../Skills_Output/ProblemSkill_output/Problem%20Files/problem%20formatting.md)
+- **Solution Output Formatting**: [`Solution formating.md`](../../../../../Skills_Output/ProblemSkill_output/Solution%20Files/Solution%20formating.md)
 
 ---
 
@@ -86,7 +86,7 @@ Outputs:
 ```bash
 python .agent/skills/SkillsOnDynamicResources/ProblemSkill/scripts/ingest_manager.py --categories
 ```
-Extracts the real-time 2-level hierarchy (Primary Category $\to$ Subcategories) from [`problem catagories.docx`](../../../../Skills_Output/ProblemSkill_output/Problem%20Files/problem%20catagories.docx) to present in the user prompt.
+Extracts the real-time 2-level hierarchy (Primary Category $\to$ Subcategories) from [`problem catagories.docx`](../../../../../Skills_Output/ProblemSkill_output/Problem%20Files/problem%20catagories.docx) to present in the user prompt.
 
 ### 4. Interactive HITL Selection Protocol
 - **NEVER guess the topic or subcategory**.
@@ -94,7 +94,7 @@ Extracts the real-time 2-level hierarchy (Primary Category $\to$ Subcategories) 
   > *"Which Primary Category and Subcategory does this problem belong to?"*
 - Await user confirmation before appending to `question bank.md`.
 
-### 5. Formatting Standards ([`problem formatting.md`](../../../../Skills_Output/ProblemSkill_output/Problem%20Files/problem%20formatting.md))
+### 5. Formatting Standards ([`problem formatting.md`](../../../../../Skills_Output/ProblemSkill_output/Problem%20Files/problem%20formatting.md))
 Format each problem entry with:
 - Unique Problem ID & Title
 - Metadata: Primary Category, Subcategory, Source, Source Link/Ref, Difficulty, Matching Template from `Skills_Input/Templates/`
@@ -107,7 +107,7 @@ Format each problem entry with:
 - **Rule**: NEVER delete a source file or clear a docx box until the entry is 100% written and verified inside `question bank.md`.
 - **Atomic Scope**: Delete ONLY the processed target file or clear ONLY the processed box; never wipe the whole staging directory.
 
-### 7. Solution Synthesis Standards ([`Solution formating.md`](../../../../Skills_Output/ProblemSkill_output/Solution%20Files/Solution%20formating.md))
+### 7. Solution Synthesis Standards ([`Solution formating.md`](../../../../../Skills_Output/ProblemSkill_output/Solution%20Files/Solution%20formating.md))
 When prompted to solve a problem:
 - Place outputs into `Skills_Output/ProblemSkill_output/Solution Files/<Category>/<Subcategory>/`.
 - Generate separate `<ID>_python.py` and `<ID>_java.java` code files.

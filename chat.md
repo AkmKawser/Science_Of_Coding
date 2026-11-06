@@ -1471,3 +1471,24 @@ This document records all instructions, architectural decisions, and agent conve
    - Cross-referenced these tips and diagram in Section 1 (Part 2, Step 5) of the execution protocol.
 3. **Git Synchronization**:
    - Committed and synchronized all changes with GitHub `origin/main`.
+
+
+---
+
+## Session 77: Fix Project-Wide Relative Links & Add Back-to-Index Navigation in Question Bank
+
+### User Request
+> "fix all the links in derivation.md files if its working also in the question bank file if i click any problem i can go to the detail of that problem. now when i am in the detial in the problem and then suppose i want to go back to the index section ther is no link. so i want to add you a link to the every detail problem so that i can go to master problem index as well. check if all links are working in the whole project."
+
+### Actions Taken & Implementation Summary
+1. **Added Bidirectional Navigation to Question Bank**:
+   - Added anchor `<a id="master-problem-index"></a>` right above the Master Problem Index table in [`question bank.md`](Skills_Output/ProblemSkill_output/Problem%20Files/question%20bank.md).
+   - Injected `[🔙 Back to Master Problem Index](#master-problem-index)` immediately below every problem title across all 53 problems (`P-1` through `P-53`).
+2. **Fixed Broken Relative Links in Solution Derivation Documents**:
+   - Corrected relative path depth from problem subdirectories (`P-1/`, `P-2/`, `P-3/`) to [`Repetitive Structure Template.md`](Skills_Input/Templates/Repetitive%20Structure%20Template.md) (`../../../../../../Skills_Input/Templates/...`).
+   - Corrected relative path depth to [`question bank.md#<id>`](Skills_Output/ProblemSkill_output/Problem%20Files/question%20bank.md) (`../../../../Problem Files/...`).
+3. **Audited and Fixed Repository-Wide Links**:
+   - Fixed broken links in [`README.md`](README.md), [`ProblemSkill/SKILL.md`](.agent/skills/SkillsOnDynamicResources/ProblemSkill/SKILL.md), [`ProblemSkill_Architecture_README.md`](.agent/skills/SkillsOnDynamicResources/ProblemSkill/SkillArchitecture/ProblemSkill_Architecture_README.md), [`SOLUTION_ARCHITECTURE.md`](.agent/skills/SkillsOnDynamicResources/ProblemSkill/SkillArchitecture/SOLUTION_ARCHITECTURE.md), [`cpbook4/SKILL.md`](.agent/skills/SkillsOnFixedResources/cpbook4/SKILL.md), [`ARCHITECTURE.md`](.agent/skills/SkillsOnFixedResources/cpbook4/SkillArchitecture/ARCHITECTURE.md), [`cpbook4_Architecture_README.md`](.agent/skills/SkillsOnFixedResources/cpbook4/SkillArchitecture/cpbook4_Architecture_README.md), [`Problem_Files_README.md`](Skills_Output/ProblemSkill_output/Problem%20Files/Problem_Files_README.md), and [`Put_The_File_Here_README.md`](Skills_Output/ProblemSkill_output/Problem%20Files/Source%20of%20Problem/put%20the%20file%20here/Put_The_File_Here_README.md).
+   - Executed project-wide Python validator verifying 0 broken links and 0 broken internal anchors across all markdown files.
+4. **Git Synchronization**:
+   - Committed and synchronized all changes with GitHub `origin/main`.
