@@ -79,9 +79,10 @@ Skills_Output/ProblemSkill_output/Solution Files/
 └── Repetitive Structures/
     └── Pattern Printing/
         └── P-1/
-            ├── P-1_derivation.md   # Mathematical derivation & state tree
-            ├── P-1_python.py       # Standalone Python 3 runnable script
-            └── P-1_java.java       # Standalone Java 21 runnable class
+            ├── P-1_derivation.md        # Mathematical derivation document
+            ├── P-1_state_space_tree.png # Rendered graphical state-space tree diagram
+            ├── P-1_python.py            # Standalone Python 3 runnable script
+            └── P-1_java.java            # Standalone Java 21 runnable class
 ```
 
 ---
@@ -96,7 +97,7 @@ The derivation document documents the complete reasoning process across five man
   - Establishes the minimal state note: $\text{State} = (\text{Free}, \text{Carried})$.
 - **Phase 2: State-Space & Relationship Derivation**:
   - Derives loop boundaries and step sizes.
-  - Generates the text-based ASCII State-Space Tree illustrating state transitions and leaf counts.
+  - Generates the high-resolution graphical image diagram (`<Problem-ID>_state_space_tree.png`) illustrating state transitions, action branches, and leaf counts (text/ASCII diagrams are strictly prohibited).
 - **Phase 3: Mathematical Invariant Formulation**:
   - Formalizes inductive invariants for Initialization ($i = \text{start}$), Maintenance ($i \to i+1$), and Termination ($i = \text{end} + 1$).
 - **Phase 4: Boundary Audits & Failure Mode Checks**:

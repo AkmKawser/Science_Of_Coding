@@ -61,25 +61,9 @@ $$\text{State} = (i, \text{total})$$
 - Step Size: $\Delta i = +1$
 - Total Iterations: $n - 1 + 1 = n$
 
-### 2. State-Space Tree (Linear Trace for $n = 5$)
+### 2. State-Space Tree Diagram (Trace for $n = 5$)
 
-```
-                   Root (Start: i=1, total=0)
-                            │
-               ┌────────────┴────────────┐
-             i = 1                   total = 1  ───> Print "1"
-               │
-             i = 2                   total = 3  ───> Print "2"
-               │
-             i = 3                   total = 6  ───> Print "3"
-               │
-             i = 4                   total = 10 ───> Print "4"
-               │
-             i = 5                   total = 15 ───> Print "5"
-                            │
-                      Leaf (End: i=5)
-                 Final Output: "Sum = 15"
-```
+![P-1 State-Space Tree Trace](P-1_state_space_tree.png)
 
 ---
 

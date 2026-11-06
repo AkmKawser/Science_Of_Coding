@@ -62,25 +62,9 @@ $$\text{State} = (i, \text{total})$$
 - Total Iterations / Steps: $n - 1 + 1 = n$
 - Term Generation Rule: $\text{term}_i = 2 \cdot i$
 
-### 2. State-Space Tree (Linear Trace for $n = 5$)
+### 2. State-Space Tree Diagram (Trace for $n = 5$)
 
-```
-                   Root (Start: i=1, total=0)
-                            │
-               ┌────────────┴────────────┐
-             i = 1       term = 2     total = 2  ───> Print "2"
-               │
-             i = 2       term = 4     total = 6  ───> Print "4"
-               │
-             i = 3       term = 6     total = 12 ───> Print "6"
-               │
-             i = 4       term = 8     total = 20 ───> Print "8"
-               │
-             i = 5       term = 10    total = 30 ───> Print "10"
-                            │
-                      Leaf (End: i=5)
-                 Final Output: "Sum = 30"
-```
+![P-2 State-Space Tree Trace](P-2_state_space_tree.png)
 
 ---
 
