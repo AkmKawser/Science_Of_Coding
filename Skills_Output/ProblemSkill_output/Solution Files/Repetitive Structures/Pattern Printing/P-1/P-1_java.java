@@ -3,6 +3,7 @@
  * Problem Title: Series Summation: 1 + 2 + 3 + 4 + .............
  * Category: Repetitive Structures
  * Subcategory: Pattern Printing
+ * Problem Reference: Skills_Output/ProblemSkill_output/Problem Files/question bank.md#p-1
  * Applied Template: Skills_Input/Templates/Repetitive Structure Template.md
  * Complexity:
  *   Time Complexity: O(N)

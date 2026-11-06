@@ -76,6 +76,7 @@ This document serves as the unified, centralized question bank storing all pract
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #1)`
 - **Difficulty**: Easy
 - **Target Template**: [`Templates/Repetitive Structure Template.md`](../../../Skills_Input/Templates/Repetitive%20Structure%20Template.md)
+- **Solution Folder**: [`Solution Files/Repetitive Structures/Pattern Printing/P-1/`](../Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-1/) ([Python](../Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-1/P-1_python.py) | [Java](../Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-1/P-1_java.java) | [Derivation](../Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-1/P-1_derivation.md))
 
 ---
 
@@ -135,6 +136,7 @@ Sum = [Total sum]
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #2)`
 - **Difficulty**: Easy
 - **Target Template**: [`Templates/Repetitive Structure Template.md`](../../../Skills_Input/Templates/Repetitive%20Structure%20Template.md)
+- **Solution Folder**: [`Solution Files/Repetitive Structures/Pattern Printing/P-2/`](../Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-2/) ([Python](../Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-2/P-2_python.py) | [Java](../Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-2/P-2_java.java) | [Derivation](../Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-2/P-2_derivation.md))
 
 ---
 
@@ -194,6 +196,7 @@ Sum = [Total sum]
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #3)`
 - **Difficulty**: Easy
 - **Target Template**: [`Templates/Repetitive Structure Template.md`](../../../Skills_Input/Templates/Repetitive%20Structure%20Template.md)
+- **Solution Folder**: [`Solution Files/Repetitive Structures/Pattern Printing/P-3/`](../Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-3/) ([Python](../Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-3/P-3_python.py) | [Java](../Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-3/P-3_java.java) | [Derivation](../Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-3/P-3_derivation.md))
 
 ---
 

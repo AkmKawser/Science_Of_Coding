@@ -1,8 +1,9 @@
 """
-Problem ID: P-1
-Problem Title: Series Summation: 1 + 2 + 3 + 4 + .............
+Problem ID: P-2
+Problem Title: Series Summation: 2 + 4 + 6 + 8 + .............
 Category: Repetitive Structures
 Subcategory: Pattern Printing
+Problem Reference: Skills_Output/ProblemSkill_output/Problem Files/question bank.md#p-2
 Applied Template: Skills_Input/Templates/Repetitive Structure Template.md
 Complexity:
   Time Complexity: O(N)
@@ -23,20 +24,21 @@ def solve() -> None:
     # - Minimal State Tuple: (i, total)
     #   * i: Free Stepper, enumerates discrete iteration space [1..N]
     #   * total: Carried Gatherer, accumulates sequence terms across iterations
-    # - Invariant: total = sum(1..i-1) before step i; total = sum(1..i) after step i
+    # - Invariant: total = sum(2 * k for k in 1..i-1) before step i; total = sum(2 * k for k in 1..i) after step i
     # - Base Case: i = 1, total = 0 (neutral identity for addition)
-    # - Transition: (i, total) -> (i + 1, total + i)
+    # - Transition: (i, total) -> (i + 1, total + 2 * i)
     # - Progress Metric: (N - i) strictly shrinks by 1 on each pass
-    # - Termination: i > N (exits when i = N + 1, total holds sum(1..N))
+    # - Termination: i > N (exits when i = N + 1, total holds sum of first N even terms)
     # - Fixed parameter: n (constant constraint)
-    # - Derived value: term = i (instantaneous identity formula)
+    # - Derived value: term = 2 * i (instantaneous even number formula)
     
     terms = []
     total = 0
     
     for i in range(1, n + 1):
-        terms.append(str(i))
-        total += i
+        term = 2 * i
+        terms.append(str(term))
+        total += term
     
     # Output Specification:
     # Line 1: Sequence terms separated by space

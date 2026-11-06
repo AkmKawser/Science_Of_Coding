@@ -13,17 +13,18 @@ All solutions are organized into a clean 2-level directory tree matching the **P
 Skills_Output/ProblemSkill_output/Solution Files/
 └── <Primary Category>/
     └── <Subcategory>/
-        ├── <Problem-ID>_python.py       # Standalone, runnable Python 3 solution
-        ├── <Problem-ID>_java.java       # Standalone, runnable Java 21 solution
-        └── <Problem-ID>_derivation.md   # Step-by-step template derivation & mathematical proof
+        └── <Problem-ID>/                 # Dedicated folder for each problem
+            ├── <Problem-ID>_python.py       # Standalone, runnable Python 3 solution
+            ├── <Problem-ID>_java.java       # Standalone, runnable Java 21 solution
+            └── <Problem-ID>_derivation.md   # Step-by-step template derivation & mathematical proof
 ```
 
 ### Folder Naming Guidelines:
 - Primary category and subcategory folder names correspond directly to the classification in `question bank.md` and `problem catagories.docx`:
-  - E.g., `Repetitive Structures/Pattern Printing/`
-  - E.g., `Two Pointers & Sliding Window/Variable-Size Window/`
-  - E.g., `Dynamic Programming/2D Grid & Interval DP/`
-  - E.g., `Graph Algorithms/Shortest Paths (SSSP)/`
+  - E.g., `Repetitive Structures/Pattern Printing/P-1/`
+  - E.g., `Two Pointers & Sliding Window/Variable-Size Window/P-10/`
+  - E.g., `Dynamic Programming/2D Grid & Interval DP/P-25/`
+  - E.g., `Graph Algorithms/Shortest Paths (SSSP)/P-50/`
 
 ---
 

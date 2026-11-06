@@ -78,9 +78,10 @@ Taking **Problem P-1** (*Series Summation: 1 + 2 + 3 + 4 + .............*) as a 
 Skills_Output/ProblemSkill_output/Solution Files/
 └── Repetitive Structures/
     └── Pattern Printing/
-        ├── P-1_derivation.md   # Mathematical derivation & state tree
-        ├── P-1_python.py       # Standalone Python 3 runnable script
-        └── P-1_java.java       # Standalone Java 21 runnable class
+        └── P-1/
+            ├── P-1_derivation.md   # Mathematical derivation & state tree
+            ├── P-1_python.py       # Standalone Python 3 runnable script
+            └── P-1_java.java       # Standalone Java 21 runnable class
 ```
 
 ---

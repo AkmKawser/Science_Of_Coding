@@ -5,8 +5,8 @@
 - **Problem Title**: Series Summation: 2 + 4 + 6 + 8 + .............
 - **Primary Category**: Repetitive Structures
 - **Subcategory**: Pattern Printing
-- **Applied Template**: [`Skills_Input/Templates/Repetitive Structure Template.md`](../../../../Skills_Input/Templates/Repetitive%20Structure%20Template.md)
-- **Problem Statement Link**: [`question bank.md#p-2`](../../Problem%20Files/question%20bank.md#p-2)
+- **Applied Template**: [`Skills_Input/Templates/Repetitive Structure Template.md`](../../../../../Skills_Input/Templates/Repetitive%20Structure%20Template.md)
+- **Problem Statement Link**: [`question bank.md#p-2`](../../../Problem%20Files/question%20bank.md#p-2)
 - **Source**: `Recursion Vs Iteration, Part 1 (Series #2)`
 
 ---

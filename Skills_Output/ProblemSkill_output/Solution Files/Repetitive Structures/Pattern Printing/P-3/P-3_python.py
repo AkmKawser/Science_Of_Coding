@@ -1,8 +1,9 @@
 """
-Problem ID: P-2
-Problem Title: Series Summation: 2 + 4 + 6 + 8 + .............
+Problem ID: P-3
+Problem Title: Series Summation: 1 + 3 + 5 + 7 + .............
 Category: Repetitive Structures
 Subcategory: Pattern Printing
+Problem Reference: Skills_Output/ProblemSkill_output/Problem Files/question bank.md#p-3
 Applied Template: Skills_Input/Templates/Repetitive Structure Template.md
 Complexity:
   Time Complexity: O(N)
@@ -23,19 +24,19 @@ def solve() -> None:
     # - Minimal State Tuple: (i, total)
     #   * i: Free Stepper, enumerates discrete iteration space [1..N]
     #   * total: Carried Gatherer, accumulates sequence terms across iterations
-    # - Invariant: total = sum(2 * k for k in 1..i-1) before step i; total = sum(2 * k for k in 1..i) after step i
+    # - Invariant: total = sum(2 * k - 1 for k in 1..i-1) before step i; total = sum(2 * k - 1 for k in 1..i) after step i
     # - Base Case: i = 1, total = 0 (neutral identity for addition)
-    # - Transition: (i, total) -> (i + 1, total + 2 * i)
+    # - Transition: (i, total) -> (i + 1, total + 2 * i - 1)
     # - Progress Metric: (N - i) strictly shrinks by 1 on each pass
-    # - Termination: i > N (exits when i = N + 1, total holds sum of first N even terms)
+    # - Termination: i > N (exits when i = N + 1, total holds sum of first N odd terms = N^2)
     # - Fixed parameter: n (constant constraint)
-    # - Derived value: term = 2 * i (instantaneous even number formula)
+    # - Derived value: term = 2 * i - 1 (instantaneous odd number formula)
     
     terms = []
     total = 0
     
     for i in range(1, n + 1):
-        term = 2 * i
+        term = 2 * i - 1
         terms.append(str(term))
         total += term
     
