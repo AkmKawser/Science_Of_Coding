@@ -575,6 +575,29 @@ This document records all instructions, architectural decisions, and agent conve
 3. **Committed and Pushed to GitHub**:
    - Pushed commit `86cc181` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 42: Establishing `SkillArchitecture/` in Every Skill
+
+### User Request
+> "For every skill there should be a folder named SkillArchitecture. Put all the arcutrecture and isntuction of using taht skill there.."
+
+### Actions Taken & Implementation Summary
+1. **Created `SkillArchitecture/` for `cpbook4`**:
+   - Locations: [`skill/SkillArchitecture/`](skill/SkillArchitecture/) and [`.agent/skills/cpbook4/SkillArchitecture/`](.agent/skills/cpbook4/SkillArchitecture/).
+   - Added:
+     - `README.md`: Complete usage instructions, collaborative design rules, surgical page retrieval guide, and tri-source knowledge workflow.
+     - `ARCHITECTURE.md`: High-level system architecture and Mermaid diagrams.
+2. **Created `SkillArchitecture/` for `ProblemSkill`**:
+   - Locations: [`Output/skill/SkillArchitecture/`](Output/skill/SkillArchitecture/) and [`.agent/skills/ProblemSkill/SkillArchitecture/`](.agent/skills/ProblemSkill/SkillArchitecture/).
+   - Added:
+     - `README.md`: End-to-end ingestion lifecycle, queue discovery via CLI, target isolation rules, dynamic 2-tier HITL category/subcategory protocols, and zero-data-loss verification checks.
+3. **Linked Skills to Their Architectures**:
+   - Updated `SKILL.md` in both skills to explicitly point agents to their respective `SkillArchitecture/README.md`.
+4. **Committed and Pushed to GitHub**:
+   - Pushed commit `5509759` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
+
 
 
 
