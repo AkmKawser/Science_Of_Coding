@@ -500,6 +500,28 @@ This document records all instructions, architectural decisions, and agent conve
    - Because `write here.docx` was open in Microsoft Word, generated the updated version as [`Output/problems/Source of Problem/write here_new.docx`](Output/problems/Source%20of%20Problem/write%20here_new.docx).
    - Once closed in Word, `write here_new.docx` will immediately replace `write here.docx`.
 
+---
+
+## Session 38: Question Bank Control via ProblemSkill & Dynamic HITL Category Selection
+
+### User Request
+> "the question bank.md can also be controlled using ProblemSkill.. The formate of placing the question in the question bank must be provided using the Problemskill. when I send enter using the ProblemSkill it will ask me about the topic of the question. The type of problem domain list will be taken from another docs file named problem catagories. i will update in that file dynamically and the ProblemSkill skill will show it in the prompt as HITL."
+
+### Actions Taken & Implementation Summary
+1. **Created Dynamic Category Registry (`problem catagories.docx`)**:
+   - Created [`Output/problems/problem catagories.docx`](Output/problems/problem%20catagories.docx) pre-populated with a modern, styled table of 15 standard algorithmic domains and key conceptual tags (Repetitive Structures, State-Space Search, Sliding Window, DP, Graph algorithms, Trees, Number Theory, Geometry, etc.).
+   - Designed for dynamic user modification: users can add, rename, or reorder categories in this document at any time.
+2. **Updated `ProblemSkill` for Dynamic HITL Selection & Question Bank Control**:
+   - Updated [`.agent/skills/ProblemSkill/SKILL.md`](.agent/skills/ProblemSkill/SKILL.md) and [`Output/skill/SKILL.md`](Output/skill/SKILL.md):
+     - **Question Bank Control**: ProblemSkill now controls the formatting and entry creation in [`Output/problems/question bank.md`](Output/problems/question%20bank.md) adhering to [`problem formatting.md`](Output/problems/problem%20formatting.md).
+     - **HITL Prompt for Topic/Domain**: When invoked or triggered, the skill dynamically inspects `problem catagories.docx`, retrieves the current categories, and prompts the user (HITL) to choose which problem domain the question belongs to before writing it into `question bank.md`.
+3. **Enhanced Ingestion Script (`ingest_manager.py`)**:
+   - Implemented dynamic parsing of `problem catagories.docx` via `python Output/skill/scripts/ingest_manager.py --categories`.
+   - Updated box parser to handle structured table cells in `write here.docx`.
+4. **Committed and Pushed to GitHub**:
+   - Pushed commit `74ccc6e` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
+
 
 
 
