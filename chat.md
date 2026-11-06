@@ -559,6 +559,23 @@ This document records all instructions, architectural decisions, and agent conve
 3. **Committed and Pushed to GitHub**:
    - Pushed commit `93fdbbc` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 41: Restoring Correct `write here_new.docx` (Clean 100 Boxes Version)
+
+### User Request
+> "The prevcious write here new file was the corerct version. the current one is the wrong version."
+
+### Actions Taken & Implementation Summary
+1. **Restored Correct File**:
+   - Checked out and restored [`Output/problems/Source of Problem/write here_new.docx`](Output/problems/Source%20of%20Problem/write%20here_new.docx) directly from commit `8940cd2`.
+   - Verified that all 100 boxes in `write here_new.docx` are completely clean with zero placeholder strings (empty body paste areas, styled header banners).
+2. **Identified Reason for Lock**:
+   - `write here.docx` is currently open and held in Microsoft Word. Once closed in Word, `write here_new.docx` can replace `write here.docx` or be used directly.
+3. **Committed and Pushed to GitHub**:
+   - Pushed commit `86cc181` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
+
 
 
 
