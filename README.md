@@ -30,7 +30,7 @@ Modern LLM-powered coding assistants frequently suffer from two fatal failure mo
    - Each skill maintains its own isolated output repository under `Skills_Output/` (`<SkillName>_output/`).
    - **`Skills_Output/ProblemSkill_output/`**:
      - `Problem Files/`: Ingestion staging area (`Source of Problem/`), dynamic taxonomy (`problem catagories.docx`), formatting specifications (`problem formatting.md`), and the central [`question bank.md`](Skills_Output/ProblemSkill_output/Problem%20Files/question%20bank.md).
-     - `Solution Files/`: Solutions categorized by Primary Category and Subcategory in separate Python (`<ID>_python.py`) and Java (`<ID>_java.java`) files, plus `<ID>_derivation.md` following [`output formating.md`](Skills_Output/ProblemSkill_output/output%20formating.md).
+     - `Solution Files/`: Solutions categorized by Primary Category and Subcategory in separate Python (`<ID>_python.py`) and Java (`<ID>_java.java`) files, plus `<ID>_derivation.md` following [`Solution Files/Solution formating.md`](Skills_Output/ProblemSkill_output/output%20formating.md).
    - **`Skills_Output/cpbook4_output/`**: Houses reference-grounded algorithmic solutions, proofs, and deep-dive query roadmaps in [`query/`](Skills_Output/cpbook4_output/query/).
 4. **`.agent/skills/` (Centralized Agent Skills Hub)**:
    - **`SkillsOnFixedResources/cpbook4/`**: Deep algorithmic knowledge base, data structures, and reference skill with surgical page extraction.
@@ -61,7 +61,7 @@ The [`Skills_Output/`](Skills_Output/) directory houses dedicated output reposit
 ### 1. `Skills_Output/ProblemSkill_output/`:
 - **`Problem Files/`**: Central problem repository preserving clean copies of statements with source attribution, dynamic categories, and sample tests.
 - **`Solution Files/`**: Multi-language, template-grounded solutions organized as:
-  `Solution Files/<Primary Category>/<Subcategory>/` with separate `<ID>_python.py`, `<ID>_java.java`, and `<ID>_derivation.md` files as specified in [`output formating.md`](Skills_Output/ProblemSkill_output/output%20formating.md).
+  `Solution Files/<Primary Category>/<Subcategory>/` with separate `<ID>_python.py`, `<ID>_java.java`, and `<ID>_derivation.md` files as specified in [`Solution Files/Solution formating.md`](Skills_Output/ProblemSkill_output/output%20formating.md).
 
 ### 2. `Skills_Output/cpbook4_output/`:
 - Solutions provide minimal state definitions, variable role tables, state-space trees, invariant checks, and runnable reference implementations in **Python 3** and **Java 21**.
@@ -142,7 +142,7 @@ Science_Of_Coding/
 │   ├── README.md                           # Directory overview and output protocols
 │   ├── ProblemSkill_output/                # Dedicated output workspace for ProblemSkill
 │   │   ├── README.md                       # ProblemSkill output guide
-│   │   ├── output formating.md             # Code & derivation formatting specification
+│   │   ├── Solution Files/Solution formating.md             # Code & derivation formatting specification
 │   │   ├── Problem Files/                  # Problem database with full source attribution
 │   │   │   ├── README.md                   # Problem metadata schemas and indexing table
 │   │   │   ├── problem catagories.docx     # Dynamic 2-tier Category & Subcategory registry

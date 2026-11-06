@@ -3,7 +3,7 @@
 For complete architectural details and visual flowcharts, consult:
 - **Solution Files Architecture & Synthesis Pipeline**: [`SOLUTION_ARCHITECTURE.md`](SOLUTION_ARCHITECTURE.md)
 - **Problem Statement Formatting**: [`problem formatting.md`](../../../../Skills_Output/ProblemSkill_output/Problem%20Files/problem%20formatting.md)
-- **Solution Output Formatting**: [`output formating.md`](../../../../Skills_Output/ProblemSkill_output/output%20formating.md)
+- **Solution Output Formatting**: [`Solution formating.md`](../../../../Skills_Output/ProblemSkill_output/Solution%20Files/Solution%20formating.md)
 
 ---
 
@@ -107,7 +107,7 @@ Format each problem entry with:
 - **Rule**: NEVER delete a source file or clear a docx box until the entry is 100% written and verified inside `question bank.md`.
 - **Atomic Scope**: Delete ONLY the processed target file or clear ONLY the processed box; never wipe the whole staging directory.
 
-### 7. Solution Synthesis Standards ([`output formating.md`](../../../../Skills_Output/ProblemSkill_output/output%20formating.md))
+### 7. Solution Synthesis Standards ([`Solution formating.md`](../../../../Skills_Output/ProblemSkill_output/Solution%20Files/Solution%20formating.md))
 When prompted to solve a problem:
 - Place outputs into `Skills_Output/ProblemSkill_output/Solution Files/<Category>/<Subcategory>/`.
 - Generate separate `<ID>_python.py` and `<ID>_java.java` code files.

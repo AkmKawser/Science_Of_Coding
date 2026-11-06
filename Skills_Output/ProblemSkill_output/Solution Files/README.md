@@ -20,7 +20,7 @@ Solution Files/
 ```
 
 For complete naming rules, template schemas, and coding standards, refer to:
-- [`Solution formating.md`](../Solution%20formating.md)
+- [`Solution formating.md`](Solution%20formating.md)
 - [`problem catagories.docx`](../Problem%20Files/problem%20catagories.docx)
 - Template blueprints in [`Skills_Input/Templates/`](../../../Skills_Input/Templates/)
 

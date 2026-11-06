@@ -6,7 +6,7 @@ This document defines the strict, required architecture and formatting standards
 
 ## 🏛️ Directory & Folder Architecture
 
-All solutions are organized into a clean 2-level directory tree matching the **Primary Category** and **Subcategory** defined in [`problem catagories.docx`](Problem%20Files/problem%20catagories.docx).
+All solutions are organized into a clean 2-level directory tree matching the **Primary Category** and **Subcategory** defined in [`problem catagories.docx`](../Problem%20Files/problem%20catagories.docx).
 
 ### Hierarchy:
 ```
@@ -29,7 +29,7 @@ Skills_Output/ProblemSkill_output/Solution Files/
 
 ## 🏷️ File Naming Conventions
 
-The file names are strictly based on the unpadded **Problem ID** from [`question bank.md`](Problem%20Files/question%20bank.md) (formatted without leading zeroes, e.g., `P-1`, `P-2`, `P-10`):
+The file names are strictly based on the unpadded **Problem ID** from [`question bank.md`](../Problem%20Files/question%20bank.md) (formatted without leading zeroes, e.g., `P-1`, `P-2`, `P-10`):
 
 | Artifact | File Naming Pattern | Concrete Example (`P-1`) |
 | :--- | :--- | :--- |
@@ -53,8 +53,8 @@ Every derivation file must rigorously execute the phased steps defined in the ma
 - **Problem ID**: [e.g., P-1]
 - **Category**: [Primary Category]
 - **Subcategory**: [Subcategory]
-- **Applied Template**: [`Skills_Input/Templates/<Template Name>.md`](../../../Skills_Input/Templates/<Template%20Name>.md)
-- **Problem Reference**: [`question bank.md#<problem-id-lowercase>`](Problem%20Files/question%20bank.md#p-1)
+- **Applied Template**: [`Skills_Input/Templates/<Template Name>.md`](../../../../Skills_Input/Templates/<Template%20Name>.md)
+- **Problem Reference**: [`question bank.md#<problem-id-lowercase>`](../Problem%20Files/question%20bank.md#p-1)
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: ProblemSkill
-description: Dedicated skill for managing and formatting problems into question bank.md and generating template-guided solutions. Inspects 'Skills_Output/ProblemSkill_output/Problem Files/Source of Problem/', parses specified files or box numbers, presents dynamic categories and nested subcategories via Human-in-the-Loop (HITL) prompt, safely ingests entries into question bank.md, and structures solution files by Category/Subcategory in Python and Java according to output formating.md.
+description: Dedicated skill for managing and formatting problems into question bank.md and generating template-guided solutions. Inspects 'Skills_Output/ProblemSkill_output/Problem Files/Source of Problem/', parses specified files or box numbers, presents dynamic categories and nested subcategories via Human-in-the-Loop (HITL) prompt, safely ingests entries into question bank.md, and structures solution files by Category/Subcategory in Python and Java according to Solution formating.md.
 ---
 
 # Problem Ingestion & Solution Engineering Skill (`ProblemSkill`)
@@ -10,7 +10,7 @@ The **`ProblemSkill`** controls the entire lifecycle of problem ingestion into [
 For complete architectural details and visual flowcharts, consult:
 - **Skill Architecture & Guide**: [`SkillArchitecture/README.md`](SkillArchitecture/README.md)
 - **Problem Statement Formatting**: [`problem formatting.md`](../../../../Skills_Output/ProblemSkill_output/Problem%20Files/problem%20formatting.md)
-- **Solution Output Formatting**: [`output formating.md`](../../../../Skills_Output/ProblemSkill_output/output%20formating.md)
+- **Solution Output Formatting**: [`Solution formating.md`](../../../../Skills_Output/ProblemSkill_output/Solution%20Files/Solution%20formating.md)
 
 ---
 
@@ -93,7 +93,7 @@ Format into the strict schema defined in [`problem formatting.md`](../../../../S
 
 ---
 
-### Part B: Solving Problems via `output formating.md`
+### Part B: Solving Problems via `Solution formating.md`
 
 When generating solutions for problems in `question bank.md`:
 1. **Target Folder Resolution**:

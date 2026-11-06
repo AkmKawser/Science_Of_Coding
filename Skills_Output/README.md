@@ -16,8 +16,8 @@ Skills_Output/
 │   │   ├── question bank.md        # Canonical repository of formatted problems
 │   │   └── README.md               # Problem schema standards and guidelines
 │   ├── Solution Files/             # Categorized algorithmic solutions by Category/Subcategory
+│   │   ├── Solution formating.md   # Formatting specifications for code & derivations
 │   │   └── README.md               # Solutions directory guide
-│   ├── output formating.md         # Formatting specifications for code & derivations
 │   └── README.md                   # ProblemSkill output overview
 │
 └── cpbook4_output/                 # Dedicated output repository for cpbook4
@@ -31,7 +31,7 @@ Skills_Output/
 
 1. **`Skills_Output/ProblemSkill_output/`**:
    - **Problem Files**: Ingested, classified against `problem catagories.docx`, and archived in [`question bank.md`](ProblemSkill_output/Problem%20Files/question%20bank.md).
-   - **Solution Files**: Template-derived solutions structured by Primary Category and Subcategory in separate Python (`<ID>_python.py`) and Java (`<ID>_java.java`) files, alongside `<ID>_derivation.md`, adhering to [`output formating.md`](ProblemSkill_output/output%20formating.md).
+   - **Solution Files**: Template-derived solutions structured by Primary Category and Subcategory in separate Python (`<ID>_python.py`) and Java (`<ID>_java.java`) files, alongside `<ID>_derivation.md`, adhering to [`Solution Files/Solution formating.md`](ProblemSkill_output/Solution%20Files/Solution%20formating.md).
 
 2. **`Skills_Output/cpbook4_output/`**:
    - **Input**: Algorithmic queries and code decomposition prompts cross-referenced against [`Skills_Input/books/`](../Skills_Input/books/).

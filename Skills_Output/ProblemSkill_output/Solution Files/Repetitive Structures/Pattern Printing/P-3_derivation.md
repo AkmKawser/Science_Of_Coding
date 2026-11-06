@@ -111,3 +111,4 @@ $$\text{total} = \sum_{k=1}^{i-1} (2k - 1) = (i - 1)^2$$
   - Each step carries out $\mathcal{O}(1)$ arithmetic and string formatting operations.
 - **Auxiliary Space Complexity**: $\mathcal{O}(1)$
   - Only two scalar registers (`i` and `total`) are maintained in memory across the loop.
+

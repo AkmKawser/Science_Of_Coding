@@ -44,7 +44,7 @@ Instead of ungrounded or unstructured code generation, the Problem-Solution Skil
    - Reformats raw statements into standardized Markdown schema ([`problem formatting.md`](../../Skills_Output/ProblemSkill_output/Problem%20Files/problem%20formatting.md)) with explicit lowercase anchors and single-line clickable jump links in the master index table.
    - Enforces zero-data loss: source files and docx entries are **never deleted** until the record is 100% verified inside [`question bank.md`](../../Skills_Output/ProblemSkill_output/Problem%20Files/question%20bank.md).
 4. **Mandatory Template Synthesis & Language-Separated Outputs**:
-   - Follows [`output formating.md`](../../Skills_Output/ProblemSkill_output/output%20formating.md).
+   - Follows [`Solution formating.md`](../../Skills_Output/ProblemSkill_output/Solution%20Files/Solution%20formating.md).
    - Couples directly with [`Skills_Input/Templates/`](../../Skills_Input/Templates/) (e.g., [`Repetitive Structure Template.md`](../../Skills_Input/Templates/Repetitive%20Structure%20Template.md)) to produce separate Python (`<ID>_python.py`), Java (`<ID>_java.java`), and derivation files (`<ID>_derivation.md`) arranged by Primary Category and Subcategory.
 
 ### 2. Concrete Implementation in Repository

@@ -53,3 +53,4 @@ class Solution {
         System.out.println("Sum = " + total);
     }
 }
+
