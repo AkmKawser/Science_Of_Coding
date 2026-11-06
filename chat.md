@@ -1176,3 +1176,22 @@ This document records all instructions, architectural decisions, and agent conve
    - Recorded the principle: Always use graphical image diagrams rather than plain-text/ASCII trees for visual architecture and decision flows.
 4. **Git Synchronization**:
    - Committed and pushed all updates to GitHub `origin/main`.
+
+
+---
+
+## Session 65: Correct Diagram Text Placement and Layout
+
+### User Request
+> "the text in the diagram has not placed proper way its not fitting. please correct it"
+
+### Actions Taken & Implementation Summary
+1. **Re-engineered Diagram Layout**:
+   - Replaced fixed-coordinate GDI bitmap rendering with an auto-typeset, vector-padded layout engine for [`Skills_Input/Templates/images/variable_classification_decision_tree.png`](Skills_Input/Templates/images/variable_classification_decision_tree.png).
+   - Ensured all card text, questions, bullets, and loop impact badges are dynamically measured and wrapped with adequate margins, eliminating overlapping text and truncated labels.
+2. **Visual Hierarchy & Styling**:
+   - Question cards: White background with indigo border, distinct step numbering, bold titles, and explicit test questions.
+   - Outcome cards: Color-coded cards with category headings (`FIXED`, `DERIVED`, `FREE`, `CARRIED`), bullets explaining lifecycle and properties, and prominent badges indicating whether each class is included in the minimal state or how many loops it adds.
+   - Clear edge annotations for all branch conditions (`NO: Unchanging`, `YES: Changes`, `YES: Formula`, `NO: Has Memory`, etc.).
+3. **Git Synchronization**:
+   - Committed and synchronized the corrected image with GitHub `origin/main`.
