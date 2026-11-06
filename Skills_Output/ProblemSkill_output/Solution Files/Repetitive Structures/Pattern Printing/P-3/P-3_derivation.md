@@ -69,6 +69,18 @@ $$\text{State} = (i, \text{total})$$
 
 ![P-3 State-Space Tree Trace](P-3_state_space_tree.png)
 
+### 3. State Transition Analysis ($T: \text{State}_t \to \text{State}_{t+1}$)
+Every edge along the vertical linear spine maps directly to the deterministic transition function:
+$$T(i, \text{total}) = \left(i + 1, \; \text{total} + (2i - 1)\right)$$
+
+| State Component | Variable | Class | Current State ($S_t$) | Transition Rule / Operator | Next State ($S_{t+1}$) | Action / Side-Effect |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Stepper (Progress)** | `i` | Free | $i$ | $i \leftarrow i + 1$ | $i + 1$ | Advances counter toward bound $n$ |
+| **Accumulator (Memory)** | `total` | Carried | $\text{total}$ | $\text{total} \leftarrow \text{total} + (2i - 1)$ | $\text{total} + (2i - 1)$ | Preserves odd-sum square property |
+| **Sequence Term** | `term` | Derived | $\text{term} = 2i - 1$ | Direct closed evaluation | $\text{term}' = 2i + 1$ | Emit string `str(2*i - 1)` to output buffer |
+
+- **Termination Condition**: When $i = n + 1$, the loop condition $i \le n$ evaluates to `False`; execution transitions to the termination leaf emitting `Sum = total`.
+
 ---
 
 ## ⚖️ Phase 3: Mathematical Invariant Formulation

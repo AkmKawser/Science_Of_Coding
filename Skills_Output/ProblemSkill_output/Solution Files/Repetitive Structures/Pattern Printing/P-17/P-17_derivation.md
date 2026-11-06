@@ -84,6 +84,24 @@ $$\text{State} = (i, j)$$
 - Each leaf emits character $j$. At the conclusion of row $i$, an end-of-line (`\n`) is emitted.
 - Total leaves generated: $\sum_{i=1}^4 i = 1 + 2 + 3 + 4 = 10$ leaves.
 
+### 3. State Transition Analysis ($T: \text{State}_t \to \text{State}_{t+1}$)
+In this 2D nested coordinate tree, transitions operate on two distinct hierarchical levels:
+
+#### A. Inner Column Walker Transition ($j \to j + 1$)
+For a fixed row $i$, the state transitions across adjacent column leaves:
+$$T_{\text{inner}}(i, j) = (i, \; j + 1) \quad \text{for } 1 \le j < i$$
+
+#### B. Row Boundary Transition & Inner Reset ($j = i \to \text{Row } i + 1$)
+When column walker reaches row limit ($j = i$), the composite row-step and reset executes:
+$$T_{\text{outer}}(i, i) = (i + 1, \; 1)$$
+
+#### State Transition Matrix:
+| Transition Phase | Current State ($i, j$) | Condition | Next State ($i', j'$) | Emitted Output / Action |
+| :--- | :--- | :--- | :--- | :--- |
+| **Inner Column Advance** | $(i, j)$ | $j < i$ | $(i, j + 1)$ | Print `j` followed by delimiter `"   "` |
+| **Row Wrap & EOL** | $(i, i)$ | $j = i \text{ and } i < n$ | $(i + 1, 1)$ | Print `i` and emit newline `"\n"` |
+| **Global Termination** | $(n, n)$ | $i = n, j = n$ | Terminated | Pattern rendering finished; program exits |
+
 ---
 
 ## ⚖️ Phase 3: Mathematical Invariant Formulation

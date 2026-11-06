@@ -68,6 +68,18 @@ $$\text{State} = (i, \text{total})$$
 
 ![P-1 State-Space Tree Trace](P-1_state_space_tree.png)
 
+### 3. State Transition Analysis ($T: \text{State}_t \to \text{State}_{t+1}$)
+Every edge along the vertical linear spine maps directly to the deterministic transition function:
+$$T(i, \text{total}) = \left(i + 1, \; \text{total} + i\right)$$
+
+| State Component | Variable | Class | Current State ($S_t$) | Transition Rule / Operator | Next State ($S_{t+1}$) | Action / Side-Effect |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Stepper (Progress)** | `i` | Free | $i$ | $i \leftarrow i + 1$ | $i + 1$ | Advances counter toward bound $n$ |
+| **Accumulator (Memory)** | `total` | Carried | $\text{total}$ | $\text{total} \leftarrow \text{total} + i$ | $\text{total} + i$ | Preserves inductive prefix sum |
+| **Sequence Term** | `term` | Derived | $\text{term} = i$ | Direct closed evaluation | $\text{term}' = i + 1$ | Emit string `str(i)` to output buffer |
+
+- **Termination Condition**: When $i = n + 1$, the loop condition $i \le n$ evaluates to `False`; execution transitions to the termination leaf emitting `Sum = total`.
+
 ---
 
 ## ⚖️ Phase 3: Mathematical Invariant Formulation
