@@ -64,37 +64,39 @@ Loading ~436,000 tokens into an AI context window causes severe degradation and 
                                     │
                                     ▼
                           Any Agentic AI System
+        (Blends Trained LLM Knowledge + Web Search + Textbooks)
                                     │
-      ┌─────────────────────────────┼─────────────────────────────┐
-      ▼                             ▼                             ▼
-Tier 1: Methodological      Tier 2: Knowledge Router      Tier 3: Targeted Search
-Blueprint                   skill/references/             python query_cpbook.py search
-Templates/*.md              table_of_contents.md
-(States, Invariants,               │                             │
-Derivation Steps)                  └──────────────┬──────────────┘
-      │                                           ▼
-      │                                  Tier 4: Surgical Extract
-      │                                  python query_cpbook.py extract
-      │                                  skill/books/Overall/ (PDFs)
-      │                                           │
-      └─────────────────────┬─────────────────────┘
-                            ▼
-               Grounded & Structured Context
-        (Step-by-Step State Tree + Mathematical Proof)
-                            │
-                            ▼
-               Collaborative Design Check
-             (Propose Options & Confirm with User)
-                            │
-                            ▼
-               Deterministic Code Generation
+         ┌──────────────────────────┴──────────────────────────┐
+         │                                                     │
+         ▼                                                     ▼
+┌─────────────────────────────────┐           ┌─────────────────────────────────┐
+│     KNOWLEDGE RETRIEVAL LAYER   │           │    TEMPLATE-DRIVEN SYNTHESIS    │
+│  1. Curated Reference Textbooks │           │         (MANDATORY OUTPUT)      │
+│     - Table of Contents Router  │           │                                 │
+│     - CLI Search & Page Extract │           │  Templates/*.md                 │
+│  2. Web Search & Live Retrieval │           │  - Step-by-Step Problem Solving │
+│  3. Model Pre-trained Reasoning │           │  - State Invariants & Roles     │
+└────────────────┬────────────────┘           │  - State-Space Tree Derivation  │
+                 │                            │  - Failure Mode Audits          │
+                 │                            └────────────────┬────────────────┘
+                 │                                             │
+                 └──────────────────────┬──────────────────────┘
+                                        ▼
+                        Collaborative Design Consensus
+                    (Propose Options & Ask User Before Coding)
+                                        │
+                                        ▼
+                         Template-Formatted Output
+                       (100% Deterministic & Verified)
 ```
 
-#### The Four Tiers Explained:
-1. **Tier 1: Methodological Blueprints (`Templates/`)**: Before writing code or choosing libraries, the agent selects the appropriate template (e.g., [`Templates/Repetitive Structure Template.md`](Templates/Repetitive%20Structure%20Template.md)) to formulate the state, classify variable roles, construct the state-space tree, and catalog boundary edge cases.
-2. **Tier 2: Knowledge Router (`skill/references/table_of_contents.md`)**: Instant, zero-token routing that pinpoints the exact chapter, section, and page range in the books.
-3. **Tier 3: Targeted Search (`query_cpbook.py search`)**: High-speed keyword search across indexed volumes for niche constraints or problem variations.
-4. **Tier 4: Surgical Page Extraction (`query_cpbook.py extract`)**: Extracts only the specific 3-5 pages containing verified proofs, lemmas, and reference implementations directly into the prompt context.
+#### Architecture Principles & Operational Flow:
+1. **Tri-Source Knowledge Absorption**: The agentic AI absorbs theoretical and domain knowledge from three complementary streams:
+   - **Curated Textbooks (`skill/books/`)**: Surgical page extractions (`query_cpbook.py extract`) for mathematically verified proofs, data structure layouts, and invariant formulas.
+   - **Model Pre-trained Knowledge**: The LLM's intrinsic reasoning, language idioms, and algorithm patterns.
+   - **Targeted Web Search**: Online judge lookups and real-time documentation checks for niche edge cases.
+2. **Mandatory Template-Driven Output Formulation**: While knowledge is gathered from multiple sources, **the agent is strictly mandated to format its output through the modular templates in `Templates/`**. The agent cannot produce arbitrary, unstructured code. It must systematically follow each phase established in the relevant template (e.g., defining candidate variables, assigning variable roles, defining the true state, building the state-space tree, deriving bounds, and verifying edge cases).
+3. **Continuous Template Expansion**: The `Templates/` directory is an evolving library where specialized templates will be added for every major problem type (Repetitive Structures, State-Space Search, Divide & Conquer, Dynamic Programming, and Graph Traversals).
 
 ---
 
