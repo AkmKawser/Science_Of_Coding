@@ -49,12 +49,16 @@ Derived variables, such as `value = n + 1 - i + j`, have no role in the chart. T
    - Variables move together under a condition: a single loop (two pointers)
    - One free variable only: a single loop
 5. **Draw the tree (mandatory).** Do not move to Part 3 until the tree exists.
-   - Root at the top, then **one level per free variable**, with the parent level first
-   - **One node per value** of that variable
-   - **Edges** from each parent value to the child values it allows
-   - **Leaves** are the complete states, where the loop body runs
-   - **Tree Geometry Note**: A single deterministic loop has branching factor $b = 1$ (no binary search/choice), forming a **linear vertical chain / straight line of depth $N$**. A binary tree only arises when binary choices exist ($b = 2$).
-   - Use a small input (`n = 4` or `5`) so the whole tree fits
+   - Root at the top, then **one level per free variable**, with the parent level first.
+   - **One node per value** of that variable.
+   - **Edges** from each parent value to the child values it allows.
+   - **Leaves** are the complete states, where the loop body runs.
+   - **Tree Geometry & Branching Factor**:
+     - **Single Deterministic Loop ($b = 1$)**: No search choices $\implies$ **Linear chain / straight line of depth $N$** (e.g. series summation P-1, P-2, P-3).
+     - **Nested Coordinate Loops**: Level 1 (outer) branches to Level 2 (inner) $\implies$ **Hierarchical tree** (e.g. pattern printing, grid scan).
+     - **Binary Decision / Backtracking ($b = 2$)**: 2 choices per node (Take/Skip) $\implies$ **Binary tree** with $2^N$ leaves.
+   - Use a small input (`n = 4` or `5`) so the whole tree fits.
+   - See [Section 2: Taxonomy of State-Space Trees](#state-space-and-tree-geometry-why-is-the-tree-a-straight-line-vs-a-branched-tree) for the full diagram and step-by-step drawing tips.
 6. **Read the loop facts off the tree.** These are the facts you will code.
    - **Start and end of each loop:** the first and last child under a node
    - **Child count per parent:** the same for every parent means independent ranges, and different counts mean dependent ranges. The pattern of counts (1, 2, 3... or 5, 4, 3...) gives the bound formula.
@@ -222,6 +226,8 @@ A common beginner mistake is thinking that if a state has 3 variables, the progr
 
 The **state space** is the set of every state the program can reach. The tree in Part 2 is an explicit structural trace of this state space: every leaf represents one completed iteration step where the loop body runs.
 
+![Taxonomy of State-Space Trees: Branching Factor & Geometry](images/state_space_tree_types.png)
+
 > [!NOTE]
 > **Why is the state-space tree of a single loop a straight line (degenerate tree) instead of a binary tree?**
 > A common point of confusion is assuming all state-space trees must look like binary trees. In computer science:
@@ -244,6 +250,32 @@ The **state space** is the set of every state the program can reach. The tree in
 | **Grid / Pattern Traversal** | $b = \text{col count}$ | **Hierarchical Spine / Forest** | Nested `for` loops |
 | **Binary Decision / Backtracking** | $b = 2$ | **Binary Tree** | Recursion (`choose` / `skip`) |
 | **$K$-Way Permutations / Complete Search** | $b = K$ | **General Multi-way Tree** | Backtracking over $K$ choices |
+
+---
+
+### 💡 Practical Guide: Tips for Drawing the State-Space Tree for Any Problem
+
+When deriving a solution using our Repetitive Structure Template, apply these 6 systematic tips to construct the state-space tree accurately:
+
+1. **Count the Free Variables to Set the Tree Height (Levels)**:
+   - Identify your Free variables (steppers/walkers). The number of Free variables equals the number of non-root levels in the tree.
+   - 1 Free variable (`i`) $\implies$ Exactly 1 level of transitions below root (depth $N$, branching factor $b = 1$). Draw it vertically down as a **single linear spine**.
+   - 2 Free variables (`row`, `col`) $\implies$ Level 1 is outer parent (`row`), Level 2 is inner children (`col`).
+2. **Assign the Root as the Initial State**:
+   - The root represents the state *before* any loop executes (at initialization).
+   - Label it with the starting indices and base values of all carried variables: e.g., $\text{Root}: (i = 1, \text{total} = 0)$.
+3. **Determine Parent $\to$ Child Dependency for Edge Branching**:
+   - If inner loop bounds depend on outer loop variables (e.g., $j \in [1, i]$ in a triangular pattern), draw a **variable number of child branches** under each parent node ($1$ branch under $i=1$, $2$ branches under $i=2$, etc.).
+   - If inner loop bounds are constant (e.g., $j \in [1, M]$ in a matrix of size $N \times M$), draw the **exact same number of uniform branches** under every parent.
+4. **Attach Action / Emission Branches to Nodes**:
+   - At each iteration step where side-effects occur (printing a term, updating a maximum, emitting a character), draw a distinct horizontal or dashed branch labelled with the action (e.g., `Emit: "1"`, `Output: \n`).
+5. **Mark the Leaves as Complete States**:
+   - Every path from the root that terminates at the bottom is a **leaf**.
+   - For a single loop, each step along the spine is an active evaluation, culminating in a termination leaf where the loop condition fails ($i > N$).
+   - For nested loops, only the nodes at the deepest level (innermost loop) are leaves.
+   - **Verification Check**: Count the total number of leaves in your small trace ($N=4$ or $5$). It must match the exact number of times the inner loop body executes (the algorithmic time complexity!).
+6. **Include the Termination Leaf**:
+   - Always draw the final leaf that illustrates why the loop stopped (e.g., `Leaf: Loop Terminates at i = N + 1 (i > N)`), along with the final return value or accumulated result.
 
 ---
 
