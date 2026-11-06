@@ -542,6 +542,24 @@ This document records all instructions, architectural decisions, and agent conve
 4. **Committed and Pushed to GitHub**:
    - Pushed commit `eb61625` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 40: Repository Cleanup & Removal of Redundant Files
+
+### User Request
+> "remove the redundant files"
+
+### Actions Taken & Implementation Summary
+1. **Audited Repository Files**:
+   - Inspected all workspace files and identified obsolete/redundant artifacts:
+     - `generate_ds_doc.py`: A 4-line obsolete generator script from an earlier manual build.
+     - `Output/problems/Source of Problem/write here_new.docx`: Temporary file generated during previous box cleanup.
+2. **Removed Redundant Files**:
+   - Safely deleted `generate_ds_doc.py` and `write here_new.docx` via `git rm`.
+3. **Committed and Pushed to GitHub**:
+   - Pushed commit `93fdbbc` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
+
 
 
 
