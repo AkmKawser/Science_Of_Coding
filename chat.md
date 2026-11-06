@@ -681,6 +681,25 @@ This document records all instructions, architectural decisions, and agent conve
 5. **Committed and Pushed to GitHub**:
    - Pushed commit `89ca832` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 47: Direct Hover & Jump Links in Master Problem Index
+
+### User Request
+> "in the index file make sure you always add link to that problem so that i can hover over that problem direct in the question bank.md file."
+
+### Actions Taken & Implementation Summary
+1. **Implemented Explicit Anchor Targets**:
+   - Added lowercase anchor IDs (`<a id="p-001"></a>`, etc.) directly above every `# Problem P-XXX:` heading in [`Output/problems/question bank.md`](Output/problems/question%20bank.md).
+2. **Linked Index Table**:
+   - Updated all 53 rows in the **Master Problem Index** table so that both the **ID** and the **Title** are clickable markdown jump links (e.g., `| [P-001](#p-001) | [Series Summation: 1 + 2 + 3 + 4 + .............](#p-001) | ...`).
+   - Clicking or hovering over any problem in the index allows instant preview and direct navigation to that exact problem entry within the file.
+3. **Updated Ingestion Schema Standard**:
+   - Updated [`Output/problems/problem formatting.md`](Output/problems/problem%20formatting.md) to make explicit anchor generation and index table link formatting mandatory for all future ingested problems.
+4. **Committed and Pushed to GitHub**:
+   - Pushed commit `1003e68` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
+
 
 
 
