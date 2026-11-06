@@ -243,3 +243,26 @@ This document records all instructions, architectural decisions, and agent conve
    - **`skill/`**: The visible repository asset directory containing the books, reference tables of contents, query scripts (`query_cpbook.py`), and architecture specifications.
    - Explained how `.agent/skills/cpbook4/SKILL.md` acts as a lightweight pointer directing the agent to the heavy assets in `skill/`.
 
+---
+
+## Session 26: Update README.md with Templates Purpose & Repository Architecture
+
+### User Request
+> "Update the readme file. The work of template folder is to let the agent know how i can to solve the problem. In tempalte folder the files contains the template how the agent should solve it. there are steps written including concepts in each tempalte folders."
+
+### Changes Made to README.md
+1. **Added Dedicated `Templates/` Section**:
+   - Outlined the purpose of the `Templates/` folder: instructing the agent on *how* to solve problems using strict, step-by-step methodologies rather than ad-hoc code guessing.
+   - Clarified the 3 core elements present in each template:
+     - **Conceptual Foundations**: Formal definitions (state, variable roles, transitions, invariants).
+     - **Phased Problem-Solving Recipes**: Strict steps from candidate listing to state extraction, relationship tree derivation, loop construction, and verification.
+     - **Failure Mode & Edge Case Prevention**: Catalogs of common pitfalls and boundary checks.
+   - Linked to [`Templates/Repetitive Structure Template.md`](Templates/Repetitive%20Structure%20Template.md).
+2. **Updated Repository Tree**:
+   - Added `Templates/` and its `Repetitive Structure Template.md`.
+   - Added `Upcoming Updates/` and `query/002_data_structures_master_manual.md`.
+3. **Agent Integration Protocols Updated**:
+   - Updated setup and usage prompts for Antigravity, Claude Code, and Codex to instruct agents to reference `Templates/` for structured problem decomposition.
+4. **Committed and Pushed**:
+   - Pushed commit `b8b1a9b` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
