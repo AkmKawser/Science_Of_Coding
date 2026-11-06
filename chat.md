@@ -333,4 +333,29 @@ This document records all instructions, architectural decisions, and agent conve
 4. **Committed and Pushed**:
    - Committed changes and pushed to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 30: Creation of `problems/` Central Database & Preservation Protocol
+
+### User Request
+> "Create a new folder named problems where i will put problems on different topic. the problem source can be taken from a .md file or it can also be taken from online or from book. No matter what the source is you must copy that problem and keep a copy in the problems database also mention the source name."
+
+### Actions Taken & Implementation Summary
+1. **Created `problems/` Database Directory**:
+   - Initialized the [`problems/`](problems/) directory.
+   - Authored [`problems/README.md`](problems/README.md) detailing the directory architecture, problem file structure, metadata schema, and master index table.
+2. **Defined Problem File & Preservation Protocol**:
+   - **Universal Preservation Rule**: Regardless of where a problem originates (local `.md` files, online judges like Codeforces/LeetCode/CSES/AtCoder, or reference textbooks), the agent must create and preserve a self-contained copy of the problem statement inside `problems/`.
+   - **Mandatory Source Attribution**: Every problem file must record the source name, original URL or book volume/page reference, topic, difficulty rating, and the matching template applied from `Templates/`.
+3. **Updated Core Repository Documentation & Agent Skills**:
+   - Updated [`README.md`](README.md):
+     - Added `problems/` as a core deliverable and repository component.
+     - Documented the Mandatory Preservation & Attribution Protocol in a dedicated section.
+     - Added `problems/` to the repository directory tree.
+   - Updated [`skill/SKILL.md`](skill/SKILL.md) and [`.agent/skills/cpbook4/SKILL.md`](.agent/skills/cpbook4/SKILL.md):
+     - Added the **Mandatory Problem Preservation Protocol** as an explicit operational rule for all agents.
+4. **Committed and Pushed to GitHub**:
+   - Pushed commit `1f62cf6` containing the new `problems/` database infrastructure to `origin/main`.
+
+
 
