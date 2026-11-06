@@ -69,6 +69,9 @@ $$\text{State} = (i, j)$$
   - Total Inner Iterations for row $i$: $i$
 
 ### 2. State-Space Tree Diagram (Trace for $N = 4$)
+- **Tree Type**: **Hierarchical 2D Coordinate Tree (Nested Loops)**
+- **Branching Factor**: Variable branching from parent row node $i$ to $i$ inner column children ($j \in [1, i]$).
+- **Topology**: Level 1 represents outer row steps ($i \in [1, N]$); Level 2 represents inner column leaf evaluations emitting values and row termination newlines.
 
 ![P-17 State-Space Tree Trace](P-17_state_space_tree.png)
 
@@ -130,3 +133,4 @@ For maximum constraint $N = 50$, total operations $\approx 1275$, executing in $
 ### 2. Space Complexity
 - **Auxiliary State Space**: The minimal state is tuple $(i, j)$ occupying $\mathcal{O}(1)$ auxiliary memory.
 - **Buffer Overhead**: $\mathcal{O}(N)$ temporary buffer per line (or $\mathcal{O}(1)$ streaming). Overall auxiliary space: $\mathcal{O}(1)$.
+

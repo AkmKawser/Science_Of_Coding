@@ -62,6 +62,9 @@ $$\text{State} = (i, \text{total})$$
 - Total Iterations: $n - 1 + 1 = n$
 
 ### 2. State-Space Tree Diagram (Trace for $n = 5$)
+- **Tree Type**: **Linear Chain / Degenerate State-Space Tree ($b = 1$)**
+- **Branching Factor**: Exactly 1 deterministic transition per step (no branching, decisions, or backtracking).
+- **Topology**: Vertical linear spine of depth $N$, where each node represents an iteration step emitting a term, culminating in a single termination leaf.
 
 ![P-1 State-Space Tree Trace](P-1_state_space_tree.png)
 

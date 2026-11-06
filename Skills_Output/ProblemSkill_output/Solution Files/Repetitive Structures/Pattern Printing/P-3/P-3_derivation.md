@@ -63,6 +63,9 @@ $$\text{State} = (i, \text{total})$$
 - Term Generation Rule: $\text{term}_i = 2i - 1$
 
 ### 2. State-Space Tree Diagram (Trace for $n = 5$)
+- **Tree Type**: **Linear Chain / Degenerate State-Space Tree ($b = 1$)**
+- **Branching Factor**: Exactly 1 deterministic transition per step (no branching, decisions, or backtracking).
+- **Topology**: Vertical linear spine of depth $N$, where each node represents an iteration step emitting a term, culminating in a single termination leaf.
 
 ![P-3 State-Space Tree Trace](P-3_state_space_tree.png)
 
