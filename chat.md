@@ -457,6 +457,31 @@ This document records all instructions, architectural decisions, and agent conve
 4. **Committed and Pushed to GitHub**:
    - Pushed commit `908dafd` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 36: Generating 100 Colorful Problem Input Boxes in `write here.docx`
+
+### User Request
+> "in the write here.docs file make a 100 boxes where there will be space for Problem name with serial number and also some space where i will be able to paste the conent or write anything. 1st show it to me let me check make the doc colourful."
+
+### Actions Taken & Implementation Summary
+1. **Designed & Generated 100 Colorful Boxes in `write here.docx`**:
+   - Built a custom python generator that created 100 structured, colorful problem boxes in [`Output/problems/Source of Problem/write here.docx`](Output/problems/Source%20of%20Problem/write%20here.docx).
+   - **Styling Architecture**:
+     - **Hero Header**: Styled title `⚡ PROBLEM INGESTION WORKBOOK ⚡` in Segoe UI bold with clean instructional subtitle.
+     - **5-Color Rotating Theme**:
+       - 📘 **Ocean Blue** (`#1A5276` banner, `#F4F6F9` content area)
+       - 📗 **Emerald Teal** (`#117A65` banner, `#F4FAF8` content area)
+       - 🔮 **Regal Purple** (`#6C3483` banner, `#FBF7FD` content area)
+       - 📙 **Warm Amber** (`#B9770E` banner, `#FEFDF8` content area)
+       - 🎯 **Graphite Slate** (`#283747` banner, `#F8F9FA` content area)
+     - **Per-Box Structure**:
+       - **Row 1 (Header Banner)**: Serial number badge (`Problem #001` through `#100`), icon accent, and editable problem title prompt `[ Click & type problem name here ]`.
+       - **Row 2 (Content Paste Area)**: Prompts for Source/URL (e.g., LeetCode, Codeforces, Book reference) and ample dedicated space for pasting problem statements, constraints, and test cases.
+2. **Committed and Pushed to GitHub**:
+   - Pushed commit `7da7c83` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
+
 
 
 
