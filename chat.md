@@ -414,6 +414,25 @@ This document records all instructions, architectural decisions, and agent conve
 4. **Committed and Pushed to GitHub**:
    - Pushed commit `3e00bdd` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 34: Isolated Staging Directory (`Source of Problem/`)
+
+### User Request
+> "keep Write here doc and put the file here folder in a separete folder. named Source of Problem."
+
+### Actions Taken & Implementation Summary
+1. **Created Isolated Staging Folder**:
+   - Created [`Output/problems/Source of Problem/`](Output/problems/Source%20of%20Problem/).
+   - Moved `write here.docx` into [`Output/problems/Source of Problem/write here.docx`](Output/problems/Source%20of%20Problem/write%20here.docx).
+   - Moved `put the file here/` into [`Output/problems/Source of Problem/put the file here/`](Output/problems/Source%20of%20Problem/put%20the%20file%20here/).
+2. **Documented Staging Protocols**:
+   - Added [`Output/problems/Source of Problem/README.md`](Output/problems/Source%20of%20Problem/README.md) detailing how inputs staged here are extracted and cleared.
+   - Updated [`Output/problems/README.md`](Output/problems/README.md) to link to `Source of Problem/`.
+3. **Committed and Pushed to GitHub**:
+   - Pushed commit `fa86b0b` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
+
 
 
 
