@@ -432,6 +432,32 @@ This document records all instructions, architectural decisions, and agent conve
 3. **Committed and Pushed to GitHub**:
    - Pushed commit `fa86b0b` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 35: Development of `ProblemSkill` for Selective & Non-Destructive Ingestion
+
+### User Request
+> "make a skill for output folder. when i mention the skill the skill will check if there is anything that need to be processed into the Question bank.md file. Also make the feature like if i mention the skill and write any specific folder path or problem number from the text the agent will only process that file or text into the question bank.md not every file or text from doc. and never destory any file or text from doc untill it gets into the question bank..md file. now make this skill.. the skill name should be ProblemSkill"
+
+### Actions Taken & Implementation Summary
+1. **Created `ProblemSkill` Specification**:
+   - Built the complete skill package at [`.agent/skills/ProblemSkill/SKILL.md`](.agent/skills/ProblemSkill/SKILL.md) and portable reference at [`Output/skill/SKILL.md`](Output/skill/SKILL.md).
+   - Designed triggers and protocols for:
+     - Checking pending items across `write here.docx` and `put the file here/`.
+     - Selectively filtering by file path/name or problem number/title.
+     - Mandating zero data loss: strictly forbidding any file deletion or doc clearing until writing to `question bank.md` is complete and verified.
+2. **Built CLI Ingestion Script (`ingest_manager.py`)**:
+   - Added [`Output/skill/scripts/ingest_manager.py`](Output/skill/scripts/ingest_manager.py) and [`.agent/skills/ProblemSkill/scripts/ingest_manager.py`](.agent/skills/ProblemSkill/scripts/ingest_manager.py).
+   - Features:
+     - `--status`: Inspects paragraph counts in `write here.docx` and files in `put the file here/`.
+     - `--delete-file <filename>`: Safely removes only the specified processed file after verification.
+     - `--clear-docx`: Safely clears `write here.docx` when all entries are processed.
+3. **Updated Core Documentation**:
+   - Updated [`README.md`](README.md): Documented `ProblemSkill` under Key Deliverables and added the `.agent/skills/ProblemSkill/` and `Output/skill/` trees to the repository architecture.
+4. **Committed and Pushed to GitHub**:
+   - Pushed commit `908dafd` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
+
 
 
 
