@@ -14,12 +14,12 @@ It is structured to be completely **agent-agnostic**—fully functional with any
 ## 1. Skill Capabilities & Core References
 
 The skill directly references the reference library stored in this repository:
-1. **Foundations & Core Algorithms (`Input/books/Overall/Part-1.pdf`)**: 329 pages.
+1. **Foundations & Core Algorithms (`Skills_Input/books/Overall/Part-1.pdf`)**: 329 pages.
    - Fundamentals, problem types, time/space complexity analysis.
    - Built-in & custom linear and non-linear data structures (UFDS, Fenwick Tree, Segment Tree).
    - Core paradigms: Complete Search, Divide and Conquer, Greedy, Dynamic Programming.
    - Graph algorithms: Traversals (DFS/BFS), MST, SSSP (Dijkstra, Bellman-Ford), APSP (Floyd-Warshall), Special Graphs (DAG, Tree, Bipartite, Eulerian).
-2. **Advanced Systems & Mathematics (`Input/books/Overall/Part-2.pdf`)**: 352 pages.
+2. **Advanced Systems & Mathematics (`Skills_Input/books/Overall/Part-2.pdf`)**: 352 pages.
    - Mathematics: Number theory (Primes, Sieve, GCD/LCM, Modular arithmetic, Extended Euclidean), Combinatorics, Probability, Game theory, Matrix power.
    - String Processing: Edit distance, LCS, KMP, Suffix Trie/Tree/Array, Rabin-Karp hashing, Manacher.
    - Computational Geometry: Points, lines, circles, polygons, Convex Hull (Graham scan, Monotone chain), 3D geometry.
@@ -67,17 +67,12 @@ When the agent requires verbatim problem descriptions, proofs, mathematical deri
 
 1. **Extracting Specific Pages**:
    ```bash
-   python scripts/query_cpbook.py extract --book 1 --start 133 --end 142
+   python .agent/skills/SkillsOnFixedResources/cpbook4/scripts/query_cpbook.py extract --book 1 --start 133 --end 142
    ```
-   *Options:*
-   - `--book`: `1` (Volume 1) or `2` (Volume 2)
-   - `--start`: 0-based start page index
-   - `--end`: 0-based end page index (inclusive)
-   - `--output`: (Optional) path to save the extracted markdown/text file
 
 2. **Searching for Keywords/Topics**:
    ```bash
-   python scripts/query_cpbook.py search --book 2 --query "Heavy-Light Decomposition" --limit 5
+   python .agent/skills/SkillsOnFixedResources/cpbook4/scripts/query_cpbook.py search --book 2 --query "Heavy-Light Decomposition" --limit 5
    ```
 
 ---
@@ -93,10 +88,10 @@ If more than one data structure, algorithm, or paradigm can solve the user's pro
 
 ---
 
-### 🚨 Mandatory Output Preservation Protocol (`Output/` Directory)
-Whenever a problem is provided, tackled, or analyzed—regardless of whether it originates from a local markdown file, an online judge (Codeforces, LeetCode, CSES, AtCoder, etc.), or a reference book:
-1. **Preserve Problem Statement (`Output/ProblemSkill_output/`)**: You MUST preserve a self-contained copy of the problem statement inside `Output/ProblemSkill_output/` with source name, URL or book reference, topic, and difficulty.
-2. **Synthesize Solution (`Output/cpbook4_output/`)**: Derive and store the step-by-step solution inside `Output/cpbook4_output/` strictly applying the designated blueprint from `Input/Templates/`.
+### 🚨 Mandatory Output Preservation Protocol (`Skills_Output/` Directory)
+Whenever a problem is provided, tackled, or analyzed—regardless of whether it originates from a local markdown file, an online judge, or a reference book:
+1. **Preserve Problem Statement (`Skills_Output/ProblemSkill_output/Problem Files/`)**: You MUST preserve a self-contained copy of the problem statement inside `Skills_Output/ProblemSkill_output/Problem Files/` with source name, URL or book reference, topic, and difficulty.
+2. **Synthesize Solution (`Skills_Output/cpbook4_output/` or `Skills_Output/ProblemSkill_output/Solution Files/`)**: Derive and store the step-by-step solution strictly applying the designated blueprint from `Skills_Input/Templates/`.
 3. **Verify Implementation**: Provide verified code implementations in Python 3 and Java 21 adhering to the template's invariants and failure audits.
 
 ---
@@ -116,6 +111,6 @@ Adhere to the rigorous 3-step mastery framework:
    - Verify greedy choice property and optimal substructure before committing to Greedy.
    - For DP, define the exact state tuple $S$, base cases, and transition recurrence.
 3. **Template & Robustness**:
-   - Guard against integer overflow: use 64-bit integers (`long long` in C++, `int` in Python 3).
+   - Guard against integer overflow: use 64-bit integers (`long long` in C++, `int` in Python 3, `long` in Java).
    - Fast I/O routines for high-volume inputs.
    - Corner cases: $N=0, 1$, disconnected components, negative weights, multiple edges/self-loops.

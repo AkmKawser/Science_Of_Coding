@@ -6,14 +6,14 @@ This document defines the technical architecture, execution lifecycle, and human
 
 ## 🏛️ System Architecture
 
-`ProblemSkill` automates the intake, classification, and safe archival of algorithmic problems into [`Output/ProblemSkill_output/question bank.md`](../../../../Output/ProblemSkill_output/question%20bank.md) without risk of data loss.
+`ProblemSkill` automates the intake, classification, safe archival, and template-guided solution synthesis of algorithmic problems without risk of data loss.
 
 ```mermaid
 flowchart TD
     User([User Invocation: @skill:ProblemSkill]) --> Agent[Agentic AI System]
     
-    subgraph StagingArea["Staging Area (Output/ProblemSkill_output/Source of Problem/)"]
-        Docx["write here.docx / write here_new.docx<br/>(100 Clean Themed Boxes for Links & Text)"]
+    subgraph StagingArea["Staging Area (Skills_Output/ProblemSkill_output/Problem Files/Source of Problem/)"]
+        Docx["write here.docx<br/>(100 Clean Themed Boxes for Links & Text)"]
         Files["put the file here/<br/>(PDFs, Book Chapters, Docs)"]
     end
     
@@ -36,8 +36,8 @@ flowchart TD
     
     HITL -->|User Selection Confirmed| Formatter["Transform into Markdown Schema<br/>(problem formatting.md)"]
     
-    subgraph PersistentDatabase["Permanent Archive"]
-        QBank["Output/ProblemSkill_output/question bank.md<br/>1. Appends Problem Specification<br/>2. Updates Master Index Table"]
+    subgraph PersistentDatabase["Problem Files Archive"]
+        QBank["Skills_Output/ProblemSkill_output/Problem Files/question bank.md<br/>1. Appends Problem Specification<br/>2. Updates Master Index Table"]
     end
     
     Formatter --> PersistentDatabase
@@ -46,6 +46,19 @@ flowchart TD
     
     Verification -->|Verified True| AtomicCleanup["Atomic Non-Destructive Cleanup:<br/>- Clear targeted Box ONLY from docx<br/>- Remove targeted File ONLY from put the file here/<br/>*All other boxes and files untouched*"]
     Verification -->|Write Incomplete| Abort["ABORT Cleanup - Zero Data Loss Guarantee"]
+    
+    subgraph SolutionArchive["Solution Files Workspace (Skills_Output/ProblemSkill_output/Solution Files/)"]
+        direction TB
+        SolFolder["<Primary Category>/<Subcategory>/"]
+        PyCode["<Problem-ID>_python.py"]
+        JavaCode["<Problem-ID>_java.java"]
+        Derivation["<Problem-ID>_derivation.md"]
+        SolFolder --> PyCode
+        SolFolder --> JavaCode
+        SolFolder --> Derivation
+    end
+    
+    PersistentDatabase -.->|When Solving Problem| SolutionArchive
 ```
 
 ---
@@ -55,7 +68,7 @@ flowchart TD
 ### 1. Ingestion Triggers
 - General check: `@skill:ProblemSkill` or `"check if there are any problems to process"`
 - Targeted Box: `@skill:ProblemSkill process Box 1 from the doc`
-- Targeted File: `@skill:ProblemSkill process Recursion_Vs_Iteration_Complete_Codes.pdf`
+- Targeted File: `@skill:ProblemSkill process sample.pdf`
 
 ### 2. Status Discovery via CLI
 ```bash
@@ -70,7 +83,7 @@ Outputs:
 ```bash
 python .agent/skills/SkillsOnDynamicResources/ProblemSkill/scripts/ingest_manager.py --categories
 ```
-Extracts the real-time 2-level hierarchy (Primary Category $\to$ Subcategories) from [`problem catagories.docx`](../../../../Output/ProblemSkill_output/problem%20catagories.docx) to present in the user prompt.
+Extracts the real-time 2-level hierarchy (Primary Category $\to$ Subcategories) from [`problem catagories.docx`](../../../../Skills_Output/ProblemSkill_output/Problem%20Files/problem%20catagories.docx) to present in the user prompt.
 
 ### 4. Interactive HITL Selection Protocol
 - **NEVER guess the topic or subcategory**.
@@ -78,10 +91,10 @@ Extracts the real-time 2-level hierarchy (Primary Category $\to$ Subcategories) 
   > *"Which Primary Category and Subcategory does this problem belong to?"*
 - Await user confirmation before appending to `question bank.md`.
 
-### 5. Formatting Standards ([`problem formatting.md`](../../../../Output/ProblemSkill_output/problem%20formatting.md))
+### 5. Formatting Standards ([`problem formatting.md`](../../../../Skills_Output/ProblemSkill_output/Problem%20Files/problem%20formatting.md))
 Format each problem entry with:
 - Unique Problem ID & Title
-- Metadata: Primary Category, Subcategory, Source, Source Link/Ref, Difficulty, Matching Template from `Input/Templates/`
+- Metadata: Primary Category, Subcategory, Source, Source Link/Ref, Difficulty, Matching Template from `Skills_Input/Templates/`
 - Problem Statement
 - Input / Output Specifications
 - Sample Tests with Explanations
@@ -90,3 +103,9 @@ Format each problem entry with:
 ### 6. Zero-Loss Non-Destructive Cleanup
 - **Rule**: NEVER delete a source file or clear a docx box until the entry is 100% written and verified inside `question bank.md`.
 - **Atomic Scope**: Delete ONLY the processed target file or clear ONLY the processed box; never wipe the whole staging directory.
+
+### 7. Solution Synthesis Standards ([`output formating.md`](../../../../Skills_Output/ProblemSkill_output/output%20formating.md))
+When prompted to solve a problem:
+- Place outputs into `Skills_Output/ProblemSkill_output/Solution Files/<Category>/<Subcategory>/`.
+- Generate separate `<ID>_python.py` and `<ID>_java.java` code files.
+- Generate `<ID>_derivation.md` strictly executing the matching template phases.

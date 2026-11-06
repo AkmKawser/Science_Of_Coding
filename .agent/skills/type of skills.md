@@ -19,11 +19,11 @@ A **PDF Book Skill** encapsulates an entire reference textbook or publication in
 ### 2. Concrete Implementation in Repository
 - **`cpbook4`**:
   - Located at: [`.agent/skills/SkillsOnFixedResources/cpbook4/`](SkillsOnFixedResources/cpbook4/)
-  - Covers complete reference volumes stored under [`Input/books/Overall/`](../../Input/books/Overall/):
+  - Covers complete reference volumes stored under [`Skills_Input/books/Overall/`](../../Skills_Input/books/Overall/):
     - *Foundations & Core Algorithms* (`Part-1.pdf`, 329 pages): Linear & non-linear data structures, complete search, greedy, dynamic programming, and graph algorithms.
     - *Advanced Systems & Mathematics* (`Part-2.pdf`, 352 pages): Mathematics, string processing, computational geometry, state-space search, network flow, and advanced data structures.
   - Architecture & Guide: [`.agent/skills/SkillsOnFixedResources/cpbook4/SkillArchitecture/README.md`](SkillsOnFixedResources/cpbook4/SkillArchitecture/README.md).
-  - Dedicated Output Directory: [`Output/cpbook4_output/`](../../Output/cpbook4_output/) (stores template solutions and deep-dive query roadmaps in `query/`).
+  - Dedicated Output Directory: [`Skills_Output/cpbook4_output/`](../../Skills_Output/cpbook4_output/) (stores template solutions and deep-dive query roadmaps in `query/`).
 
 ---
 
@@ -34,24 +34,26 @@ A **Problem-Solution Skill** handles the dynamic intake, curation, standardized 
 
 Instead of ungrounded or unstructured code generation, the Problem-Solution Skill enforces:
 1. **Multi-Source Ingestion**:
-   - **Local Word Workbooks**: Staging documents with structured boxes ([`write here.docx`](../../Output/ProblemSkill_output/Source%20of%20Problem/write%20here.docx)) for links, text, and problem notes.
-   - **Document Drops**: Ingestion folders ([`put the file here/`](../../Output/ProblemSkill_output/Source%20of%20Problem/put%20the%20file%20here/)) for offline PDF books, chapters, and worksheets.
+   - **Local Word Workbooks**: Staging documents with structured boxes ([`write here.docx`](../../Skills_Output/ProblemSkill_output/Problem%20Files/Source%20of%20Problem/write%20here.docx)) for links, text, and problem notes.
+   - **Document Drops**: Ingestion folders ([`put the file here/`](../../Skills_Output/ProblemSkill_output/Problem%20Files/Source%20of%20Problem/put%20the%20file%20here/)) for offline PDF books, chapters, and worksheets.
    - **Online Platforms & Judges**: Live competitive programming judges (e.g., Codeforces, LeetCode, CSES, AtCoder, UVa, HackerRank).
 2. **Dynamic 2-Tier Hierarchical Classification (HITL)**:
-   - Reads real-time domains and subcategories from [`problem catagories.docx`](../../Output/ProblemSkill_output/problem%20catagories.docx).
+   - Reads real-time domains and subcategories from [`problem catagories.docx`](../../Skills_Output/ProblemSkill_output/Problem%20Files/problem%20catagories.docx).
    - Prompts the user interactively (Human-in-the-Loop) to verify the **Primary Category** and **Subcategory** before committing entries.
 3. **Non-Destructive Archival Protocol**:
-   - Reformats raw statements into standardized Markdown schema ([`problem formatting.md`](../../Output/ProblemSkill_output/problem%20formatting.md)) with explicit lowercase anchors and single-line clickable jump links in the master index table.
-   - Enforces zero-data loss: source files and docx entries are **never deleted** until the record is 100% verified inside [`question bank.md`](../../Output/ProblemSkill_output/question%20bank.md).
-4. **Mandatory Template Synthesis**:
-   - Couples directly with [`Input/Templates/`](../../Input/Templates/) (e.g., [`Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)) to guide the agent through phased state derivation, invariant formulation, and verified code implementations in **Python 3** and **Java 21**.
+   - Reformats raw statements into standardized Markdown schema ([`problem formatting.md`](../../Skills_Output/ProblemSkill_output/Problem%20Files/problem%20formatting.md)) with explicit lowercase anchors and single-line clickable jump links in the master index table.
+   - Enforces zero-data loss: source files and docx entries are **never deleted** until the record is 100% verified inside [`question bank.md`](../../Skills_Output/ProblemSkill_output/Problem%20Files/question%20bank.md).
+4. **Mandatory Template Synthesis & Language-Separated Outputs**:
+   - Follows [`output formating.md`](../../Skills_Output/ProblemSkill_output/output%20formating.md).
+   - Couples directly with [`Skills_Input/Templates/`](../../Skills_Input/Templates/) (e.g., [`Repetitive Structure Template.md`](../../Skills_Input/Templates/Repetitive%20Structure%20Template.md)) to produce separate Python (`<ID>_python.py`), Java (`<ID>_java.java`), and derivation files (`<ID>_derivation.md`) arranged by Primary Category and Subcategory.
 
 ### 2. Concrete Implementation in Repository
 - **`ProblemSkill`**:
   - Located at: [`.agent/skills/SkillsOnDynamicResources/ProblemSkill/`](SkillsOnDynamicResources/ProblemSkill/)
-  - Controls problem staging, queue inspection, selective box/file parsing, dynamic category loading, and atomic updates to [`Output/ProblemSkill_output/question bank.md`](../../Output/ProblemSkill_output/question%20bank.md).
+  - Controls problem staging, queue inspection, selective box/file parsing, dynamic category loading, and atomic updates to [`question bank.md`](../../Skills_Output/ProblemSkill_output/Problem%20Files/question%20bank.md).
+  - Controls structured solution generation under [`Solution Files/`](../../Skills_Output/ProblemSkill_output/Solution%20Files/).
   - Architecture & Guide: [`.agent/skills/SkillsOnDynamicResources/ProblemSkill/SkillArchitecture/README.md`](SkillsOnDynamicResources/ProblemSkill/SkillArchitecture/README.md).
-  - Dedicated Output Directory: [`Output/ProblemSkill_output/`](../../Output/ProblemSkill_output/).
+  - Dedicated Output Directory: [`Skills_Output/ProblemSkill_output/`](../../Skills_Output/ProblemSkill_output/).
 
 ---
 
@@ -63,6 +65,6 @@ Instead of ungrounded or unstructured code generation, the Problem-Solution Skil
 | **Primary Artifact** | Complete reference books (PDFs) & TOC index | Problem staging docs, question bank, & template blueprints |
 | **Source Channels** | Comprehensive textbooks & published companion books | Online platforms, offline companion PDFs, copied text, URLs |
 | **Core Mechanism** | Zero-token routing & surgical page-level CLI extraction | Dynamic HITL 2-level category prompt & atomic cleanup |
-| **Output Delivery** | Invariant tables, mathematical proofs, candidate trade-offs | Structured problem entries, clickable jump index, verified code |
+| **Output Delivery** | Invariant tables, mathematical proofs, candidate trade-offs | Structured problem entries, clickable jump index, separate Python/Java solutions |
 | **Representative Skill**| [`cpbook4`](SkillsOnFixedResources/cpbook4/) | [`ProblemSkill`](SkillsOnDynamicResources/ProblemSkill/) |
-| **Output Workspace** | [`Output/cpbook4_output/`](../../Output/cpbook4_output/) | [`Output/ProblemSkill_output/`](../../Output/ProblemSkill_output/) |
+| **Output Workspace** | [`Skills_Output/cpbook4_output/`](../../Skills_Output/cpbook4_output/) | [`Skills_Output/ProblemSkill_output/`](../../Skills_Output/ProblemSkill_output/) |
