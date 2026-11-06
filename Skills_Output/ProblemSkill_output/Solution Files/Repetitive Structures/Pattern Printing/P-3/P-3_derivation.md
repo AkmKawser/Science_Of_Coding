@@ -24,7 +24,7 @@ We systematically trace the semantic tokens and arithmetic laws in the problem s
   - *Diagnostic Test 3 (Free Test)* on `i`: Does `i` traverse an independent arithmetic progression $[1, N]$? Yes, $i$ advances by $+1$ each iteration, controlling the primary domain progression. Hence, **Free** (Stepper).
 - **Linguistic Trigger: *"calculate the sum of the series"***:
   - Discovered entity: `total`.
-  - *Diagnostic Test 4 (Carried Test)* on `total`: Does `total` require passing its value across iteration boundaries? Yes, $\text{total}_i = \text{total}_{i-1} + (2i - 1)$. Without preserving `total` across iterations, intermediate sums are lost. Hence, **Carried** (Gatherer).
+  - *Diagnostic Test 4 (Carried Test)* on `total`: Does `total` require passing its value across iteration boundaries? Yes, $\text{total}(i) = \text{total}(i-1) + (2i - 1)$. Without preserving `total` across iterations, intermediate sums are lost. Hence, **Carried** (Gatherer).
 
 ### 2. Candidate Variables Inventory
 - `n`: Total number of terms in the sequence (given input parameter).
@@ -69,11 +69,11 @@ $$\text{State} = (i, \text{total})$$
 
 ![P-3 State-Space Tree Trace](P-3_state_space_tree.png)
 
-### 3. State Transition Analysis ($T: \text{State}_t \to \text{State}_{t+1}$)
+### 3. State Transition Analysis (`T: State(t) -> State(t+1)`)
 Every edge along the vertical linear spine maps directly to the deterministic transition function:
 $$T(i, \text{total}) = \left(i + 1, \; \text{total} + (2i - 1)\right)$$
 
-| State Component | Variable | Class | Current State ($S_t$) | Transition Rule / Operator | Next State ($S_{t+1}$) | Action / Side-Effect |
+| State Component | Variable | Class | Current State ($S(t)$) | Transition Rule / Operator | Next State ($S(t+1)$) | Action / Side-Effect |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Stepper (Progress)** | `i` | Free | $i$ | $i \leftarrow i + 1$ | $i + 1$ | Advances counter toward bound $n$ |
 | **Accumulator (Memory)** | `total` | Carried | $\text{total}$ | $\text{total} \leftarrow \text{total} + (2i - 1)$ | $\text{total} + (2i - 1)$ | Preserves odd-sum square property |

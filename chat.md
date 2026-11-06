@@ -1578,7 +1578,7 @@ yes apply it"
 ### Actions Taken & Implementation Summary
 1. **Integrated Transition Analysis into Part 2 of [`Repetitive Structure Template.md`](Skills_Input/Templates/Repetitive%20Structure%20Template.md)**:
    - **Renamed Part 2**: *Part 2: Find the relationships, draw the tree, and analyze transitions*.
-   - **Section 1 (Execution Protocol - Step 6)**: Added mandatory **Detailed State Transition Analysis ($T: \text{State}_t \to \text{State}_{t+1}$)** connecting tree edges to mathematical state transformations (Free progress, Inner resets, Carried updates, Derived evaluations, and Side-effect action emissions).
+   - **Section 1 (Execution Protocol - Step 6)**: Added mandatory **Detailed State Transition Analysis (`T: State(t) -> State(t+1)`)** connecting tree edges to mathematical state transformations (Free progress, Inner resets, Carried updates, Derived evaluations, and Side-effect action emissions).
    - **Section 2 (Reference Manual - Transition & State Transition Function)**: Added an exhaustive theoretical foundation:
      - Formulated the 4-layer transition engine: Stepper Update, Walker Reset, Inductive Carried Update, and Instantaneous Derived Evaluation.
      - Provided the **Formal State Transition Matrix** schema.
@@ -1597,7 +1597,7 @@ yes apply it"
 > "apply these two all the solution we have done so far in the @[Skills_Output/ProblemSkill_output/Solution Files]"
 
 ### Actions Taken & Implementation Summary
-1. **Retrofitted Detailed State Transition Analysis ($T: \text{State}_t \to \text{State}_{t+1}$)**:
+1. **Retrofitted Detailed State Transition Analysis (`T: State(t) -> State(t+1)`)**:
    - **Problem P-1** ([`P-1_derivation.md`](Skills_Output/ProblemSkill_output/Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-1/P-1_derivation.md)):
      - Added transition formula $T(i, \text{total}) = (i + 1, \text{total} + i)$.
      - Formulated State Transition Table covering Stepper `i`, Accumulator `total`, derived `term`, and termination conditions.
@@ -1613,4 +1613,34 @@ yes apply it"
        - Row Wrap & Inner Reset: $T_{\text{outer}}(i, i) = (i + 1, 1)$.
      - Added 2D State Transition Matrix with action emissions (value printing, spacing delimiters, newline triggers, and global termination).
 2. **Git Synchronization**:
+   - Committed and synchronized all changes with GitHub `origin/main`.
+
+
+---
+
+## Session 83: Audit & Eliminate Markdown Math Rendering Collisions
+
+### User Request
+> "when you write in the md files make sure there is no s uch error like these  ($T: \text{State}t \to \text{State}{t+1}$) double check all the md files so such text rendering issues."
+
+### Root Cause Analysis & Fix
+1. **Root Cause**:
+   - In Markdown parsers (GitHub Flavored Markdown, KaTeX parsers, CommonMark), unescaped pairs of underscores inside inline math or headers (e.g., `$\text{State}_t \to \text{State}_{t+1}$`) collide with Markdown italic delimiters (`_..._`). The Markdown engine eagerly consumes the two underscores for italic markup before LaTeX renders, stripping the subscripts and producing mangled output like `\text{State}t \to \text{State}{t+1}`.
+2. **Remediation Across All Markdown Files**:
+   - **Markdown Headings**: Substituted raw inline math underscores with bulletproof code spans:
+     `### 3. State Transition Analysis (T: State(t) -> State(t+1))`
+   - **Math Blocks & Tables**: Normalized time/step index subscripts using functional indexing notation:
+     - `\text{State}(t) \to \text{State}(t+1)`
+     - `S(t)` and `S(t+1)`
+     - `\text{total}(i) = \text{total}(i-1) + \text{term}`
+     - `\text{carried}(t+1) = f(\text{carried}(t), \text{derived}(t))`
+   - Audited and updated:
+     - [`Repetitive Structure Template.md`](Skills_Input/Templates/Repetitive%20Structure%20Template.md)
+     - [`Solution formating.md`](Skills_Output/ProblemSkill_output/Solution%20Files/Solution%20formating.md)
+     - [`P-1_derivation.md`](Skills_Output/ProblemSkill_output/Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-1/P-1_derivation.md)
+     - [`P-2_derivation.md`](Skills_Output/ProblemSkill_output/Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-2/P-2_derivation.md)
+     - [`P-3_derivation.md`](Skills_Output/ProblemSkill_output/Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-3/P-3_derivation.md)
+     - [`P-17_derivation.md`](Skills_Output/ProblemSkill_output/Solution%20Files/Repetitive%20Structures/Pattern%20Printing/P-17/P-17_derivation.md)
+     - [`chat.md`](chat.md)
+3. **Git Synchronization**:
    - Committed and synchronized all changes with GitHub `origin/main`.

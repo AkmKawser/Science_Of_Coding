@@ -84,7 +84,7 @@ $$\text{State} = (i, j)$$
 - Each leaf emits character $j$. At the conclusion of row $i$, an end-of-line (`\n`) is emitted.
 - Total leaves generated: $\sum_{i=1}^4 i = 1 + 2 + 3 + 4 = 10$ leaves.
 
-### 3. State Transition Analysis ($T: \text{State}_t \to \text{State}_{t+1}$)
+### 3. State Transition Analysis (`T: State(t) -> State(t+1)`)
 In this 2D nested coordinate tree, transitions operate on two distinct hierarchical levels:
 
 #### A. Inner Column Walker Transition ($j \to j + 1$)

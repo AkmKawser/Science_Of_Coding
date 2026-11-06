@@ -24,7 +24,7 @@ To uncover the variables and establish their roles from first principles, we ana
   - *Diagnostic Test 3 (Free Test)* on `i`: Does `i` autonomously march across a known discrete range $[1, N]$? Yes, $i$ increments by $+1$ at each step, defining the sequence of iterations. Hence, **Free** (Stepper).
 - **Linguistic Trigger: *"calculate the sum of the series"***:
   - Discovered entity: `total`.
-  - *Diagnostic Test 4 (Carried Test)* on `total`: Does `total` carry forward accumulated state across iterations? Yes, $\text{total}_i = \text{total}_{i-1} + 2i$. If the loop is paused at step $i$, `total` cannot be recomputed without knowing the past trajectory. Hence, **Carried** (Gatherer).
+  - *Diagnostic Test 4 (Carried Test)* on `total`: Does `total` carry forward accumulated state across iterations? Yes, $\text{total}(i) = \text{total}(i-1) + 2i$. If the loop is paused at step $i$, `total` cannot be recomputed without knowing the past trajectory. Hence, **Carried** (Gatherer).
 
 ### 2. Candidate Variables Inventory
 - `n`: Total count of terms in the sequence (given input parameter).
@@ -69,11 +69,11 @@ $$\text{State} = (i, \text{total})$$
 
 ![P-2 State-Space Tree Trace](P-2_state_space_tree.png)
 
-### 3. State Transition Analysis ($T: \text{State}_t \to \text{State}_{t+1}$)
+### 3. State Transition Analysis (`T: State(t) -> State(t+1)`)
 Every edge along the vertical linear spine maps directly to the deterministic transition function:
 $$T(i, \text{total}) = \left(i + 1, \; \text{total} + 2i\right)$$
 
-| State Component | Variable | Class | Current State ($S_t$) | Transition Rule / Operator | Next State ($S_{t+1}$) | Action / Side-Effect |
+| State Component | Variable | Class | Current State ($S(t)$) | Transition Rule / Operator | Next State ($S(t+1)$) | Action / Side-Effect |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Stepper (Progress)** | `i` | Free | $i$ | $i \leftarrow i + 1$ | $i + 1$ | Advances counter toward bound $n$ |
 | **Accumulator (Memory)** | `total` | Carried | $\text{total}$ | $\text{total} \leftarrow \text{total} + 2i$ | $\text{total} + 2i$ | Preserves even-prefix sum |

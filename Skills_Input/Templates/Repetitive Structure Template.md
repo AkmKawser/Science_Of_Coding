@@ -62,7 +62,7 @@ Derived variables, such as `value = n + 1 - i + j`, have no role in the chart. T
      - **Binary Decision / Backtracking ($b = 2$)**: 2 choices per node (Take/Skip) $\implies$ **Binary tree** with $2^N$ leaves.
    - Use a small input (`n = 4` or `5`) so the whole tree fits.
    - See [Section 2: Taxonomy of State-Space Trees](#state-space-and-tree-geometry-why-is-the-tree-a-straight-line-vs-a-branched-tree) for the full diagram and step-by-step drawing tips.
-6. **Detailed State Transition Analysis ($T: \text{State}_t \to \text{State}_{t+1}$).**
+6. **Detailed State Transition Analysis (`T: State(t) -> State(t+1)`).**
    Every edge in the tree represents a state transition. Formulate the explicit transition function across all dimensions of the minimal state:
    - **Free Variables (Steppers/Walkers)**: How the index advances toward the bound ($i' = i + \Delta i$).
    - **Inner Reset Rules**: When an inner walker finishes ($j = \text{bound}$), how it resets ($j' = 1$) while the parent steps ($i' = i + 1$).
@@ -423,24 +423,24 @@ The fundamental mathematical property of the state that remains true throughout 
 ### Transition & The State Transition Function $T(S)$
 
 The **transition** is the exact mathematical rule governing how the state changes along the directed edges of the state-space tree:
-$$T: \text{State}_t \to \text{State}_{t+1}$$
+$$T: \text{State}(t) \to \text{State}(t+1)$$
 
 In any iterative program, state transitions are structured into four coordinated layers:
 1. **Free Stepper Update (Progress)**: The free variable advances monotonically along its arithmetic interval toward the loop exit bound:
-   $$i_{t+1} = i_t + \Delta i$$
+   $$i(t+1) = i(t) + \Delta i$$
    *(Guarantees termination progress by strictly reducing the distance to the bound).*
 2. **Inner Walker Reset Rule (Coordinate Transitions)**: In nested loops, when the inner walker $j$ reaches its upper bound $j = \text{bound}(i)$, the next transition executes a **composite step**:
-   $$\begin{cases} j_{t+1} = j_{\text{start}} & (\text{Inner loop resets}) \\ i_{t+1} = i_t + 1 & (\text{Outer loop steps}) \end{cases}$$
+   $$\begin{cases} j(t+1) = j_{\text{start}} & (\text{Inner loop resets}) \\ i(t+1) = i(t) + 1 & (\text{Outer loop steps}) \end{cases}$$
 3. **Carried Variable Update (Inductive Accumulation)**: The carried variable is updated from its previous state and the current iteration's contribution:
-   $$\text{carried}_{t+1} = f(\text{carried}_t, \text{derived}_t)$$
-   *(Examples: $\text{total}_{t+1} = \text{total}_t + \text{term}_t$; $\text{best}_{t+1} = \max(\text{best}_t, \text{val}_t)$).*
+   $$\text{carried}(t+1) = f(\text{carried}(t), \text{derived}(t))$$
+   *(Examples: $\text{total}(t+1) = \text{total}(t) + \text{term}(t)$; $\text{best}(t+1) = \max(\text{best}(t), \text{val}(t))$).*
 4. **Instantaneous Derived Value Evaluation**: Derived values are computed fresh from the new coordinates without carrying memory:
-   $$\text{derived}_{t+1} = g(i_{t+1}, j_{t+1})$$
+   $$\text{derived}(t+1) = g(i(t+1), j(t+1))$$
 
 #### The Formal State Transition Matrix:
 Every solution derivation in Phase 2 must include the **Transition Analysis Table**:
 
-| State Component | Variable | Current State ($S_t$) | Transition Rule / Operator | Next State ($S_{t+1}$) | Loop Level |
+| State Component | Variable | Current State ($S(t)$) | Transition Rule / Operator | Next State ($S(t+1)$) | Loop Level |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Outer Stepper** | `i` | $i$ | $i \leftarrow i + 1$ | $i + 1$ | Outer Loop |
 | **Inner Walker** | `j` | $j$ | If $j < \text{bound}(i)$ then $j + 1$ else $j_{\text{start}}$ | $j'$ | Inner Loop |
