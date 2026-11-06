@@ -521,6 +521,28 @@ This document records all instructions, architectural decisions, and agent conve
 4. **Committed and Pushed to GitHub**:
    - Pushed commit `74ccc6e` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 39: Hierarchical Subcategories Under Problem Categories
+
+### User Request
+> "There can be subcatagories under catagories"
+
+### Actions Taken & Implementation Summary
+1. **Restructured `problem catagories.docx` for Hierarchy**:
+   - Upgraded [`Output/problems/problem catagories.docx`](Output/problems/problem%20catagories.docx) into a 4-column structured table:
+     `#` | `Primary Category` | `Subcategory` | `Key Concepts & Tags`
+   - Populated standard subcategories across all major domains (e.g. *Dynamic Programming* $\to$ *1D & Linear DP*, *2D Grid & Interval DP*, *Knapsack & Subset DP*, *Tree DP & Rerooting*, *Bitmask DP*, *Digit DP*; *Graph Algorithms* $\to$ *Traversals*, *SSSP*, *APSP*, *MST*, *Topological Sort*, *Flow & Matching*).
+2. **Updated `ProblemSkill` & Scripts for 2-Level Extraction**:
+   - Enhanced `ingest_manager.py` to parse hierarchical categories into primary categories and nested child subcategories.
+   - Updated [`.agent/skills/ProblemSkill/SKILL.md`](.agent/skills/ProblemSkill/SKILL.md) and [`Output/skill/SKILL.md`](Output/skill/SKILL.md) to govern 2-tier HITL category selection (Primary Category $\to$ Subcategory).
+3. **Synchronized Documentation & Question Bank Schema**:
+   - Updated [`Output/problems/problem formatting.md`](Output/problems/problem%20formatting.md) to explicitly require **Primary Category** and **Subcategory** in problem metadata.
+   - Updated the Master Problem Index table in [`Output/problems/question bank.md`](Output/problems/question%20bank.md) to include separate columns for `Primary Category` and `Subcategory`.
+4. **Committed and Pushed to GitHub**:
+   - Pushed commit `eb61625` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
+
 
 
 
