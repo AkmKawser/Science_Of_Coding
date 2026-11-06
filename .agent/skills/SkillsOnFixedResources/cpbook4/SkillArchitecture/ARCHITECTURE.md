@@ -11,18 +11,14 @@ This package can be moved into any AI agent environment (Antigravity, Claude Cod
 
 ---
 
-## 2. Directory Layout of `skill/`
+## 2. Directory Layout of `cpbook4` Skill
 
 ```
-skill/
-├── ARCHITECTURE.md                 <-- Detailed operational manual (this file)
+.agent/skills/SkillsOnFixedResources/cpbook4/
+├── SkillArchitecture/
+│   ├── ARCHITECTURE.md             <-- Detailed operational manual (this file)
+│   └── README.md                   <-- High-level overview & visual workflow
 ├── SKILL.md                        <-- Universal agent entrypoint & decision rules
-├── books/
-│   ├── Flowchart/                  <-- Flowcharts & programming techniques
-│   ├── Overall/                    <-- Comprehensive reference books
-│   │   ├── Part-1.pdf              <-- Volume 1 complete PDF (329 pages)
-│   │   └── Part-2.pdf              <-- Volume 2 complete PDF (352 pages)
-│   └── Programming Logic/          <-- Logic, loops & pattern books
 ├── references/
 │   ├── table_of_contents.md        <-- Fast human & agent markdown topic index with page numbers
 │   ├── toc_book1.json              <-- Machine-readable outline tree for Book 1
@@ -30,6 +26,8 @@ skill/
 └── scripts/
     └── query_cpbook.py             <-- Resilient, UTF-8 safe CLI search & page extractor
 ```
+
+*(Note: Reference books are stored centrally under [`Input/books/`](../../../../Input/books/))*
 
 ---
 
@@ -41,14 +39,14 @@ flowchart TD
     
     subgraph KnowledgeSources["Tri-Source Knowledge Ingestion"]
         direction TB
-        Books["Curated Reference Books<br/>(skill/books/ & query_cpbook.py)"]
+        Books["Curated Reference Books<br/>(Input/books/ & query_cpbook.py)"]
         LLM["Pre-trained Model Knowledge & Reasoning"]
         Web["Targeted Web & Documentation Search"]
     end
     
     Agent --> KnowledgeSources
     
-    subgraph TemplateSynthesis["Mandatory Template Output Layer (Templates/)"]
+    subgraph TemplateSynthesis["Mandatory Template Output Layer (Input/Templates/)"]
         direction TB
         TSelect["Select Matching Topic Template<br/>(e.g., Repetitive Structure Template)"]
         TSteps["Execute Step-by-Step Problem Solving:<br/>1. Inventory Variables & Assign Roles<br/>2. Define State & State-Space Tree<br/>3. Synthesize Invariants & Loop Bounds<br/>4. Audit Boundary Cases & Failure Modes"]

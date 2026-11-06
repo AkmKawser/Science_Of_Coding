@@ -54,7 +54,7 @@ Whenever a problem is introduced, solved, or referenced—whether extracted from
 2. **Online Competitive Programming Judges & Platforms** (e.g., Codeforces, LeetCode, CSES, AtCoder, HackerRank, UVa)
 3. **Reference Textbooks & Publications** (e.g., Reference Volume 1, Reference Volume 2)
 
-**A complete, self-contained copy of the problem statement MUST be stored in this directory (`Output/ProblemSkill/`) before or alongside solving it.**
+**A complete, self-contained copy of the problem statement MUST be stored in this directory (`Output/ProblemSkill_output/`) before or alongside solving it.**
 
 ---
 
@@ -64,8 +64,8 @@ Every problem added to this database must follow this structure:
 
 ### 1. File Naming Convention
 Store problems organized by topic or directly named with descriptive titles:
-- `Output/ProblemSkill/<topic>/<problem-title>.md` or `Output/ProblemSkill/<id>_<problem-title>.md`
-- Example: `Output/ProblemSkill/repetitive-structures/sliding_window_maximum.md`
+- `Output/ProblemSkill_output/<topic>/<problem-title>.md` or `Output/ProblemSkill_output/<id>_<problem-title>.md`
+- Example: `Output/ProblemSkill_output/repetitive-structures/sliding_window_maximum.md`
 
 ### 2. Mandatory Problem Header & Metadata
 Each problem file must clearly state its origin and metadata:
@@ -78,7 +78,7 @@ Each problem file must clearly state its origin and metadata:
 - **Source URL / Reference**: [URL or Book Volume & Page Number]
 - **Topic**: [e.g., Repetitive Structures, Two Pointers, Dynamic Programming]
 - **Difficulty**: [Easy / Medium / Hard / Rating]
-- **Template Applied**: [Matching template from Templates/, e.g., Templates/Repetitive Structure Template.md]
+- **Template Applied**: [Matching template from Input/Templates/, e.g., Input/Templates/Repetitive Structure Template.md]
 
 ---
 

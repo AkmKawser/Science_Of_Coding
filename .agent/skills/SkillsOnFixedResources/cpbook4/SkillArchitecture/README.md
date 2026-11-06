@@ -14,7 +14,7 @@ flowchart TD
     
     subgraph KnowledgeSources["Tri-Source Knowledge Ingestion"]
         direction TB
-        Books["Curated Textbooks (skill/books/)<br/>- Part-1.pdf (Volume 1, 329 pages)<br/>- Part-2.pdf (Volume 2, 352 pages)"]
+        Books["Curated Textbooks (Input/books/)<br/>- Part-1.pdf (Volume 1, 329 pages)<br/>- Part-2.pdf (Volume 2, 352 pages)"]
         Router["Zero-Token Fast Router<br/>(table_of_contents.md)"]
         CLISearch["Precision Extraction CLI<br/>(python query_cpbook.py)"]
         Router --> CLISearch
@@ -26,7 +26,7 @@ flowchart TD
     
     Agent --> KnowledgeSources
     
-    subgraph TemplateSynthesis["Mandatory Template Output Layer (Templates/)"]
+    subgraph TemplateSynthesis["Mandatory Template Output Layer (Input/Templates/)"]
         direction TB
         TSelect["Select Matching Topic Template<br/>(e.g., Repetitive Structure Template)"]
         TSteps["Execute Phased Mental Model:<br/>1. Candidate Variable Inventory<br/>2. Role Classification (Free, Carried, Derived, Fixed)<br/>3. Minimal State Formulation<br/>4. State-Space Tree Construction<br/>5. Loop Invariants & Failure Audits"]

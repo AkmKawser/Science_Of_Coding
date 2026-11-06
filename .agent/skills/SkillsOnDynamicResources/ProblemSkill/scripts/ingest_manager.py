@@ -1,11 +1,11 @@
 """
 Ingestion & Category Manager Script for ProblemSkill
 Supports:
-  - Checking pending items in 'Output/ProblemSkill/Source of Problem/'
+  - Checking pending items in 'Output/ProblemSkill_output/Source of Problem/'
   - Inspecting boxes in 'write here.docx'
   - Inspecting files in 'put the file here/'
-  - Reading dynamic categories and nested subcategories from 'Output/ProblemSkill/problem catagories.docx'
-  - Formatting entries into 'Output/ProblemSkill/question bank.md' with chosen Category & Subcategory
+  - Reading dynamic categories and nested subcategories from 'Output/ProblemSkill_output/problem catagories.docx'
+  - Formatting entries into 'Output/ProblemSkill_output/question bank.md' with chosen Category & Subcategory
   - Safe, non-destructive atomic cleanup ONLY after verified writes
 """
 
@@ -14,8 +14,8 @@ import sys
 import argparse
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[4]
-PROBLEMS_DIR = REPO_ROOT / "Output" / "ProblemSkill"
+REPO_ROOT = Path(__file__).resolve().parents[5]
+PROBLEMS_DIR = REPO_ROOT / "Output" / "ProblemSkill_output"
 SOURCE_DIR = PROBLEMS_DIR / "Source of Problem"
 DOCX_PATH = SOURCE_DIR / "write here.docx"
 PUT_DIR = SOURCE_DIR / "put the file here"
@@ -25,7 +25,7 @@ FORMATTING_SPEC = PROBLEMS_DIR / "problem formatting.md"
 
 def load_categories():
     """
-    Dynamically loads categories and subcategories from 'Output/ProblemSkill/problem catagories.docx'.
+    Dynamically loads categories and subcategories from 'Output/ProblemSkill_output/problem catagories.docx'.
     Returns a dict: { PrimaryCategory: [ (Subcategory, Description), ... ] }
     """
     if not CATEGORIES_DOCX.exists():

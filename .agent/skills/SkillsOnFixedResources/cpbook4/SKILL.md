@@ -14,12 +14,12 @@ It is structured to be completely **agent-agnostic**—fully functional with any
 ## 1. Skill Capabilities & Core References
 
 The skill directly references the reference library stored in this repository:
-1. **Foundations & Core Algorithms (`skill/books/Overall/Part-1.pdf`)**: 329 pages.
+1. **Foundations & Core Algorithms (`Input/books/Overall/Part-1.pdf`)**: 329 pages.
    - Fundamentals, problem types, time/space complexity analysis.
    - Built-in & custom linear and non-linear data structures (UFDS, Fenwick Tree, Segment Tree).
    - Core paradigms: Complete Search, Divide and Conquer, Greedy, Dynamic Programming.
    - Graph algorithms: Traversals (DFS/BFS), MST, SSSP (Dijkstra, Bellman-Ford), APSP (Floyd-Warshall), Special Graphs (DAG, Tree, Bipartite, Eulerian).
-2. **Advanced Systems & Mathematics (`skill/books/Overall/Part-2.pdf`)**: 352 pages.
+2. **Advanced Systems & Mathematics (`Input/books/Overall/Part-2.pdf`)**: 352 pages.
    - Mathematics: Number theory (Primes, Sieve, GCD/LCM, Modular arithmetic, Extended Euclidean), Combinatorics, Probability, Game theory, Matrix power.
    - String Processing: Edit distance, LCS, KMP, Suffix Trie/Tree/Array, Rabin-Karp hashing, Manacher.
    - Computational Geometry: Points, lines, circles, polygons, Convex Hull (Graham scan, Monotone chain), 3D geometry.
@@ -95,8 +95,8 @@ If more than one data structure, algorithm, or paradigm can solve the user's pro
 
 ### 🚨 Mandatory Output Preservation Protocol (`Output/` Directory)
 Whenever a problem is provided, tackled, or analyzed—regardless of whether it originates from a local markdown file, an online judge (Codeforces, LeetCode, CSES, AtCoder, etc.), or a reference book:
-1. **Preserve Problem Statement (`Output/ProblemSkill/`)**: You MUST preserve a self-contained copy of the problem statement inside `Output/ProblemSkill/` with source name, URL or book reference, topic, and difficulty.
-2. **Synthesize Solution (`Output/cpbook4/`)**: Derive and store the step-by-step solution inside `Output/cpbook4/` strictly applying the designated blueprint from `Templates/`.
+1. **Preserve Problem Statement (`Output/ProblemSkill_output/`)**: You MUST preserve a self-contained copy of the problem statement inside `Output/ProblemSkill_output/` with source name, URL or book reference, topic, and difficulty.
+2. **Synthesize Solution (`Output/cpbook4_output/`)**: Derive and store the step-by-step solution inside `Output/cpbook4_output/` strictly applying the designated blueprint from `Input/Templates/`.
 3. **Verify Implementation**: Provide verified code implementations in Python 3 and Java 21 adhering to the template's invariants and failure audits.
 
 ---

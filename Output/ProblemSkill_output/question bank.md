@@ -75,7 +75,7 @@ This document serves as the unified, centralized question bank storing all pract
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #1)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -134,7 +134,7 @@ Sum = [Total sum]
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #2)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -193,7 +193,7 @@ Sum = [Total sum]
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #3)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -252,7 +252,7 @@ Sum = [Total sum]
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #4)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -311,7 +311,7 @@ Sum = [Total sum]
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #5)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -370,7 +370,7 @@ Sum = [Total sum]
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #6)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -429,7 +429,7 @@ Sum = [Total sum]
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #7)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -488,7 +488,7 @@ Sum = [Total sum]
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #8)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -547,7 +547,7 @@ Sum = [Total sum]
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #9)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -606,7 +606,7 @@ Sum = [Total sum]
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #10)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -665,7 +665,7 @@ Sum = [Total sum]
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #11)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -724,7 +724,7 @@ Sum = [Total sum]
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #12)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -783,7 +783,7 @@ Sum = [Total sum]
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #13)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -842,7 +842,7 @@ Sum = [Total sum]
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #14)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -901,7 +901,7 @@ Sum = [Total sum]
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #15)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -960,7 +960,7 @@ Sum = [Total sum]
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 1 (Series #16)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -1019,7 +1019,7 @@ Sum = [Total sum]
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #1)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -1085,7 +1085,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #2)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -1151,7 +1151,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #3)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -1217,7 +1217,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #4)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -1283,7 +1283,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #5)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -1349,7 +1349,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #6)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -1415,7 +1415,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #7)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -1481,7 +1481,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #8)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -1547,7 +1547,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #9)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -1613,7 +1613,7 @@ E   E   E   E   E
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #10)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -1679,7 +1679,7 @@ A   B   C   D   E
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #11)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -1745,7 +1745,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #12)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -1811,7 +1811,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #13)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -1877,7 +1877,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #14)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -1943,7 +1943,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #15)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -2009,7 +2009,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #16)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -2075,7 +2075,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #17)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -2141,7 +2141,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #18)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -2207,7 +2207,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #19)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -2273,7 +2273,7 @@ A
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #20)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -2339,7 +2339,7 @@ A
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #21)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -2405,7 +2405,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #22)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -2471,7 +2471,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #23)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -2537,7 +2537,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #24)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -2603,7 +2603,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #25)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -2669,7 +2669,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #26)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -2735,7 +2735,7 @@ E   E   E   E   E
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #27)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -2809,7 +2809,7 @@ E   E   E   E   E
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #28)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -2883,7 +2883,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #29)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -2957,7 +2957,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #30)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -3031,7 +3031,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #31)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -3097,7 +3097,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #32)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -3171,7 +3171,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #33)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -3253,7 +3253,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #34)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -3335,7 +3335,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #35)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -3401,7 +3401,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #36)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 
@@ -3469,7 +3469,7 @@ Analyze the relationship between row index $i$ ($1 \le i \le N$) and column inde
 - **Source**: Recursion Vs Iteration Complete Codes (Offline Companion)
 - **Source Link / Reference**: `Recursion Vs Iteration, Part 2 (Pyramid #37)`
 - **Difficulty**: Easy
-- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Templates/Repetitive%20Structure%20Template.md)
+- **Target Template**: [`Templates/Repetitive Structure Template.md`](../../Input/Templates/Repetitive%20Structure%20Template.md)
 
 ---
 

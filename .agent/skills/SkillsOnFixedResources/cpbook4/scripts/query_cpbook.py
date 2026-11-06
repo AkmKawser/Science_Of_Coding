@@ -17,23 +17,26 @@ def find_pdf_file(book_num):
     ]
     
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    repo_root = os.path.abspath(os.path.join(script_dir, "..", "..", "..", ".."))
+    repo_root = os.path.abspath(os.path.join(script_dir, "..", "..", "..", "..", ".."))
     possible_roots = [
-        os.path.join(repo_root, "books", "Overall"),                           # books/Overall/
-        os.path.join(repo_root, "books"),                                      # books/
+        os.path.join(repo_root, "Input", "books", "Overall"),                  # Input/books/Overall/
+        os.path.join(repo_root, "Input", "books"),                             # Input/books/
+        os.path.join(repo_root, "books", "Overall"),                           # legacy books/Overall/
+        os.path.join(repo_root, "books"),                                      # legacy books/
         os.path.abspath(os.path.join(script_dir, "..", "books", "Overall")),   # local fallback
         os.path.abspath(os.path.join(script_dir, "..", "books")),              
         os.path.abspath(os.path.join(script_dir, "..")),                       
         repo_root,                                                             # repo root
     ]
     
-    # Also recursively search within repo_root/books if exists
-    books_dir = os.path.join(repo_root, "books")
-    if os.path.exists(books_dir):
-        for root, _, files in os.walk(books_dir):
-            for fname in filename_candidates:
-                if fname in files:
-                    return os.path.join(root, fname)
+    # Also recursively search within repo_root/Input/books or repo_root/books if exists
+    for search_sub in ["Input/books", "books"]:
+        b_dir = os.path.join(repo_root, *search_sub.split("/"))
+        if os.path.exists(b_dir):
+            for root, _, files in os.walk(b_dir):
+                for fname in filename_candidates:
+                    if fname in files:
+                        return os.path.join(root, fname)
 
     for r in possible_roots:
         for fname in filename_candidates:

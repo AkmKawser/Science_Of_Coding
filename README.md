@@ -23,49 +23,51 @@ Modern LLM-powered coding assistants frequently suffer from two fatal failure mo
 ## 📖 Key Deliverables
 
 1. **The Science of Coding Manual**: Structured guides, mathematical proofs, pattern decompositions, and battle-tested code templates with side-by-side runnable implementations in **Python 3** and **Java 21**.
-2. **`Templates/` Directory (Agent Solution Blueprints)**: Explicit step-by-step methodologies and conceptual frameworks instructing the agent on *how* to deconstruct, design, and verify code systematically.
+2. **`Input/` Directory (Central Ingestion & Reference Assets)**:
+   - **`Input/books/`**: Curated textbooks and domain books (Flowchart, Overall algorithms, Programming Logic & Loops).
+   - **`Input/Templates/`**: Explicit step-by-step methodologies and conceptual frameworks instructing the agent on *how* to deconstruct, design, and verify code systematically.
 3. **`Output/` Directory (Skill-Specific Outputs Hub)**:
-   - Each skill maintains its own isolated output repository under `Output/`.
-   - **`Output/ProblemSkill/`**: Houses the problem ingestion staging area (`Source of Problem/`), dynamic taxonomy (`problem catagories.docx`), formatting specifications (`problem formatting.md`), and the central [`question bank.md`](Output/ProblemSkill/question%20bank.md).
-   - **`Output/cpbook4/`**: Houses reference-grounded algorithmic solutions, proofs, and template-synthesized code derived via [`Templates/`](Templates/).
+   - Each skill maintains its own isolated output repository under `Output/` (`<SkillName>_output/`).
+   - **`Output/ProblemSkill_output/`**: Houses the problem ingestion staging area (`Source of Problem/`), dynamic taxonomy (`problem catagories.docx`), formatting specifications (`problem formatting.md`), and the central [`question bank.md`](Output/ProblemSkill_output/question%20bank.md).
+   - **`Output/cpbook4_output/`**: Houses reference-grounded algorithmic solutions, proofs, and deep-dive query roadmaps in [`query/`](Output/cpbook4_output/query/).
 4. **`.agent/skills/` (Centralized Agent Skills Hub)**:
-   - **`cpbook4`**: Deep algorithmic knowledge base, data structures, and reference skill with surgical page extraction.
-   - **`ProblemSkill`**: Autonomous ingestion skill managing staging inspection, selective problem parsing, dynamic HITL category selection, and non-destructive archival into `question bank.md`.
-5. **`books/` (Reference Library)**: Curated textbooks and domain books (Flowchart, Overall algorithms, Programming Logic & Loops).
-6. **`query/` Knowledgebase**: A dedicated library of deep-dive query documents featuring visual decision trees, interview memory mnemonics, and real-world problem mappings.
-7. **`Upcoming Updates/` Roadmap**: A centralized milestone tracker with task status boxes for planned features and upcoming manuals.
-8. **`chat.md`**: A chronological record of all conversations, architectural decisions, and design sessions.
+   - **`SkillsOnFixedResources/cpbook4/`**: Deep algorithmic knowledge base, data structures, and reference skill with surgical page extraction.
+   - **`SkillsOnDynamicResources/ProblemSkill/`**: Autonomous ingestion skill managing staging inspection, selective problem parsing, dynamic HITL category selection, and non-destructive archival into `question bank.md`.
+   - **`type of skills.md`**: Architectural manual documenting the design paradigms of fixed vs. dynamic resource skills.
+5. **`Upcoming Updates/` Roadmap**: A centralized milestone tracker with task status boxes for planned features and upcoming manuals.
+6. **`chat.md`**: A chronological record of all conversations, architectural decisions, and design sessions.
 
 ---
 
 ## 🧩 Templates: Guiding Agent Problem-Solving
 
-The primary purpose of the [`Templates/`](Templates/) directory is to **instruct the agent on the exact mental model and step-by-step procedure required to solve a problem**. Rather than allowing the agent to jump straight to writing ungrounded loops or ad-hoc logic, each template provides:
+The primary purpose of the [`Input/Templates/`](Input/Templates/) directory is to **instruct the agent on the exact mental model and step-by-step procedure required to solve a problem**. Rather than allowing the agent to jump straight to writing ungrounded loops or ad-hoc logic, each template provides:
 - **Core Conceptual Foundations**: Formal definitions (e.g., What is a state? What are the variable roles? What are state transitions and invariants?).
 - **Step-by-Step Problem-Solving Recipes**: Strict, phased instructions (e.g., Phase 1: List Candidate Variables $\to$ Classify Roles $\to$ Define the Minimal State; Phase 2: Map Relationships & Draw the State Tree; Phase 3: Synthesize Loops; Phase 4: Mathematical Verification & Edge Case Auditing).
 - **Failure Mode & Edge Case Prevention**: Detailed catalogs of common implementation traps, off-by-one errors, and invariant violations to check against before code generation.
 
 ### Available Templates
 
-- [`Templates/Repetitive Structure Template.md`](Templates/Repetitive%20Structure%20Template.md): A comprehensive blueprint for designing and deriving loops, nested iterations, multi-variable states, and state-space trees from first principles.
+- [`Input/Templates/Repetitive Structure Template.md`](Input/Templates/Repetitive%20Structure%20Template.md): A comprehensive blueprint for designing and deriving loops, nested iterations, multi-variable states, and state-space trees from first principles.
 
 ---
 
-## 🗄️ `Output/`: Central Problems & Solutions Archive
+## 🗄️ `Output/`: Skill-Specific Outputs Archive
 
 The [`Output/`](Output/) directory houses dedicated output repositories for each skill:
 
-### 1. `Output/ProblemSkill/` (Preservation & Ingestion Protocol):
+### 1. `Output/ProblemSkill_output/` (Preservation & Ingestion Protocol):
 No matter where a problem originates—whether:
 1. **Local Markdown Files** (`.md`)
 2. **Online Competitive Programming Platforms** (e.g., Codeforces, LeetCode, CSES, AtCoder, HackerRank, UVa)
 3. **Reference Textbooks & Books** (e.g., Reference Volume 1, Reference Volume 2)
 
-**The agent must always preserve a clean copy of the problem statement in [`Output/ProblemSkill/`](Output/ProblemSkill/) and explicitly document its source name, URL or page reference, difficulty, and applicable template.**
+**The agent must always preserve a clean copy of the problem statement in [`Output/ProblemSkill_output/`](Output/ProblemSkill_output/) and explicitly document its source name, URL or page reference, difficulty, and applicable template.**
 
-### 2. `Output/cpbook4/` (Template Synthesis Protocol):
-- Every solution must directly reference and execute the step-by-step phases of the matching template in [`Templates/`](Templates/).
+### 2. `Output/cpbook4_output/` (Template Synthesis & Query Output Protocol):
+- Every solution must directly reference and execute the step-by-step phases of the matching template in [`Input/Templates/`](Input/Templates/).
 - Solutions provide minimal state definitions, variable role tables, state-space trees, invariant checks, and runnable reference implementations in **Python 3** and **Java 21**.
+- Houses query manuals and algorithmic roadmaps under [`Output/cpbook4_output/query/`](Output/cpbook4_output/query/).
 
 ---
 
@@ -82,23 +84,23 @@ The `cpbook4` skill encapsulates comprehensive reference libraries:
 
 Loading ~436,000 tokens into an AI context window causes severe degradation and token bloat. Furthermore, retrieving raw algorithmic theory without a structured decomposition methodology causes agents to generate hasty, unverified code. 
 
-**Science of Coding** solves this through a **4-Tier Precision Pipeline** described in detail in [`skill/ARCHITECTURE.md`](skill/ARCHITECTURE.md):
+**Science of Coding** solves this through a **4-Tier Precision Pipeline** described in detail in [`.agent/skills/SkillsOnFixedResources/cpbook4/SkillArchitecture/ARCHITECTURE.md`](.agent/skills/SkillsOnFixedResources/cpbook4/SkillArchitecture/ARCHITECTURE.md):
 
 ```
                         Task / User Coding Problem
-                                    │
-                                    ▼
-                          Any Agentic AI System
-        (Blends Trained LLM Knowledge + Web Search + Textbooks)
-                                    │
-         ┌──────────────────────────┴──────────────────────────┐
-         │                                                     │
-         ▼                                                     ▼
+                                     │
+                                     ▼
+                           Any Agentic AI System
+         (Blends Trained LLM Knowledge + Web Search + Textbooks)
+                                     │
+          ┌──────────────────────────┴──────────────────────────┐
+          │                                                     │
+          ▼                                                     ▼
 ┌─────────────────────────────────┐           ┌─────────────────────────────────┐
 │     KNOWLEDGE RETRIEVAL LAYER   │           │    TEMPLATE-DRIVEN SYNTHESIS    │
 │  1. Curated Reference Textbooks │           │         (MANDATORY OUTPUT)      │
 │     - Table of Contents Router  │           │                                 │
-│     - CLI Search & Page Extract │           │  Templates/*.md                 │
+│     - CLI Search & Page Extract │           │  Input/Templates/*.md           │
 │  2. Web Search & Live Retrieval │           │  - Step-by-Step Problem Solving │
 │  3. Model Pre-trained Reasoning │           │  - State Invariants & Roles     │
 └────────────────┬────────────────┘           │  - State-Space Tree Derivation  │
@@ -117,11 +119,11 @@ Loading ~436,000 tokens into an AI context window causes severe degradation and 
 
 #### Architecture Principles & Operational Flow:
 1. **Tri-Source Knowledge Absorption**: The agentic AI absorbs theoretical and domain knowledge from three complementary streams:
-   - **Curated Textbooks (`skill/books/`)**: Surgical page extractions (`query_cpbook.py extract`) for mathematically verified proofs, data structure layouts, and invariant formulas.
+   - **Curated Textbooks (`Input/books/`)**: Surgical page extractions (`query_cpbook.py extract`) for mathematically verified proofs, data structure layouts, and invariant formulas.
    - **Model Pre-trained Knowledge**: The LLM's intrinsic reasoning, language idioms, and algorithm patterns.
    - **Targeted Web Search**: Online judge lookups and real-time documentation checks for niche edge cases.
-2. **Mandatory Template-Driven Output Formulation**: While knowledge is gathered from multiple sources, **the agent is strictly mandated to format its output through the modular templates in `Templates/`**. The agent cannot produce arbitrary, unstructured code. It must systematically follow each phase established in the relevant template (e.g., defining candidate variables, assigning variable roles, defining the true state, building the state-space tree, deriving bounds, and verifying edge cases).
-3. **Continuous Template Expansion**: The `Templates/` directory is an evolving library where specialized templates will be added for every major problem type (Repetitive Structures, State-Space Search, Divide & Conquer, Dynamic Programming, and Graph Traversals).
+2. **Mandatory Template-Driven Output Formulation**: While knowledge is gathered from multiple sources, **the agent is strictly mandated to format its output through the modular templates in `Input/Templates/`**. The agent cannot produce arbitrary, unstructured code. It must systematically follow each phase established in the relevant template (e.g., defining candidate variables, assigning variable roles, defining the true state, building the state-space tree, deriving bounds, and verifying edge cases).
+3. **Continuous Template Expansion**: The `Input/Templates/` directory is an evolving library where specialized templates will be added for every major problem type (Repetitive Structures, State-Space Search, Divide & Conquer, Dynamic Programming, and Graph Traversals).
 
 ---
 
@@ -130,88 +132,62 @@ Loading ~436,000 tokens into an AI context window causes severe degradation and 
 ```
 Science_Of_Coding/
 ├── .agent/
-│   └── skills/                      # Central Agent Skills Hub (Native AI auto-discovery)
-│       ├── cpbook4/                 # Algorithmic engineering knowledge base & CLI
-│       │   ├── SKILL.md             # Specification & algorithm decision matrix
-│       │   ├── SkillArchitecture/   # Technical architecture & agent instructions
-│       │   ├── references/          # Table of contents & outline trees
-│       │   └── scripts/             # Surgical query CLI (query_cpbook.py)
-│       └── ProblemSkill/            # Problem intake, classification, & archival skill
-│           ├── SKILL.md             # Ingestion protocol & HITL trigger specification
-│           ├── SkillArchitecture/   # Lifecycle architecture & execution workflow
-│           └── scripts/             # Status discovery & safe cleanup (ingest_manager.py)
-├── books/                           # Curated coding & reference books library
-│   ├── Flowchart/                   # Flowchart & programming techniques
-│   ├── Overall/                     # Comprehensive algorithm references (Part-1.pdf, Part-2.pdf)
-│   └── Programming Logic/           # Programming logic & loop patterns
-├── Templates/                       # Methodological blueprints guiding agent problem-solving
-│   └── Repetitive Structure Template.md # Step-by-step guide for states, loops, and trees
-├── Output/                          # Central archive for problems and template-guided solutions
-│   ├── README.md                    # Directory overview and dual-repository protocol
-│   ├── problems/                    # Problem database with full source attribution
-│   │   ├── README.md                # Problem metadata schemas and indexing table
-│   │   ├── problem catagories.docx  # Dynamic 2-tier Category & Subcategory registry
-│   │   ├── problem formatting.md    # Markdown schema required for all ingested problems
-│   │   ├── question bank.md         # Master persistent repository of ingested problems
-│   │   └── Source of Problem/       # Staging area for incoming problems
-│   │       ├── write here.docx      # 100 colorful structured boxes for links & text
-│   │       └── put the file here/   # Drop PDFs and offline problem files here
-│   └── solution/                    # Phased, template-derived algorithmic implementations
-│       └── README.md                # Solution directory marker
-├── Upcoming Updates/                # Roadmap, milestone checklist, and feature tracking
-│   └── Upcoming Updates.md          # Serialized progress tracking template
-├── query/                           # Deep-dive algorithmic manuals & query outputs
-│   ├── 001_graph_and_tree_learning_roadmap.md
-│   └── 002_data_structures_master_manual.md
-├── chat.md                          # Persistent project conversation & decision log
-└── README.md                        # Repository overview and usage guide
-```
-├── chat.md                         # Persistent project conversation & decision log
-└── README.md                       # Repository overview and usage guide
+│   └── skills/                             # Central Agent Skills Hub
+│       ├── type of skills.md               # Guide explaining Fixed vs Dynamic resource skills
+│       ├── SkillsOnFixedResources/         # Skills bound to static references & books
+│       │   └── cpbook4/                    # Algorithmic engineering knowledge base & CLI
+│       │       ├── SKILL.md                # Specification & algorithm decision matrix
+│       │       ├── SkillArchitecture/      # Technical architecture & agent instructions
+│       │       ├── references/             # Table of contents & outline trees
+│       │       └── scripts/                # Surgical query CLI (query_cpbook.py)
+│       └── SkillsOnDynamicResources/       # Skills bound to dynamic intake & staging
+│           └── ProblemSkill/               # Problem intake, classification, & archival skill
+│               ├── SKILL.md                # Ingestion protocol & HITL trigger specification
+│               ├── SkillArchitecture/      # Lifecycle architecture & execution workflow
+│               └── scripts/                # Status discovery & safe cleanup (ingest_manager.py)
+├── Input/                                  # Central Input & Reference Space
+│   ├── books/                              # Curated coding & reference books library
+│   │   ├── Flowchart/                      # Flowchart & programming techniques
+│   │   ├── Overall/                        # Comprehensive algorithm references (Part-1.pdf, Part-2.pdf)
+│   │   └── Programming Logic/              # Programming logic & loop patterns
+│   └── Templates/                          # Methodological blueprints guiding agent problem-solving
+│       └── Repetitive Structure Template.md # Step-by-step guide for states, loops, and trees
+├── Output/                                 # Central archive for skill-specific outputs
+│   ├── README.md                           # Directory overview and output protocols
+│   ├── ProblemSkill_output/                # Dedicated output workspace for ProblemSkill
+│   │   ├── README.md                       # Problem metadata schemas and indexing table
+│   │   ├── problem catagories.docx         # Dynamic 2-tier Category & Subcategory registry
+│   │   ├── problem formatting.md           # Markdown schema required for all ingested problems
+│   │   ├── question bank.md                # Master persistent repository of ingested problems
+│   │   └── Source of Problem/              # Staging area for incoming problems
+│   │       ├── write here.docx             # 100 colorful structured boxes for links & text
+│   │       └── put the file here/          # Drop PDFs and offline problem files here
+│   └── cpbook4_output/                     # Dedicated output workspace for cpbook4
+│       ├── README.md                       # Output overview marker
+│       └── query/                          # Deep-dive algorithmic manuals & query outputs
+│           ├── 001_graph_and_tree_learning_roadmap.md
+│           └── 002_data_structures_master_manual.md
+├── Upcoming Updates/                       # Roadmap, milestone checklist, and feature tracking
+│   └── Upcoming Updates.md                 # Serialized progress tracking template
+├── chat.md                                 # Persistent project conversation & decision log
+└── README.md                               # Repository overview and usage guide
 ```
 
 ---
 
-## 🤖 How to Use the `cpbook4` Skill with Agentic AIs
+## 🤖 How to Use the Skills with Agentic AIs
 
-The `cpbook4` skill enforces the **collaborative design protocol**: when multiple approaches exist, the agent must consult you before implementing.
-
-### 1. Google Antigravity
-Antigravity automatically discovers skills inside `.agent/skills/`:
-- **Auto-Discovery**: Pre-configured at [`.agent/skills/cpbook4/SKILL.md`](.agent/skills/cpbook4/SKILL.md).
+### 1. `cpbook4` (`SkillsOnFixedResources`)
+- **Auto-Discovery**: Pre-configured at [`.agent/skills/SkillsOnFixedResources/cpbook4/SKILL.md`](.agent/skills/SkillsOnFixedResources/cpbook4/SKILL.md).
 - **Interactive Prompts**:
   - *"Using @skill:cpbook4, I need to design a system for dynamic range minimum queries with updates. Present the available options and ask me which one fits best before writing code."*
-  - *"Using cpbook4 and `Templates/Repetitive Structure Template.md`, decompose this multi-variable nested loop problem step by step."*
-- **Agent Behavior**: Antigravity reads the decision trees in `SKILL.md`, references the appropriate methodology in `Templates/`, executes `query_cpbook.py` behind the scenes, presents the available algorithmic options, and waits for your confirmation.
+  - *"Using cpbook4 and `Input/Templates/Repetitive Structure Template.md`, decompose this multi-variable nested loop problem step by step."*
 
-### 2. Claude Code
-Claude Code discovers skills via `.claude/skills/` or prompt inclusion:
-- **Workspace Setup**:
-  ```bash
-  # Windows PowerShell
-  New-Item -ItemType Directory -Force -Path ".claude\skills\cpbook4"
-  Copy-Item -Path "skill\SKILL.md" -Destination ".claude\skills\cpbook4\SKILL.md"
-  ```
-- **Project Rule in `CLAUDE.md`**:
-  ```markdown
-  When handling algorithmic or data structure tasks:
-  1. Always consult the cpbook4 skill in `skill/SKILL.md` and relevant blueprints in `Templates/`.
-  2. If more than one viable design or data structure exists, present the trade-offs and ask the user for their preferred design before coding.
-  3. Query books using: python skill/scripts/query_cpbook.py search|extract
-  ```
-- **Prompt Invocation**:
-  > *"Consult `skill/SKILL.md` and outline the possible approaches for Maximum Bipartite Matching. Ask me how I want to structure the code before implementation."*
-
-### 3. OpenAI Codex / Cursor / Custom Agent Frameworks
-For Cursor, Copilot Workspace, OpenAI Codex, or LangChain agents:
-- **System Instructions (`.cursorrules` / `AGENTS.md`)**:
-  ```markdown
-  ### Algorithmic Design Protocol:
-  1. Consult `skill/SKILL.md` and `skill/references/table_of_contents.md`.
-  2. For structured problem decomposition, follow the guidelines in `Templates/`.
-  3. Query exact reference pages using: python skill/scripts/query_cpbook.py search|extract
-  4. MANDATORY: If more than one algorithmic solution exists (e.g., Kruskal vs. Prim, Top-Down vs. Bottom-Up DP, Fenwick vs. Segment Tree), present the options with time/space trade-offs and ASK the user which design they prefer before generating code.
-  ```
+### 2. `ProblemSkill` (`SkillsOnDynamicResources`)
+- **Auto-Discovery**: Pre-configured at [`.agent/skills/SkillsOnDynamicResources/ProblemSkill/SKILL.md`](.agent/skills/SkillsOnDynamicResources/ProblemSkill/SKILL.md).
+- **Interactive Prompts**:
+  - *"Check if there are any pending problems to process."*
+  - *"Process Box 1 from write here.docx using @skill:ProblemSkill."*
 
 ---
 
@@ -222,18 +198,18 @@ You or any AI agent can query and extract text from the books on demand using Py
 ### 1. Keyword / Phrase Search
 Scan either book for specific algorithms, problem references, or keywords:
 ```bash
-python skill/scripts/query_cpbook.py search --book 1 --query "Fenwick" --limit 5
-python skill/scripts/query_cpbook.py search --book 2 --query "Heavy-Light Decomposition" --limit 3
+python .agent/skills/SkillsOnFixedResources/cpbook4/scripts/query_cpbook.py search --book 1 --query "Fenwick" --limit 5
+python .agent/skills/SkillsOnFixedResources/cpbook4/scripts/query_cpbook.py search --book 2 --query "Heavy-Light Decomposition" --limit 3
 ```
 
 ### 2. Surgical Page Extraction
 Extract verbatim pages (text, proofs, code) into console or to a file:
 ```bash
 # Print pages 143 to 148 of Book 1 (Segment Tree)
-python skill/scripts/query_cpbook.py extract --book 1 --start 143 --end 148
+python .agent/skills/SkillsOnFixedResources/cpbook4/scripts/query_cpbook.py extract --book 1 --start 143 --end 148
 
 # Save Dinic's Algorithm pages from Book 2 to a file
-python skill/scripts/query_cpbook.py extract --book 2 --start 156 --end 160 --output dinic.txt
+python .agent/skills/SkillsOnFixedResources/cpbook4/scripts/query_cpbook.py extract --book 2 --start 156 --end 160 --output dinic.txt
 ```
 
 ---

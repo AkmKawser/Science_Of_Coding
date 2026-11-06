@@ -6,13 +6,13 @@ This document defines the technical architecture, execution lifecycle, and human
 
 ## 🏛️ System Architecture
 
-`ProblemSkill` automates the intake, classification, and safe archival of algorithmic problems into [`Output/ProblemSkill/question bank.md`](../../../Output/ProblemSkill/question%20bank.md) without risk of data loss.
+`ProblemSkill` automates the intake, classification, and safe archival of algorithmic problems into [`Output/ProblemSkill_output/question bank.md`](../../../../Output/ProblemSkill_output/question%20bank.md) without risk of data loss.
 
 ```mermaid
 flowchart TD
     User([User Invocation: @skill:ProblemSkill]) --> Agent[Agentic AI System]
     
-    subgraph StagingArea["Staging Area (Output/ProblemSkill/Source of Problem/)"]
+    subgraph StagingArea["Staging Area (Output/ProblemSkill_output/Source of Problem/)"]
         Docx["write here.docx / write here_new.docx<br/>(100 Clean Themed Boxes for Links & Text)"]
         Files["put the file here/<br/>(PDFs, Book Chapters, Docs)"]
     end
@@ -37,7 +37,7 @@ flowchart TD
     HITL -->|User Selection Confirmed| Formatter["Transform into Markdown Schema<br/>(problem formatting.md)"]
     
     subgraph PersistentDatabase["Permanent Archive"]
-        QBank["Output/ProblemSkill/question bank.md<br/>1. Appends Problem Specification<br/>2. Updates Master Index Table"]
+        QBank["Output/ProblemSkill_output/question bank.md<br/>1. Appends Problem Specification<br/>2. Updates Master Index Table"]
     end
     
     Formatter --> PersistentDatabase
@@ -59,7 +59,7 @@ flowchart TD
 
 ### 2. Status Discovery via CLI
 ```bash
-python Output/skill/scripts/ingest_manager.py --status
+python .agent/skills/SkillsOnDynamicResources/ProblemSkill/scripts/ingest_manager.py --status
 ```
 Outputs:
 - Number of filled boxes in `write here.docx` with text previews.
@@ -68,9 +68,9 @@ Outputs:
 
 ### 3. Dynamic Category Extraction via CLI
 ```bash
-python Output/skill/scripts/ingest_manager.py --categories
+python .agent/skills/SkillsOnDynamicResources/ProblemSkill/scripts/ingest_manager.py --categories
 ```
-Extracts the real-time 2-level hierarchy (Primary Category $\to$ Subcategories) from [`problem catagories.docx`](../../problems/problem%20catagories.docx) to present in the user prompt.
+Extracts the real-time 2-level hierarchy (Primary Category $\to$ Subcategories) from [`problem catagories.docx`](../../../../Output/ProblemSkill_output/problem%20catagories.docx) to present in the user prompt.
 
 ### 4. Interactive HITL Selection Protocol
 - **NEVER guess the topic or subcategory**.
@@ -78,10 +78,10 @@ Extracts the real-time 2-level hierarchy (Primary Category $\to$ Subcategories) 
   > *"Which Primary Category and Subcategory does this problem belong to?"*
 - Await user confirmation before appending to `question bank.md`.
 
-### 5. Formatting Standards ([`problem formatting.md`](../../problems/problem%20formatting.md))
+### 5. Formatting Standards ([`problem formatting.md`](../../../../Output/ProblemSkill_output/problem%20formatting.md))
 Format each problem entry with:
 - Unique Problem ID & Title
-- Metadata: Primary Category, Subcategory, Source, Source Link/Ref, Difficulty, Matching Template from `Templates/`
+- Metadata: Primary Category, Subcategory, Source, Source Link/Ref, Difficulty, Matching Template from `Input/Templates/`
 - Problem Statement
 - Input / Output Specifications
 - Sample Tests with Explanations

@@ -1,6 +1,6 @@
 # Problem Formatting Specification (`problem formatting.md`)
 
-This document defines the strict, required schema for converting raw problem sources (links, copied text, PDF book excerpts) into structured entries inside [`Output/ProblemSkill/question bank.md`](question%20bank.md).
+This document defines the strict, required schema for converting raw problem sources (links, copied text, PDF book excerpts) into structured entries inside [`Output/ProblemSkill_output/question bank.md`](question%20bank.md).
 
 ---
 
@@ -22,7 +22,7 @@ Every problem ingested into `question bank.md` must adhere to the following temp
 - **Source**: [Source Name, e.g., Codeforces / LeetCode / CSES / Book Volume & Page]
 - **Source Link / Reference**: [URL link, PDF filename, or Book Chapter/Page]
 - **Difficulty**: [Easy / Medium / Hard / Rating]
-- **Target Template**: [Matching template from Templates/, e.g., Templates/Repetitive Structure Template.md]
+- **Target Template**: [Matching template from Input/Templates/, e.g., Input/Templates/Repetitive Structure Template.md]
 
 ---
 
@@ -82,6 +82,6 @@ When processing input from `write here.docx` or `put the file here/`:
 2. **Formatting & Linking**:
    - Convert the extracted content into the markdown format defined above, inserting `<a id="p-xxx"></a>` directly above the `# Problem P-XXX:` header.
    - Add a row to the **Master Problem Index** table with both ID and Title formatted as clean single-line clickable links pointing to the anchor: `| [P-XXX](#p-xxx) | [Problem Title](#p-xxx) | [Primary Category] | [Subcategory] | [Source / Reference] |` (omitting standalone difficulty and merging source name and link into one column).
-   - Append the entry into [`Output/ProblemSkill/question bank.md`](question%20bank.md).
+   - Append the entry into [`Output/ProblemSkill_output/question bank.md`](question%20bank.md).
 3. **Purge / Cleanup**:
    - Once successfully extracted and formatted into `question bank.md`, clear the content from `write here.docx` (reset to empty document) or delete/move the source file from `put the file here/`.
