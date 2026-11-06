@@ -181,6 +181,34 @@ for (int i = 1; i <= n; ++i) {              // initialization: i = 1 | bound: i 
 }
 ```
 
+### The 5 Core Concepts of an Iterative Structure
+
+Five foundational concepts define the execution of any loop:
+
+| Term | Question it Answers | Example (Sum of 1 to $n$) |
+| :--- | :--- | :--- |
+| **State** | What do I need to know to describe where the computation is? | `(i, s)` where `i` is Free stepper and `s` is Carried gatherer |
+| **Invariant** | What is always true about the state before and after every pass? | `s = 1 + 2 + ... + i` |
+| **Base Case (Initialization)** | Where does the computation start? | `i = 0, s = 0` (or `i = 1, s = 0`), which makes the invariant true initially |
+| **Transition** | How does one state become the next one? | `(i, s)` becomes `(i + 1, s + i + 1)` |
+| **Progress** | What guarantees the computation ends? | `n - i` shrinks by 1 on every pass and cannot go below 0 |
+
+> [!IMPORTANT]
+> **The Invariant vs. The Transition**:
+> The **invariant** and the **transition** are not the same thing. The invariant states what *must stay true*, and the transition is derived so that it *keeps that true* one step later. A transition that breaks the invariant is a bug!
+
+#### At a Glance: The Iterative Transition Cycle
+
+![Transition Cycle in Iterative Structures](images/iterative_transition_cycle.png)
+
+A loop executes this cycle with state reassignment:
+1. **Base Case / Initialization**: Sets starting values of the state so the invariant is true initially.
+2. **Exit Check**: Evaluates if the termination bound has been reached. If reached, the loop exits.
+3. **Transition & Progress**: Reassigns state variables to advance to the next step, preserving the invariant while guaranteeing strict progress toward termination.
+4. **Final Result**: The loop invariant combined with the exit condition guarantees the correct answer.
+
+---
+
 ### Initialization
 
 The starting values of the state, set before the first iteration. For a free variable it is the first value of its range (`i = 1`). For a carried variable it is a neutral start: 0 for a sum, 1 for a product, the first element for a maximum, `false` for a flag. Always check the smallest case too, such as an empty input.
@@ -192,6 +220,13 @@ The start and end of each loop. In the tree they are the first and last child un
 - **A child's bound can use its parent.** `j <= n - i + 1` uses `i`.
 - **Leave room for descendants.** In the six-loop code `a` stops at `k - 5`, because five more numbers must still follow. Without that room, you get branches that cannot be completed.
 
+### Invariant
+
+The fundamental mathematical property of the state that remains true throughout the lifecycle of the loop:
+- **Initialization Invariant**: True immediately after initialization, before the first pass.
+- **Maintenance Invariant**: If true before step $k$, the transition ensures it remains true after step $k$.
+- **Termination Invariant**: When the loop terminates, the invariant combined with the exit condition proves that the final carried variable holds the correct problem answer.
+
 ### Transition
 
 How the state changes from one iteration to the next.
@@ -202,9 +237,9 @@ How the state changes from one iteration to the next.
 
 In the tree, a transition is the move from one node to the next node in the traversal.
 
-### Termination
+### Progress and Termination
 
-The loop stops when its condition becomes false. To be safe, confirm that every iteration makes **progress**: the loop variable moves closer to the bound on every pass. If you forget `++j`, `j <= n - i + 1` stays true forever and the program never ends. Loops with conditions (`while`) need the extra check that something inside the loop changes the condition. Also check that a flag or `break` can end the loop early only when that is correct.
+The loop stops when its condition becomes false. To be safe, confirm that every iteration makes **progress**: the loop variable moves closer to the bound on every pass. Specifically, identify a decreasing progress metric (such as $n - i$ or $hi - lo$) that shrinks monotonically on every pass and is bounded from below. If you forget `++j`, `j <= n - i + 1` stays true forever and the program never ends. Loops with conditions (`while`) need the extra check that something inside the loop changes the condition. Also check that a flag or `break` can end the loop early only when that is correct.
 
 ### Result
 
@@ -547,13 +582,46 @@ The last `j` drops by 1 each time `i` grows by 1, starting at 5 when `i = 1`. Th
 
 **Check the bound at both ends.** After you write a bound, plug in the smallest and the largest parent value and compare the number of children with the tree. This catches nearly all off-by-one mistakes, such as writing `<` where `<=` is needed.
 
-### Step 9 in detail: Transition
+### Step 9 in detail: Transition and Invariant Preservation
 
-A transition moves the state from one iteration to the next. There are three kinds:
+A transition moves the state from one iteration to the next.
 
-- **Free variable:** moves to its next value. The loop header does it (`++j`, `left++`).
+#### How to Derive a Transition from the Invariant
+The update line is **never guessed**—it is derived directly from the invariant:
+1. **Choose the state**: The minimal set of Free and Carried variables: $\text{State} = (\text{Free}, \text{Carried})$.
+2. **Write the invariant in one plain sentence**: Express what mathematical truth holds about the state before and after each pass.
+3. **Establish the Base Case**: Set initialization values so that the invariant holds true at step 0 (before entering the loop).
+4. **Solve the Update (Transition)**: Ask: *"If the invariant holds for step $i$, what must the state become at step $i+1$ so that the invariant remains true?"*
+5. **Guarantee Progress**: Identify a metric that strictly decreases toward 0 (or shrinks toward the bound) on every iteration.
+6. **Formulate the Exit**: The loop exits when the bound condition is met; the invariant evaluated at exit yields the exact problem result.
+
+#### The Update Rule: Free, Carried, and Derived
+- **Free variable:** advances across its discrete range. The loop header performs it (`++j`, `left++`, `i++`).
 - **Carried variable:** is updated from the current item (`total += x`, `best = max(best, x)`).
-- **Derived variable:** is recomputed from its parents each time, so there is no update to write.
+- **Derived variable:** is recomputed freshly from current variables without needing memory.
+
+#### Accumulating with the Right Neutral Identity
+Carried variables that aggregate sequences must be initialized to the mathematical identity of the operation:
+
+| Question / Operation | Neutral Start (Base Case) | Update Rule | Reason |
+| :--- | :--- | :--- | :--- |
+| **Sum / Total** | `0` | `s = s + x` | $0 + x = x$ (Additive identity) |
+| **Product** | `1` | `p = p * x` | $1 \times x = x$ (Multiplicative identity) |
+| **Count** | `0` | `c = c + 1` | Zero elements counted before starting |
+| **Maximum** | First element (or $-\infty$) | `m = max(m, x)` | Any real element dominates $-\infty$ |
+| **Minimum** | First element (or $+\infty$) | `m = min(m, x)` | Any real element is smaller than $+\infty$ |
+| **Any Match (Existential $\exists$)** | `false` | `found = found || test(x)` | Neutral for OR; becomes true on first match |
+| **All Match (Universal $\forall$)** | `true` | `ok = ok && test(x)` | Neutral for AND; becomes false on first mismatch |
+
+#### Canonical Iterative Patterns & Their Transitions
+
+| Problem Archetype | State | Invariant | Transition (State Update) | Progress Metric |
+| :--- | :--- | :--- | :--- | :--- |
+| **Fibonacci** | `(a, b)` | `a = F(k-1)`, `b = F(k)` | `(a, b) = (b, a + b)` | $n - k$ decreases by 1 |
+| **Euclidean GCD** | `(a, b)` | $\gcd(a, b) = \gcd(\text{orig}_a, \text{orig}_b)$ | `(a, b) = (b, a % b)`, stop when `b == 0` | $b$ strictly decreases |
+| **Binary Search** | `(lo, hi)` | If target exists, index $\in [\text{lo}, \text{hi}]$ | `lo = mid + 1` or `hi = mid - 1`, stop when `lo > hi` | $\text{hi} - \text{lo} + 1$ at least halves |
+| **Array Reversal** | `(l, r)` | Elements outside $[l, r]$ are swapped into place | `swap(arr[l], arr[r]); l++; r--;`, stop when `l >= r` | $r - l$ decreases by 2 |
+| **Digit Sum** | `(n, s)` | $s + \text{digits}(n) = \text{digits}(\text{orig}_n)$ | `s += n % 10; n /= 10;`, stop when `n == 0` | $n$ drops by factor of 10 |
 
 **Order matters.** Inside one iteration, use a carried variable's old value before you overwrite it, and move a follower before its leader.
 
@@ -566,7 +634,7 @@ for (int i = 1; i < n; ++i) {
 }
 ```
 
-If the two lines were swapped, `last` would equal `arr[i]` every time and every element would look like a duplicate.
+If the two lines were swapped, `last` would equal `arr[i]` every time and every element would look like a duplicate. Simultaneous assignments (like Python's `a, b = b, a + b`) must be handled with a temporary variable in languages like C/Java.
 
 ### Step 10 in detail: Termination
 
@@ -764,11 +832,29 @@ The code picks 6 sorted numbers from `k` numbers and prints each choice, using t
 ### Common mistakes in Part 4
 
 - **Checking only the sample from the problem.** A sample passes easily. The bugs are at the edges, so run `n = 0`, `n = 1` and the smallest and largest allowed inputs.
+- **Treating the invariant and the transition as the same thing.** Write the invariant first, then solve for the transition update that preserves it.
+- **Making the invariant false at the start.** Check initial values against the invariant before the loop starts.
+- **Having no progress metric.** If the state does not shrink toward the exit bound, the loop runs infinitely.
 - **Comparing the code with the output instead of the tree.** If the output itself was misread, the code will agree with a wrong target.
 - **Estimating complexity from the nesting depth alone.** Six nested loops do not always mean `k⁶` work: ordered loops give C(k, 6), and the triangle gives `n(n + 1) / 2`, not `n × n`.
 - **Ignoring the order of the output.** The leaves of the tree have a left-to-right order, and the output should follow it.
 - **Skipping the pruned branches.** A bound that removes too much loses valid states, and a bound that removes too little leaves invalid ones. Check both.
 - **Forgetting the empty case.** The loop must be safe when there is nothing to iterate over.
+
+---
+
+### 📋 Pre-Coding Verification Checklist
+
+Before you write code, verify every item on this checklist:
+- [ ] **Minimal State Tuple**: Formulated as $\text{State} = (\text{Free}, \text{Carried})$; every variable is strictly needed.
+- [ ] **Loop Invariant**: Stated in one clear sentence describing what mathematical property holds true across every iteration.
+- [ ] **Base Case / Starting Values**: Verified that initial values make the invariant strictly true at step 0.
+- [ ] **Transition Rule**: Derived to ensure the invariant remains true after moving from step $i$ to $i+1$.
+- [ ] **Progress Guarantee**: Identified a quantity that strictly shrinks on every pass and cannot go below its limit.
+- [ ] **Exit Condition**: Formulated so that Invariant $+$ Exit Condition directly yields the problem answer.
+- [ ] **Boundary Tests**: Traced by hand on the smallest inputs ($N = 0$, $N = 1$, empty arrays).
+
+---
 
 ## Quick check
 
