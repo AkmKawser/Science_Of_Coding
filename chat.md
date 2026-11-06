@@ -720,6 +720,23 @@ This document records all instructions, architectural decisions, and agent conve
 4. **Committed and Pushed to GitHub**:
    - Pushed commit `98af9e0` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 49: Enforcing Strict Single-Line Rendering on ID Column
+
+### User Request
+> "why the id column output is showing in two lines? it must be in one line."
+
+### Root Cause Analysis & Solution
+1. **Root Cause**:
+   - Web and IDE markdown renderers treat standard hyphens (`-`) as word-break opportunity points. When the column width is compact, the browser wraps `P-` onto line 1 and `001` onto line 2.
+2. **Implementation**:
+   - Wrapped all ID link elements with the non-breaking `<nobr>[P-XXX](#p-xxx)</nobr>` tag.
+   - This strictly forbids browsers, GitHub web preview, and markdown readers from line-breaking the ID across two lines under any viewport or zoom level.
+3. **Committed and Pushed to GitHub**:
+   - Pushed commit `6d1881a` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
+
 
 
 
