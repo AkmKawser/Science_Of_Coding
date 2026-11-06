@@ -27,6 +27,7 @@ Modern LLM-powered coding assistants frequently suffer from two fatal failure mo
 3. **`Output/` Directory (Central Archive for Problems & Solutions)**:
    - **`Output/problems/`**: Preserves complete copies of all tackled problem statements with full source attribution.
    - **`Output/solution/`**: Stores template-synthesized, step-by-step verified algorithmic implementations.
+   - **`Output/skill/` (`ProblemSkill`)**: Autonomous ingestion skill managing staging inspection, selective problem parsing, non-destructive formatting, and safe atomic cleanup into `question bank.md`.
 4. **`cpbook4` Agentic Skill**: A portable, self-contained AI agent skill that enables any Agentic AI (Antigravity, Claude Code, Cursor, Copilot, ChatGPT, or custom LLM harnesses) to retrieve exact formulas, theorems, and implementations on demand without context exhaustion or hallucinations.
 5. **`query/` Knowledgebase**: A dedicated library of deep-dive query documents featuring visual decision trees, interview memory mnemonics, and real-world problem mappings.
 6. **`Upcoming Updates/` Roadmap**: A centralized milestone tracker with task status boxes for planned features and upcoming manuals.
@@ -127,16 +128,29 @@ Loading ~436,000 tokens into an AI context window causes severe degradation and 
 Science_Of_Coding/
 ├── .agent/
 │   └── skills/
-│       └── cpbook4/
-│           └── SKILL.md            # Entrypoint for Antigravity native skill discovery
+│       ├── cpbook4/
+│       │   └── SKILL.md            # Entrypoint for Antigravity native skill discovery
+│       └── ProblemSkill/
+│           ├── SKILL.md            # Problem staging, selective extraction, & cleanup skill
+│           └── scripts/
+│               └── ingest_manager.py # CLI manager for problem status and atomic cleanups
 ├── Templates/                      # Methodological blueprints guiding agent problem-solving
 │   └── Repetitive Structure Template.md # Step-by-step guide for states, loops, and trees
 ├── Output/                         # Central archive for problems and template-guided solutions
 │   ├── README.md                   # Directory overview and dual-repository protocol
+│   ├── skill/                      # Output problem management skill package
+│   │   ├── SKILL.md                # Portable specification for ProblemSkill
+│   │   └── scripts/
+│   │       └── ingest_manager.py   # Ingestion status and safe cleanup CLI utility
 │   ├── problems/                   # Problem database with full source attribution
-│   │   └── README.md               # Problem metadata schemas and indexing table
+│   │   ├── README.md               # Problem metadata schemas and indexing table
+│   │   ├── problem formatting.md   # Markdown schema required for all ingested problems
+│   │   ├── question bank.md        # Master persistent repository of ingested problems
+│   │   └── Source of Problem/      # Staging area for incoming problems
+│   │       ├── write here.docx     # Drop links and copied text here
+│   │       └── put the file here/  # Drop PDFs and offline problem files here
 │   └── solution/                   # Phased, template-derived algorithmic implementations
-│       └── README.md               # Solution derivation and multi-language standards
+│       └── README.md               # Solution directory marker
 ├── Upcoming Updates/               # Roadmap, milestone checklist, and feature tracking
 │   └── Upcoming Updates.md         # Serialized progress tracking template
 ├── query/                          # Deep-dive algorithmic manuals & query outputs
