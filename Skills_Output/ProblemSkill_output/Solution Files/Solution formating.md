@@ -59,12 +59,21 @@ Every derivation file must rigorously execute the phased steps defined in the ma
 ---
 
 ## 🧠 Phase 1: State Definition & Role Classification
-1. **Candidate Variables Inventory**: All variables considered.
-2. **Variable Roles Table**:
-   | Variable | Role | Class (Free / Carried / Derived / Fixed) | Justification |
+1. **Variable Discovery & Extraction Analysis**:
+   - **Textual Triggers & Raw Entities**: Detailed narrative trace of how words, mathematical formulas, and constraints in the problem statement led to candidate variables.
+   - **Diagnostic Decision Tree Verification**: Step-by-step application of the 4 diagnostic tests for each variable:
+     - **Fixed Test**: Does it change during execution?
+     - **Derived Test**: Is it purely a function of other existing variables at the current step without memory of previous steps?
+     - **Free Test**: Does it advance independently along an arithmetic range or coordinate axis to dictate a loop iteration space?
+     - **Carried Test**: Does its current value depend strictly on its value from the prior iteration (accumulated/maintained across time)?
+2. **Candidate Variables Inventory**: All variables considered.
+3. **Variable Roles Table**:
+   | Variable | Role | Class (Free / Carried / Derived / Fixed) | Justification & Lifecycle |
    | :--- | :--- | :--- | :--- |
-3. **True Minimal State**:
+4. **True Minimal State**:
    $$\text{State} = (\text{Free Variables}, \text{Carried Variables})$$
+   - Explicitly justify why Free and Carried variables form the minimal state (the "Pause-and-Resume Note") while Fixed and Derived variables are excluded.
+   - State the exact loop count based on the number of Free variables.
 
 ---
 

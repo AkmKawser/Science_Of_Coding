@@ -13,13 +13,26 @@
 
 ## 🧠 Phase 1: State Definition & Variable Role Classification
 
-### 1. Candidate Variables Inventory
+### 1. Variable Discovery & Extraction Analysis
+To uncover the variables and establish their roles from first principles, we analyze the problem requirements:
+- **Linguistic Trigger: *"positive integer $N$ as input"***:
+  - Discovered entity: `n`.
+  - *Diagnostic Test 1 (Fixed Test)*: `n` is provided as an input bound. Its value is immutable once loaded into memory. It never transitions during execution. Hence, **Fixed**.
+- **Linguistic Trigger: *"even numbers series: $2 + 4 + 6 + 8 + \dots$"***:
+  - Discovered entities: `i` (index of the term from $1$ to $N$) and `term` (the actual even number at position $i$).
+  - *Diagnostic Test 2 (Derived Test)* on `term`: Can `term` be computed solely from existing variables at step $i$? Yes, $\text{term} = 2 \times i$. It holds no independent lifecycle and remembers nothing of prior terms. Hence, **Derived**.
+  - *Diagnostic Test 3 (Free Test)* on `i`: Does `i` autonomously march across a known discrete range $[1, N]$? Yes, $i$ increments by $+1$ at each step, defining the sequence of iterations. Hence, **Free** (Stepper).
+- **Linguistic Trigger: *"calculate the sum of the series"***:
+  - Discovered entity: `total`.
+  - *Diagnostic Test 4 (Carried Test)* on `total`: Does `total` carry forward accumulated state across iterations? Yes, $\text{total}_i = \text{total}_{i-1} + 2i$. If the loop is paused at step $i$, `total` cannot be recomputed without knowing the past trajectory. Hence, **Carried** (Gatherer).
+
+### 2. Candidate Variables Inventory
 - `n`: Total count of terms in the sequence (given input parameter).
 - `i`: Current iteration counter / index of the term ($1 \le i \le n$).
 - `term`: Mathematical value of the $i$-th term in the even-integer sequence ($\text{term} = 2i$).
 - `total`: Running cumulative sum of all terms from term $1$ through term $i$.
 
-### 2. Variable Roles & Classification Table
+### 3. Variable Roles & Classification Table
 
 | Variable | Role | Class | Justification & Lifecycle |
 | :--- | :--- | :--- | :--- |
@@ -28,15 +41,15 @@
 | `term` | Derived Value | **Derived** | Pure mathematical formula $\text{term} = 2i$; computed fresh on the fly, needs no loop. |
 | `total` | Gatherer | **Carried** | Accumulates successive terms: $\text{total}_{\text{new}} = \text{total}_{\text{old}} + 2i$; maintained across iterations. |
 
-### 3. True Minimal State Formulation
-Filtering out fixed parameters and derived values, the minimal state tuple required to pause and resume execution is:
+### 4. True Minimal State Formulation
+Filtering out fixed parameters (constant context) and derived values (instantaneous on-the-fly expressions), the minimal "pause-and-resume note" (state tuple) is:
 
 $$\text{State} = (i, \text{total})$$
 
-- Free variable: $i$ (controls progression)
-- Carried variable: $\text{total}$ (accumulates result)
+- **Free variable**: $i$ (controls progression)
+- **Carried variable**: $\text{total}$ (accumulates result across iterations)
 
-Since there is **exactly 1 free variable** ($i$), the problem requires **exactly 1 loop**.
+**Loop Requirement**: Since there is **exactly 1 free variable** ($i$), the problem requires **exactly 1 loop**.
 
 ---
 

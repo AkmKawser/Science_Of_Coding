@@ -13,13 +13,26 @@
 
 ## 🧠 Phase 1: State Definition & Variable Role Classification
 
-### 1. Candidate Variables Inventory
+### 1. Variable Discovery & Extraction Analysis
+We systematically trace the semantic tokens and arithmetic laws in the problem statement:
+- **Linguistic Trigger: *"positive integer $N$ as input"***:
+  - Discovered entity: `n`.
+  - *Diagnostic Test 1 (Fixed Test)*: `n` is supplied at invocation time and remains completely invariant over the loop lifecycle. Hence, **Fixed**.
+- **Linguistic Trigger: *"odd numbers series: $1 + 3 + 5 + 7 + \dots$"***:
+  - Discovered entities: `i` (index of the term from $1$ to $N$) and `term` (the actual odd integer generated at index $i$).
+  - *Diagnostic Test 2 (Derived Test)* on `term`: Can `term` be expressed as a closed-form formula of current variables without consulting loop history? Yes, $\text{term} = 2i - 1$. Because it is an instantaneous mapping, it requires no state retention or separate loop. Hence, **Derived**.
+  - *Diagnostic Test 3 (Free Test)* on `i`: Does `i` traverse an independent arithmetic progression $[1, N]$? Yes, $i$ advances by $+1$ each iteration, controlling the primary domain progression. Hence, **Free** (Stepper).
+- **Linguistic Trigger: *"calculate the sum of the series"***:
+  - Discovered entity: `total`.
+  - *Diagnostic Test 4 (Carried Test)* on `total`: Does `total` require passing its value across iteration boundaries? Yes, $\text{total}_i = \text{total}_{i-1} + (2i - 1)$. Without preserving `total` across iterations, intermediate sums are lost. Hence, **Carried** (Gatherer).
+
+### 2. Candidate Variables Inventory
 - `n`: Total number of terms in the sequence (given input parameter).
 - `i`: Current iteration counter / index of the term ($1 \le i \le n$).
 - `term`: Value of the $i$-th term in the odd-integer sequence ($\text{term} = 2i - 1$).
 - `total`: Running cumulative sum of all terms from term $1$ through term $i$.
 
-### 2. Variable Roles & Classification Table
+### 3. Variable Roles & Classification Table
 
 | Variable | Role | Class | Justification & Lifecycle |
 | :--- | :--- | :--- | :--- |
@@ -28,15 +41,15 @@
 | `term` | Derived Value | **Derived** | Mathematical formula $\text{term} = 2i - 1$; computed fresh on the fly, needs no loop. |
 | `total` | Gatherer | **Carried** | Accumulates successive terms: $\text{total}_{\text{new}} = \text{total}_{\text{old}} + (2i - 1)$; maintained across iterations. |
 
-### 3. True Minimal State Formulation
-Filtering out fixed parameters and derived values, the minimal state tuple required to pause and resume execution is:
+### 4. True Minimal State Formulation
+Filtering out fixed context variables and derived instant values, the minimal "pause-and-resume note" (state tuple) is:
 
 $$\text{State} = (i, \text{total})$$
 
-- Free variable: $i$ (controls progression)
-- Carried variable: $\text{total}$ (accumulates result)
+- **Free variable**: $i$ (controls progression)
+- **Carried variable**: $\text{total}$ (accumulates result across iterations)
 
-Since there is **exactly 1 free variable** ($i$), the problem requires **exactly 1 loop**.
+**Loop Requirement**: Since there is **exactly 1 free variable** ($i$), the problem requires **exactly 1 loop**.
 
 ---
 

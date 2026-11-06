@@ -13,13 +13,26 @@
 
 ## 🧠 Phase 1: State Definition & Variable Role Classification
 
-### 1. Candidate Variables Inventory
+### 1. Variable Discovery & Extraction Analysis
+To derive the state machine systematically, we analyze the linguistic triggers, entities, and operations present in the problem statement:
+- **Linguistic Trigger: *"positive integer $N$ as input"***:
+  - Discovered entity: `n`.
+  - *Diagnostic Test 1 (Fixed Test)*: `n` is set once upon reading input and remains constant throughout the execution. It acts as an unchanging limit. Hence, **Fixed**.
+- **Linguistic Trigger: *"generate sequence $1 + 2 + 3 + \dots + N$"***:
+  - Discovered entity: `i` (the progression index / term number) and `term` (the value emitted at step $i$).
+  - *Diagnostic Test 2 (Derived Test)* on `term`: Can `term` be computed at any step directly from `i` without memory of previous terms? Yes, $\text{term} = i$. Because it requires no time-series accumulation and has an explicit direct closed form, it is **Derived**.
+  - *Diagnostic Test 3 (Free Test)* on `i`: Does `i` advance monotonically across a known discrete range $[1, N]$ independent of previous sum accumulations? Yes, $i$ advances by $+1$ at each step to govern the domain. It dictates the iteration space. Hence, **Free** (Stepper).
+- **Linguistic Trigger: *"calculate the sum of the series"***:
+  - Discovered entity: `total`.
+  - *Diagnostic Test 4 (Carried Test)* on `total`: Does `total` at iteration $i$ depend strictly on its value from iteration $i-1$? Yes, $\text{total}_i = \text{total}_{i-1} + i$. If execution paused at step $i$, we cannot reconstruct `total` solely from $i$ without replaying the entire loop from $1$. Therefore, `total` bridges across iterations. Hence, **Carried** (Gatherer).
+
+### 2. Candidate Variables Inventory
 - `n`: Total number of terms to generate and sum (given input).
 - `i`: Current iteration counter / index of the term being generated.
 - `term`: The value of the $i$-th element in the sequence ($i$).
 - `total`: Running cumulative sum of all terms from $1$ up to the current term $i$.
 
-### 2. Variable Roles & Classification Table
+### 3. Variable Roles & Classification Table
 
 | Variable | Role | Class | Justification & Lifecycle |
 | :--- | :--- | :--- | :--- |
@@ -28,15 +41,15 @@
 | `term` | Derived Value | **Derived** | Trivial direct identity $\text{term} = i$; no separate loop needed. |
 | `total` | Gatherer | **Carried** | Accumulates successive terms: $\text{total}_{\text{new}} = \text{total}_{\text{old}} + i$; must be retained across iterations. |
 
-### 3. True Minimal State Formulation
-Filtering out fixed and derived variables, the minimal resume-note (state tuple) required to pause and continue execution is:
+### 4. True Minimal State Formulation
+Filtering out fixed parameters (which never change) and derived values (which can be recomputed instantaneously on demand), the minimal "pause-and-resume note" (state tuple) required to suspend and seamlessly restart execution is:
 
 $$\text{State} = (i, \text{total})$$
 
-- Free variable: $i$
-- Carried variable: $\text{total}$
+- **Free variable**: $i$ (controls progress through the domain)
+- **Carried variable**: $\text{total}$ (preserves accumulated history)
 
-Because there is **exactly 1 free variable** ($i$), this algorithm requires **exactly 1 loop**.
+**Loop Requirement**: Because there is **exactly 1 free variable** ($i$), this algorithm requires **exactly 1 loop**.
 
 ---
 

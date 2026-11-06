@@ -44,7 +44,7 @@ flowchart TD
     
     subgraph DerivationPhase["4. Step-by-Step Derivation Execution (<ID>_derivation.md)"]
         direction TB
-        P1["Phase 1: Candidate Variables & Role Classification<br/>(Fixed, Free, Carried, Derived) -> Form Minimal State"]
+        P1["Phase 1: Variable Discovery Analysis & Role Classification<br/>(Discovery Triggers, 4 Diagnostic Tests, Minimal State Tuple)"]
         P2["Phase 2: State-Space Tree & Loop Interval Derivations"]
         P3["Phase 3: Mathematical Invariant Proofs<br/>(Initialization, Maintenance, Termination)"]
         P4["Phase 4: Boundary Audits & Failure Mode Catalog"]
