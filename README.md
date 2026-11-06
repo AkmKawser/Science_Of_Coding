@@ -24,10 +24,11 @@ Modern LLM-powered coding assistants frequently suffer from two fatal failure mo
 
 1. **The Science of Coding Manual**: Structured guides, mathematical proofs, pattern decompositions, and battle-tested code templates with side-by-side runnable implementations in **Python 3** and **Java 21**.
 2. **`Templates/` Directory (Agent Solution Blueprints)**: Explicit step-by-step methodologies and conceptual frameworks instructing the agent on *how* to deconstruct, design, and verify code systematically.
-3. **`cpbook4` Agentic Skill**: A portable, self-contained AI agent skill that enables any Agentic AI (Antigravity, Claude Code, Cursor, Copilot, ChatGPT, or custom LLM harnesses) to retrieve exact formulas, theorems, and implementations on demand without context exhaustion or hallucinations.
-4. **`query/` Knowledgebase**: A dedicated library of deep-dive query documents featuring visual decision trees, interview memory mnemonics, and real-world problem mappings.
-5. **`Upcoming Updates/` Roadmap**: A centralized milestone tracker with task status boxes for planned features and upcoming manuals.
-6. **`chat.md`**: A chronological record of all conversations, architectural decisions, and design sessions.
+3. **`problems/` Database (Central Problem Archive)**: A dedicated, categorized problem repository storing copies of every problem tackled (from local notes, online platforms, or reference textbooks) alongside explicit source attribution.
+4. **`cpbook4` Agentic Skill**: A portable, self-contained AI agent skill that enables any Agentic AI (Antigravity, Claude Code, Cursor, Copilot, ChatGPT, or custom LLM harnesses) to retrieve exact formulas, theorems, and implementations on demand without context exhaustion or hallucinations.
+5. **`query/` Knowledgebase**: A dedicated library of deep-dive query documents featuring visual decision trees, interview memory mnemonics, and real-world problem mappings.
+6. **`Upcoming Updates/` Roadmap**: A centralized milestone tracker with task status boxes for planned features and upcoming manuals.
+7. **`chat.md`**: A chronological record of all conversations, architectural decisions, and design sessions.
 
 ---
 
@@ -41,6 +42,20 @@ The primary purpose of the [`Templates/`](Templates/) directory is to **instruct
 ### Available Templates
 
 - [`Templates/Repetitive Structure Template.md`](Templates/Repetitive%20Structure%20Template.md): A comprehensive blueprint for designing and deriving loops, nested iterations, multi-variable states, and state-space trees from first principles.
+
+---
+
+## 🗄️ `problems/`: Central Problem Archive & Source Database
+
+The [`problems/`](problems/) directory stores copies of all practice, benchmark, and illustrative problems across algorithmic paradigms.
+
+### Mandatory Preservation & Attribution Protocol:
+No matter where a problem originates—whether:
+1. **Local Markdown Files** (`.md`)
+2. **Online Competitive Programming Platforms** (e.g., Codeforces, LeetCode, CSES, AtCoder, HackerRank, UVa)
+3. **Reference Textbooks & Books** (e.g., Reference Volume 1, Reference Volume 2)
+
+**The agent must always create and keep a clean copy of the problem statement in `problems/` and explicitly document its source name, URL or page reference, difficulty, and applicable template.**
 
 ---
 
@@ -110,6 +125,8 @@ Science_Of_Coding/
 │           └── SKILL.md            # Entrypoint for Antigravity native skill discovery
 ├── Templates/                      # Methodological blueprints guiding agent problem-solving
 │   └── Repetitive Structure Template.md # Step-by-step guide for states, loops, and trees
+├── problems/                       # Central problem database with source attribution
+│   └── README.md                   # Problem database structure & indexing protocols
 ├── Upcoming Updates/               # Roadmap, milestone checklist, and feature tracking
 │   └── Upcoming Updates.md         # Serialized progress tracking template
 ├── query/                          # Deep-dive algorithmic manuals & query outputs

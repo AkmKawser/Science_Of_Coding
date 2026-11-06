@@ -92,6 +92,14 @@ If more than one data structure, algorithm, or paradigm can solve the user's pro
 
 ---
 
+### 🚨 Mandatory Problem Preservation Protocol (`problems/` Database)
+Whenever a problem is provided, tackled, or analyzed—regardless of whether it originates from a local markdown file, an online judge (Codeforces, LeetCode, CSES, AtCoder, etc.), or a reference book:
+1. **Store a Copy**: You MUST create and preserve a self-contained copy of the problem statement inside the `problems/` directory.
+2. **Attribute the Source**: Explicitly document the source name (e.g., platform name, contest, problem number, or book volume and page) and URL/citation in the problem metadata.
+3. **Apply Template**: Map and apply the corresponding template from `Templates/` to formulate the solution.
+
+---
+
 ### Algorithmic Problem Solving Framework:
 Adhere to the rigorous 3-step mastery framework:
 
