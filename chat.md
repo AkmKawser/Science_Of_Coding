@@ -220,3 +220,26 @@ This document records all instructions, architectural decisions, and agent conve
 3. **Committed and Pushed**:
    - Pushed commit `1b2cf37` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 25: Verification of State Definition, Template Renaming, and Folder Purpose Explanation
+
+### User Request
+> "Is the definition of state correct? also every file name in Templates folder should end with template."
+> "i dont understand the purpose of .agent\skills folder and skill folder"
+> "dont forget to always update the chat.md"
+
+### Actions Taken & Architecture Explanations
+1. **Verification of State Definition**:
+   - Confirmed correctness of the state definition in `Templates/Repetitive Structure Template.md`:
+     `State = (Free Variables, Carried Variables)`.
+   - Verified that the "pause and resume note" principle accurately enforces the Markov property (minimal sufficiency required to finish execution without history).
+2. **Standardization of Template File Naming**:
+   - Enforced rule: Every file in `Templates/` must end with `Template`.
+   - Renamed `Templates/Repetitive Structure.md` -> `Templates/Repetitive Structure Template.md`.
+   - Committed and pushed rename as `1a1f5c2` to `origin/main`.
+3. **Clarification of `.agent/skills/` vs `skill/` Folders**:
+   - **`.agent/skills/`**: The system-level registration hook discovered automatically by AI agents (e.g. Antigravity, Claude Code, Codex) when invoking `@cpbook4`.
+   - **`skill/`**: The visible repository asset directory containing the books, reference tables of contents, query scripts (`query_cpbook.py`), and architecture specifications.
+   - Explained how `.agent/skills/cpbook4/SKILL.md` acts as a lightweight pointer directing the agent to the heavy assets in `skill/`.
+
