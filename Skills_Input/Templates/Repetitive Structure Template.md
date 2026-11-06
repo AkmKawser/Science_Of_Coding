@@ -69,7 +69,7 @@ Derived variables, such as `value = n + 1 - i + j`, have no role in the chart. T
    - **Carried Variables (Accumulators/Holders)**: The recursive recurrence relation $\text{carried}' = f(\text{carried}, \text{derived})$.
    - **Derived Variables (Instantaneous)**: Recomputed instantaneously from current indices ($\text{val} = g(i, j)$) without memory.
    - **Action / Side-Effect**: What side-effect is emitted on this transition (e.g., printing term, emitting newline).
-   - *Construct the Formal Transition Table* (see Section 2 for full schema).
+   - *Construct the Formal Transition Table* (see [Section 2: The Formal State Transition Matrix](#formal-state-transition-matrix) for full schema).
 7. **Read the loop facts off the tree.** These are the facts you will code.
    - **Start and end of each loop:** the first and last child under a node
    - **Child count per parent:** the same for every parent means independent ranges, and different counts mean dependent ranges. The pattern of counts (1, 2, 3... or 5, 4, 3...) gives the bound formula.
@@ -440,6 +440,7 @@ In any iterative program, state transitions are structured into four coordinated
 4. **Instantaneous Derived Value Evaluation**: Derived values are computed fresh from the new coordinates without carrying memory:
    $$\text{derived}(t+1) = g(i(t+1), j(t+1))$$
 
+<a id="formal-state-transition-matrix"></a>
 #### The Formal State Transition Matrix:
 Every solution derivation in Phase 2 must include the **Transition Analysis Table**:
 
