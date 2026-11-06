@@ -286,3 +286,22 @@ This document records all instructions, architectural decisions, and agent conve
 3. **Committed and Pushed**:
    - Pushed commit `d38b3cf` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
 
+---
+
+## Session 28: Removal of Open-Source LICENSE & Addition of Proprietary Copyright Notice
+
+### User Request
+> "remove license. its a copyright content. no one is allowed to copy"
+
+### Actions Taken
+1. **Deleted `LICENSE` File**:
+   - Removed the permissive MIT `LICENSE` file via `git rm LICENSE`.
+2. **Updated `README.md`**:
+   - Removed `LICENSE` from the repository file tree.
+   - Added a strict proprietary copyright section:
+     > **🔒 Copyright & Terms of Use**
+     > **Copyright © 2026. All rights reserved.**
+     > This repository and all its contents—including but not limited to the manuals, query guides, architectural designs, agentic templates, decision trees, and code implementations—are proprietary copyrighted material. **No unauthorized copying, distribution, reproduction, modification, or commercial use is permitted without explicit prior written consent from the author.**
+3. **Committed and Pushed**:
+   - Pushed commit `707b79e` to `origin/main` at `https://github.com/AkmKawser/Science_Of_Coding.git`.
+
