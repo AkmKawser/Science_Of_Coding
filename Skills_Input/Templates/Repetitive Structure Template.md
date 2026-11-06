@@ -18,9 +18,7 @@
      - **Carried:** accumulated across iterations (an update inside the loop)
      - **Fixed:** given and unchanging (`n`, `k`)
 3. **Form the True State.** Filter down to the minimal note needed to pause and resume:
-   $$
-   \text{State} = (\text{Free Variables}, \text{Carried Variables})
-   $$
+   $$\text{State} = (\text{Free}, \; \text{Carried})$$
 
    *(Fixed values, derived formulas, and temporaries are dropped from the state tuple).*
 
@@ -162,9 +160,7 @@ In step 1 you list every candidate variable the problem touches. In step 2 you c
 
 ### Why only Free and Carried variables form the State
 
-$$
-\text{State} = (\text{Free Variables}, \text{Carried Variables})
-$$
+$$\text{State} = (\text{Free}, \; \text{Carried})$$
 
 To understand why this equation holds rigorously, consider what happens when you pause an ongoing algorithm and write a note for someone else to resume it:
 
@@ -219,9 +215,7 @@ A common beginner mistake is thinking that if a state has 3 variables, the progr
 > [!IMPORTANT]
 > **The Golden Law of Loop Counting**:
 >
-> $$
-> \text{Number of Nested Loops} = \text{Number of Independent Enumeration Dimensions among FREE Variables}
-> $$
+> $$\text{Nested Loops Count} = \text{Free Variables Dimension}$$
 >
 > - **Carried variables NEVER add a loop.** (They are updated inside existing loops).
 > - **Derived variables NEVER add a loop.** (They are formulas evaluated inside the loop body).
@@ -253,9 +247,8 @@ The **state space** is the set of every state the program can reach. The tree in
 > **Why is the state-space tree of a single loop a straight line (degenerate tree) instead of a binary tree?**
 > A common point of confusion is assuming all state-space trees must look like binary trees. In computer science:
 >
-> $$
-> \text{Tree Branching Factor } (b) = \text{number of possible next transitions from a given state}
-> $$
+> **Branching Factor ($b$)**:
+> $$b = \text{number of candidate transitions from state } S$$
 >
 > 1. **Deterministic Repetitive Loop ($b = 1 \implies$ Linear Chain / Straight Line)**:
 >    - In a deterministic loop (`for i from 1 to n`), there is **no branching, choice, or backtracking**.

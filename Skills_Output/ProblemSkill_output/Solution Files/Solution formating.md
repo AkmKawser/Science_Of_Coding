@@ -72,7 +72,7 @@ Every derivation file must rigorously execute the phased steps defined in the ma
    | Variable | Role | Class (Free / Carried / Derived / Fixed) | Justification & Lifecycle |
    | :--- | :--- | :--- | :--- |
 4. **True Minimal State**:
-   $$\text{State} = (\text{Free Variables}, \text{Carried Variables})$$
+   $$\text{State} = (\text{Free}, \; \text{Carried})$$
    - Explicitly justify why Free and Carried variables form the minimal state (the "Pause-and-Resume Note") while Fixed and Derived variables are excluded.
    - State the exact loop count based on the number of Free variables.
 

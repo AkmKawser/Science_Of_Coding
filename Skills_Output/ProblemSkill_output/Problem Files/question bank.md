@@ -86,7 +86,7 @@ This document serves as the unified, centralized question bank storing all pract
 ## 📝 Problem Statement
 Given a positive integer $N$, generate the mathematical sequence of terms up to the $N$-th term and compute the final cumulative sum:
 
-$$\text{Series: } 1 + 2 + 3 + 4 + ............. $$
+$$\text{Series} = 1 + 2 + 3 + 4 + .............$$
 
 Construct each term deterministically using its loop index $i$, display the generated sequence separated by spaces, and compute the total sum.
 
@@ -148,7 +148,7 @@ Sum = [Total sum]
 ## 📝 Problem Statement
 Given a positive integer $N$, generate the mathematical sequence of terms up to the $N$-th term and compute the final cumulative sum:
 
-$$\text{Series: } 2 + 4 + 6 + 8 + ............. $$
+$$\text{Series} = 2 + 4 + 6 + 8 + .............$$
 
 Construct each term deterministically using its loop index $i$, display the generated sequence separated by spaces, and compute the total sum.
 
@@ -210,7 +210,7 @@ Sum = [Total sum]
 ## 📝 Problem Statement
 Given a positive integer $N$, generate the mathematical sequence of terms up to the $N$-th term and compute the final cumulative sum:
 
-$$\text{Series: } 1 + 3 + 5 + 7 + ............. $$
+$$\text{Series} = 1 + 3 + 5 + 7 + .............$$
 
 Construct each term deterministically using its loop index $i$, display the generated sequence separated by spaces, and compute the total sum.
 
@@ -271,7 +271,7 @@ Sum = [Total sum]
 ## 📝 Problem Statement
 Given a positive integer $N$, generate the mathematical sequence of terms up to the $N$-th term and compute the final cumulative sum:
 
-$$\text{Series: } 4 + 12 + 20 + 28 + ............. $$
+$$\text{Series} = 4 + 12 + 20 + 28 + .............$$
 
 Construct each term deterministically using its loop index $i$, display the generated sequence separated by spaces, and compute the total sum.
 
@@ -332,7 +332,7 @@ Sum = [Total sum]
 ## 📝 Problem Statement
 Given a positive integer $N$, generate the mathematical sequence of terms up to the $N$-th term and compute the final cumulative sum:
 
-$$\text{Series: } 2 + 5 + 8 + 11 + ............. $$
+$$\text{Series} = 2 + 5 + 8 + 11 + .............$$
 
 Construct each term deterministically using its loop index $i$, display the generated sequence separated by spaces, and compute the total sum.
 
@@ -393,7 +393,7 @@ Sum = [Total sum]
 ## 📝 Problem Statement
 Given a positive integer $N$, generate the mathematical sequence of terms up to the $N$-th term and compute the final cumulative sum:
 
-$$\text{Series: } 1.2 + 2.3 + 3.4 + ............. $$
+$$\text{Series} = 1.2 + 2.3 + 3.4 + .............$$
 
 Construct each term deterministically using its loop index $i$, display the generated sequence separated by spaces, and compute the total sum.
 
@@ -454,7 +454,7 @@ Sum = [Total sum]
 ## 📝 Problem Statement
 Given a positive integer $N$, generate the mathematical sequence of terms up to the $N$-th term and compute the final cumulative sum:
 
-$$\text{Series: } 2.1 + 5.3 + 8.5 + ............. $$
+$$\text{Series} = 2.1 + 5.3 + 8.5 + .............$$
 
 Construct each term deterministically using its loop index $i$, display the generated sequence separated by spaces, and compute the total sum.
 
@@ -515,7 +515,7 @@ Sum = [Total sum]
 ## 📝 Problem Statement
 Given a positive integer $N$, generate the mathematical sequence of terms up to the $N$-th term and compute the final cumulative sum:
 
-$$\text{Series: } 1.3 + 3.5 + 5.7 + ............. $$
+$$\text{Series} = 1.3 + 3.5 + 5.7 + .............$$
 
 Construct each term deterministically using its loop index $i$, display the generated sequence separated by spaces, and compute the total sum.
 
@@ -576,7 +576,7 @@ Sum = [Total sum]
 ## 📝 Problem Statement
 Given a positive integer $N$, generate the mathematical sequence of terms up to the $N$-th term and compute the final cumulative sum:
 
-$$\text{Series: } 1^2 + 3^2 + 5^2 + ............. $$
+$$\text{Series} = 1^2 + 3^2 + 5^2 + .............$$
 
 Construct each term deterministically using its loop index $i$, display the generated sequence separated by spaces, and compute the total sum.
 
@@ -637,7 +637,7 @@ Sum = [Total sum]
 ## 📝 Problem Statement
 Given a positive integer $N$, generate the mathematical sequence of terms up to the $N$-th term and compute the final cumulative sum:
 
-$$\text{Series: } 1.1^2 + 2.3^2 + 3.5^2 + ............. $$
+$$\text{Series} = 1.1^2 + 2.3^2 + 3.5^2 + .............$$
 
 Construct each term deterministically using its loop index $i$, display the generated sequence separated by spaces, and compute the total sum.
 
@@ -698,7 +698,7 @@ Sum = [Total sum]
 ## 📝 Problem Statement
 Given a positive integer $N$, generate the mathematical sequence of terms up to the $N$-th term and compute the final cumulative sum:
 
-$$\text{Series: } 1.2^2 + 2.3^2 + 3.4^2 + ............. $$
+$$\text{Series} = 1.2^2 + 2.3^2 + 3.4^2 + .............$$
 
 Construct each term deterministically using its loop index $i$, display the generated sequence separated by spaces, and compute the total sum.
 
@@ -759,7 +759,7 @@ Sum = [Total sum]
 ## 📝 Problem Statement
 Given a positive integer $N$, generate the mathematical sequence of terms up to the $N$-th term and compute the final cumulative sum:
 
-$$\text{Series: } 1^2.2^2 + 2^2.3^2 + 3^2.4^2 + .. $$
+$$\text{Series} = 1^2.2^2 + 2^2.3^2 + 3^2.4^2 + ..$$
 
 Construct each term deterministically using its loop index $i$, display the generated sequence separated by spaces, and compute the total sum.
 
@@ -820,7 +820,7 @@ Sum = [Total sum]
 ## 📝 Problem Statement
 Given a positive integer $N$, generate the mathematical sequence of terms up to the $N$-th term and compute the final cumulative sum:
 
-$$\text{Series: } 1.2.3 + 2.3.4 + 3.4.5 + ............. $$
+$$\text{Series} = 1.2.3 + 2.3.4 + 3.4.5 + .............$$
 
 Construct each term deterministically using its loop index $i$, display the generated sequence separated by spaces, and compute the total sum.
 
@@ -881,7 +881,7 @@ Sum = [Total sum]
 ## 📝 Problem Statement
 Given a positive integer $N$, generate the mathematical sequence of terms up to the $N$-th term and compute the final cumulative sum:
 
-$$\text{Series: } 1.3.5.7 + 3.5.7.9 + 5.7.9.11 + ........ $$
+$$\text{Series} = 1.3.5.7 + 3.5.7.9 + 5.7.9.11 + ........$$
 
 Construct each term deterministically using its loop index $i$, display the generated sequence separated by spaces, and compute the total sum.
 
@@ -942,7 +942,7 @@ Sum = [Total sum]
 ## 📝 Problem Statement
 Given a positive integer $N$, generate the mathematical sequence of terms up to the $N$-th term and compute the final cumulative sum:
 
-$$\text{Series: } 2.5.8 + 5.8.11 + 8.11.14 + .............. $$
+$$\text{Series} = 2.5.8 + 5.8.11 + 8.11.14 + ..............$$
 
 Construct each term deterministically using its loop index $i$, display the generated sequence separated by spaces, and compute the total sum.
 
@@ -1003,7 +1003,7 @@ Sum = [Total sum]
 ## 📝 Problem Statement
 Given a positive integer $N$, generate the mathematical sequence of terms up to the $N$-th term and compute the final cumulative sum:
 
-$$\text{Series: } 5.6.7 + 6.7.8 + 7.8.9 + ............. $$
+$$\text{Series} = 5.6.7 + 6.7.8 + 7.8.9 + .............$$
 
 Construct each term deterministically using its loop index $i$, display the generated sequence separated by spaces, and compute the total sum.
 
